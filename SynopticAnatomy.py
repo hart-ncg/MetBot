@@ -197,7 +197,8 @@ class SynopticEvents:
                     outr=np.ma.MaskedArray(rain[ix,:,:],mask=~ormask)
                     ormn=outr.mean()
                     ormx=outr.max()
-                    owetness=len(np.where(ormask.ravel())[0])/float(len(np.where(~chmask.ravel())[0]))
+                    owetness=len(np.where(ormask.ravel())[0])/\
+                             float(len(np.where(~chmask.ravel())[0]))
                 else:
                     rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN;ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
                 erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness))

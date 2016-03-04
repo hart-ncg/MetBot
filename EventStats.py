@@ -60,7 +60,16 @@ def spatialsubset(s,eventkeys,cutlon=45.0):
     return westkeys, eastkeys
 
 def timesubset(s,eventkeys,edates):
-    '''Get tracks from certain months or years'''
+    '''subsetofkeys = timesubset(s,eventkeys,edates)
+
+    Get tracks from certain months or years
+    This is done by testing whether the trkarrstimes of an event match any of 
+    the dates specified in edates or if edates is list of dates.
+    
+    ALTERNATIVELY this is done by checking whether these trkarrastimes fall
+    between the dates in edates when specified in a tuple (date1, date2)
+    where date1/date2 are each lists of specifying [YYYY,MM,DD,HH]
+    '''
     if not eventkeys:
         eventkeys=[]
         for ed in s.uniques:
@@ -72,16 +81,24 @@ def timesubset(s,eventkeys,edates):
 
     keysubset=[]
     if isinstance(edates,list):
-        if not 'hadam3p' in dlist: hrs = my.dates2hrnum(edates)
-        elif 'hadam3p' in dlist:hrs = my.dates2hrnum(edates,units="hours since 1959-12-01 00:00:00",calendar="360_day" );hrs=hrs/24
+        if not 'hadam3p' in dlist:
+            hrs = my.dates2hrnum(edates)
+        elif 'hadam3p' in dlist:
+            hrs = my.dates2hrnum(edates,\
+                    units="hours since 1959-12-01 00:00:00",calendar="360_day")
+            hrs=hrs/24
         for k in eventkeys:
             e = s.events[k]
             time24hr = e.trkarrstime[e.mbskeys[1]]
             for hr in hrs:
                 if np.any(hr==time24hr): keysubset.append(k)
     elif isinstance(edates,tuple):
-        if not 'hadam3p' in dlist: hrs = my.dates2hrnum(edates)
-        elif 'hadam3p' in dlist:hrs = my.dates2hrnum(edates,units="hours since 1959-12-01 00:00:00",calendar="360_day");hrs=hrs/24
+        if not 'hadam3p' in dlist:
+            hrs = my.dates2hrnum(edates)
+        elif 'hadam3p' in dlist:
+            hrs = my.dates2hrnum(edates,\
+                    units="hours since 1959-12-01 00:00:00",calendar="360_day")
+            hrs=hrs/24
         hrmn, hrmx = hrs
         for k in eventkeys:
             e = s.events[k]
