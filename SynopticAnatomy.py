@@ -450,7 +450,7 @@ class SynopticEvents:
                                                      self.blobs[k]['mbs'])
             print 'SUCCESS!\n'
 
-    def buildevents(self,basetrkkey='noaa-olr-0-all'):
+    def buildevents(self):
         '''Builds list of Events
         Builds events using a prescribed base track specified by basetrkkey
         Default basetrkkey = "noaa-olr-0-all"
@@ -458,10 +458,9 @@ class SynopticEvents:
         trklen in buildtracks to be set = 1
         '''
         # MATCH REFERENCE BLOBTRACKS TO CANDIDATE DAYS
-        ix_base = self.mbskeys.index(basetrkkey)
         flagmbs = self.blobs[self.flagkey]['mbs']
-        candtracks = self.tracks[self.mbskeys[ix_base]]
-        candblobs = self.blobs[self.mbskeys[ix_base]]['mbs']
+        candtracks = self.tracks[self.mbskeys[1]]
+        candblobs = self.blobs[self.mbskeys[1]]['mbs']
         asstrks = self.__tracks2blobs__(flagmbs,candtracks, candblobs)
         self.asstrks=asstrks
         ixflagblob, flagtrackkeys = asstrks[:,0], asstrks[:,2]
@@ -551,7 +550,7 @@ class Event(SynopticEvents):
     Might be clumsy, but inherits from SynopticEvents, so has Synoptic Events methods'''
 
     def __init__(self,Inherits,reftrackkey,ixflags,maxdist_otherblobs=1000e3,\
-                 sbst='SA',basetrkkey='noaa-olr-0-all'):
+                 sbst='SA'):
         #print 'Initiating event: ',reftrackkey
         self.fields = Inherits.fields
         self.blobs = Inherits.blobs
@@ -562,10 +561,8 @@ class Event(SynopticEvents):
         self.mbskeys = Inherits.mbskeys
         self.mxdist = maxdist_otherblobs
         self.vaxis = Inherits.vaxis
-
+        
         self.refkey = self.mbskeys[1]
-        ### testing a change here
-        self.refkey = basetrkkey
         self.trkkey = reftrackkey
         self.trk = self.tracks[self.refkey][self.trkkey]
         self.ixflags = ixflags
