@@ -200,7 +200,8 @@ class SynopticEvents:
                     owetness=len(np.where(ormask.ravel())[0])/\
                              float(len(np.where(~chmask.ravel())[0]))
                 else:
-                    rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN;ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
+                    rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN
+                    ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
                 erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness))
 
         event.rainfall[rainkey] = np.asarray(erain)
@@ -209,8 +210,8 @@ class SynopticEvents:
 
     def __mbsmatch__(self,mbs,ch,maxdist=1000e3):
         '''Matches metblobs[time] in blobs[now] to blobs[now+1]
-        Matching very arbitrary: Uses criteria of only matching centroid within 1.5xAveRadius of previous blob
-
+        Matching very arbitrary: Uses criteria of only matching centroid within
+        1.5xAveRadius of previous blob
         Returns: Array with one entry for each blob as such
         [date, label, nextdate, nextlabel, nextIndex, previousIndex]
         where array= -1  no matches'''
@@ -482,7 +483,7 @@ class SynopticEvents:
             tmk=timer()
             iflag = np.where(flagtrackkeys == k)[0]
             an_event = Event(Bequeath, k, ixflagblob[iflag],\
-                             maxdist_otherblobs=3000e3)
+                             basetrkkey=basetrkkey,maxdist_otherblobs=3000e3)
             self.events[k]=an_event
             print 'Built event: %d/%d in %4.2f s'\
                    %(count,len(np.unique(flagtrackkeys)),(timer()-tmk))
@@ -556,7 +557,9 @@ class SynopticEvents:
 
 class Event(SynopticEvents):
     '''Object that contains all details of single synoptic events
-    Might be clumsy, but inherits from SynopticEvents, so has Synoptic Events methods'''
+       Might be clumsy, but inherits from SynopticEvents, so has Synoptic Events
+       methods.
+    '''
 
     def __init__(self,Inherits,reftrackkey,ixflags,maxdist_otherblobs=1000e3,\
                  sbst='SA',basetrkkey='noaa-olr-0-all'):
@@ -575,7 +578,8 @@ class Event(SynopticEvents):
         self.trkkey = reftrackkey
         self.trk = self.tracks[self.refkey][self.trkkey]
         self.ixflags = ixflags
-        self.flagtimes = self.blobs[Inherits.flagkey]['mbs'][ixflags,self.ifld('hrtime')]
+        self.flagtimes = self.blobs[Inherits.flagkey]['mbs']\
+                                   [ixflags,self.ifld('hrtime')]
         self.trktimes = self.blobs[self.refkey]['mbs'][self.trk,self.ifld('hrtime')]
         self.trkdtimes = self.blobs[self.refkey]['mbt'][self.trk,:]
         self.trkcX = self.blobs[self.refkey]['mbs'][self.trk,self.ifld('cX')]
