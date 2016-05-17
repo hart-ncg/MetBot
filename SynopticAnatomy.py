@@ -81,7 +81,8 @@ class SynopticEvents:
                     u = self.uniqueevents()
 
                 print "Completion time:",(timer()-tmo),"s"
-        self.flagkey = self.mbskeys[0] # only here because for synop call, mbskeylist[0] won't exist at start
+        self.flagkey = self.mbskeys[0] # only here because for synop call...
+        #... mbskeylist[0] won't exist at start
 
     def save(self,fname):
         print "Saving Synoptic Events to", fname
@@ -209,7 +210,8 @@ class SynopticEvents:
 
     def __mbsmatch__(self,mbs,ch,maxdist=1000e3):
         '''Matches metblobs[time] in blobs[now] to blobs[now+1]
-        Matching very arbitrary: Uses criteria of only matching centroid within 1.5xAveRadius of previous blob
+        Matching very arbitrary: Uses criteria of only matching centroid 
+                                 within 1.5xAveRadius of previous blob
 
         Returns: Array with one entry for each blob as such
         [date, label, nextdate, nextlabel, nextIndex, previousIndex]
@@ -246,7 +248,7 @@ class SynopticEvents:
             ### and following timestep
             inxt = np.where(mbs[:,0] == mt[i+1])[0]
             ### This makes sure don't match tracks beyond consecutive timesteps
-            if (mt[i+1]-mt[i]) > dt:     
+            if (mt[i+1]-mt[i]) > dt: 
                 continue
             # For each blob centroid at now timestep
             for inw in inow:
