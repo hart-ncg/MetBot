@@ -1,4 +1,4 @@
-''' SynoptcAnatomy_fixing.py: A module of MetBot package\
+''' SynopticAnatomy.py: A module of MetBot package\
 Rainfall is an dictionary attribute of each event'''
 import MetBlobs as blb
 import numpy as np
@@ -81,8 +81,8 @@ class SynopticEvents:
                     u = self.uniqueevents()
 
                 print "Completion time:",(timer()-tmo),"s"
-        self.flagkey = self.mbskeys[0] # only here because for synop call.. 
-        # ...mbskeylist[0] won't exist at start
+        self.flagkey = self.mbskeys[0] # only here because for synop call...
+        #... mbskeylist[0] won't exist at start
 
     def save(self,fname):
         print "Saving Synoptic Events to", fname
@@ -201,8 +201,7 @@ class SynopticEvents:
                     owetness=len(np.where(ormask.ravel())[0])/\
                              float(len(np.where(~chmask.ravel())[0]))
                 else:
-                    rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN
-                    ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
+                    rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN;ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
                 erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness))
 
         event.rainfall[rainkey] = np.asarray(erain)
@@ -211,10 +210,9 @@ class SynopticEvents:
 
     def __mbsmatch__(self,mbs,ch,maxdist=1000e3):
         '''Matches metblobs[time] in blobs[now] to blobs[now+1]
-        Matching very arbitrary: Uses criteria of only matching centroid within
-                                 maxdist. There is however some commented
-                                 code within that could allow dist criterion 
-                                 to be 1.5xAveRadius of previous blob
+        Matching very arbitrary: Uses criteria of only matching centroid 
+                                 within 1.5xAveRadius of previous blob
+
         Returns: Array with one entry for each blob as such
         [date, label, nextdate, nextlabel, nextIndex, previousIndex]
         where array= -1  no matches'''
@@ -228,9 +226,8 @@ class SynopticEvents:
             chlon, chlat = ch[i][:,0], ch[i][:,1]
             cx, cy = mbs[i, icX:icY+1]
             cx = np.tile(cx,(len(chlon),)) ; cy = np.tile(cy,(len(chlon),))
-            #avedist = np.mean(self.__spheredist__(cx, cy, chlon, chlat))
-            #if avedist > maxdist: avedist=maxdist
-            avedist=maxdist
+            avedist = np.mean(self.__spheredist__(cx, cy, chlon, chlat))
+            if avedist > maxdist: avedist=maxdist
             ### arbitrary to use crit. as within 1.5xAveRadius of previous blob
             blobradii.append(avedist*1.0) 
 
@@ -246,41 +243,33 @@ class SynopticEvents:
         for i in xrange(len(mt)-1):
             #print "Matching blobs found on: %d, (tstep=%d/%d)"\
             #        %(int(mt[i]), i, len(mt))
-            ### Indices of blobs at timestep
+            ### Indicies of blobs at timestep
             inow = np.where(mbs[:,0] == mt[i])[0]
             ### and following timestep
             inxt = np.where(mbs[:,0] == mt[i+1])[0]
             ### This makes sure don't match tracks beyond consecutive timesteps
-            ### so gives an entry which only contains one blob. This implies
-            ### a track will be built with only one entry
-            if (mt[i+1]-mt[i]) > dt:
-                inw=inow[0]     
-                matchnext[inw,:] = mbs[inw,0], mbs[inw,1], -1, -1, -999,\
-                                   matchnext[inw,5]
+            if (mt[i+1]-mt[i]) > dt: 
                 continue
             # For each blob centroid at now timestep
             for inw in inow:
-                ### compare distance to all blob centroids at next timestep
+                ### compare with all blob centroids at next timesteip
                 cx, cy = mbs[inw, icX:icY+1]
                 cx = np.tile(cx,(len(inxt),)) ; cy = np.tile(cy,(len(inxt),))
                 xnxt, ynxt = mbs[inxt,icX], mbs[inxt,icY]
+                # Apply 1.5xRad criterion
                 d2nxt = self.__spheredist__(cx, cy, xnxt, ynxt)
                 m = np.where(d2nxt < blobradii[inw])[0]
 
                 if len(m) > 0:
-                    ### Get closest match if many pass criterion
+                    ### Get closest match if many pass distance criterion
                     ixbest = d2nxt.argmin()
                     ixmatch = inxt[ixbest]
                     matchnext[inw,:] = mbs[inw,0], mbs[inw,1], mbs[ixmatch,0],\
                                        mbs[ixmatch,1], ixmatch, matchnext[inw,5]
                     matchnext[ixmatch,5] = inw
                 elif len(m)==0:
-                    matchnext[inw,:] = mbs[inw,0], mbs[inw,1], -1, -1, -999,\
+                    matchnext[inw,:] = mbs[inw,0], mbs[inw,1], -1, -1, -1,\
                                        matchnext[inw,5]
-                    ### This is a key and important change!!! from what was
-                    #matchnext[inw,:] = mbs[inw,0], mbs[inw,1], -1, -1, -1,\
-                    #                   matchnext[inw,5]
-                      
         matches = np.int32(matchnext)
 
         return matches
@@ -297,17 +286,15 @@ class SynopticEvents:
         m = matches[:,4:]
         tracks={}
         # Since track start occurs with no prevIndex but has a nxtIndex
-        nxtNonxt = (m[:,0]>0) | (m[:,0]==-999)
-        istart=np.where((m[:,1]==-1) & nxtNonxt )[0]
+        istart=np.where((m[:,1]==-1) & (m[:,0]>0))[0]
         for ix in istart:
             trk=[ix,]
             inxt = m[ix,0]
-            if inxt == -999:
-                dummy="this track will only have one position"
-            else:
-                while inxt>0:
-                    trk.append(inxt)
-                    inxt=m[inxt,0]
+
+            while inxt != -1:
+                trk.append(inxt)
+                inxt=m[inxt,0]
+
             if len(trk)>=trklen:
                 trklabel = matches[ix,0]*100+matches[ix,1]
                 tracks[trklabel] = trk
@@ -465,7 +452,7 @@ class SynopticEvents:
                                                      self.blobs[k]['mbs'])
             print 'SUCCESS!\n'
 
-    def buildevents(self,basetrkkey='noaa-olr-0-all'):
+    def buildevents(self):
         '''Builds list of Events
         Builds events using a prescribed base track specified by basetrkkey
         Default basetrkkey = "noaa-olr-0-all"
@@ -473,11 +460,9 @@ class SynopticEvents:
         trklen in buildtracks to be set = 1
         '''
         # MATCH REFERENCE BLOBTRACKS TO CANDIDATE DAYS
-        ix_base = self.mbskeys.index(basetrkkey)
         flagmbs = self.blobs[self.flagkey]['mbs']
-        candtracks = self.tracks[self.mbskeys[ix_base]]
-        candblobs = self.blobs[self.mbskeys[ix_base]]['mbs']
-
+        candtracks = self.tracks[self.mbskeys[1]]
+        candblobs = self.blobs[self.mbskeys[1]]['mbs']
         asstrks = self.__tracks2blobs__(flagmbs,candtracks, candblobs)
         self.asstrks=asstrks
         ixflagblob, flagtrackkeys = asstrks[:,0], asstrks[:,2]
@@ -490,7 +475,7 @@ class SynopticEvents:
             tmk=timer()
             iflag = np.where(flagtrackkeys == k)[0]
             an_event = Event(Bequeath, k, ixflagblob[iflag],\
-                             basetrkkey=basetrkkey,maxdist_otherblobs=3000e3)
+                             maxdist_otherblobs=3000e3)
             self.events[k]=an_event
             print 'Built event: %d/%d in %4.2f s'\
                    %(count,len(np.unique(flagtrackkeys)),(timer()-tmk))
@@ -552,8 +537,7 @@ class SynopticEvents:
                 otrkarr = ecomp.trkarrs[e.refkey]
                 nmatches=0
                 for tm, ib in trkarr[:,:2]:
-                    if np.any((tm==otrkarr[:,0]) & (ib==otrkarr[:,1]))\
-                    and ib !=-1:
+                    if np.any((tm==otrkarr[:,0]) & (ib==otrkarr[:,1])) and ib !=-1:
                         nmatches += 1
                 if nmatches>0: samevents.append((ks[i+icnt],nmatches))
                 icnt+=1
@@ -565,12 +549,10 @@ class SynopticEvents:
 
 class Event(SynopticEvents):
     '''Object that contains all details of single synoptic events
-       Might be clumsy, but inherits from SynopticEvents, so has Synoptic Events
-       methods.
-    '''
+    Might be clumsy, but inherits from SynopticEvents, so has Synoptic Events methods'''
 
     def __init__(self,Inherits,reftrackkey,ixflags,maxdist_otherblobs=1000e3,\
-                 sbst='SA',basetrkkey='noaa-olr-0-all'):
+                 sbst='SA'):
         #print 'Initiating event: ',reftrackkey
         self.fields = Inherits.fields
         self.blobs = Inherits.blobs
@@ -581,15 +563,13 @@ class Event(SynopticEvents):
         self.mbskeys = Inherits.mbskeys
         self.mxdist = maxdist_otherblobs
         self.vaxis = Inherits.vaxis
-         
-        self.refkey = basetrkkey
+        
+        self.refkey = self.mbskeys[1]
         self.trkkey = reftrackkey
         self.trk = self.tracks[self.refkey][self.trkkey]
         self.ixflags = ixflags
-        self.flagtimes = self.blobs[Inherits.flagkey]['mbs']\
-                                   [ixflags,self.ifld('hrtime')]
-        self.trktimes = self.blobs[self.refkey]['mbs']\
-                        [self.trk,self.ifld('hrtime')]
+        self.flagtimes = self.blobs[Inherits.flagkey]['mbs'][ixflags,self.ifld('hrtime')]
+        self.trktimes = self.blobs[self.refkey]['mbs'][self.trk,self.ifld('hrtime')]
         self.trkdtimes = self.blobs[self.refkey]['mbt'][self.trk,:]
         self.trkcX = self.blobs[self.refkey]['mbs'][self.trk,self.ifld('cX')]
         self.trkcY = self.blobs[self.refkey]['mbs'][self.trk,self.ifld('cY')]
@@ -597,8 +577,7 @@ class Event(SynopticEvents):
         if len(self.mbskeys) > 2:
             self.ombskeys = self.mbskeys[2:]
             for k in self.ombskeys:
-                self.assoctrks[k] = self.__othertracks__(self.trkkey,k,\
-                                                         maxdist=self.mxdist)
+                self.assoctrks[k] = self.__othertracks__(self.trkkey,k,maxdist=self.mxdist)
         # Build eventarrays needed for further plotting and analysis
         self.trkarrs,refkey = self.__eventarray__()
         #self.trkarrs = {} # this also can get added later by calling self.__eventarray__
@@ -620,8 +599,7 @@ class Event(SynopticEvents):
         trkshr = self.trackshr[k]
         trkscX = self.trackscX[k]
         trkscY = self.trackscY[k]
-        # Get array of keys of the other tracks and filter for +- 90 days
-        # either side
+        # Get array of keys of the other tracks and filter for +- 90 days either side
         ks = trkshr.keys();ks.sort()
         ks=np.array(ks)
         # Get indices of tracks to search for associations
@@ -630,8 +608,7 @@ class Event(SynopticEvents):
 
         assocs=[]
         for k in ks[ifltr]:
-            ohrs, ocX, ocY = np.asarray(trkshr[k]),\
-                             np.asarray(trkscX[k]), np.asarray(trkscY[k])
+            ohrs, ocX, ocY = np.asarray(trkshr[k]), np.asarray(trkscX[k]), np.asarray(trkscY[k])
             cnt=0
             for i in xrange(len(flaghrs)):
                 rhr, rcX, rcY = flaghrs[i], flagcX[i], flagcY[i]
@@ -650,12 +627,10 @@ class Event(SynopticEvents):
         properties: hrtime, trkix, cX, cY
         variable: these are those contained in mbskeys
 
-        Rainfall is attribute later to this object by simply gettting
-        stations/gridpoints within the OLR cloud contour its a dict with keys
-        for each rainfall dataset each key accesses an array time x values
-        values are meanrain,maxrain,wetness,heavyness,outsidemean,
-        outsidemax,outsidewetness
-        '''
+        Rainfall is attribute later to this object by simply gettting stations/gridpoints within the OLR cloud contour
+        its a dict with keys for each rainfall dataset
+        each key accesses an array time x values
+        values are meanrain,maxrain,wetness,heavyness,outsidemean,outsidemax,outsidewetness'''
         # Get hour time for event from appearance of first metblob in any track
         mbskeyvals=self.refkey.split('-')
         self.ombskeys = self.mbskeys[2:]
@@ -666,8 +641,7 @@ class Event(SynopticEvents):
         allhrtime=np.unique(allhrtime)
         shp = (len(allhrtime),4)
         trkarr=np.zeros(shp,dtype=np.float32);trkarr[:]=-1
-        # BUILD TRACK ARRAY FOR REFERENCE/FLAG TRACKS: 
-        # currently 'noaa-olr-0-all' which has tres==24
+        # BUILD TRACK ARRAY FOR REFERENCE/FLAG TRACKS: currently 'noaa-olr-0-all' which has tres==24
         allhrtm = allhrtime
         if mbskeyvals[0]=='noaa':
             allhrtm = allhrtm - (allhrtm % 24)
@@ -692,8 +666,7 @@ class Event(SynopticEvents):
             #dset,vrb,lvl,descr=mbsk.split('-')
             otrks = self.assoctrks[mbsk]
             if len(otrks)==0: # Since rest of this for loop depends on other associated track existing
-                print 'No associated',mbsk,'tracks for event',\
-                       self.trkkey,'moving on...'
+                print 'No associated',mbsk,'tracks for event', self.trkkey,'moving on...'
                 trkarrs[mbsk], trkarrstime[mbsk] = {}, {}
                 continue
 
@@ -719,8 +692,7 @@ class Event(SynopticEvents):
                     otrkarr[ix,:,trkcnt] = t,otrk[cnt],otrkcX[cnt],otrkcY[cnt]
                     if mbsk=='COL':
                         ix = np.where(allhrtm==t)[0][0]
-                        otrkarr[ix:ix+4,:,trkcnt] = t,otrk[cnt],\
-                                                    otrkcX[cnt],otrkcY[cnt]
+                        otrkarr[ix:ix+4,:,trkcnt] = t,otrk[cnt],otrkcX[cnt],otrkcY[cnt]
                     cnt+=1
                 trkcnt+=1
 
@@ -733,18 +705,15 @@ class Event(SynopticEvents):
 
 # FUNCTIONS: EXTRA EVENT ATTRIBUTES
 def gridmasks(event,lon,lat,trkkey=False,compress=True):
-    '''This simple script produces grid masks for each contour associated with
-        each event
+    '''This simple script produces grid masks for each contour associated with each event
     Usage: masks = event.gridmasks(lat,lon)
           lat and lon are the coordinates of the associated gridded data
           trkkey=False implies get the masks for all mbskeys
-          trkkey='noaa-olr-0-all' implies compute the masks for only
-                 that dataset
-          compress=True means multi-track variables are going to be flattened
-                        into one mask
+          trkkey='noaa-olr-0-all' implies compute the masks for only that dataset
+          compress=True means multi-track variables are going to be flattened into
+                        one mask
 
-    Returns: masks (dict) mask['mbs-keys-you-specified'] = {}
-    '''
+    Returns: masks (dict) mask['mbs-keys-you-specified'] = {}     '''
     e = event
     if trkkey==False:
         mbskeys = e.trkarrs.keys()
@@ -784,18 +753,15 @@ def gridmasks(event,lon,lat,trkkey=False,compress=True):
     return masks
 
 def coordsmasks(event,xy_points,trkkey=False):
-    '''This simple script produces masks for coordinates within each contour
-       associated with each event
+    '''This simple script produces masks for coordinates within each contour associated with each event
     NOTE: This produces masks for station RAINFALL DATA
     Usage: masks = event.gridmasks(event,xy_points)
           xy_points are the coordinates of the associated list of points
           xy_points[:,0] is lon, xy_points[:,1] is lat
           trkkey=False implies get the masks for all mbskeys
-          trkkey='noaa-olr-0-all' implies compute the masks for only
-                 that dataset
+          trkkey='noaa-olr-0-all' implies compute the masks for only that dataset
 
-    Returns: masks (dict) mask['mbs-keys-you-specified'] = {}
-    '''
+    Returns: masks (dict) mask['mbs-keys-you-specified'] = {}     '''
     e = event
     if trkkey==False:
         mbskeys = e.trkarrs.keys()
@@ -813,8 +779,7 @@ def coordsmasks(event,xy_points,trkkey=False):
             maskarr = np.bool8(np.zeros((ntimes,npts)))
             for t in xrange(ntimes):
                 if trkarr[t,1] != -1:
-                    maskarr[t,:] = points_inside_poly(xy_points,\
-                                               e.blobs[mbk]['ch'][trkarr[t,1]])
+                    maskarr[t,:] = points_inside_poly(xy_points,e.blobs[mbk]['ch'][trkarr[t,1]])
 
         elif trkarr.ndim==3:
             ntimes, ntrks = trkarr.shape[0],trkarr.shape[2]
@@ -822,18 +787,14 @@ def coordsmasks(event,xy_points,trkkey=False):
             for t in xrange(ntimes):
                 for n in xrange(ntrks):
                     if trkarr[t,1,n] != -1:
-                        maskarr[t,:,n] = points_inside_poly(xy_points,\
-                                               e.blobs[mbk]['ch'][trkarr[t,1]])
+                        maskarr[t,:,n] = points_inside_poly(xy_points,e.blobs[mbk]['ch'][trkarr[t,1]])
         masks[mbk] = maskarr
     return masks
 
 def addtrkarrs(SEobj):
-    '''This is generally performed at file load time in 
-       SynopticAnatomy.SynopticEvents.__init__() however can be called outside
-       of this.
-       Unecessary to call this if already plan on calling 
-       SynopticAnatomy.addCOLs()
-    '''
+    '''This is generally performed at file load time in SynopticAnatomy.SynopticEvents.__init__()
+    however can be called outside of this
+    Unecessary to call this if already plan on calling SynopticAnatomy.addCOLs()'''
     ks = SEobj.events.keys()
     print "Computing trkarrs of",len(ks),"events..."
     for k in ks:
@@ -845,11 +806,8 @@ def addCOLs(SEobj,mintrklen=2,fname='/home/neil/phd/cutofflowtracks_alicefavre/n
     '''Adds cut-off low tracks from Alice Favre's tracks'''
     COLs, COLhrtime, COLdtime = my.readincutoffs(fname=fname)
     nl = COLs.shape[0];dum=np.tile(0,(nl,1))
-    SEobj.blobs['COL'] =\
-    {'mbs': np.hstack((COLhrtime[:,np.newaxis],COLs[:,1][:,np.newaxis],\
-                       COLs[:,2][:,np.newaxis],COLs[:,4][:,np.newaxis],\
-                       COLs[:,3][:,np.newaxis])),\
-    'mbt': COLdtime}
+    SEobj.blobs['COL'] = {'mbs': np.hstack((COLhrtime[:,np.newaxis],COLs[:,1][:,np.newaxis],COLs[:,2][:,np.newaxis],COLs[:,4][:,np.newaxis],COLs[:,3][:,np.newaxis])),\
+                          'mbt': COLdtime}
     trkkeys = np.unique(COLs[:,0])
     SEobj.tracks['COL']={}
     for k in trkkeys:
@@ -860,12 +818,9 @@ def addCOLs(SEobj,mintrklen=2,fname='/home/neil/phd/cutofflowtracks_alicefavre/n
         if len(trk)>=mintrklen:
             SEobj.tracks['COL'][key] = trk
     newk='COL'
-    SEobj.trackshr[newk] = SEobj.__trkmbsfield__('hrtime',SEobj.tracks[newk],\
-                                                 SEobj.blobs[newk]['mbs'])
-    SEobj.trackscX[newk] = SEobj.__trkmbsfield__('cX',SEobj.tracks[newk],\
-                                                 SEobj.blobs[newk]['mbs'])
-    SEobj.trackscY[newk] = SEobj.__trkmbsfield__('cY',SEobj.tracks[newk],\
-                                                 SEobj.blobs[newk]['mbs'])
+    SEobj.trackshr[newk] = SEobj.__trkmbsfield__('hrtime',SEobj.tracks[newk],SEobj.blobs[newk]['mbs'])
+    SEobj.trackscX[newk] = SEobj.__trkmbsfield__('cX',SEobj.tracks[newk],SEobj.blobs[newk]['mbs'])
+    SEobj.trackscY[newk] = SEobj.__trkmbsfield__('cY',SEobj.tracks[newk],SEobj.blobs[newk]['mbs'])
 
     oldmbskeys=list(SEobj.mbskeys);oldmbskeys.append('COL')
     SEobj.mbskeys=tuple(oldmbskeys)
@@ -880,11 +835,8 @@ def addRWB(SEobj,mintrklen=1,wb='AWB',pv=1.5,isk=340,fname='/home/neil/work/rwb/
     rwb, rwbhrtime, rwbdtime = my.readin_rwb(wb=wb,pv=pv,isk=isk,fdir=fname)
     nl = rwb.shape[0]
     rwbkeys = np.arange(1,nl+1,1)
-    SEobj.blobs[wb] =\
-    {'mbs': np.hstack((rwbhrtime[:,np.newaxis],rwbkeys[:,np.newaxis],\
-                       rwb[:,2][:,np.newaxis],rwb[:,3][:,np.newaxis],\
-                       rwb[:,4][:,np.newaxis])),\
-     'mbt': rwbdtime}
+    SEobj.blobs[wb] = {'mbs': np.hstack((rwbhrtime[:,np.newaxis],rwbkeys[:,np.newaxis],rwb[:,2][:,np.newaxis],rwb[:,3][:,np.newaxis],rwb[:,4][:,np.newaxis])),\
+                          'mbt': rwbdtime}
     trkkeys = rwbkeys
     SEobj.tracks[wb]={}
     for k in trkkeys:
@@ -898,12 +850,9 @@ def addRWB(SEobj,mintrklen=1,wb='AWB',pv=1.5,isk=340,fname='/home/neil/work/rwb/
         if len(trk)>=mintrklen:
             SEobj.tracks[wb][key] = trk
     newk=wb
-    SEobj.trackshr[newk] = SEobj.__trkmbsfield__('hrtime',SEobj.tracks[newk],\
-                                                  SEobj.blobs[newk]['mbs'])
-    SEobj.trackscX[newk] = SEobj.__trkmbsfield__('cX',SEobj.tracks[newk],\
-                                                  SEobj.blobs[newk]['mbs'])
-    SEobj.trackscY[newk] = SEobj.__trkmbsfield__('cY',SEobj.tracks[newk],\
-                                                 SEobj.blobs[newk]['mbs'])
+    SEobj.trackshr[newk] = SEobj.__trkmbsfield__('hrtime',SEobj.tracks[newk],SEobj.blobs[newk]['mbs'])
+    SEobj.trackscX[newk] = SEobj.__trkmbsfield__('cX',SEobj.tracks[newk],SEobj.blobs[newk]['mbs'])
+    SEobj.trackscY[newk] = SEobj.__trkmbsfield__('cY',SEobj.tracks[newk],SEobj.blobs[newk]['mbs'])
 
     oldmbskeys=list(SEobj.mbskeys);oldmbskeys.append(wb)
     SEobj.mbskeys=tuple(oldmbskeys)
