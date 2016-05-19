@@ -514,6 +514,7 @@ class SynopticEvents:
             count += 1
         print "...that took",(timer()-tms)/60,"mins"
         uniques = self.uniqueevents()
+        addtrkarrs(self)
 
     def addeventrain(self,rainkeys,type='station',heavy=20.):
         '''rainkeys can be 'wrc', 'trmm' but must be list
@@ -709,7 +710,7 @@ class Event(SynopticEvents):
             # Get associated tracks for given mbskey
             #dset,vrb,lvl,descr=mbsk.split('-')
             otrks = self.assoctrks[mbsk]
-            if len(otrks)==0: # Since rest of this for loop depends on other associated track existing
+            if len(otrks)==0: # Since requires existence of associated track
                 print 'No associated',mbsk,'tracks for event',\
                        self.trkkey,'moving on...'
                 trkarrs[mbsk], trkarrstime[mbsk] = {}, {}
@@ -856,7 +857,8 @@ def addtrkarrs(SEobj):
     print "Computing trkarrs of",len(ks),"events..."
     for k in ks:
         refkey = SEobj.events[k].refkey
-        SEobj.events[k].trkarrs, SEobj.events[k].trkarrstime =SEobj.events[k].__eventarray__()
+        SEobj.events[k].trkarrs, SEobj.events[k].trkarrstime =\
+                                               SEobj.events[k].__eventarray__()
 
 
 def addCOLs(SEobj,mintrklen=2,fname='/home/neil/phd/cutofflowtracks_alicefavre/ncep2tracks.txt'):
