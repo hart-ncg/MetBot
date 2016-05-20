@@ -449,7 +449,7 @@ class SynopticEvents:
             plt.clf()
 
     # MAIN ROUTINES OF CLASS SYNOPTIC EVENTS
-    def buildtracks(self,keys=False,trklen=2,maxdist=1000e3):
+    def buildtracks(self,keys=False,trklen=1,maxdist=1000e3):
         '''Will build tracks for all metblobs unless keys are specified'''
         self.tracks={}
         self.trackshr={}
@@ -472,7 +472,7 @@ class SynopticEvents:
                                                      self.blobs[k]['mbs'])
             print 'SUCCESS!\n'
 
-    def buildevents(self,basetrkkey='noaa-olr-0-0',trklen=1,maxdist=1500e3):
+    def buildevents(self,basetrkkey='noaa-olr-0-0',trklen=1,maxdist=1000e3):
         '''Builds list of Events
         Builds events using a prescribed base track specified by basetrkkey
         Default basetrkkey = "noaa-olr-0-all"
