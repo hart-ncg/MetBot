@@ -676,7 +676,8 @@ def gethists(vrb,time,lat,lon,varstr,sub='SA',b=50,interact=False,figd=False):
     This function produces histograms of data values at
      various stages of the MetBlobs process
 
-     If run with: interact=False, returns a callable function pointer for display'''
+     If run with interact=False, returns a callable function pointer for display
+    '''
     dset, vrst, levsel, deriv = varstr.split('-')
     try:
         plt.close('all')
