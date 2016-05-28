@@ -151,7 +151,9 @@ def seasonalcycle(s,eventkeys,years=False,season=[8,9,10,11,12,1,2,3,4,5,6,7]):
     edts = np.asarray(edts)
     # BUILD SEASONAL CYCLES OF EACH YEAR
     yrs = np.unique(edts[:-1,0])[:-1];dirtyfix=False
+    ###### WHAT IS THIS DIRTYFIX ABOUT??? ##################
     if len(yrs)==0:yrs = np.unique(edts[:-1,0]);dirtyfix=True
+    ############## HUH? ##############################
     if isinstance(years,list) or isinstance(years,np.ndarray): yrs=years
     scycle = np.zeros((len(yrs),12))
     for iyr in xrange(len(yrs)):
