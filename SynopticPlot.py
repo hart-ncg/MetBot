@@ -41,6 +41,7 @@ def openolr(reftime=False,sub='SA'):
     hrwindow=49
     v="noaa-olr-0-0";dset, varstr, lev, drv = v.split('-')
     dsrc="/home/neil/data/olr/"
+    dsrc="/home/neil/sogehome/data/olr/"
     olr, time, lat, lon, dtime = my.mync.openolr(dsrc+'olr.day.mean.nc','olr',subs='SA')
     time=time-15769752.0;olr=olr[1675:,:,:];time=time[1675:];dtime=dtime[1675:]
     if isinstance(reftime, np.ndarray): exec("ixt, [time, "+varstr+", dtime] = my.ixtwindow(reftime,time,hrwindow,time,"+varstr+",dtime)")
