@@ -512,8 +512,8 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
             if trkarr.ndim==2:
                 ixt = np.where(trkarr[:,1]>0)[0]
                 uni,iu=np.unique(trkarr[ixt,0],return_index=True)
-                ixt=ixt[iu]
-                itrk = trkarr[ixt,1].squeeze()
+                itrk = trkarr[ixt,1]
+                #print len(itrk),":",itrk
             elif trkarr.ndim==3:
                 itrk = np.ndarray((0,),dtype=np.int32)
                 for d in xrange(trkarr.shape[2]):
