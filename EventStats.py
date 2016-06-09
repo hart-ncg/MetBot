@@ -18,6 +18,8 @@ monthlist=[1,2,3,4,5,6,7,8,9,10,11,12]
 monthends = [31,28,31,30,31,30,31,31,30,31,30,31]
 monthends_leap = [31,29,31,30,31,30,31,31,30,31,30,31]
 monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
+monthstrseason=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
+monthstr_calendar=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec']
 mndict={}
 for i in xrange(len(season)): mndict[season[i]]=monthstr[i]
 
