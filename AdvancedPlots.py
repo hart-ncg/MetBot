@@ -29,7 +29,7 @@ def spatiofreq2_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
     m, f = blb.SAfrBasemap(lat[4:-7],lon[3:-2],drawstuff=True,prj='cyl',\
            fno=figno,rsltn='l')
     if len(mns)==12:plt.close();plt.figure(figsize=[12,10])
-    elif len(mns)==6:plt.close();plt.figure(figsize=[12,10])
+    elif len(mns)==6:plt.close();plt.figure(figsize=[13,10])
     cnt=1
     msklist=[]
     for mn in mns:
@@ -74,7 +74,7 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
     m, f = blb.SAfrBasemap(lat[4:-7],lon[3:-2],drawstuff=True,prj='cyl',\
                            fno=figno,rsltn='l')
     if len(mns)==12:plt.close();plt.figure(figsize=[12,10])
-    elif len(mns)==6:plt.close();plt.figure(figsize=[12,10])
+    elif len(mns)==6:plt.close();plt.figure(figsize=[13,10])
     cnt=1
     for mn in mns:
         if len(mns)==12:plt.subplot(4,3,cnt)

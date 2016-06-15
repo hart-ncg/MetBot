@@ -393,26 +393,28 @@ def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,de
 
 
 
-def plotseasonbox(scycle,descr,savefig=False,ylims=False):
-    plt.figure()
+def plotseasonbox(scycle,descr,ax=False,savefig=False,ylims=False):
+    if isinstance(ax,bool):plt.figure()
+    else: plt.axes(ax)
     monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
     plt.boxplot(scycle, notch=0, sym='+', vert=1, whis=1.5)
-    plt.plot(np.arange(1,13),np.median(scycle,axis=0),'k--',lw=1)
-    plt.xticks(np.arange(1,13),monthstr,fontsize=13.0)
-    plt.yticks(np.arange(1,15),fontsize=13.0)
+    plt.plot(np.arange(1,13),np.median(scycle,axis=0),'k-',lw=1.5)
+    plt.xticks(np.arange(1,13),monthstr,fontsize=14.0)
+    plt.yticks(np.arange(1,15),fontsize=14.0)
     if ylims:
         plt.ylim(ylims[0],ylims[1])
     else:
         plt.ylim(0,10.)
     plt.ylabel('No. of Cloudbands', fontsize=13.0, weight='demibold')
-    plt.title('Seasonal Cycle: '+descr.upper(), fontweight='demibold')
+    plt.title(descr, fontweight='demibold')
     plt.grid()
     fname=figdir+'scycle-'+descr+'.png'
     if savefig: plt.savefig(fname,dpi=150)
     plt.show()
 
-def plotseasonbox_rain(scycle,descr):
-    plt.figure()
+def plotseasonbox_rain(scycle,descr,ax=False):
+    if isinstance(ax,bool):plt.figure()
+    else: plt.axes(ax)
     monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
     plt.boxplot(scycle, notch=0, sym='+', vert=1, whis=1.5)
     plt.plot(np.arange(1,13),st.nanmean(scycle,0),'k-',lw=1)
