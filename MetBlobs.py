@@ -269,6 +269,7 @@ def BlobAngles(dct,blobs,img,gpx,thrs):
             yb = gpx.yp2lat(blobs[i].centroid[0])
             ij = 1
             ### Associate angleblobs with blobs
+            #print angblobs.keys()
             for j in angblobs.keys():
                 gpx.subdomain=smallsubdomain
                 xab = gpx.xp2lon(angblobs[j].centroid[1])
@@ -316,6 +317,7 @@ def FilterByLatextent(dct,blobs,gpx):
     for i in blobs.keys():
         #print 'Current iteration',i, blobs[i].label
         miny,minx,maxy,maxx = blobs[i].bbox
+        #print miny, maxy, mn,mx
         if (miny>mn or maxy< mx):
             #print 'Deleting blob no.',i,' labelled:',blobs[i].label
             del blobs[i]
@@ -350,7 +352,7 @@ def SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1,rsltn='c'):
     delat = 5.
     circles = np.arange(0.,90.+delat,delat).tolist()+\
               np.arange(-delat,-90.-delat,-delat).tolist()
-    f1 = plt.figure(fno,figsize=[12.0, 8.0])
+    f1 = plt.figure(fno,figsize=[13.0, 8.0])
     #ax = f1.add_axes([0.1,0.1,0.7,0.7])
     #pos = ax.get_position()
     #l, b, w, h = pos.bounds
@@ -712,7 +714,8 @@ def gethists(vrb,time,lat,lon,varstr,sub='SA',b=50,interact=False,figd=False):
     ixr = randindgen(len(time),nsamples)
     for i in ixr:
         #print cnt, time[i]
-        datafig = m.transform_scalar(data[i,::-1,:],lon,lat[::-1],len(lon),len(lat))
+        datafig=m.transform_scalar(data[i,::-1,:],lon,lat[::-1],\
+                                   len(lon),len(lat))
         m.imshow(datafig,mycmap,interpolation='nearest')
         plt.clim(0,255)
 

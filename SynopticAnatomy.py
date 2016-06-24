@@ -538,7 +538,7 @@ class SynopticEvents:
         if type=='grid':
             for rainkey in rainkeys:
                 print 'Adding rain from ',rainkey,'gridded data set'
-                flist=glob.glob('/home/neil/data/%s/%s.*.daily.SA.nc'\
+                flist=glob.glob('/home/neil/sogehome/data/%s/%s.*.daily.SA.nc'\
                                  %(rainkey,rainkey) )
                 flist.sort()
                 rain, time, lat, lon, lev, dtime = \
@@ -930,7 +930,7 @@ def addRWB(SEobj,mintrklen=1,wb='AWB',pv=1.5,isk=340,fname='/home/neil/work/rwb/
 
 def points_inside_poly(points,poly):
     thepoly=Path(poly)
-    boolean=Path.contains_points(points)
+    boolean=thepoly.contains_points(points)
     return boolean
 
     #for k in SEobj.events.keys():
