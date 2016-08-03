@@ -82,8 +82,8 @@ def timesubset(s,eventkeys,edates):
             eventkeys.append(ed[0])
 
     e = s.events[eventkeys[0]]
-    flagkey=e.refkey
-    dlist = flagkey.split('-')
+    refkey=e.refkey
+    dlist = refkey.split('-')
 
     keysubset=[]
     if isinstance(edates,list):
@@ -95,7 +95,7 @@ def timesubset(s,eventkeys,edates):
             hrs=hrs/24
         for k in eventkeys:
             e = s.events[k]
-            time24hr = e.trkarrstime[e.mbskeys[1]]
+            time24hr = e.trkarrstime[refkey]
             for hr in hrs:
                 if np.any(hr==time24hr): keysubset.append(k)
     elif isinstance(edates,tuple):
@@ -108,7 +108,7 @@ def timesubset(s,eventkeys,edates):
         hrmn, hrmx = hrs
         for k in eventkeys:
             e = s.events[k]
-            time24hr = e.trkarrstime[e.mbskeys[1]]
+            time24hr = e.trkarrstime[refkey]
             if np.any((time24hr>=hrmn) & (time24hr<=hrmx)): keysubset.append(k)
     keysubset = list(np.unique(np.asarray(keysubset)))
 
@@ -315,7 +315,8 @@ def plotallseasons(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,descr=
         #plt.show()
     return zz
 
-def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,descr='blank stare'):
+def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,\
+    descr='blank stare'):
     '''Type can be line or pcolor, very different results
     pcolor assumes given a years by months grid'''
     colims=(0,10)
@@ -326,7 +327,8 @@ def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,de
         cm=plt.cm.RdBu
         #cm=plt.cm.bwr_r
     fig=plt.figure(figsize=[10,6])
-    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
+    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar',\
+              'Apr','May','Jun','Jul']
     if type=='line':
         for iyr in xrange(len(yrs)):
             plt.plot(np.arange(1,13),scycle[iyr,:])
@@ -467,8 +469,10 @@ def spatiofreq(s,eventkeys,descr,plottrk=False,plothex=False,res=4.0,sub='SA'):
     #plt.savefig(fname,dpi=200)
     #plt.show()
 
-def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0-all',clim=(4,36,4),month=False,flagonly=False):
-    '''Get grid-cell frequencies for no. of times a grid-cell falls within a contour describing a feature from metblobs
+def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
+                clim=(4,36,4),month=False,flagonly=False):
+    '''Get grid-cell frequencies for no. of times a grid-cell falls within a 
+       contour describing a feature from metblobs.
     USAGE: If wish to create Basemap within function, m will be "create"
            if wish to have only for particular month, month=yourchoice
            if wish to only count for flagged days, flagonly=True'''
@@ -481,8 +485,8 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
         descr = dset+'-'+varstr
 
     mbskeys = s.mbskeys
-    refkey = mbskeys[0]
-    basekey = mbskeys[1]
+    refkey = s.events.values()[0].refkey
+    basekey = refkey
     try:
         dset, varstr, levsel, deriv, expid = basekey.split('-')
     except:
@@ -503,8 +507,8 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
     allmask = np.zeros((lat.shape[0],lon.shape[0]),dtype=np.float32)
 
     #Determine which variable we dealing with
-    iv = s.mbskeys.index(key)
-    if flagonly: iv = s.mbskeys.index(s.flagkey)
+    countkey=refkey
+    if flagonly: countkey = s.flagkey
 
     for k in eventkeys:
         e = s.events[k]
@@ -515,7 +519,7 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
         if flagonly:
             itrk=e.ixflags
         else:
-            trkarr = np.int32(e.trkarrs[e.mbskeys[iv]])
+            trkarr = np.int32(e.trkarrs[countkey])
             if trkarr.ndim==2:
                 ixt = np.where(trkarr[:,1]>0)[0]
                 uni,iu=np.unique(trkarr[ixt,0],return_index=True)
@@ -530,7 +534,7 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
                     itrk = np.append(itrk,trkarr[ixt,1,d].squeeze())
         # Get masks for each contour feature of a track
         for ixtrk in itrk:
-            mask = my.poly2mask(lon,lat,e.blobs[e.mbskeys[iv]]['ch'][ixtrk])
+            mask = my.poly2mask(lon,lat,e.blobs[countkey]['ch'][ixtrk])
             allmask=allmask+np.float32(mask)
 
     #cm=plt.cm.PuBu
@@ -544,7 +548,8 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
     #cm=plt.cm.gray_r
     cm.set_under(color='w')
     if m=='create':
-        m, f = blb.SAfrBasemap(lat[3:-6],lon[3:-3],drawstuff=True,prj='cyl',fno=figno,rsltn='l')
+        m, f = blb.SAfrBasemap(lat[3:-6],lon[3:-3],drawstuff=True,\
+                               prj='cyl',fno=figno,rsltn='l')
     #df=m.transform_scalar(allmask[::-1,:],lon,lat[::-1],len(lon),len(lat))
     #m.imshow(df,cm,interpolation='nearest')
     #m.pcolor(lon,lat,allmask,cmap=cm)
@@ -552,17 +557,21 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
     lon,lat = np.meshgrid(lon,lat)
     #m.contourf(lon,lat,(allmask/len(yrs)),cmap=cm)
     #
-
-    allmask[-9:,:]=0 # dirty trick to drop out permanent mid-latitude cloudiness allowing colormap to enhance cloud bands better
+    ### Next is dirty trick to drop out permanent mid-latitude cloudiness
+    ### allowing colormap to enhance cloud bands better
+    allmask[-9:,:]=0 
     std_mask=allmask/len(yrs)
     if isinstance(m,bool):
         return std_mask
     # IF M WAS NOT A BOOLEAN (False) THIS WILL CONTINUE TO PLOTTING
     if isinstance(meanmask,np.ndarray):
-        std_mask=std_mask-meanmask;std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
-        m.contour(lon,lat,meanmask,[2,3,4,6,8],colors='.3',linestyles='--',linewidths='1')
+        std_mask=std_mask-meanmask
+        std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
+        m.contour(lon,lat,meanmask,[2,3,4,6,8],\
+                  colors='.3',linestyles='--',linewidths='1')
     ## NEED TO DO THIS SINCE PCOLOR IS NOT SHADING VALUES OUTSIDE OF THE CLIMS
-    cstd_mask=np.where(std_mask>clim[1],clim[1],std_mask);cstd_mask=np.where(cstd_mask<clim[0],clim[0],cstd_mask)
+    cstd_mask=np.where(std_mask>clim[1],clim[1],std_mask)
+    cstd_mask=np.where(cstd_mask<clim[0],clim[0],cstd_mask)
     # Plot pcolor
     m.pcolor(lon,lat,cstd_mask,cmap=cm)
     img=plt.gci()
@@ -580,7 +589,8 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
                     ixx = np.where(trar[:,1,ntrk]>0)[0]
                     xx, yy = trar[ixx,2,ntrk],trar[ixx,3,ntrk]
                     off=np.random.rand()*.5
-                    m.scatter(xx[-1]+off,yy[-1]+off,50,color='none',edgecolor='k',marker='o',linewidth='2')
+                    m.scatter(xx[-1]+off,yy[-1]+off,50,color='none',\
+                              edgecolor='k',marker='o',linewidth='2')
                     plt.sci(img)
         #m.plot(e.trkcX,e.trkcY,'0.5')
 
@@ -591,21 +601,28 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,key='noaa-olr-0
         f,ax=plt.gcf(),plt.gca()
         axcol=f.add_axes([0.91,0.2,0.02,0.6])
         plt.colorbar(mappable=img,cax=axcol,boundaries=bounds)
-        if isinstance(meanmask,np.ndarray):plt.ylabel('anomaly grid-point count / year',fontweight='demibold')
-        else:plt.ylabel('grid-point count / year',fontweight='demibold')
+        if isinstance(meanmask,np.ndarray):
+            plt.ylabel('anomaly grid-point count / year',fontweight='demibold')
+        else:
+            plt.ylabel('grid-point count / year',fontweight='demibold')
         plt.axes(ax)
-        plt.title('Cloudband Annual Grid-Point Count Climatology: '+descr.upper(),fontsize='14', fontweight='demibold')
+        plt.title('Cloudband Annual Grid-Point Count Climatology: '\
+                  +descr.upper(),fontsize='14', fontweight='demibold')
         fname=figdir+'/FootprintFreqencygray-'+descr+'.png'
-        if flagonly:fname=figdir+'/FootprintFreqencygray-'+descr+'_flagonly.png'
+        if flagonly:
+            fname=figdir+'/FootprintFreqencygray-'+descr+'_flagonly.png'
         plt.savefig(fname,dpi=150)
     elif month:
         f,ax=plt.gcf(),plt.gca()
         axcol=f.add_axes([0.91,0.2,0.02,0.6])
         plt.colorbar(cax=axcol,boundaries=bounds)
-        if isinstance(meanmask,np.ndarray):plt.ylabel('anomaly grid-point count / year',fontweight='demibold')
-        else:plt.ylabel('grid-point count / year',fontweight='demibold')
+        if isinstance(meanmask,np.ndarray):
+            plt.ylabel('anomaly grid-point count / year',fontweight='demibold')
+        else:
+            plt.ylabel('grid-point count / year',fontweight='demibold')
         plt.axes(ax)
         plt.title(mndict[month], fontweight='demibold')
+
     return std_mask
 
 def wetlandevents(s, eventkeys, land_datasets=['wrc']):
@@ -615,7 +632,8 @@ def wetlandevents(s, eventkeys, land_datasets=['wrc']):
         for ed in s.uniques:
             eventkeys.append(ed[0])
 
-    # Select events based on the criteria of continental rainfall using SA datasets
+    ### Select events based on the criteria of continental rainfall 
+    ### using SA datasets
     wetlandkeys=[]
     for k in eventkeys:
         e = s.events[k]
@@ -729,19 +747,23 @@ def ploteventrain(m,k,event,rainmasklist,raindata,griddata=False,key=False):
         if griddata:
             olat,olon,dtime,olr = griddata
             ox, oy = np.meshgrid(olon,olat)
-            ixgrid = my.ixdtimes(dtime,[trkdtime[0]],[trkdtime[1]],[trkdtime[2]],[])[0]
+            ixgrid = my.ixdtimes(dtime,[trkdtime[0]],[trkdtime[1]],\
+                                 [trkdtime[2]],[])[0]
             m.pcolor(ox,oy,olr[ixgrid,:,:],cmap=plt.cm.PuBu_r)
             plt.clim(150,300)
         # PLOT THE CLOUD BAND CONTOUR
-        plt.plot(event.blobs[event.refkey]['ch'][event.trk[cnt]][:,0],event.blobs[event.refkey]['ch'][event.trk[cnt]][:,1],color='b',ls='-',lw='3.0')
+        plt.plot(event.blobs[event.refkey]['ch'][event.trk[cnt]][:,0],\
+                 event.blobs[event.refkey]['ch'][event.trk[cnt]][:,1],\
+                 color='b',ls='-',lw='3.0')
         # PLOT CONTOUR OF BLOB PROVIDED BY "KEY" WORD
         if key:
             e=event
             iarr = np.ndarray((0,),dtype=np.int32)
             hrtm = e.trktimes[cnt]
-            ir = np.where((e.trkarrs[e.refkey][:,1] != -1) & (e.trkarrs[e.refkey][:,0]==hrtm))
+            ir = np.where((e.trkarrs[e.refkey][:,1] != -1) & \
+                          (e.trkarrs[e.refkey][:,0]==hrtm))
             iarr = np.append(iarr,ir)
-            # Get the blob indices for tracks we interested in getting contours for
+            # Get the blob indices for tracks we want contours for
             trkarr = np.int32(e.trkarrs[key][iarr,:])
             if trkarr.ndim==2:
                 ixx = np.where(trkarr[:,1]>0)
@@ -752,21 +774,27 @@ def ploteventrain(m,k,event,rainmasklist,raindata,griddata=False,key=False):
                     ixx = np.where(trkarr[:,1,d]>0)
                     itrk = np.append(itrk,trkarr[ixx,1,d].squeeze())
             for ixtrk in itrk:
-                plt.plot(event.blobs[key]['ch'][ixtrk][:,0],event.blobs[key]['ch'][ixtrk][:,1],color='m',ls='--',lw='2.0')
+                plt.plot(event.blobs[key]['ch'][ixtrk][:,0],\
+                         event.blobs[key]['ch'][ixtrk][:,1],\
+                         color='m',ls='--',lw='2.0')
 
-
-        if ~ np.any(mask) or ~ np.any(~ np.isnan(rain[mask,ixt[cnt]])):     # skip plotting if there is no data
+        # skip plotting if there is no data
+        if ~ np.any(mask) or ~ np.any(~ np.isnan(rain[mask,ixt[cnt]])):    
             plt.text(0.5,0.5,"No rainfall inside contour")
             continue
-        m.scatter(x[mask],y[mask],5,rain[mask,ixt[cnt]],cmap=mycm,edgecolor='none');plt.clim(5,100)
-        m.scatter(x[~mask],y[~mask],5,np.where(rain[~mask,ixt[cnt]]<5,np.nan,rain[~mask,ixt[cnt]]),cmap=plt.cm.GnBu,edgecolor='none');plt.clim(5,50)
+        m.scatter(x[mask],y[mask],5,rain[mask,ixt[cnt]],\
+                 cmap=mycm,edgecolor='none');plt.clim(5,100)
+        m.scatter(x[~mask],y[~mask],5,np.where(rain[~mask,ixt[cnt]]<5,\
+                 np.nan,rain[~mask,ixt[cnt]]),\
+                 cmap=plt.cm.GnBu,edgecolor='none');plt.clim(5,50)
         ax = plt.gca()
         #if cnt==0:
             #plt.colorbar()
         m.drawcoastlines()
         m.drawcountries()
         cnt+=1
-        dstring='blobs'+str(event.trkkey)+'-%d%02d%02d' %(trkdtime[0],trkdtime[1],trkdtime[2])
+        dstring='blobs'+str(event.trkkey)+'-%d%02d%02d'\
+                %(trkdtime[0],trkdtime[1],trkdtime[2])
         fname = rainfigdir+dstring+'_ee.png'
         plt.savefig(fname,dpi=200)
         #time.sleep(0.2)
@@ -787,7 +815,8 @@ def eventrainbystation(rain,dates,masklist,maskdtimes):
     #edates=np.asarray(edates)
     return erain
 
-def seasoncbcountmasks(s,eventkeys,yrs,lat,lon,key='noaa-olr-0-all',season='coreseason',flagonly=False):
+def seasoncbcountmasks(s,eventkeys,yrs,lat,lon,key='noaa-olr-0-all',\
+    season='coreseason',flagonly=False):
     ''' Use spatiofreq2 to return cloud band grid point counts
     USAGE: yrs is list of starting year of seasons of interest'''
     dset, varstr, levsel, deriv, exp = key.split('-')
@@ -802,8 +831,10 @@ def seasoncbcountmasks(s,eventkeys,yrs,lat,lon,key='noaa-olr-0-all',season='core
     if dset=='hadam3p' and mend==2:dend=28
     cbcount=np.ndarray((0,len(lat),len(lon)),dtype=np.int32)
     for yr in yrs:
-        seaskeys=specificseasons(s,eventkeys,[yr],startd=[mst,dst],endd=[mend,dend])
-        gridcount = spatiofreq2(False,s,lat,lon,[yr],seaskeys,key=key,flagonly=flagonly)
+        seaskeys=specificseasons(s,eventkeys,[yr],startd=[mst,dst],\
+                                                  endd=[mend,dend])
+        gridcount = spatiofreq2(False,s,lat,lon,[yr],seaskeys,key=key,\
+                                flagonly=flagonly)
         cbcount=np.append(cbcount,gridcount[np.newaxis,:,:],axis=0)
 
     return cbcount, yrs
