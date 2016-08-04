@@ -104,14 +104,14 @@ class Geopix:
     def lat2pix(self,deg):
         #ideg=np.where(np.abs(self.lat-deg)==np.abs((self.lat-deg)).min())[0][0]
         #closedeg = self.lat[ideg]
-        pix=(deg-self.lat0)*self.ny/self.rnglat
+        pix=(deg-self.lat0)*self.ny/float(self.rnglat)
         #print pix
         return np.int(pix)
 
     def lon2pix(self,deg):
         #ideg=np.where(np.abs(self.lon-deg)==np.abs((self.lon-deg)).min())[0][0]
         #closedeg = self.lon[ideg]
-        pix=(deg-self.lon0)*self.nx/self.rnglon
+        pix=(deg-self.lon0)*self.nx/float(self.rnglon)
         #print 'lon2pix',pix,self.lon[ideg]
         return np.int(pix)
 
@@ -142,11 +142,11 @@ class Geopix:
         subrect=(y1,x1,y2-y1,x2-x1)
         x1,y1,w,h=subrect
         #print img.shape
-        yy,xx,zz = np.indices(img.shape)
+        yy,xx = np.indices(img.shape)
         submask = ((xx>x1) & (xx<x2)) & ((yy>y1) & (yy<y2))
-        black=np.uint8([1,1,1])
+        black=0
         if img.ndim>2:subimg = np.where(submask,img,black)
-        elif img.ndim==2: subimg = np.where(submask,img,1)
+        elif img.ndim==2: subimg = np.where(submask,img,0)
         self.subdomain=(x1,x2,y1,y2,w,h)
 
         return subimg, (x1,x2,y1,y2,w,h)
@@ -155,14 +155,14 @@ class Geopix:
         #x1 = self.subdomain[0]
         #pix = xpix+x1
         pix = xpix
-        ln = pix*self.rnglon/self.nx + self.lon0
+        ln = pix*self.rnglon/float(self.nx) + self.lon0
         return np.around(ln,decimals=1)
 
     def yp2lat(self,ypix):
         #y1 = self.subdomain[2]
         #pix = ypix+y1
         pix = ypix
-        lt = pix*self.rnglat/self.ny + self.lat0
+        lt = pix*self.rnglat/float(self.ny) + self.lat0
         return np.around(lt,decimals=1)
 
 def fig2img(fig,subrect):
@@ -231,7 +231,7 @@ def Threshold(arr,tval):
     arrIn=arr.copy()
     arrOut = np.where(arrIn < tval,0,arrIn)
     arrOut = np.where(arrIn > tval,255,arrOut)
-    return arr
+    return arrOut
 
 
 def MagDir(u,v):
@@ -255,13 +255,15 @@ def DistVector(p1,p2):
 
     return (dx,dy),(mag,dir)
 
-def BlobAngles(dct,blobs,img,gpx,thrs):
+#def BlobAngles(dct,blobs,img,gpx,thrs):
+def BlobAngles(dct,blobs,img,gpx):
     if 'angleROI' in dct.keys():   # Use an angle from blobs in subdomain of one used to get blobs passed to FilterByAngle
         angledomain = dct['angleROI']
         bigsubdomain = gpx.subdomain
         img4blob, pixss = gpx.imgsubdomain(img,angledomain)
         smallsubdomain = gpx.subdomain
-        angblbim, angblobs, anggrey = GetBlobs(img4blob,(thrs,255))
+        #angblbim, angblobs, anggrey = GetBlobs(img4blob,(thrs,255))
+        angblbim, angblobs, anggrey = GetBlobs(img4blob)
         dstold = 100000 # Big irrelevant starting dst
         for i in blobs.keys():
             gpx.subdomain=bigsubdomain
@@ -312,7 +314,8 @@ def FilterByLatextent(dct,blobs,gpx):
         if pixS > y2:
             pixS = y2;
 
-    mn, mx = pixN+5, pixS-5
+    #mn, mx = pixN+5, pixS-5
+    mn, mx = pixN, pixS
     #print "Lat pixs:", pixN, pixS
     for i in blobs.keys():
         #print 'Current iteration',i, blobs[i].label
@@ -390,6 +393,7 @@ def BlobContour(blbim,blob,gpx):
         #poly = np.vstack((poly,polylist[-1][0,:]))
         apoly=skimage.measure.approximate_polygon(poly,1)
     #properties
+    apoly=poly
     equivradius=blob.perimeter/(2*np.pi)
     circ_area = np.pi*equivradius**2
     Circularity = blob.area/circ_area
@@ -423,7 +427,7 @@ def DrawContourAngles(blobs,gpx,m=plt):
         else: mcx,mcy,mex,mey = cx,cy,ex,ey
         #plt.arrow(mcx,mcy,mex,mey,width=1.0,fc=cl)
         txt="Cloudband\nTilt: %03.0f" %(cb.degs)
-        plt.text(mcx,mcy,txt,fontsize=14.,fontweight='bold') 
+        plt.text(mcx,mcy,txt,color='c',fontsize=14.,fontweight='bold') 
         ### Draw contour
         if hasattr(m,'drawgreatcircle'):
             contour = cb.convhull
@@ -434,7 +438,8 @@ def DrawContourAngles(blobs,gpx,m=plt):
         
 
 # MAIN FUNCTIONS
-def GetBlobs(img,threshold,subrect=False):
+#def GetBlobs(img,threshold,subrect=False):
+def GetBlobs(img,subrect=False):
     '''Info to follow'''
     if subrect:
         x1,y1,w,h=subrect
@@ -442,10 +447,10 @@ def GetBlobs(img,threshold,subrect=False):
         if img.ndim>2: subimg = img[x1:x1+xw,y1:y1+yh,:]
         elif img.ndim==2: subimg = img[x1:x1+xw,y1:y1+yh]
         img=subimg
-
-    grey = skimage.img_as_ubyte(skimage.color.rgb2grey(img))
+    grey=img
+    #grey = skimage.img_as_ubyte(skimage.color.rgb2grey(img))
     #grey = skimage.img_as_bool( (grey>threshold[0]) & (grey<threshold[1]) )
-    grey = (grey>threshold[0]) & (grey<threshold[1])
+    #grey = (grey>threshold[0]) & (grey<threshold[1])
     #plt.figure();plt.imshow(grey);plt.colorbar(shrink=.5)
     ### LABEL BLOBS
     labelled = skimage.measure.label(grey,connectivity=2,background=0)
@@ -469,23 +474,23 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
     plt.close('all')
     wt=100
     ### CREATE BASEMAP INSTANCES
-    m, mfig = SAfrBasemap(lat,lon,drawstuff=True,prj='cyl')
+    if showblobs: m, mfig = SAfrBasemap(lat,lon,drawstuff=True,prj='cyl')
     ###GET APROPRIATE THRESHOLDS ARE DOMAINS FROM DICTIONARY AND ASSIGN COLORMAP
     dct=filters.blobfilters[sub+'cloudband'][varstr]
     domain=dct['ROI']
-    dstretch=dct['stretch']
     dthresh, highlow = dct['thresh']
-    data, thrs=Stretch(vrb,dthresh,tval=dstretch)
+    #data, thrs=Stretch(vrb,dthresh,tval=dstretch)
     if highlow=='low':
+        data = vrb < dthresh
         mycmap=plt.cm.gray_r;#print "Reverse Gray Colormap"
-        thrs=255-thrs
     elif highlow=='high':
+        data = vrb > dthresh
         mycmap=plt.cm.gray;print "Gray Colormap"
-
-    blobslist=[]
-    blobimages=[]
-    chlist=[]
-    metblobs = np.zeros((len(time)*10,14),dtype=np.float32) # this essentially allows space for 4 blobs per day, a "guestimate" initialisation
+    data = skimage.img_as_ubyte(data)
+    ### Initialize variables to store output
+    blobslist, blobimages, chlist = [], [], []
+    ### Below: allow space for 4 blobs per day, a "guestimate" initialisation
+    metblobs = np.zeros((len(time)*10,14),dtype=np.float32) 
     blobtime = np.zeros((len(time)*10,4),dtype=np.int)
 
     if showblobs:
@@ -494,10 +499,11 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
         keyin=raw_input("Position windows as desired then press any key,\n \
         Press [Esc] at any time to quit...\
         #[Backspace] to go back one image...")
-    canvasrect = CanvasCutOut(mfig)
-    gpx = Geopix((canvasrect[2],canvasrect[3]),lat,lon)
+    #canvasrect = CanvasCutOut(mfig)
+    #gpx = Geopix((canvasrect[2],canvasrect[3]),lat,lon)
+    gpx = Geopix((len(lat),len(lon)),lat,lon)
     llgridtup=np.meshgrid(lon,lat)
-    plt.figure(num=mfig.number);plt.clf()
+    #plt.figure(num=mfig.number);plt.clf()
     t=0
     #for t in xrange(len(time)):
     ixmbs=0
@@ -506,25 +512,25 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
         wtimstart=timer()
         tm=time[t,:]
         hr=hrtime[t]
-        #humandate=num2date(time[t],units="hours since 1-1-1 00:00:0.0",calendar='gregorian')
         humandate="%d-%02d-%02d %02d:00" %(tm[0],tm[1],tm[2],tm[3])
-        #print num2date(time[t],units="hours since 1-1-1 00:00:0.0",calendar='gregorian')
-        plt.figure(num=mfig.number);plt.clf()
-        datafig=m.transform_scalar(data[t,::-1,:],lon,lat[::-1],\
-                                   len(lon),len(lat))
-        plt.figure(num=mfig.number)
-        m.imshow(datafig,mycmap,interpolation='nearest')
+        #plt.figure(num=mfig.number);plt.clf()
+        #datafig=m.transform_scalar(data[t,::-1,:],lon,lat[::-1],\
+        #                           len(lon),len(lat))
+        #plt.figure(num=mfig.number)
+        #m.imshow(datafig,mycmap,interpolation='nearest')
         #plt.clim(dstretch[0],dstretch[1])
-        plt.clim(0,255);#plt.colorbar()
-        img = fig2img(mfig,canvasrect)
+        #plt.clim(0,255);#plt.colorbar()
+        #img = fig2img(mfig,canvasrect)
+        img = data[t,:,:]
         img4blob, pixss = gpx.imgsubdomainmasked(img,domain)
 
-        plt.figure(num=mfig.number);plt.clf()
-        blbim, blobs, grey = GetBlobs(img4blob,(thrs,255))
+        #plt.figure(num=mfig.number);plt.clf()
+        blbim, blobs, grey = GetBlobs(img4blob)
         if len(blobs)==0:
             print humandate,": No Blobs detected"
             if showblobs:
-                plt.figure(num=mfig.number)
+                plt.figure(num=mfig.number);plt.clf()
+                plt.figure(num=bfig.number);plt.clf()
                 if interact:
                     d=raw_input('Press: x to stop; b to go backwards')
                 else: d=='nada'
@@ -537,7 +543,8 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
                 t=t+1
                 continue
 
-        FilterBlobs(dct,blobs,img,gpx,thrs)
+        #FilterBlobs(dct,blobs,img,gpx,thrs)
+        FilterBlobs(dct,blobs,img,gpx)
         if len(blobs) > 0:
             #blobslist.append(blobs);blobimages.append(blbim)
             print "%s: %d CANDIDATE %s IN %s"\
@@ -572,6 +579,8 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
             donada=1;print humandate
 
         if showblobs:
+            plt.figure(num=mfig.number);plt.clf()
+            plt.figure(num=bfig.number);plt.clf()
             pt1=(pixss[0],pixss[2]);pt3=(pixss[1],pixss[3])
             pt2=(pixss[0],pixss[3]);pt4=(pixss[1],pixss[2])
             pt5=pt1
@@ -612,12 +621,14 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
 
     return metblobs[ikeep,:], blobtime[ikeep,:], chlist
 
-def FilterBlobs(dct,blobs,img,gpx,thrs):
+#def FilterBlobs(dct,blobs,img,gpx,thrs):
+def FilterBlobs(dct,blobs,img,gpx):
     '''Filters blobs by predefined criteria:
     These are contained in filters.blobfilters (dict type)'''
     # Area Filter
     if dct['area']:
-        mn,mx=dct['area']
+        #mn,mx=dct['area']
+        mn, mx = 4,300
         for i in blobs.keys():
             if blobs[i].area<mn or blobs[i].area>mx:
                 #print 'Area:',blobs[i].area, "fails"
@@ -626,7 +637,8 @@ def FilterBlobs(dct,blobs,img,gpx,thrs):
     if dct['latextent']:
         FilterByLatextent(dct,blobs,gpx)
     # Angle Filter
-    BlobAngles(dct,blobs,img,gpx,thrs)
+    #BlobAngles(dct,blobs,img,gpx,thrs)
+    BlobAngles(dct,blobs,img,gpx)
     if dct['angle']:
         FilterByAngle(dct,blobs)
 
