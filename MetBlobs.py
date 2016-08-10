@@ -342,8 +342,8 @@ def FilterBlobs(dct,blobs,img,gpx):
     These are contained in filters.blobfilters (dict type)'''
     # Area Filter
     if dct['area']:
-        #mn,mx=dct['area']
-        mn, mx = 4,300
+        mn,mx=dct['area']
+        #mn, mx = 4,300
         for i in blobs.keys():
             if blobs[i].area<mn or blobs[i].area>mx:
                 #print 'Area:',blobs[i].area, "fails"
