@@ -38,10 +38,10 @@ def spatiofreq2_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
         my.xtickfonts();my.ytickfonts()
         if flagonly:
             allmask=stats.spatiofreq2(m,s,lat,lon,yrs,eventkeys,\
-                    clim=(1.,9.,1.),key=key,month=mn,flagonly=True)
+                    clim=(1.,9.,1.),month=mn,flagonly=True)
         else:
             allmask=stats.spatiofreq2(m,s,lat,lon,yrs,eventkeys,clim=dclim,\
-                                      key=key,month=mn,flagonly=False)
+                                      month=mn,flagonly=False)
         if cnt%2==0:syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
         else:syp.redrawmap(m,lns=True,resol='verylow')
         cnt+=1
@@ -81,10 +81,10 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
         elif len(mns)==6:plt.subplot(3,2,cnt)
         if flagonly:
             allmask=stats.spatiofreq2(m,s,lat,lon,yrs,eventkeys,\
-            meanmask=msklist[cnt-1],clim=dclim,key=key,month=mn,flagonly=True)
+            meanmask=msklist[cnt-1],clim=dclim,month=mn,flagonly=True)
         else:
             allmask=stats.spatiofreq2(m,s,lat,lon,yrs,eventkeys,\
-            meanmask=msklist[cnt-1],clim=dclim,key=key,month=mn,flagonly=False)
+            meanmask=msklist[cnt-1],clim=dclim,month=mn,flagonly=False)
         if cnt%2==0:syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
         else:syp.redrawmap(m,lns=True,resol='verylow')
         cnt+=1

@@ -477,20 +477,16 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
            if wish to have only for particular month, month=yourchoice
            if wish to only count for flagged days, flagonly=True'''
     #plt.close('all')
-    try:
-        dset, varstr, levsel, deriv, expid = key.split('-')
-        descr = dset+'-'+varstr
-    except:
-        dset, varstr, levsel, deriv = key.split('-')
-        descr = dset+'-'+varstr
 
     mbskeys = s.mbskeys
     refkey = s.events.values()[0].refkey
     basekey = refkey
     try:
         dset, varstr, levsel, deriv, expid = basekey.split('-')
+        descr = dset+'-'+varstr
     except:
         dset, varstr, levsel, deriv = basekey.split('-')
+        descr = dset+'-'+varstr
     #vkey='%s-%s-%s-%s' %(dset, varstr, levsel, deriv)
     #x1,x2,y1,y2=blb.blobfilters[sub+'cloudband'][vkey]['ROI']
     #nx, ny = np.abs(x1-x2)/res, np.abs(y1-y2)/res

@@ -639,7 +639,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
             latplot = np.hstack((lat[0]-dlat/2.,lat+dlat/2.))
             lonplot = np.hstack((lon[0]-dlon/2.,lon+dlon/2.))
             plt.figure(num=mfig.number)
-            plt.pcolormesh(lonplot,latplot,vrb[t,:,:],cmap=plt.cm.Greys)
+            plt.pcolormesh(lonplot,latplot,vrb[t,:,:],cmap=mycmap)
             plt.grid()
             DrawContourAngles(blobs,gpx,m=plt)
             plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
