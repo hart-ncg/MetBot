@@ -18,6 +18,8 @@ blobfilters['SAcloudband']={
 'ncep2-hgt-250-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-6,7), 'thresh': (1,'high'), 'text': "trough"},
 'ncep2-uvmag-500-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-1,'low'), 'text': "jet"},
 'ncep2-uvmag-250-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-1,'low'), 'text': "jet"},
+'ncep2-strmfp-200-0': {'area': 15, 5000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (0.2e7,'high'), 'text': "eddy"},
+'ncep2-strmfn-200-0': {'area': (15, 5000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-0.2e7,'low'), 'text': "eddy"},
 'ncep2-uvmag-850-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-1.5,1.5), 'thresh': (-0.5,'low'), 'text': "jet"},
 'ncep2-quvmag-500-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-1,'low'), 'text': "moistjet"},
 'ncep2-quvmag-700-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-1,'low'), 'text': "moistjet"},

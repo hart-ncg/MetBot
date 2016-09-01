@@ -445,6 +445,7 @@ def BlobContour(blbim,blob,gpx):
 
 def DrawContourAngles(blobs,gpx,m=plt):
     cols=['r','b','c','m','g','r','b','c','m','g']
+    for rp in xrange(5):cols.extend(cols)
     for i in blobs.keys():
         cl=cols[i]
         cb=blobs[i]
