@@ -398,9 +398,22 @@ def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,\
 def plotseasonbox(scycle,descr,ax=False,savefig=False,ylims=False):
     if isinstance(ax,bool):plt.figure()
     else: plt.axes(ax)
-    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
-    plt.boxplot(scycle, notch=0, sym='+', vert=1, whis=1.5)
-    plt.plot(np.arange(1,13),np.median(scycle,axis=0),'k-',lw=1.5)
+    lc='b'
+    bp = dict(linewidth=2,color=lc)
+    fp = dict(markersize=12,markeredgewidth=1.5,markeredgecolor=lc,alpha=1.)
+    mp = dict(linewidth=2,color='r')
+    #wp = dict(linewidth=1.5,color=lc,alpha=alpha)
+    wp = dict(linewidth=1.5,color=lc)
+    cp = dict(linewidth=1.5,color=lc)
+    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb',\
+              'Mar','Apr','May','Jun','Jul']
+    plt.boxplot(scycle, notch=0, sym='+', vert=1, whis=1.5,\
+                showfliers=True,showcaps=True,boxprops=bp,flierprops=fp,\
+                medianprops=mp,whiskerprops=wp,capprops=cp)
+    #plt.violinplot(scycle,
+    #               showmeans=False,
+    #               showmedians=True)
+    #plt.plot(np.arange(1,13),np.median(scycle,axis=0),'k-',lw=1.5)
     plt.xticks(np.arange(1,13),monthstr,fontsize=14.0)
     plt.yticks(np.arange(1,15),fontsize=14.0)
     if ylims:
@@ -413,6 +426,28 @@ def plotseasonbox(scycle,descr,ax=False,savefig=False,ylims=False):
     fname=figdir+'scycle-'+descr+'.png'
     if savefig: plt.savefig(fname,dpi=150)
     plt.show()
+
+def plotseasonbox_background(scycle,ax=False,savefig=False,ylims=False):
+    if isinstance(ax,bool):plt.figure()
+    else: plt.axes(ax)
+    bp = dict(linewidth=2,color='None',facecolor='.8')
+    mp = dict(linewidth=2,color='.5')
+    wp = dict(color='None')
+    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb',\
+              'Mar','Apr','May','Jun','Jul']
+    plt.boxplot(scycle, notch=0, widths=.4, vert=1,patch_artist=True,\
+                showfliers=False,showcaps=False,boxprops=bp,\
+                medianprops=mp,whiskerprops=wp)
+    #plt.violinplot(scycle,
+    #               showmeans=False,
+    #               showmedians=True)
+    #plt.plot(np.arange(1,13),np.median(scycle,axis=0),'k-',lw=1.5)
+    plt.xticks(np.arange(1,13),monthstr,fontsize=14.0)
+    plt.yticks(np.arange(1,15),fontsize=14.0)
+    if ylims:
+        plt.ylim(ylims[0],ylims[1])
+    else:
+        plt.ylim(0,10.)
 
 def plotseasonbox_rain(scycle,descr,ax=False):
     if isinstance(ax,bool):plt.figure()
