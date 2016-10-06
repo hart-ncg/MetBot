@@ -98,6 +98,18 @@ def timesubset(s,eventkeys,edates):
             time24hr = e.trkarrstime[refkey]
             for hr in hrs:
                 if np.any(hr==time24hr): keysubset.append(k)
+    elif isinstance(edates,np.ndarray):
+        if not 'hadam3p' in dlist:
+            hrs = my.dates2hrnum(edates)
+        elif 'hadam3p' in dlist:
+            hrs = my.dates2hrnum(edates,\
+                    units="hours since 1959-12-01 00:00:00",calendar="360_day")
+            hrs=hrs/24
+        for k in eventkeys:
+            e = s.events[k]
+            time24hr = e.trkarrstime[refkey]
+            for hr in time24hr:
+                if np.any(hrs==hr): keysubset.append(k)
     elif isinstance(edates,tuple):
         if not 'hadam3p' in dlist:
             hrs = my.dates2hrnum(edates)
@@ -173,10 +185,12 @@ def seasonalcycle(s,eventkeys,years=False,season=[8,9,10,11,12,1,2,3,4,5,6,7]):
             else:
                 ix = np.where((edts[:,0]==yr+1) & (edts[:,1]==mn))[0]
             scycle[iyr,imn] = len(ix)
-    cyclestats=np.hstack((scycle.mean(0)[:,np.newaxis],scycle.std(0)[:,np.newaxis]))
+    cyclestats=np.hstack((scycle.mean(0)[:,np.newaxis],\
+                          scycle.std(0)[:,np.newaxis]))
     return scycle, cyclestats, yrs
 
-def scycle_rainfall(s,eventkeys,raindset='wrc',years=False,season=[8,9,10,11,12,1,2,3,4,5,6,7]):
+def scycle_rainfall(s,eventkeys,raindset='wrc',years=False,\
+                    season=[8,9,10,11,12,1,2,3,4,5,6,7]):
     '''Calculate seasonal cycle of mean cloudband intensity
     Can specify eventkeys is specified False if want all events
     Can specify years or allow autodiscovery'''
