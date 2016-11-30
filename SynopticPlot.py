@@ -190,25 +190,29 @@ def daylabel(e,etime):
     return np.asarray(lablist), np.asarray(ixlist), flarr[ixlist,:]
 
 # PLOTTING FUNCTIONS
-def redrawmap(m,lns=False,resol='low',parallel=True,meridian=True):
+def redrawmap(m,lns=False,resol='low',parallel=True,meridian=True,\
+    fontdict=False):
     '''Redraw the basemap features after calling plt.clf()'''
+    if not fontdict: fd = {'fontsize':14,'fontweight':'bold'}
+    else: fd=fontdict
     m.drawcountries()
     m.drawcoastlines()
     if lns and resol=='low':
         delon = 10.; meridians = np.arange(10.,360.,delon)
-        delat = 5.; circles = np.arange(0.,90.+delat,delat).tolist()+np.arange(-delat,-90.-delat,-delat).tolist()
-        if parallel: m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0])
-        if meridian:m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1])
+        delat = 5.; circles = np.arange(0.,90.+delat,delat).tolist()+\
+                              np.arange(-delat,-90.-delat,-delat).tolist()
     elif lns and resol=='hi':
         delon = 2.; meridians = np.arange(10.,360.,delon)
-        delat = 2.; circles = np.arange(0.,90.+delat,delat).tolist()+np.arange(-delat,-90.-delat,-delat).tolist()
-        if parallel:m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0])
-        if meridian:m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1])
+        delat = 2.; circles = np.arange(0.,90.+delat,delat).tolist()+\
+                              np.arange(-delat,-90.-delat,-delat).tolist()
     elif lns and resol=='verylow':
         delon = 20.; meridians = np.arange(10.,360.,delon)
-        delat = 10.; circles = np.arange(0.,90.+delat,delat).tolist()+np.arange(-delat,-90.-delat,-delat).tolist()
-        if parallel:m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0])
-        if meridian:m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1])
+        delat = 10.; circles = np.arange(0.,90.+delat,delat).tolist()+\
+                               np.arange(-delat,-90.-delat,-delat).tolist()
+    if parallel:
+        m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0],fontdict=fd)
+    if meridian:
+        m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1],fontdict=fd)
 
 def addpatch(verts):
     '''Helper to add patch defined by poly with xverts, yverts'''

@@ -361,7 +361,8 @@ def FilterBlobs(dct,blobs,img,gpx):
 
 # MAPPING AND PLOTTING HELPERS
 
-def SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1,rsltn='c'):
+def SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1,rsltn='c',\
+    fontdict=False):
     '''m, f = SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1)
 
     This creates a basemap instance from lat's and lon's provided.
@@ -372,7 +373,7 @@ def SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1,rsltn='c'):
              f, pointer figure'''
     xy=(lat.min(),lat.max(),lon.min(),lon.max())
     nx = len(lon); ny = len(lat)
-
+    if not fontdict: fontdict = {'fontsize':14,'fontweight':'bold'}
     if prj=='cyl':
         m = bm.Basemap(llcrnrlon=xy[2],llcrnrlat=xy[0],urcrnrlon=xy[3],\
                        urcrnrlat=xy[1],resolution=rsltn,area_thresh=10000.,\
@@ -399,8 +400,10 @@ def SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1,rsltn='c'):
     if drawstuff:
         m.drawcoastlines()
         m.drawcountries()
-        m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0])
-        m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1])
+        m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0],\
+                        fontdict=fontdict)
+        m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1],\
+                        fontdict=fontdict)
 
     return m, f1
 

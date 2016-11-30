@@ -519,14 +519,15 @@ def spatiofreq(s,eventkeys,descr,plottrk=False,plothex=False,res=4.0,sub='SA'):
     #plt.show()
 
 def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
-                clim=(4,36,4),month=False,flagonly=False):
+                clim=(4,36,4),month=False,flagonly=False,fontdict=False):
     '''Get grid-cell frequencies for no. of times a grid-cell falls within a 
        contour describing a feature from metblobs.
     USAGE: If wish to create Basemap within function, m will be "create"
            if wish to have only for particular month, month=yourchoice
            if wish to only count for flagged days, flagonly=True'''
     #plt.close('all')
-
+    if not fontdict: fd = {'fontsize':14,'fontweight':'bold'}
+    else: fd=fontdict
     mbskeys = s.mbskeys
     refkey = s.events.values()[0].refkey
     basekey = refkey
@@ -644,27 +645,29 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
     #vals=np.arange(0,35,2)
     if not month:
         f,ax=plt.gcf(),plt.gca()
-        axcol=f.add_axes([0.91,0.2,0.02,0.6])
+        axcol=f.add_axes([0.93,0.2,0.02,0.6])
         plt.colorbar(mappable=img,cax=axcol,boundaries=bounds)
+        my.ytickfonts()
         if isinstance(meanmask,np.ndarray):
-            plt.ylabel('anomaly grid-point count / year',fontweight='demibold')
+            plt.ylabel('anomaly grid-point count / year',fontdict=fd)
         else:
-            plt.ylabel('grid-point count / year',fontweight='demibold')
+            plt.ylabel('grid-point count / year',fontdict=fd)
         plt.axes(ax)
         plt.title('Cloudband Annual Grid-Point Count Climatology: '\
-                  +descr.upper(),fontsize='14', fontweight='demibold')
+                  +descr.upper(),fontsize='14',fontdict=fd)
         fname=figdir+'/FootprintFreqencygray-'+descr+'.png'
         if flagonly:
             fname=figdir+'/FootprintFreqencygray-'+descr+'_flagonly.png'
         plt.savefig(fname,dpi=150)
     elif month:
         f,ax=plt.gcf(),plt.gca()
-        axcol=f.add_axes([0.91,0.2,0.02,0.6])
+        axcol=f.add_axes([0.93,0.2,0.02,0.6])
         plt.colorbar(cax=axcol,boundaries=bounds)
+        my.ytickfonts()
         if isinstance(meanmask,np.ndarray):
-            plt.ylabel('anomaly grid-point count / year',fontweight='demibold')
+            plt.ylabel('anomaly grid-point count / year',fontdict=fd)
         else:
-            plt.ylabel('grid-point count / year',fontweight='demibold')
+            plt.ylabel('grid-point count / year',fontdict=fd)
         plt.axes(ax)
         plt.title(mndict[month], fontweight='demibold')
 
