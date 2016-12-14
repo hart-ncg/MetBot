@@ -93,9 +93,10 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
             allmask=stats.spatiofreq2(m,s,lat,lon,yrs,eventkeys,fontdict=fd,\
             meanmask=msklist[cnt-1],clim=dclim,month=mn,flagonly=False)
         if cnt%2==0:
-            syp.redrawmap(m,lns=True,resol='verylow',parallel=False,fontdict=fd)
+            syp.redrawmap(m,lns=True,resol='verylow',parallel=False,\
+                          fontdict=fd,clr='0.5')
         else:
-            syp.redrawmap(m,lns=True,resol='verylow',fontdict=fd)
+            syp.redrawmap(m,lns=True,resol='verylow',fontdict=fd,clr='0.5')
         cnt+=1
     plt.subplots_adjust(left=0.05,right=0.92,top=0.97,bottom=0.02,\
                         wspace=0.02,hspace=0.1)

@@ -613,13 +613,18 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
     if isinstance(meanmask,np.ndarray):
         std_mask=std_mask-meanmask
         std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
-        m.contour(lon,lat,meanmask,[2,3,4,6,8],\
-                  colors='.3',linestyles='--',linewidths='1')
+        lnmin,lnmx,latmn,latmx =\
+                        blb.filters.blobfilters['SAcloudband'][countkey]['ROI']
+        latmask = (lat<latmn) & (lat>latmx) # this is for S. Hemisphere
+        meanmasked = np.ma.MaskedArray(meanmask,mask=~latmask)
+        m.contour(lon,lat,meanmasked,[2,4],colors='k')
+        #m.contourf(lon,lat,meanmasked,[2,4,14],hatches=['.','..'],\
+        #          colors='none',linestyles='-',linewidths='1',alpha=.1)
     ## NEED TO DO THIS SINCE PCOLOR IS NOT SHADING VALUES OUTSIDE OF THE CLIMS
     cstd_mask=np.where(std_mask>clim[1],clim[1],std_mask)
     cstd_mask=np.where(cstd_mask<clim[0],clim[0],cstd_mask)
     # Plot pcolor
-    m.pcolor(lon,lat,cstd_mask,cmap=cm)
+    pcolmap=m.pcolormesh(lon,lat,cstd_mask,cmap=cm,zorder=1)
     img=plt.gci()
     for k in eventkeys:
         e = s.events[k]

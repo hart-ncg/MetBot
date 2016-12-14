@@ -191,12 +191,12 @@ def daylabel(e,etime):
 
 # PLOTTING FUNCTIONS
 def redrawmap(m,lns=False,resol='low',parallel=True,meridian=True,\
-    fontdict=False):
+    fontdict=False,clr='k'):
     '''Redraw the basemap features after calling plt.clf()'''
     if not fontdict: fd = {'fontsize':14,'fontweight':'bold'}
     else: fd=fontdict
-    m.drawcountries()
-    m.drawcoastlines()
+    m.drawcountries(color=clr)
+    m.drawcoastlines(color=clr)
     if lns and resol=='low':
         delon = 10.; meridians = np.arange(10.,360.,delon)
         delat = 5.; circles = np.arange(0.,90.+delat,delat).tolist()+\
