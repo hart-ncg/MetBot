@@ -516,7 +516,8 @@ class SynopticEvents:
         uniques = self.uniqueevents()
         addtrkarrs(self)
 
-    def addeventrain(self,rainkeys,type='station',heavy=20.):
+    def addeventrain(self,rainkeys,type='station',heavy=20.,\
+                    datadir='/home/neil/sogehome/data/'):
         '''rainkeys can be 'wrc', 'trmm' but must be list
         type is either 'station' or 'grid'
         Would make more sense to put this partly in buildevents and the
@@ -528,8 +529,9 @@ class SynopticEvents:
         if type=='station':
             for rainkey in rainkeys:
                 print 'Adding rain from ',rainkey,'station data set'
-                exec('rain, hrtime, lat, lon, dates = my.open%sstations()'\
-                       %(rainkey.upper()))
+                exec('rain, hrtime, lat, lon, dates = my.open%sstations(\
+                      datadir=\"%s\")'\
+                       %(rainkey.upper(),datadir))
                 rainstations=(rain,dates,np.hstack((lon,lat)))
                 for k in ekeys:
                     evnt = self.events[k]
@@ -538,11 +540,11 @@ class SynopticEvents:
         if type=='grid':
             for rainkey in rainkeys:
                 print 'Adding rain from ',rainkey,'gridded data set'
-                flist=glob.glob('/home/neil/sogehome/data/%s/%s.*.daily.SA.nc'\
-                                 %(rainkey,rainkey) )
+                flist=glob.glob('%s/%s/%s.*.daily.SA.nc'\
+                                 %(datadir,rainkey,rainkey) )
                 flist.sort()
                 rain, time, lat, lon, lev, dtime = \
-                            my.OpenMultipleNC(flist,rainkey,'ncep2',sub='SAROI')
+                            my.OpenMultipleNC(flist,rainkey,'ncep2',sub='SA')
                 dtime[:,3]=0
                 raingrid=(rain,dtime,(lon,lat))
                 for k in ekeys:
