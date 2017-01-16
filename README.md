@@ -17,7 +17,7 @@ Dependencies:
 3- Also netCDF4 is needed for opening nc files
 OPT (don't think needed)- Python Image Processing Library (PIL)
 NOTE: This software has been developed in Python 2.7 and is therefore unlikely
-to work in Python 3.*.
+to work in Python 3.\*.
 
 Recommended to use with Anaconda python distribution for easy installation of
 dependencies. https://www.continuum.io/downloads
@@ -34,11 +34,10 @@ conda update
 conda install scikit-image
 conda install basemap
 conda install netcdf4
-### I don't think this ones are needed anymore
-###conda install pil
-###conda install opencv
 
-Finally add these lines to your .bashrc file (or just execute them at the command line)
+Finally the best likely way to get your own copy of this code is to fork it to your github account. Alternatively you can clone the directory to your local machine. Forking is preferable as it will then be possible for your improvements to be incorporated into the main project.
+
+Finally you should add path to  add these lines to your .bashrc file (or just execute them at the command line)
 Now run test.py in test folder in order to check all is working. Do this as follows:
 1- You will need to download the NOAA olr file if don't already have this. Running the getOLRdata.sh file will sort you out.
 2- Then open python using "ipython --pylab" is probably easiest
