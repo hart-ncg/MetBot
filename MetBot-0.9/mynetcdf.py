@@ -20,10 +20,13 @@ dimdict={"ncep2": ['time','lat','lon','level','lev'],
 "interp_olr": ['time','lat','lon'],
 "tamsat_ccd": ['time','lat','lon'],
 "had": ['time','latitude','longitude','level'],
+"um": ['t','latitude','longitude','toa'],
+"umpr": ['t','latitude','longitude','surface'],
 "era": ['date','latitude','longitude','level'],
 "hadam3p": ['t','latitude','longitude','p','theta','surface','toa'],
 "cfsr": ['time','latitude','longitude','level'],
-"nddiagnc": ['t','y','x','p']}
+"nddiagnc": ['t','y','x','p'],
+"trmm": ['time','latitude','longitude']}
 writedict={}
 
 def isubs(sub,lat,lon,*args):
@@ -52,9 +55,12 @@ def isubs(sub,lat,lon,*args):
     domains['SH60'] = ((-60.0,0.0),(0,360))
     domains['imkf'] = ((-46.25,-10.0),(0.0,91.875))
     domains['SA'] = ((-60.0,0.0),(0.0,100.0))
+    domains['SA_TR'] = ((-40.0,-15.0),(7.5,100.0))
     domains['NA'] = ((0.0,60.0),(280.0,359.0))
     domains['NP'] = ((0.0,60.0),(180.0,260.0))
-    domains['SAROI'] = ((-35,-23),(7.5, 100))
+    domains['SAROI'] = ((-35,-23),(7.5, 80))
+    domains['WPR'] = ((-40.0,-15.0),(7.5, 40.0))
+    domains['EPR'] = ((-40.0,-15.0),(40.0, 100.0))
     if isinstance(sub,str):
         domain=domains[sub]; getisubs=True
     elif isinstance(sub,tuple):
@@ -203,7 +209,7 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
            UM .pp files
 
     USAGE: varstr - string
-           dset   - string valid: ncep2, interp_olr, had, era, hadam3p, cfsr
+           dset   - string valid: ncep2, interp_olr, had, era, hadam3p, cfsr, um, umpr
            sub    - tuple - ((latmin,latmax),(lonmin,lonmax))
                    or string - see options availble in mynetcdf.isubs
            levselect - will return level slice closest to given value
@@ -231,6 +237,16 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
     if dset=='hadam3p' or ncfile.split('/').count('flavours'):
         exec('dtime=num2date(('+timestr+'-1)*24,\
                  units="hours since 1959-12-01 00:00:00",calendar="360_day")') 
+        # the above t-1 thing is a hack, but it works apparently for me
+        dtime=fix360d(dtime)
+    elif dset=='um':
+        exec('dtime=num2date(('+timestr+'-1)*24,\
+                 units="hours since 1978-09-01 00:00:00",calendar="360_day")')
+        # the above t-1 thing is a hack, but it works apparently for me
+        dtime=fix360d(dtime)
+    elif dset=='umpr': # Added by RJ to run on UM
+        exec('dtime=num2date(('+timestr+'-1)*24,\
+                 units="hours since 1978-09-01 00:00:00",calendar="360_day")')
         # the above t-1 thing is a hack, but it works apparently for me
         dtime=fix360d(dtime)
     elif dset=='cfsr' and \
@@ -359,7 +375,15 @@ def opennc_generic(ncfile,varstr,dset='ncep2',subs=False,levsel=False):
     out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
     return out
 
+def opentrmm(ncfile,varstr,dset='trmm',subs=False,levsel=False):
+    out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
+    return out
+
 def openhad(ncfile,varstr,dset='had',subs=False,levsel=False):
+    out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
+    return out
+
+def openum(ncfile,varstr,dset='um',subs=False,levsel=False):
     out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
     return out
 
