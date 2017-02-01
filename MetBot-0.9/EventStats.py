@@ -16,6 +16,7 @@ season=[8,9,10,11,12,1,2,3,4,5,6,7]
 coreseason=[10,11,12,1,2,3]
 monthlist=[1,2,3,4,5,6,7,8,9,10,11,12]
 monthends = [31,28,31,30,31,30,31,31,30,31,30,31]
+monthends360 = [30,28,30,30,30,30,30,30,30,30,30,30]
 monthends_leap = [31,29,31,30,31,30,31,31,30,31,30,31]
 monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
 monthstrseason=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
@@ -87,24 +88,30 @@ def timesubset(s,eventkeys,edates):
 
     keysubset=[]
     if isinstance(edates,list):
-        if not 'hadam3p' in dlist:
+        if 'noaa' in dlist:
             hrs = my.dates2hrnum(edates)
         elif 'hadam3p' in dlist:
             hrs = my.dates2hrnum(edates,\
                     units="hours since 1959-12-01 00:00:00",calendar="360_day")
             hrs=hrs/24
+        elif 'um' in dlist:
+            hrs = my.dates2hrnum(edates, units="hours since 1978-09-01 00:00:00", calendar="360_day");
+            hrs = hrs / 24
         for k in eventkeys:
             e = s.events[k]
             time24hr = e.trkarrstime[refkey]
             for hr in hrs:
                 if np.any(hr==time24hr): keysubset.append(k)
     elif isinstance(edates,np.ndarray):
-        if not 'hadam3p' in dlist:
+        if 'noaa' in dlist:
             hrs = my.dates2hrnum(edates)
         elif 'hadam3p' in dlist:
             hrs = my.dates2hrnum(edates,\
                     units="hours since 1959-12-01 00:00:00",calendar="360_day")
             hrs=hrs/24
+        elif 'um' in dlist:
+            hrs = my.dates2hrnum(edates, units="hours since 1978-09-01 00:00:00", calendar="360_day");
+            hrs = hrs / 24
         for k in eventkeys:
             e = s.events[k]
             time24hr = e.trkarrstime[refkey]
@@ -143,7 +150,37 @@ def specificseasons(s,eventkeys,seasonstartyr,startd=[10,01],endd=[4,30]):
 
     return specifickeys
 
+def specificmon(s,eventkeys,yrs,month,dset):
+    '''Uses timesubset function to return keys for specific month and years'''
+    if not eventkeys:
+        eventkeys=[]
+        for ed in s.uniques:
+            eventkeys.append(ed[0])
+    specifickeys=[]
+    for yr in yrs:
+        dstart=[yr,month,1,0]
+        if dset=='noaa':lastday=monthends[month-1]
+        if dset=='um':lastday=monthends360[month-1] # this is a bit of a fudge for feb
+        dend = [yr,month,lastday,0]
+        datetup = (dstart,dend)
+        seasevents = timesubset(s,eventkeys,datetup)
+        specifickeys.extend(seasevents)
 
+    return specifickeys
+
+def getwinterdates(s,ks,yrs,dset):
+    mons=[6,7,8]
+    key=dset+'-olr-0-0'
+    datelist=[]
+    for m in mons:
+        keys=specificmon(s,ks,yrs,m,dset)
+        for k in keys:
+            e=s.events[k]
+            hrs=e.trkarrstime[key]
+            dates=my.hrnum2dates(hrs,units="hours since 1800-01-01 00:00:0.0",calendar='gregorian')
+            datelist.append(dates)
+
+    return datelist
 
 def seasonalcycle(s,eventkeys,years=False,season=[8,9,10,11,12,1,2,3,4,5,6,7]):
     '''Calculate seasonal cycle of cloudband frequency
@@ -202,6 +239,7 @@ def scycle_rainfall(s,eventkeys,raindset='wrc',years=False,\
         for ed in s.uniques:
             eventkeys.append(ed[0])
     # GET CENTRAL TIME OF EVENT, MEAN RAINFALL AND TOTAL RAINFALL
+    # RJ - note total rainfall is based on mean for each blob in the event
     edts=[]
     emrain=np.ndarray((0,8),dtype=np.float32)
     etrain=np.ndarray((0,8),dtype=np.float32)
@@ -251,6 +289,95 @@ def scycle_rainfall(s,eventkeys,raindset='wrc',years=False,\
 
     return scycle_mrain, scycle_train, yrs
 
+
+def scycle_rainsum(s,eventkeys,raindset='wrc',years=False,heavy=False,season=[8,9,10,11,12,1,2,3,4,5,6,7]):
+    '''Calculate seasonal cycle of rainfall contributed by TTCBs
+    The total rainfall under an OLR flag summed
+    RJ July 2016 based on scycle_rainfall
+    Can specify eventkeys is specified False if want all events
+    heavy key word to sum only over heavy days (thres prescribed in addeventrain)
+    Can specify years or allow autodiscovery'''
+    if heavy:
+        rainind=8
+    else:
+        rainind=7
+    mbskeys = s.mbskeys
+    refkey = mbskeys[0]
+    if not eventkeys:
+        eventkeys=[]
+        for ed in s.uniques:
+            eventkeys.append(ed[0])
+
+    # GET CENTRAL TIME OF EVENT, TOTAL RAINFALL
+    edts=[]
+    etrain=[]
+    for k in eventkeys:
+        e = s.events[k]
+        dts = s.blobs[refkey]['mbt'][e.ixflags]
+        if len(dts)>1:
+            dts = dts[len(dts)/2] # Picks the middle date
+        else:
+            dts=dts[0]
+
+        if len(e.rainfall[raindset])==0:
+            print 'No data availble in',raindset,'for event',k
+            continue
+
+        edts.append(dts)
+        totrain=e.rainfall[raindset][:,rainind]
+        train = np.nansum(totrain);etrain.append(train)
+    edts = np.asarray(edts)
+    etrain = np.asarray(etrain)
+
+    # BUILD SEASONAL CYCLES FROM ALL YEARS
+    yrs=years
+    #if years: yrs=years
+    #else: yrs = np.unique(edts[:,0])
+    #yrs = np.unique(edts[:,0])
+    scycle_train = np.zeros((len(yrs),12))
+    for iyr in xrange(len(yrs)):
+        yr=yrs[iyr]
+        for imn in xrange(len(season)):
+            mn=season[imn]
+            if imn < 5:
+                ix = np.where((edts[:,0]==yr) & (edts[:,1]==mn))[0]
+            else:
+                ix = np.where((edts[:,0]==yr+1) & (edts[:,1]==mn))[0]
+            scycle_train[iyr,imn] = np.nansum(etrain[ix])
+
+    return scycle_train, yrs
+
+def scycle_rainsum_raw(rain,dtime,raindset='trmm',season=[8,9,10,11,12,1,2,3,4,5,6,7],years=False):
+    '''Calculate seasonal cycle of rainfall from raw dataset (i.e. not only under CBs)
+    Sum of all rainfall
+    Designed for TRMM rainfall
+    rain data in shape (time,lat,lon)
+    dtime data in shape (4,ntimesteps)
+    RJ July 2016 based on scycle_rainfall
+    Can specify years or allow autodiscovery'''
+
+    # SUM OVER LAT AND LONG FOR EVERY TSTEP
+    ntime=len(dtime[:,0])
+    rfldsum=np.zeros(ntime,dtype=np.float32)
+    for t in xrange(ntime):
+        rfldsum[t]=np.nansum(rain[t,:,:])
+
+    # BUILD SEASONAL CYCLES FROM ALL YEARS
+    yrs=years
+    #if years: yrs=years
+    #else: yrs = np.unique(dtime[:,0])
+    scycle_train = np.zeros((len(yrs),12))
+    for iyr in xrange(len(yrs)):
+        yr=yrs[iyr]
+        for imn in xrange(len(season)):
+            mn=season[imn]
+            if imn < 5:
+                ix = np.where((dtime[:,0]==yr) & (dtime[:,1]==mn))[0]
+            else:
+                ix = np.where((dtime[:,0]==yr+1) & (dtime[:,1]==mn))[0]
+            scycle_train[iyr,imn] = np.nansum(rfldsum[ix])
+
+    return scycle_train, yrs
 
 def plotallseasons(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,descr='blank stare'):
     '''Type can be line or pcolor, very different results
@@ -333,6 +460,8 @@ def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,\
     descr='blank stare'):
     '''Type can be line or pcolor, very different results
     pcolor assumes given a years by months grid'''
+    # alternative line option added by RJ 'line_rj'
+    # I think I added this because I couldn't get 'line' to work!
     colims=(0,10)
     cm=plt.cm.RdBu
     if anomaly:
@@ -353,6 +482,17 @@ def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,\
             plt.show()
             raw_input()
             plt.clf()
+    if type=='line_rj':
+        ymonsum = np.zeros(12, dtype=np.float32)
+        for imn in xrange(len(monthstr)):
+            ymonsum[imn] = np.nansum(scycle[:, imn])
+        plt.plot(np.arange(0, 12), ymonsum)
+        plt.xticks(np.arange(0, 12), monthstr)
+        plt.xlim(0, 11)
+        # plt.ylim(0,10)
+        plt.grid('on')
+        fname = 'SeasonalCycle_totalTTCBrain_' + descr.strip() + '.png'
+        plt.savefig(fname, dpi=200)
     if type=='pcolor':
         y=np.arange(1,13)[2:9]
         x=yrs
@@ -463,6 +603,21 @@ def plotseasonbox_background(scycle,ax=False,savefig=False,ylims=False):
     else:
         plt.ylim(0,10.)
 
+def plotseasonbox_pretty(scycle,descr,dset,picext,savefig=False):
+    # Alternative plotseasonbox made by RJ
+    plt.figure()
+    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
+    plt.boxplot(scycle, notch=0, sym='+', vert=1, whis=1.5) # produces boxplot
+    plt.plot(np.arange(1,13),scycle.mean(0),'k-',lw=1) # produces mean line
+    plt.xticks(np.arange(1,13),monthstr,fontsize=13.0) # month labels
+    plt.yticks(np.arange(1,14),fontsize=13.0)
+    plt.ylim(0,8.5)
+    plt.ylabel('No. of Cloudbands', fontsize=13.0, weight='demibold')
+    plt.title(descr.upper(), fontweight='demibold')
+    #plt.grid()
+    fname=picext+'scycle-'+descr+'_'+dset+'.png'
+    if savefig: plt.savefig(fname,dpi=150)
+
 def plotseasonbox_rain(scycle,descr,ax=False):
     if isinstance(ax,bool):plt.figure()
     else: plt.axes(ax)
@@ -477,6 +632,76 @@ def plotseasonbox_rain(scycle,descr,ax=False):
     fname=figdir+'scycle-'+descr+'.png'
     #plt.savefig(fname,dpi=200)
     plt.show()
+
+def plotseasonbox_wrain(ntttcycle,raincycle,descr,dset,pcent=True,savefig=False):
+    '''Plots seasonal cycle of number of TTTs and
+     rainfall contributed by TTTs'''
+    # RJ August 2016
+
+    fig, ax1 = plt.subplots()
+    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
+
+    # Plot scycle of number of TTTs
+    ax1.boxplot(ntttcycle, notch=0, sym='+', vert=1, whis=1.5) # produces boxplot
+    ax1.plot(np.arange(1,13),ntttcycle.mean(0),'k-',lw=1,zorder=3) # produces mean line
+    plt.xticks(np.arange(1,13),monthstr,fontsize=13.0) # month labels
+    plt.yticks(np.arange(1,14),fontsize=13.0)
+    plt.ylim(0,12.5)
+    ax1.set_ylabel('No. of Cloudbands', fontsize=13.0, weight='demibold')
+    plt.title(descr.upper(), fontweight='demibold')
+    #plt.grid()
+
+    # Plot scycle of rainfall
+    ax2 = ax1.twinx()
+    ax2.fill_between(np.arange(1,13),0,raincycle,edgecolor='none',facecolor='lightskyblue',zorder=1)
+    if pcent:
+        ax2.set_ylabel('%',color='black')
+        ax2.set_ylim(0,100)
+    else:
+        ax2.set_ylabel('mm',color='black')
+    ax1.set_zorder(2)
+    ax2.set_zorder(1)
+    ax1.set_axis_bgcolor('none')
+
+    fname='Scycle_nttt_rain-'+descr+'_'+dset+'.png'
+    if savefig: plt.savefig(fname,dpi=150)
+
+def plotseasonbox_wrain_2(ntttcycle,raincycle,descr,dset,pcent=True,savefig=False):
+    '''Plots seasonal cycle of number of TTTs and
+         rainfall contributed by TTTs'''
+    # RJ August 2016
+
+    fig, ax1 = plt.subplots()
+    monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
+
+    # Plot scycle of number of TTTs
+    boxprops = dict(linestyle='-',linewidth=1.5,color='k')
+    whiskerprops = dict(linestyle='--',linewidth=1.5,color='k')
+    medianprops = dict(linestyle='-',linewidth=1.5,color='k')
+    capprops = dict(linestyle='-',linewidth=1.5,color='k')
+    ax1.boxplot(ntttcycle, notch=0, sym='+', vert=1, whis=1.5, boxprops=boxprops, medianprops=medianprops, whiskerprops=whiskerprops, capprops=capprops) # produces boxplot
+    #ax1.plot(np.arange(1,13),ntttcycle.mean(0),'k-',lw=1,zorder=3) # produces mean line
+    plt.xticks(np.arange(1,13),monthstr,fontsize=13.0) # month labels
+    plt.yticks(np.arange(1,14),fontsize=13.0)
+    plt.ylim(0,8.5)
+    ax1.set_ylabel('No. of TTT events', fontsize=13.0, weight='demibold')
+    #plt.title(descr.upper(), fontweight='demibold')
+    #plt.grid()
+
+    # Plot scycle of rainfall
+    ax2 = ax1.twinx()
+    ax2.fill_between(np.arange(1,13),0,raincycle,edgecolor='none',facecolor='mediumaquamarine',zorder=1)
+    if pcent:
+        ax2.set_ylabel('%',color='black')
+        ax2.set_ylim(0,30)
+    else:
+        ax2.set_ylabel('mm',color='black')
+    ax1.set_zorder(2)
+    ax2.set_zorder(1)
+    ax1.set_axis_bgcolor('none')
+
+    fname='Scycle_nttt_rain-'+descr+'_'+dset+'.png'
+    if savefig: plt.savefig(fname,dpi=150)
 
 def spatiofreq(s,eventkeys,descr,plottrk=False,plothex=False,res=4.0,sub='SA'):
     '''Get grid-cell frequencies for cloudband tracks'''
@@ -626,6 +851,8 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
     # Plot pcolor
     pcolmap=m.pcolormesh(lon,lat,cstd_mask,cmap=cm,zorder=1)
     img=plt.gci()
+
+    #Plotting centroids
     for k in eventkeys:
         e = s.events[k]
         if month:
@@ -747,6 +974,41 @@ def raineventmask(allpolys,s,raindata):
         rainmasks[k] = polylist
 
     return rainmasks, masklist, maskdtimes, maskekeys
+
+def griddedrainmasks(s,eventkeys,raindata,refkey='noaa-olr-0-0'):
+    '''Returns a masked array of rainfall from TTT events (tstep, lon, lat)'''
+    # RJ 2016
+    #input raindata should be in the form raindata=(rain,dtime,(lon,lat))
+    #if want to choose particular years or mons need to do this with eventkey input
+    #e.g. using stats.specificseason
+    if not eventkeys:
+        eventkeys=[]
+        for ed in s.uniques:
+            eventkeys.append(ed[0])
+
+    rain,date,xypts = raindata
+    lon, lat = xypts
+    nlon=len(lon)
+    nlat=len(lat)
+    routput=[]
+    for k in eventkeys:
+        e=s.events[k]
+        rtmp=np.zeros(((len(e.trkdtimes)),nlat,nlon),dtype=np.float32)
+        for t in xrange(len(e.trkdtimes)):
+            ix = my.ixdtimes(date,[e.trkdtimes[t,0]],\
+                              [e.trkdtimes[t,1]],[e.trkdtimes[t,2]],[0])
+            if len(ix)>1: print 'We have a problem'
+            elif len(ix)==0:
+                if t==0: print 'No time match',e.trkdtimes[t]
+                continue
+            ch = e.blobs[refkey]['ch'][e.trk[t]]
+            chmask = my.poly2mask(xypts[0],xypts[1],ch)
+            r=np.ma.MaskedArray(rain[ix,:,:],mask=~chmask)
+            rtmp[t,:,:]=r
+        routput.append(rtmp)
+    routput=np.asarray(routput)
+
+    return routput
 
 def grideventmask(allpolys,s,lon,lat):
     '''Returns a mask for gridded dataset for each day of each event
