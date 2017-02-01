@@ -14,6 +14,7 @@ except ImportError:
     date2index,date2num,num2date = kh.date2index,kh.date2num,kh.num2date
 import time as tm
 import datetime
+import MetBot.cmip5dict as cmipdict
 
 # Add to this dictionary as need be by looking at ncdump -h ????.nc
 dimdict={"ncep2": ['time','lat','lon','level','lev'],
@@ -22,6 +23,7 @@ dimdict={"ncep2": ['time','lat','lon','level','lev'],
 "had": ['time','latitude','longitude','level'],
 "um": ['t','latitude','longitude','toa'],
 "umpr": ['t','latitude','longitude','surface'],
+"cmip5": ['time','lat','lon'],
 "era": ['date','latitude','longitude','level'],
 "hadam3p": ['t','latitude','longitude','p','theta','surface','toa'],
 "cfsr": ['time','latitude','longitude','level'],
@@ -209,7 +211,7 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
            UM .pp files
 
     USAGE: varstr - string
-           dset   - string valid: ncep2, interp_olr, had, era, hadam3p, cfsr, um, umpr
+           dset   - string valid: ncep2, interp_olr, had, era, hadam3p, cfsr, um, umpr, cmip5
            sub    - tuple - ((latmin,latmax),(lonmin,lonmax))
                    or string - see options availble in mynetcdf.isubs
            levselect - will return level slice closest to given value
@@ -249,6 +251,18 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
                  units="hours since 1978-09-01 00:00:00",calendar="360_day")')
         # the above t-1 thing is a hack, but it works apparently for me
         dtime=fix360d(dtime)
+    elif dset == 'cmip5':
+        substrings = ncfile.split('/')
+        bit = substrings[7]
+        msubstrs = bit.split('.')
+        mname = msubstrs[0]
+        moddct = cmipdict.cmip5deets['info'][mname]
+        cal = moddct['calendar']
+        units = moddct['timeunit']
+        newunits = units.replace('days since', 'hours since')
+        exec ('dtime=num2date((' + timestr + ')*24,units="' + newunits + '",calendar="' + cal + '")')
+        if cal == '360_day':
+            dtime = fix360d(dtime)
     elif dset=='cfsr' and \
     ncf.variables['time'].units== "seconds since 1970-01-01 00:00:00.0 0:00":
         print "Performing hrtime conversion to hours since 1800-01-01"
@@ -360,6 +374,9 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
     if dset=='cfsr':
         latitude=latitude[::-1]
         exec(varstr+'='+varstr+'[:,::-1,:]')
+    if dset == 'cmip5':
+        lat = lat[::-1]
+        exec (varstr + '=' + varstr + '[:,::-1,:]')
 
 
     exec('out=(np.float32('+varstr+'),'+', '.join(dimlist)+',dtarr)')
@@ -384,6 +401,10 @@ def openhad(ncfile,varstr,dset='had',subs=False,levsel=False):
     return out
 
 def openum(ncfile,varstr,dset='um',subs=False,levsel=False):
+    out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
+    return out
+
+def opencmip5(ncfile,varstr,dset='cmip5',subs=False,levsel=False):
     out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
     return out
 
