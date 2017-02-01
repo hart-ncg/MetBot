@@ -128,7 +128,7 @@ class SynopticEvents:
 
     def __rainamounts__(self,event,raindata,rainkey,heavy=20.):
         '''Calculates rainfall statistics for under cloud band footprints
-        properties: rmn,rmx,wetness,heavyness,outrmn,outrmx,outwetness'''
+        properties: rmn,rmx,wetness,heavyness,outrmn,outrmx,outwetness, rsum, hsum'''
         # STATION RAINFALL
         heavythresh=heavy
         rain,date,xypts = raindata
@@ -150,10 +150,13 @@ class SynopticEvents:
                 heavymask = rain[:,ix] >= heavythresh
                 hmask = chmask & heavymask.squeeze()
                 r=np.ma.MaskedArray(rain[:,ix],mask=~rmask)
+                h=np.ma.MaskedArray(rain[:,ix],mask=~hmask)
                 if np.any(rmask):
                     # RAIN FALL INSIDE OLR COUNTOUR
                     rmn=r.mean()
                     rmx=r.max()
+                    rsum=r.sum()
+                    hsum=h.sum()
                     wetness=len(np.where(rmask)[0])/\
                             float(len(np.where(chmask)[0]))
                     heavyness=len(np.where(hmask)[0])/\
@@ -168,7 +171,7 @@ class SynopticEvents:
                 else:
                     rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN
                     ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
-                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness))
+                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness,rsum,hsum))
         elif rain.ndim==3:
             #print 'Gridded rainfall dataset:',rainkey
             for t in xrange(len(event.trkdtimes)):
@@ -185,10 +188,13 @@ class SynopticEvents:
                 heavymask = rain[ix,:,:] >= heavythresh
                 hmask = chmask & heavymask
                 r=np.ma.MaskedArray(rain[ix,:,:],mask=~rmask)
+                h=np.ma.MaskedArray(rain[ix,:,:],mask=~hmask)
                 if np.any(rmask):
                     # RAIN FALL INSIDE OLR COUNTOUR
                     rmn=r.mean()
                     rmx=r.max()
+                    rsum=r.sum()
+                    hsum=np.nansum(h)
                     wetness=len(np.where(rmask.ravel())[0])/\
                             float(len(np.where(chmask.ravel())[0]))
                     heavyness=len(np.where(hmask.ravel())[0])/\
@@ -202,8 +208,8 @@ class SynopticEvents:
                              float(len(np.where(~chmask.ravel())[0]))
                 else:
                     rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN
-                    ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
-                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness))
+                    ormn=np.NaN;ormx=np.NaN;owetness=np.NaN;rsum=np.NaN;hsum=np.NaN
+                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness,rsum,hsum))
 
         event.rainfall[rainkey] = np.asarray(erain)
 
