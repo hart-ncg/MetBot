@@ -543,6 +543,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
         bfig=plt.figure(num='Blobs')
         bafig=plt.figure(num='BlobsAngles')
         plt.show();plt.ion()
+        plt.pause(0.05)
         keyin=raw_input("Position windows as desired then press any key,\n \
         Press [Esc] at any time to quit...\
         #[Backspace] to go back one image...")
@@ -556,10 +557,10 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
     ixmbs=0
     mtimstart=timer()
     while t <= (len(time)-1):
-        wtimstart=timer()
-        tm=time[t,:]
-        hr=hrtime[t]
-        humandate="%d-%02d-%02d %02d:00" %(tm[0],tm[1],tm[2],tm[3])
+        wtimstart = timer()
+        tm = time[t, :]
+        hr = hrtime[t]
+        humandate = "%d-%02d-%02d %02d:00" % (tm[0], tm[1], tm[2], tm[3])
         #plt.figure(num=mfig.number);plt.clf()
         #datafig=m.transform_scalar(data[t,::-1,:],lon,lat[::-1],\
         #                           len(lon),len(lat))
@@ -579,6 +580,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
                 plt.figure(num=mfig.number);plt.clf()
                 plt.figure(num=bfig.number);plt.clf()
                 if interact:
+                    plt.pause(0.05)
                     d=raw_input('Press: x to stop; b to go backwards')
                 else: d=='nada'
                 if d=='x':
@@ -653,6 +655,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
             plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
             plt.draw()
             if interact:
+                plt.pause(0.05)
                 d=raw_input('Press: x to stop; b to go backwards')
             else:
                 d='nada'
