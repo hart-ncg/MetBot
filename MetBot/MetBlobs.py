@@ -593,7 +593,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
                 continue
 
         #FilterBlobs(dct,blobs,img,gpx,thrs)
-        if showblobs: plt.figure(num=3);plt.clf()
+        #if showblobs: plt.figure(num=3);plt.clf()
         FilterBlobs(dct,blobs,img,gpx)
         if len(blobs) > 0:
             #blobslist.append(blobs);blobimages.append(blbim)
