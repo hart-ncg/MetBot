@@ -541,7 +541,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
 
     if showblobs:
         bfig=plt.figure(num='Blobs')
-        bafig=plt.figure(num='BlobsAngles')
+        #bafig=plt.figure(num='BlobsAngles')
         plt.show();plt.ion()
         plt.pause(0.05)
         keyin=raw_input("Position windows as desired then press any key,\n \
