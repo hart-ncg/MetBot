@@ -16,7 +16,7 @@ season=[8,9,10,11,12,1,2,3,4,5,6,7]
 coreseason=[10,11,12,1,2,3]
 monthlist=[1,2,3,4,5,6,7,8,9,10,11,12]
 monthends = [31,28,31,30,31,30,31,31,30,31,30,31]
-monthends360 = [30,28,30,30,30,30,30,30,30,30,30,30]
+monthends360 = [30,30,30,30,30,30,30,30,30,30,30,30]
 monthends_leap = [31,29,31,30,31,30,31,31,30,31,30,31]
 monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
 monthstrseason=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
@@ -118,12 +118,16 @@ def timesubset(s,eventkeys,edates):
             for hr in time24hr:
                 if np.any(hrs==hr): keysubset.append(k)
     elif isinstance(edates,tuple):
-        if not 'hadam3p' in dlist:
+        if 'noaa' in dlist:
             hrs = my.dates2hrnum(edates)
         elif 'hadam3p' in dlist:
             hrs = my.dates2hrnum(edates,\
                     units="hours since 1959-12-01 00:00:00",calendar="360_day")
             hrs=hrs/24
+        elif 'um' in dlist:
+            hrs = my.dates2hrnum(edates, \
+                    units="hours since 1978-09-01 00:00:00", calendar="360_day");
+            hrs = hrs / 24
         hrmn, hrmx = hrs
         for k in eventkeys:
             e = s.events[k]
@@ -160,7 +164,7 @@ def specificmon(s,eventkeys,yrs,month,dset):
     for yr in yrs:
         dstart=[yr,month,1,0]
         if dset=='noaa':lastday=monthends[month-1]
-        if dset=='um':lastday=monthends360[month-1] # this is a bit of a fudge for feb
+        if dset=='um':lastday=monthends360[month-1]
         dend = [yr,month,lastday,0]
         datetup = (dstart,dend)
         seasevents = timesubset(s,eventkeys,datetup)

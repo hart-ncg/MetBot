@@ -30,6 +30,7 @@ import cPickle
 import datetime
 import matplotlib.colors as colors
 from matplotlib.collections import LineCollection
+import errno
 
 monthends = [31,28,31,30,31,30,31,31,30,31,30,31]
 monthends_leap = [31,29,31,30,31,30,31,31,30,31,30,31]
@@ -1984,3 +1985,13 @@ def xtickfonts(fontweight='bold',fontsize=13.,color='k',rotation=False):
         lb.set_fontweight(fontweight)
         lb.set_color(color)
         if rotation: lb.set_rotation(rotation)
+
+# Basic function for mkdir -p functionality
+def mkdir_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc:  # Python >2.5
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
