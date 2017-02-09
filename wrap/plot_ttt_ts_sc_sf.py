@@ -3,6 +3,7 @@ iris.FUTURE.netcdf_promote=True
 iris.FUTURE.cell_datetime_objects=True
 import numpy as np
 import matplotlib.pyplot as plt
+from datetime import date
 import sys,os
 cwd=os.getcwd()
 sys.path.append(cwd+'/..')
@@ -18,10 +19,10 @@ import mpl_toolkits.basemap as bm
 
 
 ### Choose dset and years
-dset="noaa" # options: noaa, um, cmip5
-name="noaa" # options: noaa, mo runid, cmip5 model name
-ys="1979_1979" # these are the years in the file name
-beginatyr="1975" # choose first year for analysis (should fit with metbot run)
+dset="um" # options: noaa, um, cmip5
+name="anqjn" # options: noaa, mo runid, cmip5 model name
+ys="1978_2013" # these are the years in the file name
+beginatyr="1979" # choose first year for analysis (should fit with metbot run)
 vname="olr" # will be olr for most dsets but rlut for cmip5
 
 
@@ -42,7 +43,7 @@ seasopt="coreseason"    # for spatiofreq plots
 tsplot=True             # to get timeseries plot
 scplot=True             # to get seasonal cycle plots
 sfplot=True             # to get spatiofrequency plot
-testfile=True           # Uses a test file with short period
+testfile=False           # Uses a test file with short period
 
 
 ### Open olr nc file
@@ -101,16 +102,19 @@ scyclee, cyclestatse, yrse = stats.seasonalcycle(s,ke)
 nNF=scycle[:,3:7].sum(1) # summing years for months November to March
 
 ### PLOT TIMESERIES OF SEASONAL CYCLE
+print 'Plotting timeseries'
 plt.figure(figsize=[11,5])
 plt.plot(yrs,nNF,'k',lw=2.)
 plt.savefig(outsuf+dset+'timeseries.png',dpi=150)
 
 ### PLOT SEASONAL CYCLE WITH BOX AND WHISKERS
+print 'Plotting seasonal cycle'
 stats.plotseasonbox_rj(scycle,'All__'+count_all,outsuf+dset+'_All',savefig=True)
 stats.plotseasonbox_rj(scyclew,'Continental__'+count_cont,outsuf+dset+'_Continental',savefig=True)
 stats.plotseasonbox_rj(scyclee,'Oceanic__'+count_mada,outsuf+dset+'_Oceanic',savefig=True)
 
 ### PLOT MONTHLY GRIDPOINT COUNT
+print 'Plotting spatiofrequency'
 mapnm=outsuf+dset+'_'+seasopt
 msklist=ap.spatiofreq2_season(s,lat,lon,yrs,ks,\
     figno=1,season=seasopt,key=dset+'-olr-0-0',flagonly=True,file_suffix=mapnm,savefig=True)
