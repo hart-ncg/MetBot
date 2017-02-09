@@ -34,9 +34,9 @@ import MetBot.dset_dict as dsetdict
 tstart=tmr.time()
 
 ### Choose dset and years
-dset="um" # options: noaa, um, cmip5
-name="anqjn" # options: noaa, mo runid, cmip5 model name
-ys="1979_1979" # these are the years in the file name
+dset="noaa" # options: noaa, um, cmip5
+name="noaa" # options: noaa, mo runid, cmip5 model name
+ys="1974_2013" # these are the years in the file name
 beginatyr="1979" # choose first year for analysis
 vname="olr" # will be olr for most dsets but rlut for cmip5
 
@@ -52,8 +52,8 @@ outsuf=outdir+name+'_'
 olr=True         # Get mbs for $dset-olr-0-0
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=True    # Uses a test file with short period
-testyear=True    # Only uses first 365 days of olr data
+testfile=False    # Uses a test file with short period
+testyear=False    # Only uses first 365 days of olr data
 getdistr=True    # Save a figure showing histogram of OLR values
 getmbs=True      # Actually run the MetBot algorithm
 showblb=False    # Show the blobs while running
@@ -96,7 +96,7 @@ if olr:
         if cal=="360_day":
             startday=(ystart*360)+((mstart-1)*30)+dstart
             beginday=((int(beginatyr))*360)+1
-            daysgap=beginday-startday
+            daysgap=beginday-startday+1
         else:
             startd=date(ystart,mstart,dstart)
             begind=date(int(beginatyr),01,01)
