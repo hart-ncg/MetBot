@@ -34,8 +34,8 @@ import MetBot.dset_dict as dsetdict
 tstart=tmr.time()
 
 ### Choose dset and years
-dset="noaa" # options: noaa, um, cmip5
-name="noaa" # options: noaa, mo runid, cmip5 model name
+dset="um" # options: noaa, um, cmip5
+name="anqjn" # options: noaa, mo runid, cmip5 model name
 ys="1979_1979" # these are the years in the file name
 beginatyr="1979" # choose first year for analysis
 vname="olr" # will be olr for most dsets but rlut for cmip5
@@ -56,8 +56,8 @@ testfile=True    # Uses a test file with short period
 testyear=True    # Only uses first 365 days of olr data
 getdistr=True    # Save a figure showing histogram of OLR values
 getmbs=True      # Actually run the MetBot algorithm
-showblb=True    # Show the blobs while running
-intract=True    # Interactive running of showblobs
+showblb=False    # Show the blobs while running
+intract=False    # Interactive running of showblobs
 refsubset=True   # This is used if noaaolr=True to only look in time window
 hrwindow=49      # ... close (49 hours/ 2days) to flagged cloud band days
 synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
@@ -153,7 +153,7 @@ if synoptics:
     print mfilelist
     s = sy.SynopticEvents(metblobslist,mfilelist,hrwindow=hrwindow)
     s.buildtracks()
-    s.buildevents()
+    s.buildevents(basetrkkey=refmbsstr)
     u = s.uniqueevents()
     s.save(outsuf+dset+'-OLR.synop')
     del s
