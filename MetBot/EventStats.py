@@ -44,8 +44,8 @@ dudxyears=np.asarray([1980,1981,1983,1986,1987,1990,1993,1995,1996,1999,2001,200
 nodudxyears=np.asarray([2000,1992,1984])
 eastdudxyears=np.asarray([1979,1982,1985,1988,1989,1991,1994,1997,1998,2002,2006,2009])
 
-figdir='/home/neil/work/computervision/metblobs/SA/statsfigs/'
-rainfigdir='/home/neil/work/computervision/metblobs/SA/rain/'
+#figdir='/home/neil/work/computervision/metblobs/SA/statsfigs/'
+#rainfigdir='/home/neil/work/computervision/metblobs/SA/rain/'
 
 def spatialsubset(s,eventkeys,cutlon=45.0):
     '''Get tracks from subsetted domain
@@ -607,8 +607,10 @@ def plotseasonbox_background(scycle,ax=False,savefig=False,ylims=False):
     else:
         plt.ylim(0,10.)
 
-def plotseasonbox_pretty(scycle,descr,dset,picext,savefig=False):
+def plotseasonbox_rj(scycle,descr,picext,savefig=False):
     # Alternative plotseasonbox made by RJ
+    # descr is title of the plot
+    # pixext is the beginning of file name (can include dir)
     plt.figure()
     monthstr=['Aug','Sept','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul']
     plt.boxplot(scycle, notch=0, sym='+', vert=1, whis=1.5) # produces boxplot
@@ -619,7 +621,7 @@ def plotseasonbox_pretty(scycle,descr,dset,picext,savefig=False):
     plt.ylabel('No. of Cloudbands', fontsize=13.0, weight='demibold')
     plt.title(descr.upper(), fontweight='demibold')
     #plt.grid()
-    fname=picext+'scycle-'+descr+'_'+dset+'.png'
+    fname=picext+'_scycle.png'
     if savefig: plt.savefig(fname,dpi=150)
 
 def plotseasonbox_rain(scycle,descr,ax=False):

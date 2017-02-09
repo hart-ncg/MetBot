@@ -34,11 +34,11 @@ import MetBot.dset_dict as dsetdict
 tstart=tmr.time()
 
 ### Choose dset and years
-dset="noaa" # options: noaa, um, cmip5
-name="noaa" # options: noaa, mo runid, cmip5 model name
-ys="1974_2013" # these are the years in the file name
-beginatyr="1979" # choose first year for analysis
-vname="olr" # will be olr for most dsets but rlut for cmip5
+dset="cmip5" # options: noaa, um, cmip5
+name="ACCESS1-0" # options: noaa, mo runid, cmip5 model name
+ys="1975_1975" # these are the years in the file name
+beginatyr="1975" # choose first year for analysis
+vname="rlut" # will be olr for most dsets but rlut for cmip5
 
 ### Location for olr input & outputs
 indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
@@ -52,8 +52,8 @@ outsuf=outdir+name+'_'
 olr=True         # Get mbs for $dset-olr-0-0
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=False    # Uses a test file with short period
-testyear=False    # Only uses first 365 days of olr data
+testfile=True    # Uses a test file with short period
+testyear=True    # Only uses first 365 days of olr data
 getdistr=True    # Save a figure showing histogram of OLR values
 getmbs=True      # Actually run the MetBot algorithm
 showblb=False    # Show the blobs while running

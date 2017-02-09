@@ -24,6 +24,7 @@ def spatiofreq2_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
     if mbkl[0]=='noaa':dclim=(1,9,1)
     if mbkl[0]=='hadam3p':dclim=(1,11,1)
     if mbkl[0]=='um':dclim=(1,9,1)
+    if mbkl[0]=='cmip5':dclim=(1,9,1)
 
     if isinstance(season,str):
         if season=='coreseason':mns=[10,11,12,1,2,3]
@@ -63,8 +64,8 @@ def spatiofreq2_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
                         wspace=0.02,hspace=0.1)
     if savefig:
         if flagonly:
-            plt.savefig(stats.figdir+file_suffix+'_flagonly.png',dpi=150)
-        else: plt.savefig(stats.figdir+file_suffix+'.png',dpi=150)
+            plt.savefig(file_suffix+'_flagonly.png',dpi=150)
+        else: plt.savefig(file_suffix+'.png',dpi=150)
 
     return msklist
 
