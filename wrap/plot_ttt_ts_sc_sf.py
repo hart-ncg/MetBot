@@ -20,9 +20,9 @@ import mpl_toolkits.basemap as bm
 
 ### Choose dset and years
 dset="um" # options: noaa, um, cmip5
-name="anqjn" # options: noaa, mo runid, cmip5 model name
-ys="1978_2013" # these are the years in the file name
-beginatyr="1979" # choose first year for analysis (should fit with metbot run)
+name="antib" # options: noaa, mo runid, cmip5 model name
+ys="1985_1985" # these are the years in the file name
+beginatyr="1985" # choose first year for analysis (should fit with metbot run)
 vname="olr" # will be olr for most dsets but rlut for cmip5
 
 
@@ -43,8 +43,8 @@ seasopt="coreseason"    # for spatiofreq plots
 tsplot=True             # to get timeseries plot
 scplot=True             # to get seasonal cycle plots
 sfplot=True             # to get spatiofrequency plot
-testfile=False           # Uses a test file with short period
-
+testfile=True           # Uses a test file with short period
+res='noaa'              # Option to plot at 'noaa' res or 'native' res
 
 ### Open olr nc file
 ncout = mync.openolr_multi(infile,vname,name,\
@@ -81,6 +81,18 @@ else:
         daysgap=(begind-startd).days
     olr=olr[daysgap:,:,:];time=time[daysgap:];dtime=dtime[daysgap:]
 
+### Option to open noaa file for res
+if res=='native':
+    lat2=lat
+    lon2=lon
+elif res=='noaa':
+    if testfile:
+        yr_noaa="1979_1979"
+    else:
+        yr_noaa="1974_2013"
+    f_noaa=cwd+"/../../../CTdata/metbot_multi_dset/"\
+        "noaa/noaa.olr.day.mean."+yr_noaa+".nc"
+    olrdump,timedump,lat2,lon2,dtimedump = mync.openolr(f_noaa,'olr',subs=sub)
 
 ### Open ttt data
 s = sy.SynopticEvents((),[syfile],COL=False)
@@ -116,5 +128,5 @@ stats.plotseasonbox_rj(scyclee,'Oceanic__'+count_mada,outsuf+dset+'_Oceanic',sav
 ### PLOT MONTHLY GRIDPOINT COUNT
 print 'Plotting spatiofrequency'
 mapnm=outsuf+dset+'_'+seasopt
-msklist=ap.spatiofreq2_season(s,lat,lon,yrs,ks,\
-    figno=1,season=seasopt,key=dset+'-olr-0-0',flagonly=True,file_suffix=mapnm,savefig=True)
+msklist=ap.spatiofreq3_season(s,lat2,lon2,yrs,ks,\
+    figno=1,season=seasopt,key=dset+'-olr-0-0',res=res,flagonly=True,file_suffix=mapnm,savefig=True)

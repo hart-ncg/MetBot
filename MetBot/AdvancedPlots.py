@@ -69,6 +69,81 @@ def spatiofreq2_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
 
     return msklist
 
+def spatiofreq3_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
+     key='noaa-olr-0-all',res='noaa',flagonly=False,file_suffix='test',savefig=False,\
+     fontdict=False):
+    '''spatiofreq3_season(s,lat,lon,yrs,figno=1,season='coreseason',\
+                          flagonly=False,file_suffix='test')
+    Produces subplots of cloud-band gridpoint count by month
+    spatiofreq3 similar to spatiofreq2 but with option by RJ to fix res to noaa
+    '''
+    if not fontdict:fd = {'fontsize':14,'fontweight':'bold'}
+    else: fd=fontdict
+    mbkl=key.split('-')
+    if mbkl[0]=='noaa':dclim=(1,7,1)
+    if mbkl[0]=='hadam3p':dclim=(1,11,1)
+    if mbkl[0]=='um':dclim=(1,7,1)
+    if mbkl[0]=='cmip5':dclim=(1,7,1)
+
+    if isinstance(season,str):
+        if season=='coreseason':mns=[10,11,12,1,2,3]
+        elif season=='fullseason':mns=[8,9,10,11,12,1,2,3,4,5,6,7]
+        elif season=='dryseason':mns=[4,5,6,7,8,9]
+    elif isinstance(season,list):
+        mns=season
+
+    if mbkl[0]=='noaa':
+        m, f = blb.SAfrBasemap(lat[6:-8],lon[3:-2],drawstuff=True,prj='cyl',fno=figno,rsltn='l')
+    else:
+        if res=='native':
+            m, f = blb.SAfrBasemap(lat[13:-27],lon[6:-5],drawstuff=True,prj='cyl',fno=figno,rsltn='l')
+        else:
+            m, f = blb.SAfrBasemap(lat[6:-8], lon[3:-2], drawstuff=True, prj='cyl', fno=figno,
+                                   rsltn='l')  # lat and lon specified by number - diff for UM at native res
+
+    if len(mns)==12:
+        plt.close()
+        g, axls = plt.subplots(figsize=[12,10])
+    elif len(mns)==6:
+        plt.close()
+        g, axls = plt.subplots(figsize=[12,10])
+
+
+    if len(mns)==12:plt.close();plt.figure(figsize=[12,10])
+    elif len(mns)==6:plt.close();plt.figure(figsize=[13,8])
+    cnt=1
+    msklist=[]
+    for mn in mns:
+        if len(mns)==12:plt.subplot(4,3,cnt)
+        elif len(mns)==6:plt.subplot(3,2,cnt)
+        if flagonly:
+            allmask=stats.spatiofreq3(m,s,lat,lon,yrs,eventkeys,\
+                    clim=dclim,month=mn,flagonly=True,fontdict=fd)
+        else:
+            allmask=stats.spatiofreq3(m,s,lat,lon,yrs,eventkeys,clim=dclim,\
+                                      month=mn,flagonly=False,fontdict=fd)
+        if len(mns)==12:
+            if cnt == 1 or cnt == 4 or cnt == 7 or cnt == 10:
+                syp.redrawmap(m,lns=True,resol='verylow')
+            else:
+                syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
+        elif len(mns)==6:
+            if cnt%2==0:
+                syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
+            else:
+                syp.redrawmap(m,lns=True,resol='verylow')
+        cnt+=1
+        msklist.append(allmask)
+        my.xtickfonts();my.ytickfonts()
+    plt.subplots_adjust(left=0.05,right=0.92,top=0.97,bottom=0.02,\
+                        wspace=0.02,hspace=0.1)
+    if savefig:
+        if flagonly:
+            plt.savefig(file_suffix+'_res-'+res+'_flagonly.png',dpi=150)
+        else: plt.savefig(file_suffix+'_res-'+res+'.png',dpi=150)
+
+    return msklist
+
 def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
     season='coreseason',key='noaa-olr-0-all',flagonly=False,\
     file_suffix='test',savefig=False,fontdict=False):
