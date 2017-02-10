@@ -35,11 +35,11 @@ import MetBot.dset_dict as dsetdict
 tstart=tmr.time()
 
 ### Running options
-olr=True         # Get mbs for $dset-olr-0-0
+olr0=True         # Get mbs for $dset-olr-0-0
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=True    # Uses a test file with short period
-testyear=True    # Only uses first 365 days of olr data
+testfile=False    # Uses a test file with short period
+testyear=False    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
 getdistr=True    # Save a figure showing histogram of OLR values
@@ -62,23 +62,29 @@ if dsets=='all':
 elif dsets=='spec': # edit for the dset you want
     ndset=1
     dsetnames=['cmip5']
+ndstr=str(ndset)
 
 for d in range(ndset):
     dset=dsetnames[d]
+    dcnt=str(d)
     print 'Running on '+dset
+    print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='spec'  # "all" or "spec" to choose specific model(s)
+    mods='all'  # "all" or "spec" to choose specific model(s)
     if mods=='all':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
         mnames=['ACCESS1-0']
+    nmstr=str(nmod)
 
     for m in range(nmod):
         name=mnames[m]
+	mcnt=str(m)
         print 'Running on ' + name
+	print 'This is model '+mcnt+' of '+nmstr+' in list'
 
         # Get details
         moddct=dsetdict.dset_deets[dset][name]
@@ -104,7 +110,7 @@ for d in range(ndset):
 
 
         ### Open OLR data
-        if olr:
+        if olr0:
             v=dset+"-olr-0-0"
             daset, varstr, lev, drv = v.split('-')
             ncout = mync.openolr_multi(infile,vname,name,\
@@ -195,4 +201,7 @@ for d in range(ndset):
             s.save(outsuf+dset+'-OLR.synop')
             del s
 
-print 'TOTAL TIME TAKEN FOR test.py is:',(tmr.time()-tstart)/60,'mins'
+	print 'Finished running on ' + name
+        print 'This is model '+mcnt+' of '+nmstr+' in list'
+
+print 'TOTAL TIME TAKEN FOR get_ttcbs_loopmodel.py is:',(tmr.time()-tstart)/60,'mins'
