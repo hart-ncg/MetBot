@@ -40,20 +40,14 @@ ys="1975_1975" # these are the years in the file name
 beginatyr="1975" # choose first year for analysis
 vname="rlut" # will be olr for most dsets but rlut for cmip5
 
-### Location for olr input & outputs
-indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
-infile=indir+name+".olr.day.mean."+ys+".nc"
-print infile
-outdir=indir+name+"/"
-my.mkdir_p(outdir)
-outsuf=outdir+name+'_'
-
 ### Running options
 olr=True         # Get mbs for $dset-olr-0-0
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
 testfile=True    # Uses a test file with short period
 testyear=True    # Only uses first 365 days of olr data
+                 # (testfile designed to be used together with testyear
+                 # ..but testyear can be used on any file)
 getdistr=True    # Save a figure showing histogram of OLR values
 getmbs=True      # Actually run the MetBot algorithm
 showblb=False    # Show the blobs while running
@@ -65,6 +59,16 @@ synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
 
 ### Ensure only look at Southern Africa
 sub="SA"
+
+### Location for olr input & outputs
+indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
+infile=indir+name+".olr.day.mean."+ys+".nc"
+print infile
+outdir=indir+name+"/"
+if testyear:outdir = outdir + 'test/'
+else:outdir = outdir
+my.mkdir_p(outdir)
+outsuf=outdir+name+'_'
 
 ### Open OLR data
 if olr:

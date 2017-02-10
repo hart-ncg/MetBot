@@ -40,6 +40,8 @@ olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
 testfile=True    # Uses a test file with short period
 testyear=True    # Only uses first 365 days of olr data
+                 # (testfile designed to be used together with testyear
+                 # ..but testyear can be used on any file)
 getdistr=True    # Save a figure showing histogram of OLR values
 getmbs=True      # Actually run the MetBot algorithm
 showblb=False    # Show the blobs while running
@@ -95,6 +97,8 @@ for d in range(ndset):
         infile=indir+name+".olr.day.mean."+ys+".nc"
         print infile
         outdir=indir+name+"/"
+        if testyear: outdir=outdir+'test/'
+        else: outdir=outdir
         my.mkdir_p(outdir)
         outsuf=outdir+name+'_'
 

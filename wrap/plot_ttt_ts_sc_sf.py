@@ -25,17 +25,6 @@ ys="1975_1975" # these are the years in the file name
 beginatyr="1975" # choose first year for analysis (should fit with metbot run)
 vname="rlut" # will be olr for most dsets but rlut for cmip5
 
-
-### Location for olr input & outputs
-indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
-infile=indir+name+".olr.day.mean."+ys+".nc"
-print infile
-outdir=indir+name+"/"
-outsuf=outdir+name+'_'
-mbsfile=outsuf+dset+"-olr-0-0.mbs"
-syfile=outsuf+dset+'-OLR.synop'
-
-
 ### Running options
 sub="SA"
 seasopt="coreseason"    # for spatiofreq plots
@@ -43,8 +32,22 @@ seasopt="coreseason"    # for spatiofreq plots
 tsplot=True             # to get timeseries plot
 scplot=True             # to get seasonal cycle plots
 sfplot=True             # to get spatiofrequency plot
+testyear=True           # To use output from a test
 testfile=True           # Uses a test file with short period
-res='native'              # Option to plot at 'noaa' res or 'native' res
+                        # (testfile designed to be used together with testyear
+                        # ..but testyear can be used seperately)
+res='native'            # Option to plot at 'noaa' res or 'native' res
+
+### Location for olr input & outputs
+indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
+infile=indir+name+".olr.day.mean."+ys+".nc"
+print infile
+outdir=indir+name+"/"
+if testyear:outdir = outdir + 'test/'
+else:outdir = outdir
+outsuf=outdir+name+'_'
+mbsfile=outsuf+dset+"-olr-0-0.mbs"
+syfile=outsuf+dset+'-OLR.synop'
 
 ### Open olr nc file
 ncout = mync.openolr_multi(infile,vname,name,\
