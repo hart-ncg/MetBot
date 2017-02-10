@@ -19,11 +19,11 @@ import mpl_toolkits.basemap as bm
 
 
 ### Choose dset and years
-dset="um" # options: noaa, um, cmip5
-name="antib" # options: noaa, mo runid, cmip5 model name
-ys="1985_1985" # these are the years in the file name
-beginatyr="1985" # choose first year for analysis (should fit with metbot run)
-vname="olr" # will be olr for most dsets but rlut for cmip5
+dset="cmip5" # options: noaa, um, cmip5
+name="ACCESS1-0" # options: noaa, mo runid, cmip5 model name
+ys="1975_1975" # these are the years in the file name
+beginatyr="1975" # choose first year for analysis (should fit with metbot run)
+vname="rlut" # will be olr for most dsets but rlut for cmip5
 
 
 ### Location for olr input & outputs
@@ -44,7 +44,7 @@ tsplot=True             # to get timeseries plot
 scplot=True             # to get seasonal cycle plots
 sfplot=True             # to get spatiofrequency plot
 testfile=True           # Uses a test file with short period
-res='noaa'              # Option to plot at 'noaa' res or 'native' res
+res='native'              # Option to plot at 'noaa' res or 'native' res
 
 ### Open olr nc file
 ncout = mync.openolr_multi(infile,vname,name,\
@@ -117,7 +117,7 @@ nNF=scycle[:,3:7].sum(1) # summing years for months November to March
 print 'Plotting timeseries'
 plt.figure(figsize=[11,5])
 plt.plot(yrs,nNF,'k',lw=2.)
-plt.savefig(outsuf+dset+'timeseries.png',dpi=150)
+plt.savefig(outsuf+dset+'_timeseries.png',dpi=150)
 
 ### PLOT SEASONAL CYCLE WITH BOX AND WHISKERS
 print 'Plotting seasonal cycle'

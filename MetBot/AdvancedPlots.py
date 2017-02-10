@@ -139,8 +139,8 @@ def spatiofreq3_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
                         wspace=0.02,hspace=0.1)
     if savefig:
         if flagonly:
-            plt.savefig(file_suffix+'_res-'+res+'_flagonly.png',dpi=150)
-        else: plt.savefig(file_suffix+'_res-'+res+'.png',dpi=150)
+            plt.savefig(file_suffix+'_res-'+res+'_flagonly_spatiofreq.png',dpi=150)
+        else: plt.savefig(file_suffix+'_res-'+res+'_spatiofreq.png',dpi=150)
 
     return msklist
 
