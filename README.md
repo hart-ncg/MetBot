@@ -15,6 +15,8 @@ Dependencies:
 1- Numpy, Scipy, matplotlib, basemap
 2- scikit-image
 3- Also netCDF4 is needed for opening nc files
+4- pyclimate
+5- windspharm
 OPT (don't think needed)- Python Image Processing Library (PIL)
 NOTE: This software has been developed in Python 2.7 and is therefore unlikely
 to work in Python 3.\*.

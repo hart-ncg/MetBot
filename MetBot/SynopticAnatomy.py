@@ -60,7 +60,8 @@ class SynopticEvents:
                                              'mbt': mbslist[i][1],
                                              'ch' : mbslist[i][2]}
         elif isinstance(refm,str):
-            f, extens = refm.split('.')
+            #f, extens = refm.split('.')
+            extens = refm.split('.')[-1]
             if extens == 'mbs':
                 for i in xrange(len(mbskeylist)):
                     mbs, mbt, ch = blb.mbopen(mbslist[i])
