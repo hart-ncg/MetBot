@@ -1,3 +1,19 @@
+# Plotting wrapper
+# to plot
+# .... time series of no of core season TTTs over time
+# .... box plots for seasonal cycle of TTTs
+# ....   for whole domain, and west & east of 40E
+# .... gridpoint frequency maps for each month
+#
+# Designed to be flexible to dataset
+# input at the top
+# .....dset: noaa, um, cmip5
+# .....name: noaa, $mo_runid (e.g. anqjn), $cmip5_model_name
+# .....years of file: $firstyear_lastyear
+# .....start year for calculations: currently using 1979 for OLR, 1970 for cmip5
+# .....   [adjust depending on years available]
+# .....directory: here ../../CTdata/metbot_multi_dset/$dset/
+# naming of ncfiles used here /$dset/$name.olr.day.mean.$firstyear_$lastyear.nc
 import iris
 iris.FUTURE.netcdf_promote=True
 iris.FUTURE.cell_datetime_objects=True
