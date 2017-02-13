@@ -36,8 +36,6 @@ conda update
 conda install scikit-image
 conda install basemap
 conda install netcdf4
-conda install --channel https://conda.anaconda.org/omgarcia pyclimate
-conda install --channel https://conda.anaconda.org/ajdawson windspharm
 
 Finally the best likely way to get your own copy of this code is to fork it to your github account. Alternatively you can clone the directory to your local machine. Forking is preferable as it will then be possible for your improvements to be incorporated into the main project.
 
