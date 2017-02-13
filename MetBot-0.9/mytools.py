@@ -17,7 +17,6 @@ from scipy.signal import convolve
 from scipy import mgrid
 import time as tm
 import mynetcdf as mync
-from pyclimate import diffoperators as diff
 #import matplotlib.nxutils as nx 
 from matplotlib.path import Path
 import matplotlib.pyplot as plt
@@ -683,71 +682,6 @@ def points_inside_poly(points,poly):
     thepoly=Path(poly)
     boolean=thepoly.contains_points(points)
     return boolean
-
-## METEOROLOGICAL VARIABLES
-def d_dx(var,time,lat,lon):
-    '''d_dx*1e7 = d_dx(var,time,lat,lon)
-
-    Calculates d(var)/dx of geophysical field
-    using pyclimate.diff.HGRADIENT
-    which calculate these values for spherical coordinates.
-
-    Usage: Bit of hack but time is either time array or [False]
-
-    Returns: d_dx*1e7 '''
-
-    Grd=diff.HGRADIENT(lat,lon)
-    if not time[0]:
-        d_dx,d_dy=Grd.hgradient(var)
-    else:
-        d_dx=np.zeros(var.shape, dtype=np.float32)
-        for t in xrange(len(time)):
-            ugrd,vgrd=Grd.hgradient(var[t,:,:].squeeze())
-            d_dx[t,:,:]=ugrd
-
-    return d_dx*1e7
-
-def del2(var,time,lat,lon):
-    '''del2*1e10 = del2(var,time,lat,lon)
-
-    Calculates del2 (Laplace Operator) of geophysical field
-    using pyclimate.diff.HGRADIENT
-                            pyclimate.diff.HDIVERGENCE
-    which calculate these values for spherical coordinates.
-
-
-    Usage: Bit of hack but time is either time array or [False]
-
-    Returns: del2*1e10 '''
-
-    Grd=diff.HGRADIENT(lat,lon)
-    Div=diff.HDIVERGENCE(lat,lon)
-    if not time[0]:
-        ugrd,vgrd=Grd.hgradient(var)
-        del2=Div.hdivergence(ugrd,vgrd)
-    else:
-        del2=np.zeros(var.shape, dtype=np.float32)
-        for t in xrange(len(time)):
-            ugrd,vgrd=Grd.hgradient(var[t,:,:].squeeze())
-            del2[t,:,:]=Div.hdivergence(ugrd,vgrd)
-
-    return del2*1e10
-
-def div(u,v,time,lat,lon):
-    '''Divergence of geophysical field on lat lon grid
-    Usage: Bit of hack but time is either time array or [False]
-
-    Returns: del2*1e10 '''
-
-    Div=diff.HDIVERGENCE(lat,lon)
-    if not time[0]:
-        dv=Div.hdivergence(u,v)
-    else:
-        dv=np.zeros(u.shape, dtype=np.float32)
-        for t in xrange(len(time)):
-            dv[t,:,:]=Div.hdivergence(u[t,:,:],v[t,:,:])
-
-    return dv
 
 def magdir(u,v):
     '''returns the mag and bearing of vector describe by u & v'''
