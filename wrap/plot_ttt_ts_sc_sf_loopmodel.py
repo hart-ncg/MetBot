@@ -38,8 +38,8 @@ seasopt="coreseason"    # for spatiofreq plots
 tsplot=True             # to get timeseries plot
 scplot=True             # to get seasonal cycle plots
 sfplot=True             # to get spatiofrequency plot
-testyear=True           # To use output from a test
-testfile=True           # Uses a test file with short period
+testyear=False           # To use output from a test
+testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
 res='noaa'            # Option to plot at 'noaa' res or 'native' res
@@ -51,7 +51,7 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['um']
+    dsetnames=['cmip5']
 ndstr=str(ndset)
 
 for d in range(ndset):

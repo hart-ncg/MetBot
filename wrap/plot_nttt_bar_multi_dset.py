@@ -33,15 +33,18 @@ testyear=False  # plot based on 1 year of test data
 indir=cwd+"/../../../CTdata/metbot_multi_dset/"
 
 ### Multi dset?
-dsets='spec'     # "all" or "spec" to choose specific dset(s)
+dsets='all'     # "all" or "spec" to choose specific dset(s)
 if dsets=='all':
     ndset=len(dsetdict.dset_deets)
     dsetnames=list(dsetdict.dset_deets)
     dsetstr='all_dset'
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['um']
+    dsetnames=['cmip5']
     dsetstr='_'.join(dsetnames)
+print 'Running on datasets:'
+print dsetnames
+
 
 ### Count total number of models
 nm_dset=np.zeros(3)
@@ -51,21 +54,24 @@ for d in range(ndset):
     nm_dset[d]=nmod
 nallmod=np.sum(nm_dset)
 nallmod=int(nallmod)
+print 'Total number of models = '+str(nallmod)
 
 ### Open arrays for results
 ttt_count=np.zeros((3,nallmod))
 modnm=["" for x in range(nallmod)] # creates a list of strings for modnames
 
 ### Loop dsets and models
+z=0
 for d in range(ndset):
     dset=dsetnames[d]
     nmod=len(dsetdict.dset_deets[dset])
     mnames=list(dsetdict.dset_deets[dset])
+    print 'Looping through models'
+    print mnames
 
     for m in range(nmod):
         name=mnames[m]
-        z=d+m # number for output list
-
+        
         ### Open synop file
         outdir=indir+dset+"/"+name+"/"
         if testyear: outdir=outdir+'test/'
@@ -85,7 +91,7 @@ for d in range(ndset):
 
         ### Put name into string list
         modnm[z]=dset+"_"+name
-
+	z+=1
 
 ### Loop domains
 doms=['All','Continental','Madagascar']
@@ -121,9 +127,9 @@ for r in range(ndoms):
     plt.figure()
     plt.subplots_adjust(left=0.3,right=0.9,top=0.9,bottom=0.1)
     plt.barh(pos,val4plot,align='center')
-    plt.ylim(0,nmod)
+    plt.ylim(0,nallmod)
     plt.yticks(pos,modlabels,fontsize=10)
     plt.xlabel('Number of Events')
-    barfig=indir+'/neventsbar.'+dsetstr+'.'+doms[d]+'.png'
+    barfig=indir+'/neventsbar.'+dsetstr+'.'+doms[r]+'.png'
     plt.savefig(barfig,dpi=150)
     file.close()

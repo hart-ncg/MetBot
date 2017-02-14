@@ -39,8 +39,8 @@ tstart=tmr.time()
 olr0=True         # Get mbs for $dset-olr-0-0
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=True    # Uses a test file with short period
-testyear=True    # Only uses first 365 days of olr data
+testfile=False    # Uses a test file with short period
+testyear=False    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
 getdistr=True    # Save a figure showing histogram of OLR values
@@ -51,7 +51,7 @@ refsubset=True   # This is used if noaaolr=True to only look in time window
 hrwindow=49      # ... close (49 hours/ 2days) to flagged cloud band days
 synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
                  # ... which are then used to build TTT events.
-onlynew=True     # Option to only run if the synop file doesn't exist yet
+onlynew=False     # Option to only run if the synop file doesn't exist yet
 
 ### Ensure only look at Southern Africa
 sub="SA"
@@ -63,7 +63,7 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['um']
+    dsetnames=['noaa']
 ndstr=str(ndset)
 
 for d in range(ndset):
