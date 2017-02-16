@@ -47,7 +47,7 @@ print dsetnames
 
 
 ### Count total number of models
-nm_dset=np.zeros(3)
+nm_dset=np.zeros(ndset)
 for d in range(ndset):
     dset = dsetnames[d]
     nmod = len(dsetdict.dset_deets[dset])
@@ -91,7 +91,7 @@ for d in range(ndset):
 
         ### Put name into string list
         modnm[z]=dset+"_"+name
-	z+=1
+        z+=1
 
 ### Loop domains
 doms=['All','Continental','Madagascar']

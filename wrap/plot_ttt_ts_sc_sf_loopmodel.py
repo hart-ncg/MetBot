@@ -38,11 +38,12 @@ seasopt="coreseason"    # for spatiofreq plots
 tsplot=True             # to get timeseries plot
 scplot=True             # to get seasonal cycle plots
 sfplot=True             # to get spatiofrequency plot
-testyear=False           # To use output from a test
-testfile=False           # Uses a test file with short period
+testyear=True           # To use output from a test
+testfile=True           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
 res='noaa'            # Option to plot at 'noaa' res or 'native' res
+nos4cbar=(1,7,1)        # choose the intervals for spatiofreq cbar
 
 ### Multi dset?
 dsets='spec'     # "all" or "spec" to choose specific dset(s)
@@ -51,12 +52,12 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['cmip5']
+    dsetnames=['um']
 ndstr=str(ndset)
 
 for d in range(ndset):
     dset=dsetnames[d]
-    dcnt=str(d)
+    dcnt=str(d+1)
     print 'Running on '+dset
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
@@ -72,7 +73,7 @@ for d in range(ndset):
 
     for m in range(nmod):
         name=mnames[m]
-        mcnt=str(m)
+        mcnt=str(m+1)
         print 'Running on ' + name
         print 'This is model '+mcnt+' of '+nmstr+' in list'
 
@@ -182,4 +183,4 @@ for d in range(ndset):
         print 'Plotting spatiofrequency'
         mapnm=outsuf+dset+'_'+seasopt
         msklist=ap.spatiofreq3_season(s,lat2,lon2,yrs,ks,\
-            figno=1,season=seasopt,key=dset+'-olr-0-0',res=res,flagonly=True,file_suffix=mapnm,savefig=True)
+            figno=1,season=seasopt,key=dset+'-olr-0-0',res=res,dclim=nos4cbar,flagonly=True,file_suffix=mapnm,savefig=True)
