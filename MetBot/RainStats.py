@@ -386,5 +386,6 @@ def rainprops(s,kchoice,rp,propall,rdset='wrc',pdf_title=False):
         plt.xlim(xl[:2])
         plt.ylim(yl[:2]);plt.yticks(np.arange(yl[0],yl[1],yl[2]))
         plt.title(pdf_title+' (n='+str(len(rprop))+')',fontweight='normal')
+        plt.savefig(pdf_title + '.' + rp + '.histogram.test.png', dpi=150)
 
     return rprop
