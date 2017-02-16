@@ -79,7 +79,7 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['ACCESS1-0']
+        mnames=['u-ab680']
     nmstr=str(nmod)
 
     for m in range(nmod):
