@@ -18,6 +18,8 @@ import MetBot.dset_dict as dsetdict
 
 # Add to this dictionary as need be by looking at ncdump -h ????.nc
 dimdict={"ncep2": ['time','lat','lon','level','lev'],
+"ncep": ['time','lat','lon'],
+"20cr": ['time','lat','lon'],
 "interp_olr": ['time','lat','lon'],
 "noaa": ['time','lat','lon'],
 "tamsat_ccd": ['time','lat','lon'],
@@ -25,7 +27,8 @@ dimdict={"ncep2": ['time','lat','lon','level','lev'],
 "um": ['t','latitude','longitude','toa'],
 "umpr": ['t','latitude','longitude','surface'],
 "cmip5": ['time','lat','lon'],
-"era": ['date','latitude','longitude','level'],
+#"era": ['date','latitude','longitude','level'],
+"era": ['time','latitude','longitude'],
 "hadam3p": ['t','latitude','longitude','p','theta','surface','toa'],
 "cfsr": ['time','latitude','longitude','level'],
 "nddiagnc": ['t','y','x','p'],
@@ -406,7 +409,12 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
         moddct = dsetdict.dset_deets[dset][mname]
         units = moddct['timeunit']
         cal = moddct['calendar']
-        exec ('dtime=num2date((' + timestr + '-1)*24,units="' + units + '",calendar="' + cal + '")')
+        if mname=='anqjn' or mname=='antib':
+            exec ('dtime=num2date((' + timestr + '-1)*24,units="' + units + '",calendar="' + cal + '")')
+        elif mname=='u-ab674' or mname=='u-ab680':
+            exec('dtime=num2date((' + timestr + '-1),units="' + units + '",calendar="' + cal + '")')
+        else:
+            print 'new mname - check time string'
         # the above t-1 thing is a hack, but it works apparently for me
         dtime = fix360d(dtime)
     elif dset=='umpr':

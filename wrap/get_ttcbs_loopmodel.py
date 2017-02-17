@@ -39,8 +39,8 @@ tstart=tmr.time()
 olr0=True         # Get mbs for $dset-olr-0-0
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=False    # Uses a test file with short period
-testyear=False    # Only uses first 365 days of olr data
+testfile=True    # Uses a test file with short period
+testyear=True    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
 getdistr=True    # Save a figure showing histogram of OLR values
@@ -63,12 +63,12 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['noaa']
+    dsetnames=['um']
 ndstr=str(ndset)
 
 for d in range(ndset):
     dset=dsetnames[d]
-    dcnt=str(d)
+    dcnt=str(d+1)
     print 'Running on '+dset
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
@@ -79,12 +79,12 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['ACCESS1-0']
+        mnames=['u-ab680']
     nmstr=str(nmod)
 
     for m in range(nmod):
         name=mnames[m]
-        mcnt=str(m)
+        mcnt=str(m+1)
         print 'Running on ' + name
         print 'This is model '+mcnt+' of '+nmstr+' in list'
 

@@ -25,6 +25,18 @@ blobfilters['SAcloudband']={
 'ncep2-quvmag-700-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-1,'low'), 'text': "moistjet"},
 'ncep2-quvmag-850-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-1.5,1.5), 'thresh': (-0.5,'low'), 'text': "moistjet"},
 
+'ncep-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+'ncep-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+'ncep-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+
+'era-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+'era-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+'era-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+
+'20cr-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
+'20cr-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
+'20cr-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
+
 'um-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
 'um-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
 'um-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },

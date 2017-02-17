@@ -70,7 +70,7 @@ def spatiofreq2_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
     return msklist
 
 def spatiofreq3_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
-     key='noaa-olr-0-all',res='noaa',flagonly=False,file_suffix='test',savefig=False,\
+     key='noaa-olr-0-all',res='noaa',dclim=(1,7,1),flagonly=False,file_suffix='test',savefig=False,\
      fontdict=False):
     '''spatiofreq3_season(s,lat,lon,yrs,figno=1,season='coreseason',\
                           flagonly=False,file_suffix='test')
@@ -80,10 +80,6 @@ def spatiofreq3_season(s,lat,lon,yrs,eventkeys,figno=1,season='coreseason',\
     if not fontdict:fd = {'fontsize':14,'fontweight':'bold'}
     else: fd=fontdict
     mbkl=key.split('-')
-    if mbkl[0]=='noaa':dclim=(1,7,1)
-    if mbkl[0]=='hadam3p':dclim=(1,11,1)
-    if mbkl[0]=='um':dclim=(1,7,1)
-    if mbkl[0]=='cmip5':dclim=(1,7,1)
 
     if isinstance(season,str):
         if season=='coreseason':mns=[10,11,12,1,2,3]
