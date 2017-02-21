@@ -520,9 +520,14 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
     if dset == 'cmip5':
         lat = lat[::-1]
         exec (varstr + '=' + varstr + '[:,::-1,:]')
+    if dset == 'noaa':
+        if mname == 'cdr':
+            lat = lat[::-1]
+            exec (varstr + '=' + varstr + '[:,::-1,:]')
     if dset == 'um':
         latitude=latitude[::-1]
         exec (varstr + '=' + varstr + '[:,:,::-1,:]')
+
 
     exec('out=(np.float32('+varstr+'),'+', '.join(dimlist)+',dtarr)')
 
