@@ -9,6 +9,7 @@ dset_deets={}
 # NOAA
 dset_deets['noaa']={
 'noaa': {'name': "noaa", 'calendar':"gregorian", 'timeunit':"hours since 1800-01-01 00:00:0.0", 'startdate':"1974-06-01", 'olrname':"olr", 'yrfname':"1974_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
+'cdr': {'name': "noaa", 'calendar':"gregorian", 'timeunit':"hours since 1800-01-01 00:00:0.0", 'startdate':"1979-01-01", 'olrname':"olr", 'yrfname':"1979_2012", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
 }
 
 # NCEP

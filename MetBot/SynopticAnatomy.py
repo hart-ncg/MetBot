@@ -341,6 +341,7 @@ class SynopticEvents:
         ihrt,ilab = self.ifld('hrtime'),self.ifld('Label')
         icx, icy = self.ifld('cX'), self.ifld('cY')
         startfilter = 30*24*100  # the time in label is *100
+        # not sure if this is compatible with other datasets
 
         refhr, reflab = target[:,ihrt], target[:,ilab]
         refcx, refcy = target[:,icx], target[:,icy]
@@ -639,12 +640,13 @@ class Event(SynopticEvents):
         ihrt, ilab = self.ifld('hrtime'), self.ifld('Label')
         icX, icY = self.ifld('cX'), self.ifld('cY')
         startfilter = 30*24*100  # the time in label is *100
+        #.....not sure if the above is compatible with other datasets?
         # Get necessary properties of elements of flag track
         flagtrk = self.trk
         flaghrs = self.trktimes
         flagcX  = self.trkcX
         flagcY  = self.trkcY
-        #
+
         trkshr = self.trackshr[k]
         trkscX = self.trackscX[k]
         trkscY = self.trackscY[k]
@@ -697,8 +699,12 @@ class Event(SynopticEvents):
         # BUILD TRACK ARRAY FOR REFERENCE/FLAG TRACKS: 
         # currently 'noaa-olr-0-all' which has tres==24
         allhrtm = allhrtime
-        if mbskeyvals[0]=='noaa':
-            allhrtm = allhrtm - (allhrtm % 24)
+        #if mbskeyvals[0]=='noaa':
+            # round the time (in hours) to the nearest day?
+            # not sure this does anything because the value seems to be zero?
+            # for other datasets it might break things
+            # ....because than allhrtm does not equal t below
+        #    allhrtm = allhrtm - (allhrtm % 24)
         trkarr[:,0]=allhrtm
         cnt=0
         for t in self.trktimes:
