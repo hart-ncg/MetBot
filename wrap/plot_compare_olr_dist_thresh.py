@@ -282,7 +282,7 @@ if histplot:
 
 ### Edits to text file
 if threshtext:
-    txtfile.close
+    txtfile.close()
 
 
 ### Edits to threshs figure
