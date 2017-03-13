@@ -1,5 +1,5 @@
-# Bar chart plotting wrapper
-#   to plot a bar chart displaying the number of events for each model
+# Scatterplot wrapper
+#   to plot number of events for each model versus threshold
 #   for all datasets or specific dataset
 
 # .....dset: noaa, um, cmip5
@@ -26,10 +26,8 @@ import MetBot.find_saddle as fs
 
 
 ### Running options
-inorder=True    # to put the bars in order of number of TTTs
-numlab=True     # to include number of TTTs in the yaxis label
-testyear=False  # plot based on 1 year of test data
-threshtest=True # Option to run on thresholds + and - 5Wm2 as a test
+testyear=True  # plot based on 1 year of test data
+threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 
 ### Directory
 indir=cwd+"/../../../CTdata/metbot_multi_dset/"
@@ -41,17 +39,18 @@ else:
     thnames=['actual']
 
 nthresh=len(thnames)
+
 for t in range(nthresh):
 
     ### Multi dset?
-    dsets='all'     # "all" or "spec" to choose specific dset(s)
+    dsets='spec'     # "all" or "spec" to choose specific dset(s)
     if dsets=='all':
         ndset=len(dsetdict.dset_deets)
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
-        ndset=1
-        dsetnames=['cmip5']
+        ndset=2
+        dsetnames=['noaa','um']
         dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
     print 'Running on datasets:'
     print dsetnames
@@ -69,6 +68,7 @@ for t in range(nthresh):
 
     ### Open arrays for results
     ttt_count=np.zeros((3,nallmod))
+    threshlist=np.zeros(nallmod)
     modnm=["" for x in range(nallmod)] # creates a list of strings for modnames
 
     ### Loop dsets and models
@@ -90,12 +90,13 @@ for t in range(nthresh):
             outsuf=outdir+name+'_'
 
             ### Get thresh
-            with open(indir+'thresholds.fmin.all_dset.txt') as f:
+            threshlist=indir+'thresholds.fmin.all_dset.txt'
+            print threshlist
+            with open(threshlist) as f:
                 for line in f:
                     if dset+'\t'+name in line:
                         thresh = line.split()[2]
                         print 'thresh='+str(thresh)
-
 
             if thnames[t]=='actual':
                 thisthresh=thresh
@@ -105,6 +106,7 @@ for t in range(nthresh):
                 thisthresh=thresh + 5
 
             thre_str = str(int(thisthresh))
+            threshlist[z] = thisthresh
 
             ###  Open synop file
             syfile=outsuf+thre_str+'_'+dset+'-OLR.synop'
@@ -129,37 +131,16 @@ for t in range(nthresh):
 
     for r in range(ndoms):
         val=ttt_count[r,:]
+        val4plot=val
+        mod4plot=modnm
 
-        # Open text file for results
-        file = open(indir+"nTTT_list."+thre_str+'.'+dsetstr+"."+doms[r]+".txt", "w")
-
-        if inorder:
-            indsort=np.argsort(val)
-            val4plot=val[indsort]
-            mod4plot=[modnm[i] for i in indsort]
-        else:
-            val4plot=val
-            mod4plot=modnm
-
-        pos=np.arange(nallmod)+0.5
-
-        modlabels=["" for x in range(nallmod)]
-        for m in range(nallmod):
-            tmp=int(val4plot[m])
-            strval=str(tmp)
-            if numlab:
-                modlabels[m]=mod4plot[m]+' ('+strval+')'
-            else:
-                modlabels[m] = mod4plot[m]
-            file.write(mod4plot[m]+"\t"+str(int(val4plot[m]))+"\n")
-
+        #for m in range(nallmod):
 
         plt.figure()
-        plt.subplots_adjust(left=0.3,right=0.9,top=0.9,bottom=0.1)
-        plt.barh(pos,val4plot,align='center')
-        plt.ylim(0,nallmod)
-        plt.yticks(pos,modlabels,fontsize=10)
-        plt.xlabel('Number of Events')
-        barfig=indir+'/neventsbar.thresh_'+thnames[t]+'.'+dsetstr+'.'+doms[r]+'.png'
+        plt.scatter(threshlist,val4plot)
+        plt.xlim(220,260)
+        plt.xlabel('OLR threshold')
+        plt.ylabel('Number of TTT events')
+        scatterfig=indir+'/scatter_threshold_nTTT.thresh_'+thnames[t]+'.'+dsetstr+'.'+doms[r]+'.png'
         plt.savefig(barfig,dpi=150)
         file.close()
