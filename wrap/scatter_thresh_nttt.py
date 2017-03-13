@@ -98,6 +98,8 @@ for t in range(nthresh):
                         thresh = line.split()[2]
                         print 'thresh='+str(thresh)
 
+            thresh = int(thresh)
+
             if thnames[t]=='actual':
                 thisthresh=thresh
             if thnames[t]=='lower':
