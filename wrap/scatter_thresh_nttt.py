@@ -145,4 +145,3 @@ for t in range(nthresh):
         plt.ylabel('Number of TTT events')
         scatterfig=indir+'/scatter_threshold_nTTT.thresh_'+thnames[t]+'.'+dsetstr+'.'+doms[r]+'.png'
         plt.savefig(scatterfig,dpi=150)
-        file.close()
