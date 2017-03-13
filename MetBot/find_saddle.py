@@ -54,6 +54,7 @@ def find_saddle(data,first_guess=240,nbins=50,xlims=[100,320],method='fmin',\
             plt.plot((upper,upper),(0,0.014),'k',lw=2)
         figname=figd+'olrhist_autothresh_'+str(olr_saddle)+'.png'
         plt.savefig(figname,dpi=150)
+        plt.close()
     else:
         plt.close()
     return olr_saddle
