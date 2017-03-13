@@ -26,7 +26,7 @@ import MetBot.find_saddle as fs
 
 
 ### Running options
-testyear=True  # plot based on 1 year of test data
+testyear=False  # plot based on 1 year of test data
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 
 ### Directory
@@ -90,9 +90,9 @@ for t in range(nthresh):
             outsuf=outdir+name+'_'
 
             ### Get thresh
-            threshlist=indir+'thresholds.fmin.all_dset.txt'
-            print threshlist
-            with open(threshlist) as f:
+            threshtxt=indir+'thresholds.fmin.all_dset.txt'
+            print threshtxt
+            with open(threshtxt) as f:
                 for line in f:
                     if dset+'\t'+name in line:
                         thresh = line.split()[2]
