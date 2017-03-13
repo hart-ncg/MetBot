@@ -144,5 +144,5 @@ for t in range(nthresh):
         plt.xlabel('OLR threshold')
         plt.ylabel('Number of TTT events')
         scatterfig=indir+'/scatter_threshold_nTTT.thresh_'+thnames[t]+'.'+dsetstr+'.'+doms[r]+'.png'
-        plt.savefig(barfig,dpi=150)
+        plt.savefig(scatterfig,dpi=150)
         file.close()
