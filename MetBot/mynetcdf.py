@@ -402,39 +402,14 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
             print 'Variable \"'+i+ '\" does not exist in '+ncfile
             dimlist.remove(i);continue
 
-    # HUMAN TIME CONVERSION AND TIME SUBSET IF REQUIRED \
-    # (only really used for big files like cfsr)
+    # HUMAN TIME CONVERSION
+    moddct = dsetdict.dset_deets[dset][mname]
+    units = moddct['timeunit']
+    cal = moddct['calendar']
+    exec('dtime=num2date((' + timestr + '),units="' + units + '",calendar="' + cal + '")')
+    if cal == '360_day':
+        dtime = fix360d(dtime)
 
-    if dset=='um':
-        moddct = dsetdict.dset_deets[dset][mname]
-        units = moddct['timeunit']
-        cal = moddct['calendar']
-        if mname=='anqjn' or mname=='antib':
-            exec ('dtime=num2date((' + timestr + '-1)*24,units="' + units + '",calendar="' + cal + '")')
-        elif mname=='u-ab674' or mname=='u-ab680':
-            exec('dtime=num2date((' + timestr + '-1),units="' + units + '",calendar="' + cal + '")')
-        else:
-            print 'new mname - check time string'
-        # the above t-1 thing is a hack, but it works apparently for me
-        dtime = fix360d(dtime)
-    elif dset=='umpr':
-        moddct = dsetdict.dset_deets[dset][mname]
-        units = moddct['timeunit']
-        cal = moddct['calendar']
-        exec ('dtime=num2date((' + timestr + '-1)*24,units="' + units + '",calendar="' + cal + '")')
-        # the above t-1 thing is a hack, but it works apparently for me
-        dtime = fix360d(dtime)
-    elif dset == 'cmip5':
-        moddct = dsetdict.dset_deets[dset][mname]
-        cal = moddct['calendar']
-        units = moddct['timeunit']
-        newunits = units.replace('days since', 'hours since')
-        exec ('dtime=num2date((' + timestr + ')*24,units="' + newunits + '",calendar="' + cal + '")')
-        if cal == '360_day':
-            dtime = fix360d(dtime)
-    else:
-        exec('dtime=num2date('+timestr+',units=ncf.variables[timestr].units,\
-             calendar=\'gregorian\')')
     dtarr=dtime2arr(dtime)
 
     if not subtime:

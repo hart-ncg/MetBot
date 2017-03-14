@@ -9,7 +9,7 @@ dset_deets={}
 # NOAA
 dset_deets['noaa']={
 'noaa': {'name': "noaa", 'calendar':"gregorian", 'timeunit':"hours since 1800-01-01 00:00:0.0", 'startdate':"1974-06-01", 'olrname':"olr", 'yrfname':"1974_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
-'cdr': {'name': "noaa", 'calendar':"gregorian", 'timeunit':"hours since 1800-01-01 00:00:0.0", 'startdate':"1979-01-01", 'olrname':"olr", 'yrfname':"1979_2012", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
+'cdr': {'name': "noaa", 'calendar':"gregorian", 'timeunit':"days since 1800-01-01 00:00:0.0", 'startdate':"1979-01-01", 'olrname':"olr", 'yrfname':"1979_2012", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
 }
 
 # NCEP
@@ -29,8 +29,8 @@ dset_deets['20cr']={
 
 # UM
 dset_deets['um']={
-'anqjn': {'name': "anqjn", 'calendar':"360_day", 'timeunit':"hours since 1978-09-01 00:00:00", 'startdate':"1978-09-01", 'olrname':"olr", 'yrfname':"1978_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
-'antib': {'name': "antib", 'calendar':"360_day", 'timeunit':"hours since 1981-09-01 00:00:00", 'startdate':"1981-09-01", 'olrname':"olr", 'yrfname':"1981_2008", 'startyr':"1982", 'testfileyr':"1985_1985",'testyr':"1985"},
+'anqjn': {'name': "anqjn", 'calendar':"360_day", 'timeunit':"days since 1978-09-01 00:00:00", 'startdate':"1978-09-01", 'olrname':"olr", 'yrfname':"1978_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
+'antib': {'name': "antib", 'calendar':"360_day", 'timeunit':"days since 1981-09-01 00:00:00", 'startdate':"1981-09-01", 'olrname':"olr", 'yrfname':"1981_2008", 'startyr':"1982", 'testfileyr':"1985_1985",'testyr':"1985"},
 'u-ab674': {'name': "u-ab674", 'calendar':"360_day", 'timeunit':"days since 1998-12-1 00:00:00", 'startdate':"2079-01-01", 'olrname':"olr", 'yrfname':"2079_2113", 'startyr':"2079", 'testfileyr':"2079_2079",'testyr':"2079"},
 'u-ab680': {'name': "u-ab680", 'calendar':"360_day", 'timeunit':"days since 1981-9-1 00:00:00", 'startdate':"1981-09-01", 'olrname':"olr", 'yrfname':"1981_2008", 'startyr':"1982", 'testfileyr':"1985_1985",'testyr':"1985"},
 }
