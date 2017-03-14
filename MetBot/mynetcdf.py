@@ -28,7 +28,6 @@ dimdict={"ncep2": ['time','lat','lon','level','lev'],
 "tamsat_ccd": ['time','lat','lon'],
 "had": ['time','latitude','longitude','level'],
 #"um": ['t','latitude','longitude','toa'],
-#"umpr": ['t','latitude','longitude','surface'],
 #"cmip5": ['time','lat','lon'],
 "era": ['date','latitude','longitude','level'],
 #"era": ['time','latitude','longitude'],
@@ -365,7 +364,7 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
 
     return out
 
-def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
+def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
     '''var, time, lat, lon, [[,lev], [,time_bnds]]= opennc2(ncfile,varstr,mname,dset,
                                         sub=False,levselect=False,subtime=False)
 
@@ -382,8 +381,10 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
          - hadam3p is .nc output from subset.tcl (uses xconv), where input was
            UM .pp files
 
-    USAGE: varstr - string
-           dset   - string valid: um, umpr, cmip5, noaa
+    USAGE: globv  - string - global variable name - not nec the one
+                    for each netcdf file, which is called from dset_dict below
+                    string valid: olr, pr
+           dset   - string valid: um, noaa, cmip5, ncep, era, 20cr
            sub    - tuple - ((latmin,latmax),(lonmin,lonmax))
                    or string - see options availble in mynetcdf.isubs
            levselect - will return level slice closest to given value
@@ -394,7 +395,7 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
 
     RETURNS: var, lat, lon, lev'''
 
-    dimlist = dim_exdict.dim_deets[varstr][dset]
+    dimlist = dim_exdict.dim_deets[globv][dset]
     timestr = dimlist[0]
     ncf = kh.NetCDFFile(ncfile,'r')
     #vkeys = ncf.variables.keys() # could use something with this?
@@ -409,6 +410,8 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
     moddct = dsetdict.dset_deets[dset][mname]
     units = moddct['timeunit']
     cal = moddct['calendar']
+    vnamedict = globv+'name'
+    varstr = moddct[vnamedict]
     exec('dtime=num2date((' + timestr + '),units="' + units + '",calendar="' + cal + '")')
     if cal == '360_day':
         dtime = fix360d(dtime)
@@ -553,7 +556,7 @@ def opentamsatCCD(ncfile,varstr='ccd',dset='tamsat_ccd'):
     out = opennc(ncfile,varstr,dset)
     return out
 
-def openolr_multi(ncfile,varstr,name,dataset='noaa',subs=False,levsel=False):
+def open_multi(ncfile,varstr,name,dataset='noaa',subs=False,levsel=False):
     out = opennc2(ncfile,varstr,name,dataset,sub=subs,levselect=levsel)
     return out
 
