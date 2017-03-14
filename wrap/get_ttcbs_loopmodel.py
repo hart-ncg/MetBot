@@ -73,7 +73,7 @@ for d in range(ndset):
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='all'  # "all" or "spec" to choose specific model(s)
+    mods='spec'  # "all" or "spec" to choose specific model(s)
     if mods=='all':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])

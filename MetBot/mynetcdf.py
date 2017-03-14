@@ -15,20 +15,23 @@ except ImportError:
 import time as tm
 import datetime
 import MetBot.dset_dict as dsetdict
+import MetBot.dimensions_dict as dim_exdict
 
 # Add to this dictionary as need be by looking at ncdump -h ????.nc
+# There is an alternative (using "dimensions_dict.py" and opennc2) - all dsets already
+# ...listed with that method are now commented out below
 dimdict={"ncep2": ['time','lat','lon','level','lev'],
-"ncep": ['time','lat','lon'],
-"20cr": ['time','lat','lon'],
+#"ncep": ['time','lat','lon'],
+#"20cr": ['time','lat','lon'],
 "interp_olr": ['time','lat','lon'],
-"noaa": ['time','lat','lon'],
+#"noaa": ['time','lat','lon'],
 "tamsat_ccd": ['time','lat','lon'],
 "had": ['time','latitude','longitude','level'],
-"um": ['t','latitude','longitude','toa'],
-"umpr": ['t','latitude','longitude','surface'],
-"cmip5": ['time','lat','lon'],
-#"era": ['date','latitude','longitude','level'],
-"era": ['time','latitude','longitude'],
+#"um": ['t','latitude','longitude','toa'],
+#"umpr": ['t','latitude','longitude','surface'],
+#"cmip5": ['time','lat','lon'],
+"era": ['date','latitude','longitude','level'],
+#"era": ['time','latitude','longitude'],
 "hadam3p": ['t','latitude','longitude','p','theta','surface','toa'],
 "cfsr": ['time','latitude','longitude','level'],
 "nddiagnc": ['t','y','x','p'],
@@ -391,7 +394,7 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
 
     RETURNS: var, lat, lon, lev'''
 
-    dimlist = dimdict[dset][:]
+    dimlist = dim_exdict.dim_deets[varstr][dset]
     timestr = dimlist[0]
     ncf = kh.NetCDFFile(ncfile,'r')
     #vkeys = ncf.variables.keys() # could use something with this?
