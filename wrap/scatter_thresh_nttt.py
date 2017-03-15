@@ -23,6 +23,7 @@ import glob, socket, os
 import mpl_toolkits.basemap as bm
 import MetBot.dset_dict as dsetdict
 import MetBot.find_saddle as fs
+import scipy
 
 
 ### Running options
@@ -140,8 +141,12 @@ for t in range(nthresh):
 
         plt.figure()
         plt.scatter(threshlist,val4plot)
-        plt.xlim(220,260)
+        m, c, r_value, p_value, std_err = scipy.stats.linregress(threshlist,val4plot)
+        rsquared=r_value**2
+        plt.plot(threshlist,(m*threshfit + c),'-')
+        plt.xlim(230,265)
         plt.xlabel('OLR threshold')
         plt.ylabel('Number of TTT events')
+        plt.title(doms[r]+'.thresh_'+thnames[t]+'_r2_'+str(round(rsquared,2)))
         scatterfig=indir+'/scatter_threshold_nTTT.thresh_'+thnames[t]+'.'+dsetstr+'.'+doms[r]+'.png'
         plt.savefig(scatterfig,dpi=150)
