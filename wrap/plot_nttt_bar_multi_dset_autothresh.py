@@ -109,7 +109,7 @@ for t in range(nthresh):
 
             ###  Open synop file
             syfile=outsuf+thre_str+'_'+dset+'-OLR.synop'
-            s = sy.SynopticEvents((),[syfile],COL=False)
+            s = sy.SynopticEvents((),[syfile],COL=False):
 
             ### Count number of events
             ks = s.events.keys() # all events
