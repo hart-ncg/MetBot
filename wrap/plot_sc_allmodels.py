@@ -71,7 +71,7 @@ nallmod = int(nallmod)
 print 'Total number of models = ' + str(nallmod)
 
 ### Loop auto or man threshold
-th_type=['man','auto']
+th_type=['auto','man']
 for q in range(len(th_type)):
 
     ### Open arrays for results
@@ -80,7 +80,10 @@ for q in range(len(th_type)):
     if medplot:
         med_data=np.zeros((3,nallmod,12))
     if allyearplot:
-        all_data=np.zeros((3,nallmod*35,12))
+        if th_type[q]=='man':
+		all_data=np.zeros((3,nallmod*30,12))
+	elif th_type[q]=='auto':
+		all_data=np.zeros((3,nallmod*35,12))
 
     modnm = ["" for x in range(nallmod)]  # creates a list of strings for modnames
 
@@ -116,7 +119,7 @@ for q in range(len(th_type)):
 
             if th_type[q]=='man':
                 ###  Open synop file
-                syfile = outsuf + '_' + dset + '-OLR.synop'
+                syfile = outsuf + dset + '-OLR.synop'
                 s = sy.SynopticEvents((), [syfile], COL=False)
 
             elif th_type[q]=='auto':
@@ -147,20 +150,33 @@ for q in range(len(th_type)):
             ### Loop domains
             doms = ['All', 'Continental', 'Madagascar']
             ndoms = len(doms)
-            whichc = [sycle,scyclew,scyclee]
+            whichc = [scycle,scyclew,scyclee]
 
             for r in range(ndoms):
 
                 ### Put into data arrays
                 if meanplot:
-                    monmean=whichc[r].mean()
+                    monmean=whichc[r].mean(0)
                     mean_data[r,z,:] = monmean
                 if medplot:
-                    monmed=whichc[r].median()
+                    monmed=np.median(whichc[r],0)
                     med_data[r,z,:] = monmed
                 if allyearplot:
-                    firstdate=z*35
-                    lastdate=firstdate+34
+		    if th_type[q]=='man':
+			if name=='HadGEM2-ES' or name=='HadGEM2-CC':
+			    firstdate=z*30
+                            lastdate=firstdate+30
+			else:
+		            firstdate=z*30
+	        	    lastdate=firstdate+29
+		    elif th_type[q]=='auto':
+			if name=='inmcm4':
+		            firstdate=z*35
+			    nyears=len(whichc[r][:,0])
+                            lastdate=firstdate+nyears
+			else:
+	                    firstdate=z*35
+        	            lastdate=firstdate+34
                     all_data[r,firstdate:lastdate,:] = whichc[r]
 
             ### Put name into string list
@@ -177,17 +193,17 @@ for q in range(len(th_type)):
             plt.boxplot(plotvals, notch=0, sym='+', vert=1, whis=1.5)  # produces boxplot
             plt.plot(np.arange(1, 13), plotvals.mean(0), 'k-', lw=1)  # produces mean of model means
             plt.xticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
-            plt.yticks(np.arange(1, 14), fontsize=13.0)
-            plt.ylim(0, 8.5)
+            plt.yticks(np.arange(1, 15), fontsize=13.0)
+            plt.ylim(0, 15)
             plt.ylabel('No. of Cloudbands', fontsize=13.0, weight='demibold')
-            plttitle='Intra-model spread of monthly mean CBs: with '\
+            plttitle='Intra-model spread of monthly mean CBs:\n with '\
                      +th_type[q]+' thresh_'+doms[r]
             plt.title(plttitle, fontweight='demibold')
             # plt.grid()
 
             fname = picdir+'Intra-model_spread.mean.'\
                     +th_type[q]+'.'+doms[r]+'.'+dsetstr+'.png'
-            if savefig: plt.savefig(fname, dpi=150)
+            plt.savefig(fname, dpi=150)
 
         if medplot:
 
@@ -196,17 +212,17 @@ for q in range(len(th_type)):
             plt.boxplot(plotvals, notch=0, sym='+', vert=1, whis=1.5)  # produces boxplot
             plt.plot(np.arange(1, 13), plotvals.mean(0), 'k-', lw=1)  # produces mean of model medians
             plt.xticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
-            plt.yticks(np.arange(1, 14), fontsize=13.0)
-            plt.ylim(0, 8.5)
+            plt.yticks(np.arange(1, 15), fontsize=13.0)
+            plt.ylim(0, 15)
             plt.ylabel('No. of Cloudbands', fontsize=13.0, weight='demibold')
-            plttitle='Intra-model spread of monthly median CBs: with '\
+            plttitle='Intra-model spread of monthly median CBs:\n with '\
                      +th_type[q]+' thresh_'+doms[r]
             plt.title(plttitle, fontweight='demibold')
             # plt.grid()
 
             fname = picdir+'Intra-model_spread.median.'\
                     +th_type[q]+'.'+doms[r]+'.'+dsetstr+'.png'
-            if savefig: plt.savefig(fname, dpi=150)
+            plt.savefig(fname, dpi=150)
 
         if allyearplot:
 
@@ -215,14 +231,14 @@ for q in range(len(th_type)):
             plt.boxplot(plotvals, notch=0, sym='+', vert=1, whis=1.5)  # produces boxplot
             plt.plot(np.arange(1, 13), plotvals.mean(0), 'k-', lw=1)  # produces mean of all data
             plt.xticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
-            plt.yticks(np.arange(1, 14), fontsize=13.0)
-            plt.ylim(0, 8.5)
+            plt.yticks(np.arange(1, 20), fontsize=13.0)
+            plt.ylim(0, 20)
             plt.ylabel('No. of Cloudbands', fontsize=13.0, weight='demibold')
-            plttitle='Intra-model spread of monthly CBs - all years: with '\
+            plttitle='Intra-model spread of monthly CBs - all years:\n with '\
                      +th_type[q]+' thresh_'+doms[r]
             plt.title(plttitle, fontweight='demibold')
             # plt.grid()
 
             fname = picdir+'Intra-model_spread.allyear.'\
                     +th_type[q]+'.'+doms[r]+'.'+dsetstr+'.png'
-            if savefig: plt.savefig(fname, dpi=150)
+            plt.savefig(fname, dpi=150)
