@@ -43,18 +43,23 @@ testfile=True    # Uses a test file with short period
 testyear=True    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
-getdistr=True    # Save a figure showing histogram of OLR values
-getmbs=True      # Actually run the MetBot algorithm
+getdistr=False    # Save a figure showing histogram of OLR values
+getmbs=False      # Actually run the MetBot algorithm
+onlynew=False    # Option to only run if the synop file doesn't exist yet (for mbs)
 showblb=False    # Show the blobs while running
 intract=False    # Interactive running of showblobs
 refsubset=True   # This is used if noaaolr=True to only look in time window
 hrwindow=49      # ... close (49 hours/ 2days) to flagged cloud band days
 synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
                  # ... which are then used to build TTT events.
-onlynew=False     # Option to only run if the synop file doesn't exist yet
+addrain=True     # Add event rain - at the moment need to be running synoptics too
+heavythresh=50   # Threshold for heavy precip (if add event rain)
 
 ### Ensure only look at Southern Africa
 sub="SA"
+subrain="SA_TR"
+
+bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 
 ### Multi dset?
 dsets='spec'     # "all" or "spec" to choose specific dset(s)
@@ -63,7 +68,7 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['noaa']
+    dsetnames=['um']
 ndstr=str(ndset)
 
 for d in range(ndset):
@@ -79,7 +84,7 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['noaa']
+        mnames=['anqjn']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -90,7 +95,6 @@ for d in range(ndset):
 
         # Get details
         moddct=dsetdict.dset_deets[dset][name]
-        vname=moddct['olrname']
         if testfile:
             ys=moddct['testfileyr']
         else:
@@ -101,7 +105,7 @@ for d in range(ndset):
             beginatyr = moddct['startyr']
 
         ### Location for olr input & outputs
-        indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
+        indir=bkdir+dset+"/"
         infile=indir+name+".olr.day.mean."+ys+".nc"
         print infile
         outdir=indir+name+"/"
@@ -122,8 +126,8 @@ for d in range(ndset):
         ### Open OLR data
         if olr0:
             v=dset+"-olr-0-0"
-            daset, varstr, lev, drv = v.split('-')
-            ncout = mync.openolr_multi(infile,vname,name,\
+            daset, globv, lev, drv = v.split('-')
+            ncout = mync.open_multi(infile,globv,name,\
                                                         dataset=dset,subs=sub)
             ndim = len(ncout)
             if ndim==5:
@@ -206,8 +210,76 @@ for d in range(ndset):
             print mfilelist
             s = sy.SynopticEvents(metblobslist,mfilelist,hrwindow=hrwindow)
             s.buildtracks()
-            s.buildevents(basetrkkey=refmbsstr)
+            s.buildevents(basetrkkey=refmbstr)
             u = s.uniqueevents()
+
+            ### Add event rain
+            if addrain:
+
+                globp='pr'
+
+                ### Open rain data
+                if dset=='noaa':
+                    raindset='trmm'
+                    rainmod='trmm_3b42v7'
+                    moddct = dsetdict.dset_deets[raindset][rainmod]
+                    units = moddct['timeunit']
+                    cal = moddct['calendar']
+                    if testfile:
+                        ys = moddct['testfileyr']
+                    else:
+                        ys = moddct['yrfname']
+                    if testyear:
+                        beginatyr = moddct['testyr']
+                    else:
+                        beginatyr = moddct['startyr']
+                else:
+                    raindset=dset
+                    rainmod=name
+
+                rainname = moddct['prname']
+                rainfile=bkdir+raindset+"/"+rainmod+".pr.day.mean."+ys+".nc"
+                print rainfile
+
+                rainout = mync.open_multi(rainfile, globp, rainmod,\
+                                             dataset=raindset, subs=subrain)
+
+                ndim = len(ncout)
+                if ndim==5:
+                    rain,time,lat,lon,dtime = ncout
+                elif ndim==6:
+                    rain, time, lat, lon, lev, dtime = ncout
+                    rain=np.squeeze(rain)
+                else:
+                    print 'Check number of levels in ncfile'
+
+                ### Select data to run
+                ### If testfile run on all days available
+                if testfile:
+                    rain = rain[:, :, :];time = time[:];dtime = dtime[:]
+                else:
+                    ### Find starting timestep
+                    start = moddct['startdate']
+                    ystart=int(start[0:4]);mstart=int(start[5:7]);dstart=int(start[8:10])
+                    if cal=="360_day":
+                        startday=(ystart*360)+((mstart-1)*30)+dstart
+                        beginday=((int(beginatyr))*360)+1
+                        daysgap=beginday-startday+1
+                    else:
+                        startd=date(ystart,mstart,dstart)
+                        begind=date(int(beginatyr),01,01)
+                        daysgap=(begind-startd).days
+                    rain=rain[daysgap:,:,:];time=time[daysgap:];dtime=dtime[daysgap:]
+                if testyear:
+                    if cal=="360_day":
+                        rain, dtime, time = olr[:360, :, :], dtime[:360], time[:360]
+                    else:
+                        rain, dtime, time = olr[:365,:,:],dtime[:365],time[:365]
+
+                ### Add event rain
+                s.addeventrain_any(rain,lat,lon,dtime,\
+                    [raindset],type='grid',heavy=heavythresh)
+
             s.save(outsuf+dset+'-OLR.synop')
             del s
 

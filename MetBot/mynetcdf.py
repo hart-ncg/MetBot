@@ -15,20 +15,22 @@ except ImportError:
 import time as tm
 import datetime
 import MetBot.dset_dict as dsetdict
+import MetBot.dimensions_dict as dim_exdict
 
 # Add to this dictionary as need be by looking at ncdump -h ????.nc
+# There is an alternative (using "dimensions_dict.py" and opennc2) - all dsets already
+# ...listed with that method are now commented out below
 dimdict={"ncep2": ['time','lat','lon','level','lev'],
-"ncep": ['time','lat','lon'],
-"20cr": ['time','lat','lon'],
+#"ncep": ['time','lat','lon'],
+#"20cr": ['time','lat','lon'],
 "interp_olr": ['time','lat','lon'],
-"noaa": ['time','lat','lon'],
+#"noaa": ['time','lat','lon'],
 "tamsat_ccd": ['time','lat','lon'],
 "had": ['time','latitude','longitude','level'],
-"um": ['t','latitude','longitude','toa'],
-"umpr": ['t','latitude','longitude','surface'],
-"cmip5": ['time','lat','lon'],
-#"era": ['date','latitude','longitude','level'],
-"era": ['time','latitude','longitude'],
+#"um": ['t','latitude','longitude','toa'],
+#"cmip5": ['time','lat','lon'],
+"era": ['date','latitude','longitude','level'],
+#"era": ['time','latitude','longitude'],
 "hadam3p": ['t','latitude','longitude','p','theta','surface','toa'],
 "cfsr": ['time','latitude','longitude','level'],
 "nddiagnc": ['t','y','x','p'],
@@ -362,7 +364,7 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
 
     return out
 
-def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
+def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
     '''var, time, lat, lon, [[,lev], [,time_bnds]]= opennc2(ncfile,varstr,mname,dset,
                                         sub=False,levselect=False,subtime=False)
 
@@ -379,8 +381,10 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
          - hadam3p is .nc output from subset.tcl (uses xconv), where input was
            UM .pp files
 
-    USAGE: varstr - string
-           dset   - string valid: um, umpr, cmip5, noaa
+    USAGE: globv  - string - global variable name - not nec the one
+                    for each netcdf file, which is called from dset_dict below
+                    string valid: olr, pr
+           dset   - string valid: um, noaa, cmip5, ncep, era, 20cr
            sub    - tuple - ((latmin,latmax),(lonmin,lonmax))
                    or string - see options availble in mynetcdf.isubs
            levselect - will return level slice closest to given value
@@ -391,7 +395,7 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
 
     RETURNS: var, lat, lon, lev'''
 
-    dimlist = dimdict[dset][:]
+    dimlist = dim_exdict.dim_deets[globv][dset]
     timestr = dimlist[0]
     ncf = kh.NetCDFFile(ncfile,'r')
     #vkeys = ncf.variables.keys() # could use something with this?
@@ -402,39 +406,16 @@ def opennc2(ncfile,varstr,mname,dset,sub=False,levselect=False,subtime=False):
             print 'Variable \"'+i+ '\" does not exist in '+ncfile
             dimlist.remove(i);continue
 
-    # HUMAN TIME CONVERSION AND TIME SUBSET IF REQUIRED \
-    # (only really used for big files like cfsr)
+    # HUMAN TIME CONVERSION
+    moddct = dsetdict.dset_deets[dset][mname]
+    units = moddct['timeunit']
+    cal = moddct['calendar']
+    vnamedict = globv+'name'
+    varstr = moddct[vnamedict]
+    exec('dtime=num2date((' + timestr + '),units="' + units + '",calendar="' + cal + '")')
+    if cal == '360_day':
+        dtime = fix360d(dtime)
 
-    if dset=='um':
-        moddct = dsetdict.dset_deets[dset][mname]
-        units = moddct['timeunit']
-        cal = moddct['calendar']
-        if mname=='anqjn' or mname=='antib':
-            exec ('dtime=num2date((' + timestr + '-1)*24,units="' + units + '",calendar="' + cal + '")')
-        elif mname=='u-ab674' or mname=='u-ab680':
-            exec('dtime=num2date((' + timestr + '-1),units="' + units + '",calendar="' + cal + '")')
-        else:
-            print 'new mname - check time string'
-        # the above t-1 thing is a hack, but it works apparently for me
-        dtime = fix360d(dtime)
-    elif dset=='umpr':
-        moddct = dsetdict.dset_deets[dset][mname]
-        units = moddct['timeunit']
-        cal = moddct['calendar']
-        exec ('dtime=num2date((' + timestr + '-1)*24,units="' + units + '",calendar="' + cal + '")')
-        # the above t-1 thing is a hack, but it works apparently for me
-        dtime = fix360d(dtime)
-    elif dset == 'cmip5':
-        moddct = dsetdict.dset_deets[dset][mname]
-        cal = moddct['calendar']
-        units = moddct['timeunit']
-        newunits = units.replace('days since', 'hours since')
-        exec ('dtime=num2date((' + timestr + ')*24,units="' + newunits + '",calendar="' + cal + '")')
-        if cal == '360_day':
-            dtime = fix360d(dtime)
-    else:
-        exec('dtime=num2date('+timestr+',units=ncf.variables[timestr].units,\
-             calendar=\'gregorian\')')
     dtarr=dtime2arr(dtime)
 
     if not subtime:
@@ -575,7 +556,7 @@ def opentamsatCCD(ncfile,varstr='ccd',dset='tamsat_ccd'):
     out = opennc(ncfile,varstr,dset)
     return out
 
-def openolr_multi(ncfile,varstr,name,dataset='noaa',subs=False,levsel=False):
+def open_multi(ncfile,varstr,name,dataset='noaa',subs=False,levsel=False):
     out = opennc2(ncfile,varstr,name,dataset,sub=subs,levselect=levsel)
     return out
 

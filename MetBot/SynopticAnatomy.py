@@ -130,10 +130,10 @@ class SynopticEvents:
     def __rainamounts__(self,event,raindata,rainkey,heavy=20.):
         '''Calculates rainfall statistics for under cloud band footprints
         properties: rmn,rmx,wetness,heavyness,outrmn,outrmx,outwetness, rsum, hsum'''
-        # STATION RAINFALL
         heavythresh=heavy
         rain,date,xypts = raindata
         erain=[]
+        # STATION RAINFALL
         if rain.ndim==2:
             #print 'Station dataset ',rainkey
             for t in xrange(len(event.trkdtimes)):
@@ -173,6 +173,7 @@ class SynopticEvents:
                     rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN
                     ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
                 erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness,rsum,hsum))
+        # GRIDDED RAINFALL
         elif rain.ndim==3:
             #print 'Gridded rainfall dataset:',rainkey
             for t in xrange(len(event.trkdtimes)):
@@ -524,8 +525,8 @@ class SynopticEvents:
         uniques = self.uniqueevents()
         addtrkarrs(self)
 
-    def addeventrain(self,rainkeys,type='station',heavy=20.,\
-                    datadir='/home/neil/sogehome/data/'):
+    def addeventrain(self,rainkeys,type='station',heavy=20., \
+                     datadir='/home/neil/sogehome/data/'):
         '''rainkeys can be 'wrc', 'trmm' but must be list
         type is either 'station' or 'grid'
         Would make more sense to put this partly in buildevents and the
@@ -560,6 +561,28 @@ class SynopticEvents:
                     self.__rainamounts__(evnt,raingrid,rainkey+'grid',\
                                          heavy=heavy)
                 del rain, dtime, lat, lon, raingrid
+
+    def addeventrain_any(self, raindata, lat, lon, dates,\
+                         rainkeys, type='grid', heavy=20.):
+        '''rainkeys can be 'wrc', 'trmm' but must be list
+        type is either 'station' or 'grid'
+        Would make more sense to put this partly in buildevents and the
+        self.rainamounts function into a method of Event but for various
+        reason, not least, need to open and close rain datasets,
+        it is done this way'''
+        # Edited to allow raindata to be set in wrapper
+        ekeys = self.events.keys();
+        ekeys.sort()
+        if type == 'grid':
+            for rainkey in rainkeys:
+                print 'Adding rain from ', rainkey, 'gridded data set'
+                #dates[:, 3] = 0
+                raingrid = (raindata, dates, (lon, lat))
+                for k in ekeys:
+                    evnt = self.events[k]
+                    self.__rainamounts__(evnt, raingrid, rainkey + 'grid', \
+                                         heavy=heavy)
+                del dates, lat, lon, raingrid
 
     def uniqueevents(self):
         '''Loop through all events and ensure none give same event but with
