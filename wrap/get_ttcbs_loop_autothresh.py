@@ -56,9 +56,14 @@ synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
                  # ... which are then used to build TTT events.
 onlynew=False    # Option to only run if the synop file doesn't exist yet
 threshtest=True  # Option to run on thresholds + and - 5Wm2 as a test
+addrain=True     # Add event rain - at the moment need to be running synoptics too
+heavythresh=50   # Threshold for heavy precip (if add event rain)
 
 ### Ensure only look at Southern Africa
 sub="SA"
+subrain="SA_TR"
+
+bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 
 ### Multi dset?
 dsets='spec'     # "all" or "spec" to choose specific dset(s)
@@ -94,7 +99,6 @@ for d in range(ndset):
 
         # Get details
         moddct=dsetdict.dset_deets[dset][name]
-        vname=moddct['olrname']
         if testfile:
             ys=moddct['testfileyr']
         else:
@@ -105,7 +109,7 @@ for d in range(ndset):
             beginatyr = moddct['startyr']
 
         ### Location for olr input & outputs
-        indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
+        indir=bkdir+dset+"/"
         infile=indir+name+".olr.day.mean."+ys+".nc"
         print infile
         outdir=indir+name+"/"
@@ -115,7 +119,9 @@ for d in range(ndset):
         outsuf=outdir+name+'_'
 
         ### Open OLR data
-        ncout = mync.openolr_multi(infile,vname,name,\
+        v = dset + "-olr-0-0"
+        daset, globv, lev, drv = v.split('-')
+        ncout = mync.openolr_multi(infile,globv,name,\
                                                     dataset=dset,subs=sub)
         ndim = len(ncout)
         if ndim==5:
@@ -185,7 +191,7 @@ for d in range(ndset):
             ### Get mbs 0-0
             if getmbs:
                 v = dset + "-olr-0-0"
-                daset, varstr, lev, drv = v.split('-')
+                daset, globv, lev, drv = v.split('-')
                 mbs, mbt, chull = blb.MetBlobs_th(olr,dtime,time,lat,lon,v,thisthresh,\
                                                sub=sub,showblobs=showblb,interact=intract)
                 blb.mbsave(outsuf+thre_str+'_'+v+".mbs",mbs,mbt,chull)
@@ -227,10 +233,84 @@ for d in range(ndset):
                 s.buildtracks()
                 s.buildevents(basetrkkey=refmbsstr)
                 u = s.uniqueevents()
+
+                ### Add event rain
+                if addrain:
+
+                    globp = 'pr'
+
+                    ### Open rain data
+                    if dset == 'noaa':
+                        raindset = 'trmm'
+                        rainmod = 'trmm_3b42v7'
+                        moddct = dsetdict.dset_deets[raindset][rainmod]
+                        units = moddct['timeunit']
+                        cal = moddct['calendar']
+                        if testfile:
+                            ys = moddct['testfileyr']
+                        else:
+                            ys = moddct['yrfname']
+                        if testyear:
+                            beginatyr = moddct['testyr']
+                        else:
+                            beginatyr = moddct['startyr']
+                    else:
+                        raindset = dset
+                        rainmod = name
+
+                    rainname = moddct['prname']
+                    rainfile = bkdir + raindset + "/" + rainmod + ".pr.day.mean." + ys + ".nc"
+                    print rainfile
+
+                    rainout = mync.open_multi(rainfile, globp, rainmod, \
+                                              dataset=raindset, subs=subrain)
+
+                    ndim = len(ncout)
+                    if ndim == 5:
+                        rain, time, lat, lon, dtime = ncout
+                    elif ndim == 6:
+                        rain, time, lat, lon, lev, dtime = ncout
+                        rain = np.squeeze(rain)
+                    else:
+                        print 'Check number of levels in ncfile'
+
+                    ### Select data to run
+                    ### If testfile run on all days available
+                    if testfile:
+                        rain = rain[:, :, :];
+                        time = time[:];
+                        dtime = dtime[:]
+                    else:
+                        ### Find starting timestep
+                        start = moddct['startdate']
+                        ystart = int(start[0:4]);
+                        mstart = int(start[5:7]);
+                        dstart = int(start[8:10])
+                        if cal == "360_day":
+                            startday = (ystart * 360) + ((mstart - 1) * 30) + dstart
+                            beginday = ((int(beginatyr)) * 360) + 1
+                            daysgap = beginday - startday + 1
+                        else:
+                            startd = date(ystart, mstart, dstart)
+                            begind = date(int(beginatyr), 01, 01)
+                            daysgap = (begind - startd).days
+                        rain = rain[daysgap:, :, :];
+                        time = time[daysgap:];
+                        dtime = dtime[daysgap:]
+                    if testyear:
+                        if cal == "360_day":
+                            rain, dtime, time = olr[:360, :, :], dtime[:360], time[:360]
+                        else:
+                            rain, dtime, time = olr[:365, :, :], dtime[:365], time[:365]
+
+                    ### Add event rain
+                    s.addeventrain_any(rain, lat, lon, dtime, \
+                                       [raindset], type='grid', heavy=heavythresh)
+
                 s.save(outsuf+thre_str+'_'+dset+'-OLR.synop')
                 del s
 
         print 'Finished running on ' + name
         print 'This is model '+mcnt+' of '+nmstr+' in list'
 
-print 'TOTAL TIME TAKEN FOR get_ttcbs_loopmodel.py is:',(tmr.time()-tstart)/60,'mins'
+print 'TOTAL TIME TAKEN FOR get_ttcbs_loop_autothresh.py is:',(tmr.time()-tstart)/60,'mins'
