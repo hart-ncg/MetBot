@@ -177,10 +177,10 @@ class SynopticEvents:
         elif rain.ndim==3:
             #print 'Gridded rainfall dataset:',rainkey
             for t in xrange(len(event.trkdtimes)):
-                #ix = my.ixdtimes(date,[event.trkdtimes[t,0]],\
-                #              [event.trkdtimes[t,1]],[event.trkdtimes[t,2]],[0])
                 ix = my.ixdtimes(date,[event.trkdtimes[t,0]],\
-                              [event.trkdtimes[t,1]],[event.trkdtimes[t,2]],[event.trkdtimes[t,3]])
+                              [event.trkdtimes[t,1]],[event.trkdtimes[t,2]],[0])
+                #ix = my.ixdtimes(date,[event.trkdtimes[t,0]],\
+                #              [event.trkdtimes[t,1]],[event.trkdtimes[t,2]],[event.trkdtimes[t,3]])
                 if len(ix)>1: print 'We have a problem'
                 elif len(ix)==0:
                     if t==0: print 'No time match in',rainkey,event.trkdtimes[t]
@@ -578,7 +578,7 @@ class SynopticEvents:
         if type == 'grid':
             for rainkey in rainkeys:
                 print 'Adding rain from ', rainkey, 'gridded data set'
-                #dates[:, 3] = 0 # to set hrtime to 0
+                dates[:, 3] = 0 # to set hrtime to 0
                 raingrid = (raindata, dates, (lon, lat))
                 for k in ekeys:
                     evnt = self.events[k]
