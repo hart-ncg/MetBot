@@ -135,7 +135,7 @@ for d in range(ndset):
         ### Select data to run
         ### Get time information
         moddct = dsetdict.dset_deets[dset][name]
-        units = moddct['timeunit']
+        units = moddct['olrtimeunit']
         cal = moddct['calendar']
         ### If testfile run on all days available
         if testfile:
@@ -247,7 +247,7 @@ for d in range(ndset):
                     raindset = 'trmm'
                     rainmod = 'trmm_3b42v7'
                     moddct = dsetdict.dset_deets[raindset][rainmod]
-                    units = moddct['timeunit']
+                    units = moddct['prtimeunit']
                     cal = moddct['calendar']
                     if testfile:
                         ys = moddct['testfileyr']

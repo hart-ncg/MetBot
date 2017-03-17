@@ -408,7 +408,7 @@ def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
 
     # HUMAN TIME CONVERSION
     moddct = dsetdict.dset_deets[dset][mname]
-    units = moddct['timeunit']
+    units = moddct[globv+'timeunit']
     cal = moddct['calendar']
     vnamedict = globv+'name'
     varstr = moddct[vnamedict]
