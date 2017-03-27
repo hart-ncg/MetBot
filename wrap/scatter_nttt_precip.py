@@ -28,8 +28,8 @@ import scipy
 
 
 ### Running options
-testfile=True  # plot based on test file
-testyear=True  # plot based on 1 year of test data
+testfile=False  # plot based on test file
+testyear=False  # plot based on 1 year of test data
                 # will only really work on spec dset & model
 threshtest=True # Option to run on thresholds + and - 5Wm2 as a test
 
