@@ -34,8 +34,10 @@ testyear=True  # plot based on 1 year of test data
 threshtest=True # Option to run on thresholds + and - 5Wm2 as a test
 
 ### Looping options
-prdom=['SA_TR','WPR','EPR','WCONT','ECONT'] # Domains over which to average precip
-cbdom=['All','Continental','Oceanic','Wcont','Econt'] # CBs from which domain? (based on centroids)
+prdom=['SA_TR','WPR','EPR'] # Domains over which to average precip
+cbdom=['All','Continental','Oceanic'] # CBs from which domain? (based on centroids)
+#prdom=['SA_TR','WPR','EPR','WCONT','ECONT'] # Domains over which to average precip
+#cbdom=['All','Continental','Oceanic','Wcont','Econt'] # CBs from which domain? (based on centroids)
    # domains are handled together - can't mix and match at the moment
 seasons=['ann','djf','jja']
 
@@ -240,7 +242,7 @@ for d in range(ndset):
             ### Count number of events
             ks = s.events.keys() # all events
             kw, ke = stats.spatialsubset(s,False,cutlon=40.) # splitting tracks west and east of 40E
-            kww, kwe = stats.spatialsubset(kw,False,cutlon=25.) # splitting tracks west and east of 40E
+            #kww, kwe = stats.spatialsubset(kw,False,cutlon=25.) # splitting tracks west and east of 40E
 
             # Loop domains
             for r in range(len(cbdom)):
