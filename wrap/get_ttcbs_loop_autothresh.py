@@ -46,7 +46,13 @@ testfile=True    # Uses a test file with short period
 testyear=True    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
+calcthresh=False    # If calc thresh true, calculates again
+                    # if false uses text file already computed
+                    #(not test txtfile...
+                    # ...so it allows you to use the real threshold on test data)
 showdistr=False   # Save a figure showing histogram of OLR values
+                    # Only works if calcthresh is True
+threshtest=False  # Option to run on thresholds + and - 5Wm2 as a test
 getmbs=True      # Actually run the MetBot algorithm
 showblb=True    # Show the blobs while running
 intract=True    # Interactive running of showblobs
@@ -55,7 +61,8 @@ hrwindow=49      # ... close (49 hours/ 2days) to flagged cloud band days
 synoptics=False   # Build tracks of cloud blobs that become TTT cloud bands
                  # ... which are then used to build TTT events.
 onlynew=False    # Option to only run if the synop file doesn't exist yet
-threshtest=False  # Option to run on thresholds + and - 5Wm2 as a test
+
+bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 
 ### Ensure only look at Southern Africa
 sub="SA"
@@ -67,7 +74,7 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['noaa']
+    dsetnames=['cmip5']
 ndstr=str(ndset)
 
 for d in range(ndset):
@@ -83,7 +90,7 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['cdr']
+        mnames=['CSIRO-Mk3-6-0']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -104,7 +111,7 @@ for d in range(ndset):
             beginatyr = moddct['startyr']
 
         ### Location for olr input & outputs
-        indir=cwd+"/../../../CTdata/metbot_multi_dset/"+dset+"/"
+        indir=bkdir+dset+"/"
         infile=indir+name+".olr.day.mean."+ys+".nc"
         print infile
         outdir=indir+name+"/"
@@ -155,8 +162,19 @@ for d in range(ndset):
                 olr, dtime, time = olr[:365,:,:],dtime[:365],time[:365]
 
         ### Get OLR threshold - and plot if showdistr
-        thresh=fs.find_saddle(olr,method='fmin',addtests=threshtest,\
+        if calcthresh:
+            thresh=fs.find_saddle(olr,method='fmin',addtests=threshtest,\
                               showplot=showdistr,figd=outsuf)
+        else:
+            threshtxt=bkdir+'thresholds.fmin.all_dset.txt'
+            print threshtxt
+            with open(threshtxt) as f:
+                for line in f:
+                    if dset+'\t'+name in line:
+                        thresh = line.split()[2]
+            thresh = int(thresh)
+        print 'thresh=' + str(thresh)
+
         if threshtest:
             lowert = thresh - 5
             uppert = thresh + 5
@@ -168,9 +186,8 @@ for d in range(ndset):
         nthresh=len(threshs)
         for t in range(nthresh):
             thisthresh=threshs[t]
-            print thisthresh
             thre_str=str(int(thisthresh))
-            print thre_str
+            print 'thisthresh='+thre_str
 
             # Check if file exists for this model
             if onlynew:
