@@ -42,20 +42,20 @@ tstart=tmr.time()
 ### Running options
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=True    # Uses a test file with short period
-testyear=True    # Only uses first 365 days of olr data
+testfile=False    # Uses a test file with short period
+testyear=False    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
-showdistr=True   # Save a figure showing histogram of OLR values
+showdistr=False   # Save a figure showing histogram of OLR values
 getmbs=True      # Actually run the MetBot algorithm
-showblb=False    # Show the blobs while running
-intract=False    # Interactive running of showblobs
+showblb=True    # Show the blobs while running
+intract=True    # Interactive running of showblobs
 refsubset=True   # This is used if noaaolr=True to only look in time window
 hrwindow=49      # ... close (49 hours/ 2days) to flagged cloud band days
-synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
+synoptics=False   # Build tracks of cloud blobs that become TTT cloud bands
                  # ... which are then used to build TTT events.
 onlynew=False    # Option to only run if the synop file doesn't exist yet
-threshtest=True  # Option to run on thresholds + and - 5Wm2 as a test
+threshtest=False  # Option to run on thresholds + and - 5Wm2 as a test
 
 ### Ensure only look at Southern Africa
 sub="SA"
@@ -94,7 +94,6 @@ for d in range(ndset):
 
         # Get details
         moddct=dsetdict.dset_deets[dset][name]
-        vname=moddct['olrname']
         if testfile:
             ys=moddct['testfileyr']
         else:
@@ -115,7 +114,9 @@ for d in range(ndset):
         outsuf=outdir+name+'_'
 
         ### Open OLR data
-        ncout = mync.openolr_multi(infile,vname,name,\
+        v = dset + "-olr-0-0"
+        daset, globv, lev, drv = v.split('-')
+	ncout = mync.open_multi(infile,globv,name,\
                                                     dataset=dset,subs=sub)
         ndim = len(ncout)
         if ndim==5:
