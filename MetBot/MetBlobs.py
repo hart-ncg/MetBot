@@ -680,7 +680,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
     return metblobs[ikeep,:], blobtime[ikeep,:], chlist
 
 def MetBlobs_th(vrb,time,hrtime,lat,lon,varstr,thresh,sub='SA',showblobs=True,\
-                interact=False):
+             lurid=False,interact=False):
     '''mbs, blbim = MetBlobs_th(vrb,time,hrtime,lat,lon,varstr,sub='SA',
                              showblobs=True)
     Main blobbing loop - but edited to be able to set threshold from wrapper
@@ -816,9 +816,18 @@ def MetBlobs_th(vrb,time,hrtime,lat,lon,varstr,thresh,sub='SA',showblobs=True,\
             latplot = np.hstack((lat[0]-dlat/2.,lat+dlat/2.))
             lonplot = np.hstack((lon[0]-dlon/2.,lon+dlon/2.))
             plt.figure(num=mfig.number)
-            plt.pcolormesh(lonplot,latplot,vrb[t,:,:],cmap=mycmap)
+            if lurid:
+                lcm=plt.cm.gist_rainbow
+                #clevs=[215,220,225,230,235,240,245,250,255,260]
+                clevs=[220,230,240,250,260]
+                clevs = [230, 235, 240, 245, 250]
+                cs=plt.contourf(lon,lat,vrb[t,:,:],clevs,cmap=lcm,extend='min')
+                #plt.contour(lon, lat, vrb[t, :, :], clevs,colors='k')
+                plt.colorbar(cs)
+            else:
+                plt.pcolormesh(lonplot,latplot,vrb[t,:,:],cmap=mycmap)
             plt.grid()
-            DrawContourAngles(blobs,gpx,m=plt)
+            DrawContourAngles_lrd(blobs,gpx,m=plt,lurid=True)
             plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
             plt.draw()
             plt.figure(num=bfig.number)
