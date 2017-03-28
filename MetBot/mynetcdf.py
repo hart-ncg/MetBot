@@ -69,6 +69,8 @@ def isubs(sub,lat,lon,*args):
     domains['SAROI'] = ((-35,-23),(7.5, 80))
     domains['WPR'] = ((-40.0,-15.0),(7.5, 40.0))
     domains['EPR'] = ((-40.0,-15.0),(40.0, 100.0))
+    domains['WCONT'] = ((-40.0,-15.0),(7.5, 25.0))
+    domains['ECONT'] = ((-40.0, -15.0), (25.0, 40.0))
     if isinstance(sub,str):
         domain=domains[sub]; getisubs=True
     elif isinstance(sub,tuple):

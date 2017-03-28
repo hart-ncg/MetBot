@@ -383,6 +383,43 @@ def scycle_rainsum_raw(rain,dtime,raindset='trmm',season=[8,9,10,11,12,1,2,3,4,5
 
     return scycle_train, yrs
 
+
+def seasmean(rain, dtime, seas='ann', years=False):
+    '''Calculate seasonal mean rainfall from raw dataset
+    rain data in shape (time,lat,lon)
+    dtime data in shape (4,ntimesteps)
+    Can specify years or allow autodiscovery'''
+
+    # Get season
+    if seas == 'ann': season=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    if seas == 'djf': season=[12, 1, 2]
+    if seas == 'jja': season=[6, 7, 8]
+
+    # MEAN OVER LAT AND LONG FOR EVERY TSTEP
+    ntime = len(dtime[:, 0])
+    rfldmean = np.zeros(ntime, dtype=np.float32)
+    for t in xrange(ntime):
+        rfldmean[t] = np.nanmean(rain[t, :, :])
+
+    # SELECT TSTEPS YOU WANT
+    if years:
+        yrs = years
+    else:
+        yrs = np.unique(dtime[:, 0])
+    seassel = np.zeros((len(season) * len(yrs)),dtype=np.float32)
+    z = 0
+    for iyr in xrange(len(yrs)):
+        yr = yrs[iyr]
+        for imn in xrange(len(season)):
+            mn = season[imn]
+            ix = np.where((dtime[:, 0] == yr) & (dtime[:, 1] == mn))[0]
+            seassel[z] = np.nanmean(rfldmean[ix])
+            z += 1
+
+    seasmean = np.nanmean(seassel)
+
+    return seasmean
+
 def plotallseasons(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,descr='blank stare'):
     '''Type can be line or pcolor, very different results
     pcolor assumes given a years by months grid'''

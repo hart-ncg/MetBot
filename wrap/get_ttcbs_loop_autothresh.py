@@ -286,7 +286,7 @@ for d in range(ndset):
                 rainout = mync.open_multi(rainfile, globp, rainmod, \
                                           dataset=raindset, subs=subrain)
 
-                ndim = len(ncout)
+                ndim = len(rainout)
                 if ndim == 5:
                     rain, time, lat, lon, dtime = rainout
                 elif ndim == 6:
@@ -320,9 +320,9 @@ for d in range(ndset):
                     dtime = dtime[daysgap:]
                 if testyear:
                     if cal == "360_day":
-                        rain, dtime, time = olr[:360, :, :], dtime[:360], time[:360]
+                        rain, dtime, time = rain[:360, :, :], dtime[:360], time[:360]
                     else:
-                        rain, dtime, time = olr[:365, :, :], dtime[:365], time[:365]
+                        rain, dtime, time = rain[:365, :, :], dtime[:365], time[:365]
 
                 ### Add event rain
                 syfile = outsuf + thre_str + '_' + dset + '-OLR.synop'
