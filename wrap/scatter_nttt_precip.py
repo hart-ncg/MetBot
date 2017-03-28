@@ -286,9 +286,9 @@ if maketxts:
 
                         print "Counting nTTTs for "+seasons[ss]
 
-                        if seasons[ss]=='ann': tttmean=scycle.mean
-                        if seasons[ss]=='djf': tttmean=scycle[:,4:6].mean
-                        if seasons[ss]=='jja': tttmean=scycle[:,(0,10,11)].mean
+                        if seasons[ss]=='ann': tttmean=np.nanmean(scycle)
+                        if seasons[ss]=='djf': tttmean=np.nanmean(scycle[:,4:6])
+                        if seasons[ss]=='jja': tttmean=np.nanmean(scycle[:,(0,10,11)])
 
                         ### Write to textfile
                         txtfile_ttt=txtdir+"ttt_mean."+thnames[t]+"."+seasons[ss]+"."+cbdom[r]+".txt"
