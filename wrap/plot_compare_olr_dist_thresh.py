@@ -142,11 +142,7 @@ zorders=[3,2,2,2,1]
 
 ### Open figures
 if histplot: plt.figure(num='raw')
-if threshtext:
-    if testyear:
-        txtfile = open(bkdir + "/thresholds.fmin." + dsetstr + ".test.txt", "w")
-    else:
-        txtfile = open(bkdir + "/thresholds.fmin."+dsetstr+".txt", "w")
+if threshtext: txtfile = open(bkdir + "/thresholds.fmin."+dsetstr+".txt", "w")
 if threshplot: plt.figure(num='threshs',figsize=[10,3])
 if shiftdist: plt.figure(num='shift')
 
