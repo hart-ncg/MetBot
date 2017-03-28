@@ -316,9 +316,11 @@ for ss in range(len(seasons)):
         raindata=np.zeros(nallmod,dtype=np.float32)
 
         with open(rain_txtfile) as f:
+            p=0
             for line in f:
                 data=line.split()[2]
-                raindata[f] = data
+                raindata[p] = float(data)
+                p += 1
 
         # thresholds
         for t in range(nthresh):
@@ -330,9 +332,11 @@ for ss in range(len(seasons)):
             tttdata=np.zeros(nallmod,dtype=np.float32)
 
             with open(ttt_txtfile) as f:
+                p=0
                 for line in f:
                     data=line.split()[2]
-                    tttdata[f] = data
+                    tttdata[p] = float(data)
+                    p += 1
 
             #Plot
             print "Plotting..."
