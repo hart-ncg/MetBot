@@ -827,7 +827,7 @@ def MetBlobs_th(vrb,time,hrtime,lat,lon,varstr,thresh,sub='SA',showblobs=True,\
             else:
                 plt.pcolormesh(lonplot,latplot,vrb[t,:,:],cmap=mycmap)
             plt.grid()
-            DrawContourAngles_lrd(blobs,gpx,m=plt,lurid=True)
+            DrawContourAngles(blobs,gpx,m=plt)
             plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
             plt.draw()
             plt.figure(num=bfig.number)

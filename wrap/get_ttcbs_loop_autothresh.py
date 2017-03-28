@@ -42,8 +42,8 @@ tstart=tmr.time()
 ### Running options
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=False    # Uses a test file with short period
-testyear=False    # Only uses first 365 days of olr data
+testfile=True    # Uses a test file with short period
+testyear=True    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
 showdistr=False   # Save a figure showing histogram of OLR values
@@ -116,7 +116,7 @@ for d in range(ndset):
         ### Open OLR data
         v = dset + "-olr-0-0"
         daset, globv, lev, drv = v.split('-')
-	ncout = mync.open_multi(infile,globv,name,\
+        ncout = mync.open_multi(infile,globv,name,\
                                                     dataset=dset,subs=sub)
         ndim = len(ncout)
         if ndim==5:
@@ -162,7 +162,7 @@ for d in range(ndset):
             uppert = thresh + 5
             threshs = [lowert, thresh, uppert]
         else:
-            threshs = thresh
+            threshs = [thresh]
 
         ### Loop threshes
         nthresh=len(threshs)
