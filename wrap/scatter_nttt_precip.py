@@ -41,11 +41,11 @@ cbdom=['All','Continental','Oceanic'] # CBs from which domain? (based on centroi
    # domains are handled together - can't mix and match at the moment
 seasons=['ann','djf','jja']
 
-dsets=['all'] # spec or all
+dsets=['spec'] # spec or all
 mods=['all'] # spec or all - can only be spec if 1 spec dset
 if dsets==['spec']:
-    ndset=1
-    dsetnames=['noaa']
+    ndset=6
+    dsetnames=['noaa','ncep','era','20cr','um','cmip5']
     dsetstr = '_'.join(dsetnames)
     if mods == 'spec':  # edit for the models you want
         nmod = 1
@@ -201,7 +201,7 @@ for d in range(ndset):
                 # ...because it's not spanning too many latitudes
                 rainmean=stats.seasmean(rain,raindates,seas=seasons[ss])
                 rainmean=round(rainmean, 2)
-                raincollect[d,m]=rainmean
+                raincollect[r,ss]=rainmean
                 rain_txtfile.write(dset + "\t" + name + "\t" + str(rainmean) + "\n")
 
         ### Find location of synop file
@@ -237,6 +237,7 @@ for d in range(ndset):
 
             ###  Open synop file
             syfile=outsuf+thre_str+'_'+dset+'-OLR.synop'
+ 	    print syfile
             s = sy.SynopticEvents((),[syfile],COL=False)
 
             ### Count number of events
