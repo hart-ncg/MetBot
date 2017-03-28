@@ -116,7 +116,7 @@ for d in range(ndset):
         ### Select olr data
         ### Get time information
         moddct = dsetdict.dset_deets[dset][name]
-        units = moddct['timeunit']
+        units = moddct['olrtimeunit']
         cal = moddct['calendar']
         ### If testfile run on all days available
         if testfile:
