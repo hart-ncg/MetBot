@@ -32,7 +32,7 @@ testfile=False  # plot based on test file
 testyear=False  # plot based on 1 year of test data
                 # will only really work on spec dset & model
 threshtest=True # Option to run on thresholds + and - 5Wm2 as a test
-maketxts=True   # Make textfiles (if false can use ones already generated)
+maketxts=False   # Make textfiles (if false can use ones already generated)
 
 ### Looping options
 prdom=['SA_TR','WPR','EPR'] # Domains over which to average precip
@@ -294,7 +294,7 @@ if maketxts:
                         txtfile_ttt=txtdir+"ttt_mean."+thnames[t]+"."+seasons[ss]+"."+cbdom[r]+".txt"
                         print "Writing to txtfile "+txtfile_ttt
                         with open(txtfile_ttt, "a") as myfile:
-                            myfile.write(dset + "\t" + name + "\t" + str(rainmean) + "\n")
+                            myfile.write(dset + "\t" + name + "\t" + str(tttmean) + "\n")
 
             ### Put name into string list
             modnm[z] = dset + "_" + name
@@ -317,7 +317,8 @@ for ss in range(len(seasons)):
 
         with open(rain_txtfile) as f:
             for line in f:
-                raindata[f] = float(line.split()[2])
+                data=line.split()[2]
+                raindata[f] = data
 
         # thresholds
         for t in range(nthresh):
@@ -330,7 +331,8 @@ for ss in range(len(seasons)):
 
             with open(ttt_txtfile) as f:
                 for line in f:
-                    tttdata[f] = float(line.split()[2])
+                    data=line.split()[2]
+                    tttdata[f] = data
 
             #Plot
             print "Plotting..."
