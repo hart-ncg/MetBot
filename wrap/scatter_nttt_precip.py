@@ -237,7 +237,7 @@ for d in range(ndset):
 
             ###  Open synop file
             syfile=outsuf+thre_str+'_'+dset+'-OLR.synop'
- 	    print syfile
+            print syfile
             s = sy.SynopticEvents((),[syfile],COL=False)
 
             ### Count number of events
@@ -280,7 +280,7 @@ for ss in range(len(seasons)):
         rain_txtfile=txtdir + "precip_mean."\
                     +seasons[ss]+"."+prdom[r]+".txt"
 
-        raindata=np.zeros(nallmod,dtype=float32)
+        raindata=np.zeros(nallmod,dtype=np.float32)
 
         with open(rain_txtfile) as f:
             for line in f:
@@ -292,7 +292,7 @@ for ss in range(len(seasons)):
             + thnames[t] + "." + seasons[ss] + \
             "." + cbdom[r] + ".txt"
 
-            tttdata=np.zeros(nallmod,dtype=float32)
+            tttdata=np.zeros(nallmod,dtype=np.float32)
 
             with open(ttt_txtfile) as f:
                 for line in f:
