@@ -45,10 +45,10 @@ seasons=['ann','djf','jja']
 dsets=['spec'] # spec or all
 mods=['all'] # spec or all - can only be spec if 1 spec dset
 if dsets==['spec']:
-    ndset=1
-    dsetnames=['noaa']
-    #ndset=6
-    #dsetnames=['noaa','ncep','era','20cr','um','cmip5']
+    #ndset=1
+    #dsetnames=['noaa']
+    ndset=6
+    dsetnames=['noaa','ncep','era','20cr','um','cmip5']
     dsetstr = '_'.join(dsetnames)
     if mods == 'spec':  # edit for the models you want
         nmod = 1
@@ -289,6 +289,8 @@ if maketxts:
                         if seasons[ss]=='ann': tttmean=np.nanmean(scycle)
                         if seasons[ss]=='djf': tttmean=np.nanmean(scycle[:,4:6])
                         if seasons[ss]=='jja': tttmean=np.nanmean(scycle[:,(0,10,11)])
+
+                        tttmean=round(tttmean,2)
 
                         ### Write to textfile
                         txtfile_ttt=txtdir+"ttt_mean."+thnames[t]+"."+seasons[ss]+"."+cbdom[r]+".txt"
