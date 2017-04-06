@@ -106,8 +106,10 @@ for d in range(ndset):
         outsuf=outdir+name+'_'
 
         ### Open olr nc file
-        ncout = mync.openolr_multi(infile,vname,name,\
-                                dataset=dset,subs=sub)
+        v = dset + "-olr-0-0"
+        daset, globv, lev, drv = v.split('-')
+        ncout = mync.open_multi(infile,globv,name,\
+                                                    dataset=dset,subs=sub)
         ndim = len(ncout)
         if ndim == 5:
             olr, time, lat, lon, dtime = ncout
