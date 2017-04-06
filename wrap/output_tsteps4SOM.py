@@ -1,5 +1,5 @@
-# Initial playing with SOMs
-# First need to select all the days from the TTCB events
+# Wrapper to output a list of the timesteps of OLR file should be used for SOM analysis
+# The timesteps are those with TTCBs (currently based on all days within events)
 
 import sys,os
 cwd=os.getcwd()
@@ -10,6 +10,7 @@ import MetBot.MetBlobs as blb
 import MetBot.dset_dict as dsetdict
 import MetBot.find_saddle as fs
 import MetBot.mynetcdf as mync
+import MetBot.mytools as my
 
 
 ### Running options
@@ -137,24 +138,47 @@ for t in range(nthresh):
             print "Total CB events ="+str(count_all)
 
             ### Get a list of dates - as np.array (nstep,4) yyyy, mm, dd, hh
+            ### I wanted to check the indices using two methods for now
             refkey = s.mbskeys[0]
             edts = []
+            indices_m1=[]
             for k in ks:
                 e = s.events[k]
                 dts = s.blobs[refkey]['mbt'][e.ixflags]
                 for dt in range(len(dts)):
                     edts.append(dts[dt])
+                    # Check if it matches dtime
+                    ix = my.ixdtimes(dtime, [dts[dt][0]], \
+                                     [dts[dt][1]], [dts[dt][2]], [0])
+                    indices_m1.append(ix)
             edts = np.asarray(edts)
+            indices_m1 = np.asarray(indices_m1)
 
             ### Compare all dates with the list of TTT dates
+            # 2nd method
             str_edts = [str(edts[x]) for x in range(len(edts[:, 0]))]
             str_dtime = [str(dtime[x]) for x in range(len(dtime[:, 0]))]
 
-            indices=[]
+            indices_m2=[]
             for i in range(len(str_edts)):
-                indices.append(str_dtime.index(str_edts[i]))
+                indices_m2.append(str_dtime.index(str_edts[i]))
+
+            ### Check methods get the same result
+            if len(indices_m1)==len(indices_m2):
+                print "Dates of CBs detected for "+str(len(indices_m1))+" days"
+            else:
+                print "Error in detecting number of days with CBs"
+            for c in range(len(edts)):
+                if indices_m1[c]!=indices_m2[c]:
+                    print "Error in detecting days with CBs"
 
             ### Sel OLR (time,lat,lon) for TTCB days
-            olrsel=olr[indices,:,:]
+            olrsel=olr[indices_m1,:,:]
 
-
+            ### Print list of indices
+            outtxt="../../SOM_test/txtfile_tstep/"+dset+"."+name+".thresh_"+thnames[t]+".tstep_ttcb.txt"
+            print "Outputing tsteps to txtfile "+outtxt
+            txtfile = open(outtxt, "w")
+            for i in range(len(indices_m1)):
+                txtfile.write(","+str(indices_m1[i][0]))
+            txtfile.close()
