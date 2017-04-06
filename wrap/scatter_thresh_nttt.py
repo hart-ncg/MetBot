@@ -91,7 +91,10 @@ for t in range(nthresh):
             outsuf=outdir+name+'_'
 
             ### Get thresh
-            threshtxt=indir+'thresholds.fmin.all_dset.txt'
+            if testyear:
+                threshtxt = indir + 'thresholds.fmin.'+dset+'.test.txt'
+            else:
+                threshtxt=indir+'thresholds.fmin.all_dset.txt'
             print threshtxt
             with open(threshtxt) as f:
                 for line in f:
