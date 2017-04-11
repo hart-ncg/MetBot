@@ -44,6 +44,7 @@ testfile=True           # Uses a test file with short period
 title=True      # plot title
 refdset="noaa"
 refmod="cdr"
+globv='olr'
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset"
 
 ### Multi dset?
@@ -54,7 +55,7 @@ if dsets=='all':
     dsetstr = 'all_dset'
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['noaa']
+    dsetnames=['um']
     dsetstr = '_'.join(dsetnames)
 ndstr=str(ndset)
 print 'Running on datasets:'
@@ -75,7 +76,7 @@ else:
 indir = bkdir + "/"+ refdset + "/"
 infile = indir + refmod + ".olr.day.mean." + ys + ".nc"
 print infile
-ncout = mync.openolr_multi(infile, vname, refmod,\
+ncout = mync.open_multi(infile, globv, refmod,\
                            dataset=refdset, subs=sub)
 ndim = len(ncout)
 if ndim == 5:
@@ -192,7 +193,7 @@ for d in range(ndset):
         print infile
 
         ### Open olr nc file
-        ncout = mync.openolr_multi(infile,vname,name,\
+        ncout = mync.open_multi(infile,globv,name,\
                                 dataset=dset,subs=sub)
         ndim = len(ncout)
         if ndim == 5:
