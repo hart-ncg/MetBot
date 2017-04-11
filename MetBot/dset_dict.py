@@ -24,7 +24,7 @@ dset_deets['ncep']={
 
 # ERA
 dset_deets['era']={
-'erai': {'name': "erai", 'calendar':"gregorian", 'olrtimeunit':"hours since 1800-01-01 00:00:0.0", 'prtimeunit':"hours since 1900-01-01 00:00:0.0", 'startdate':"1979-01-01", 'olrname':"olr", 'prname':"tp", 'yrfname':"1979_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
+'erai': {'name': "erai", 'calendar':"gregorian", 'olrtimeunit':"hours since 1900-01-01 00:00:0.0", 'prtimeunit':"hours since 1900-01-01 00:00:0.0", 'startdate':"1979-01-01", 'olrname':"olr", 'prname':"tp", 'yrfname':"1979_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
 }
 
 # 20cr
@@ -34,10 +34,10 @@ dset_deets['20cr']={
 
 # UM
 dset_deets['um']={
-'anqjn': {'name': "anqjn", 'calendar':"360_day", 'olrtimeunit':"hours since 1800-01-01 00:00:0.0", 'prtimeunit':"days since 1978-09-01 00:00:00", 'startdate':"1978-12-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"1978_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
-'antib': {'name': "antib", 'calendar':"360_day", 'olrtimeunit':"hours since 1800-01-01 00:00:0.0", 'prtimeunit':"days since 1981-09-01 00:00:00", 'startdate':"1981-09-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"1981_2008", 'startyr':"1982", 'testfileyr':"1985_1985",'testyr':"1985"},
-'u-ab674': {'name': "u-ab674", 'calendar':"360_day", 'olrtimeunit':"hours since 1800-01-01 00:00:0.0", 'prtimeunit':"days since 1998-12-1 00:00:00", 'startdate':"2079-01-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"2079_2113", 'startyr':"2079", 'testfileyr':"2079_2079",'testyr':"2079"},
-'u-ab680': {'name': "u-ab680", 'calendar':"360_day", 'olrtimeunit':"hours since 1800-01-01 00:00:0.0", 'prtimeunit':"days since 1981-9-1 00:00:00", 'startdate':"1981-09-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"1981_2008", 'startyr':"1982", 'testfileyr':"1985_1985",'testyr':"1985"},
+'anqjn': {'name': "anqjn", 'calendar':"360_day", 'olrtimeunit':"days since 1978-09-01 00:00:00", 'prtimeunit':"days since 1978-09-01 00:00:00", 'startdate':"1978-12-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"1978_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
+'antib': {'name': "antib", 'calendar':"360_day", 'olrtimeunit':"days since 1981-09-01 00:00:00", 'prtimeunit':"days since 1981-09-01 00:00:00", 'startdate':"1981-09-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"1981_2008", 'startyr':"1982", 'testfileyr':"1985_1985",'testyr':"1985"},
+'u-ab674': {'name': "u-ab674", 'calendar':"360_day", 'olrtimeunit':"days since 1998-12-1 00:00:00", 'prtimeunit':"days since 1998-12-1 00:00:00", 'startdate':"2079-01-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"2079_2113", 'startyr':"2079", 'testfileyr':"2079_2079",'testyr':"2079"},
+'u-ab680': {'name': "u-ab680", 'calendar':"360_day", 'olrtimeunit':"days since 1981-9-1 00:00:00", 'prtimeunit':"days since 1981-9-1 00:00:00", 'startdate':"1981-09-01", 'olrname':"olr", 'prname':"precip", 'yrfname':"1981_2008", 'startyr':"1982", 'testfileyr':"1985_1985",'testyr':"1985"},
 }
 
 # CMIP5
