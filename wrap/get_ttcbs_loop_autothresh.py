@@ -46,23 +46,23 @@ testfile=True    # Uses a test file with short period
 testyear=True    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
-calcthresh=False    # If calc thresh true, calculates again
+calcthresh=True    # If calc thresh true, calculates again
                     # if false uses text file already computed
                     #(not test txtfile...
                     # ...so it allows you to use the real threshold on test data)
 showdistr=False   # Save a figure showing histogram of OLR values
                     # Only works if calcthresh is True
-threshtest=False  # Option to run on thresholds + and - 5Wm2 as a test
+threshtest=True  # Option to run on thresholds + and - 5Wm2 as a test
 getmbs=True      # Actually run the MetBot algorithm
-showblb=True    # Show the blobs while running
-intract=True    # Interactive running of showblobs
+showblb=False    # Show the blobs while running
+intract=False    # Interactive running of showblobs
 refsubset=True   # This is used if noaaolr=True to only look in time window
 hrwindow=49      # ... close (49 hours/ 2days) to flagged cloud band days
-synoptics=False   # Build tracks of cloud blobs that become TTT cloud bands
+synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
                  # ... which are then used to build TTT events.
 onlynew=False    # Option to only run if the synop file doesn't exist yet
 
-addrain=True     # Add event rain - at the moment need to be running synoptics too
+addrain=False     # Add event rain - at the moment need to be running synoptics too
 heavythresh=50   # Threshold for heavy precip (if add event rain)
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
