@@ -37,8 +37,8 @@ histplot=True           # to get olr histograms
 threshplot=True         # to get olr threshold plot
 threshtext=True         # to put olr thresholds in text file
 shiftdist=True          # to plot shifted distributions
-testyear=True           # To use output from a test
-testfile=True           # Uses a test file with short period
+testyear=False           # To use output from a test
+testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
 title=True      # plot title
@@ -54,8 +54,10 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
     dsetstr = 'all_dset'
 elif dsets=='spec': # edit for the dset you want
+#    ndset=6
+#    dsetnames=['noaa','ncep','era','20cr','um','cmip5']
     ndset=1
-    dsetnames=['um']
+    dsetnames=['cmip5']
     dsetstr = '_'.join(dsetnames)
 ndstr=str(ndset)
 print 'Running on datasets:'

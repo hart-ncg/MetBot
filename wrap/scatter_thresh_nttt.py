@@ -50,8 +50,10 @@ for t in range(nthresh):
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
-        ndset=2
-        dsetnames=['noaa','um']
+	ndset=6
+	dsetnames=['noaa','ncep','era','20cr','um','cmip5']
+#        ndset=2
+#        dsetnames=['noaa','um']
         dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
     print 'Running on datasets:'
     print dsetnames
@@ -146,7 +148,7 @@ for t in range(nthresh):
         plt.scatter(threshlist,val4plot)
         m, c, r_value, p_value, std_err = scipy.stats.linregress(threshlist,val4plot)
         rsquared=r_value**2
-        plt.plot(threshlist,(m*threshfit + c),'-')
+        plt.plot(threshlist,(m*threshlist + c),'-')
         plt.xlim(230,265)
         plt.xlabel('OLR threshold')
         plt.ylabel('Number of TTT events')

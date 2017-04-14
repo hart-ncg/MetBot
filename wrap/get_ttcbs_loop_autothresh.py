@@ -42,15 +42,15 @@ tstart=tmr.time()
 ### Running options
 olrall=True      # Get mbs for $dset-olr-0-all
 olrfull=True     # Get mbs for $dset-olr-0-full
-testfile=True    # Uses a test file with short period
-testyear=True    # Only uses first 365 days of olr data
+testfile=False    # Uses a test file with short period
+testyear=False    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
 calcthresh=True    # If calc thresh true, calculates again
                     # if false uses text file already computed
                     #(not test txtfile...
                     # ...so it allows you to use the real threshold on test data)
-showdistr=False   # Save a figure showing histogram of OLR values
+showdistr=True   # Save a figure showing histogram of OLR values
                     # Only works if calcthresh is True
 threshtest=True  # Option to run on thresholds + and - 5Wm2 as a test
 getmbs=True      # Actually run the MetBot algorithm
@@ -62,7 +62,7 @@ synoptics=True   # Build tracks of cloud blobs that become TTT cloud bands
                  # ... which are then used to build TTT events.
 onlynew=False    # Option to only run if the synop file doesn't exist yet
 
-addrain=False     # Add event rain - at the moment need to be running synoptics too
+addrain=True     # Add event rain - at the moment need to be running synoptics too
 heavythresh=50   # Threshold for heavy precip (if add event rain)
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
@@ -80,7 +80,7 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['um']
+    dsetnames=['cmip5']
 ndstr=str(ndset)
 
 for d in range(ndset):
@@ -96,7 +96,7 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['anqjn']
+        mnames=['CanESM2']
     nmstr=str(nmod)
 
     for m in range(nmod):

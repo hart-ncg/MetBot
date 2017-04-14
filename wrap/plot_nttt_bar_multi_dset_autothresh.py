@@ -44,14 +44,16 @@ nthresh=len(thnames)
 for t in range(nthresh):
 
     ### Multi dset?
-    dsets='all'     # "all" or "spec" to choose specific dset(s)
+    dsets='spec'     # "all" or "spec" to choose specific dset(s)
     if dsets=='all':
         ndset=len(dsetdict.dset_deets)
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
-        ndset=1
-        dsetnames=['cmip5']
+#        ndset=1
+#        dsetnames=['cmip5']
+	ndset=6
+	dsetnames=['noaa','ncep','era','20cr','um','cmip5']
         dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
     print 'Running on datasets:'
     print dsetnames
@@ -109,7 +111,7 @@ for t in range(nthresh):
 
             ###  Open synop file
             syfile=outsuf+thre_str+'_'+dset+'-OLR.synop'
-            s = sy.SynopticEvents((),[syfile],COL=False):
+            s = sy.SynopticEvents((),[syfile],COL=False)
 
             ### Count number of events
             ks = s.events.keys() # all events
