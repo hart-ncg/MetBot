@@ -35,7 +35,7 @@ CPyears = np.asarray([1987,1990,1994,2002, 2004, 2009])
 EPyears = np.asarray([1982,1991,1997])
 ELyears = np.asarray([1982,1986,1987,1991,1994,1997,2002,2004,2009])
 LAyears = np.asarray([1984,1988,1995,1998,1999,2000,2007,2010,2011])
-nonENSOyrs=range(1979,2013)
+nonENSOyrs=range(1979,2016)
 for y in np.hstack((LAyears,ELyears)):
     nonENSOyrs.remove(y)
 nonENSOyears=np.asarray(nonENSOyrs)
@@ -409,7 +409,8 @@ def plotallseasonsRain(scycle,yrs,type='pcolor',anomaly=False,srainfall=False,\
 
 
 
-def plotseasonbox(scycle,descr,ax=False,savefig=False,ylims=False):
+def plotseasonbox(scycle,descr,ax=False,savefig=False,ylims=False,\
+                  yticklocs=False):
     if isinstance(ax,bool):plt.figure()
     else: plt.axes(ax)
     lc='b'
@@ -429,7 +430,10 @@ def plotseasonbox(scycle,descr,ax=False,savefig=False,ylims=False):
     #               showmedians=True)
     #plt.plot(np.arange(1,13),np.median(scycle,axis=0),'k-',lw=1.5)
     plt.xticks(np.arange(1,13),monthstr,fontsize=14.0)
-    plt.yticks(np.arange(1,15),fontsize=14.0)
+    if not isinstance(yticklocs,bool):
+        plt.yticks(yticklocs,fontsize=14.)
+    else:
+        plt.yticks(np.arange(1,15),fontsize=14.0)
     if ylims:
         plt.ylim(ylims[0],ylims[1])
     else:
@@ -457,7 +461,6 @@ def plotseasonbox_background(scycle,ax=False,savefig=False,ylims=False):
     #               showmedians=True)
     #plt.plot(np.arange(1,13),np.median(scycle,axis=0),'k-',lw=1.5)
     plt.xticks(np.arange(1,13),monthstr,fontsize=14.0)
-    plt.yticks(np.arange(1,15),fontsize=14.0)
     if ylims:
         plt.ylim(ylims[0],ylims[1])
     else:
@@ -617,7 +620,9 @@ def spatiofreq2(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
                         blb.filters.blobfilters['SAcloudband'][countkey]['ROI']
         latmask = (lat<latmn) & (lat>latmx) # this is for S. Hemisphere
         meanmasked = np.ma.MaskedArray(meanmask,mask=~latmask)
-        m.contour(lon,lat,meanmasked,[2,4],colors='k')
+        cs = m.contour(lon,lat,meanmasked,[1,2,3,4],colors='k')
+        labels=plt.clabel(cs, [1,2,3,4],inline_spacing=2, fmt='%d',\
+                          fontsize=14)
         #m.contourf(lon,lat,meanmasked,[2,4,14],hatches=['.','..'],\
         #          colors='none',linestyles='-',linewidths='1',alpha=.1)
     ## NEED TO DO THIS SINCE PCOLOR IS NOT SHADING VALUES OUTSIDE OF THE CLIMS

@@ -4,15 +4,19 @@ blobfilters['SAcloudband']={
 'noaa-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (230,'low'), 'text': "Cloudband" },
 'noaa-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (230,'low'), 'text': "Cloudband" },
 'noaa-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (230,'low'), 'text': "Cloudband" },
+
 'ncdr-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
 'ncdr-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
 'ncdr-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
+
 'ncep2-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
 'ncep2-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
 'ncep2-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+
 'erain-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 100,-15,-40),'angleROI': (7.5, 100,-23,-33), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
 'erain-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 100,-15,-40), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
 'erain-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+
 'ncep2-hgt-850-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-3,4), 'thresh': (1.0,'high'), 'text': "low"},
 'ncep2-hgt-500-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-3.5,4.5), 'thresh': (1,'high'), 'text': "depression"},
 'ncep2-hgt-250-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-6,7), 'thresh': (1,'high'), 'text': "trough"},
@@ -50,7 +54,12 @@ blobfilters['SAcloudband']={
 'hadam3p-uvmag-250-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-1,'low'), 'text': "jet"},
 'hadam3p-uvmag-850-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-1.5,1.5), 'thresh': (-0.5,'low'), 'text': "jet"},
 'hadam3p-quvmag-700-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-2.5,2.5), 'thresh': (-1,'low'), 'text': "moistjet"},
-'hadam3p-quvmag-850-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-1.5,1.5), 'thresh': (-0.5,'low'), 'text': "moistjet"}
+'hadam3p-quvmag-850-del2': {'area': (1000, 1000000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (-1.5,1.5), 'thresh': (-0.5,'low'), 'text': "moistjet"},
+
+'cp4-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (7.5, 56,-15,-40),'angleROI': (7.5, 56,-23,-33), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+'cp4-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (7.5, 56,-15,-40), 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+'cp4-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (245,'low'), 'text': "Cloudband" },
+
 }
 
 blobfilters['SH60cloudband']={
@@ -64,7 +73,10 @@ blobfilters['SH60cloudband']={
                    'text': "Cloudband" },
 'noaa-olr-0-full': {'area': (5000, 1000000), 'angle': False, 
                     'latextent': False, 'ROI': False, 'stretch': (100,320),
-                    'thresh': (230,'low'), 'text': "Cloudband" }}
+                    'thresh': (230,'low'), 'text': "Cloudband" },
+'ncdr-olr-0-0': {'area': (4,3000), 'angle': (-90., -5.0), 'latextent': (-20,-40), 'ROI': (0, 360,-15,-40),'angleROI': (0, 360,-23,-33), 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
+'ncdr-olr-0-all': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': (0, 360,-15,-40), 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" },
+'ncdr-olr-0-full': {'area': (4,3000), 'angle': False, 'latextent': False, 'ROI': False, 'stretch': (100,320), 'thresh': (240,'low'), 'text': "Cloudband" }}
 
 blobfilters['NAcloudband']={
 'noaa-olr-0-0': {'area': (5000, 1000000), 'angle': (-90.0, -5.0), 'latextent': (35,23), 'ROI': (280.0,357.5,40,20), 'stretch': (100,320), 'thresh': (230,'low'), 'text': "Cloudband" },
