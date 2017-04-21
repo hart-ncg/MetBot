@@ -49,3 +49,10 @@ To see what is actually going on by plotting imagery, change:
 showblb=False to showblb=True
 To have control of how fast the algorithm proceeds, change the keyword argument
 on line 57 of test.py to interact=True.
+To plot raw blobs and blob angle blobs also include keyword debugplots=True,
+which is helpful for debugging quirks that may exist.
+
+NB/IMPORTANT: Always run through you data with showblobs enable at first...
+there have been quirks with different installation environments that have lead
+to errors. We think these are fixed but cannot guarantee this for all versions
+of scikit-image and dependencies.
