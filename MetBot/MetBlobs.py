@@ -257,7 +257,7 @@ def DistVector(p1,p2):
     return (dx,dy),(mag,dir)
 
 #def BlobAngles(dct,blobs,img,gpx,thrs):
-def BlobAngles(dct,blobs,img,gpx):
+def BlobAngles(dct,blobs,img,gpx,plot_angleROI=False):
     if 'angleROI' in dct.keys():   # Use an angle from blobs in subdomain of one used to get blobs passed to FilterByAngle
         angledomain = dct['angleROI']
         #bigsubdomain = gpx.subdomain
@@ -265,15 +265,15 @@ def BlobAngles(dct,blobs,img,gpx):
         #smallsubdomain = gpx.subdomain
         #angblbim, angblobs, anggrey = GetBlobs(img4blob,(thrs,255))
         angblbim, angblobs, anggrey = GetBlobs(img4blob)
-        #if plt.fignum_exists(3):
-        #    lat, lon = gpx.lat, gpx.lon
-        #    dlat=lat[1]-lat[0];dlon=lon[1]-lon[0]
-        #    latplot = np.hstack((lat[0]-dlat/2.,lat+dlat/2.))
-        #    lonplot = np.hstack((lon[0]-dlon/2.,lon+dlon/2.))
-        #    plt.figure(num=3)
-        #    plt.pcolormesh(lonplot,latplot,angblbim);plt.grid()
-        #    plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
-        #    plt.draw()
+        if plot_angleROI:
+            lat, lon = gpx.lat, gpx.lon
+            dlat=lat[1]-lat[0];dlon=lon[1]-lon[0]
+            latplot = np.hstack((lat[0]-dlat/2.,lat+dlat/2.))
+            lonplot = np.hstack((lon[0]-dlon/2.,lon+dlon/2.))
+            plt.figure(num=3)
+            plt.pcolormesh(lonplot,latplot,angblbim);plt.grid()
+            plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
+            plt.draw()
         dstold = 100000 # Big irrelevant starting dst
         for i in blobs.keys():
             #gpx.subdomain=bigsubdomain
@@ -289,7 +289,9 @@ def BlobAngles(dct,blobs,img,gpx):
                 # should be distance on a sphere but isn't
                 dst = np.sqrt((xab-xb)**2 + (yab-yb)**2)
                 ### Test to get angleblob centroid closest to blob centroid
-                if dst < dstold: ijmatch = j
+                if dst < dstold:
+                    ijmatch = j
+                    dstold = dst
             degs=(blobs[i].orientation*360)/(2*np.pi)
             angdegs=(angblobs[ijmatch].orientation*360)/(2*np.pi)
             blobs[i].degs = degs
@@ -336,8 +338,7 @@ def FilterByLatextent(dct,blobs,gpx):
             del blobs[i]
             #print "Failed Latextent"
 
-#def FilterBlobs(dct,blobs,img,gpx,thrs):
-def FilterBlobs(dct,blobs,img,gpx):
+def FilterBlobs(dct,blobs,img,gpx,debugplots=False):
     '''Filters blobs by predefined criteria:
     These are contained in filters.blobfilters (dict type)'''
     # Area Filter
@@ -353,7 +354,7 @@ def FilterBlobs(dct,blobs,img,gpx):
         FilterByLatextent(dct,blobs,gpx)
     # Angle Filter
     #BlobAngles(dct,blobs,img,gpx,thrs)
-    BlobAngles(dct,blobs,img,gpx)
+    BlobAngles(dct,blobs,img,gpx,plot_angleROI=debugplots)
     if dct['angle']:
         FilterByAngle(dct,blobs)
 
@@ -511,9 +512,9 @@ def GetBlobs(img,subrect=False):
 
 
 def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
-             interact=False):
+             interact=False,debugplots=False):
     '''mbs, blbim = MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',
-                             showblobs=True)
+                             showblobs=True,interact=False,debugplots=False)
     Main blobbing loop
     USAGE: vrb (array, dim: time x lat x lon) NOTE: use plt.cm.gray_r
     therefore, whitest values are lowest, sometimes need to times vrb by (-1)'''
@@ -540,10 +541,10 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
     blobtime = np.zeros((len(time)*10,4),dtype=np.int)
 
     if showblobs:
-        bfig=plt.figure(num='Blobs')
-        #bafig=plt.figure(num='BlobsAngles')
+        if debugplots:
+            bfig=plt.figure(num='Blobs')
+            bafig=plt.figure(num='BlobsAngles')
         plt.show();plt.ion()
-        plt.pause(0.05)
         keyin=raw_input("Position windows as desired then press any key,\n \
         Press [Esc] at any time to quit...\
         #[Backspace] to go back one image...")
@@ -557,10 +558,10 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
     ixmbs=0
     mtimstart=timer()
     while t <= (len(time)-1):
-        wtimstart = timer()
-        tm = time[t, :]
-        hr = hrtime[t]
-        humandate = "%d-%02d-%02d %02d:00" % (tm[0], tm[1], tm[2], tm[3])
+        wtimstart=timer()
+        tm=time[t,:]
+        hr=hrtime[t]
+        humandate="%d-%02d-%02d %02d:00" %(tm[0],tm[1],tm[2],tm[3])
         #plt.figure(num=mfig.number);plt.clf()
         #datafig=m.transform_scalar(data[t,::-1,:],lon,lat[::-1],\
         #                           len(lon),len(lat))
@@ -578,9 +579,8 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
             print humandate,": No Blobs detected"
             if showblobs:
                 plt.figure(num=mfig.number);plt.clf()
-                plt.figure(num=bfig.number);plt.clf()
+                if debugplots: plt.figure(num=bfig.number);plt.clf()
                 if interact:
-                    plt.pause(0.05)
                     d=raw_input('Press: x to stop; b to go backwards')
                 else: d='nada'
                 if d=='x':
@@ -592,9 +592,8 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
                 t=t+1
                 continue
 
-        #FilterBlobs(dct,blobs,img,gpx,thrs)
-        #if showblobs: plt.figure(num=3);plt.clf()
-        FilterBlobs(dct,blobs,img,gpx)
+        if showblobs & debugplots: plt.figure(num=3);plt.clf()
+        FilterBlobs(dct,blobs,img,gpx,debugplots=debugplots)
         if len(blobs) > 0:
             #blobslist.append(blobs);blobimages.append(blbim)
             print "%s: %d CANDIDATE %s IN %s"\
@@ -630,7 +629,7 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
 
         if showblobs:
             plt.figure(num=mfig.number);plt.clf()
-            plt.figure(num=bfig.number);plt.clf()
+            if debugplots: plt.figure(num=bfig.number);plt.clf()
             pt1=(pixss[0],pixss[2]);pt3=(pixss[1],pixss[3])
             pt2=(pixss[0],pixss[3]);pt4=(pixss[1],pixss[2])
             pt5=pt1
@@ -650,12 +649,13 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
             DrawContourAngles(blobs,gpx,m=plt)
             plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
             plt.draw()
-            plt.figure(num=bfig.number)
-            plt.pcolormesh(lonplot,latplot,blbim);plt.grid()
-            plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
-            plt.draw()
+            if debugplots:
+                plt.figure(num=bfig.number)
+                plt.pcolormesh(lonplot,latplot,blbim);plt.grid()
+                plt.xlim(lonplot[0],lonplot[-1])
+                plt.ylim(latplot[-1],latplot[0])
+                plt.draw()
             if interact:
-                plt.pause(0.05)
                 d=raw_input('Press: x to stop; b to go backwards')
             else:
                 d='nada'
@@ -720,6 +720,49 @@ def relpos((mbs0, mbt0), (mbs1,mbt1),twindow=13):
     return np.hstack((tmatch,dx[:,np.newaxis],dy[:,np.newaxis])), ixdict, showme
 
 # TESTING AND FINE TUNING FUNCTIONS
+def find_saddle(data,first_guess=240,nbins=50,xlims=[100,350],method='fmin',\
+                showplot=True):
+    '''Function to find the saddle between to peaks in a bimodal distribution.
+       Usage: Best to plot a histogram of data first in order to make a good
+              first guess
+              The implemented deldxmin method has OLR typical proximity
+              thresholds relative to first_guess value.
+    '''
+    import scipy.interpolate as spi
+    data = np.nan_to_num(data)
+    if showplot:
+        f,[ax1,ax2] = plt.subplots(2,1)
+        plt.axes(ax1)
+    hy,hx,hbars=plt.hist(data.ravel(),bins=nbins,normed=True,color='0.5',ec='k')
+    plt.xlim(xlims)
+    Interpolator = spi.interp1d(hx[1:],hy,kind='cubic')
+    if method=='deldxmin':
+        hires_x = np.linspace(xlims[0],xlims[1],2000)
+        y = Interpolator(hires_x)
+        dx= y[1:]-y[:-1]
+        if showplot:
+            plt.axes(ax2)
+            plt.plot(hires_x[:-1],dx,'b')
+            plt.plot(hires_x[:-1],np.abs(dx),'g')
+            plt.plot([hires_x[0],hires_x[-1]],[0,0],'b--')
+            ddx = dx[1:] - dx[:-1]
+            plt.twinx()
+            plt.plot(hires_x[1:-1],ddx,'r')
+            plt.plot([hires_x[0],hires_x[-1]],[0,0],'r--')
+        iddx_mask = ddx <= 0
+        data1,data2 = first_guess-30, first_guess+30
+        proximity_mask= (hires_x[1:-1]<data1) | (hires_x[1:-1]>data2)
+        msk = iddx_mask | proximity_mask
+        idx_masked = np.ma.MaskedArray(np.abs(dx[1:]),mask=msk)
+        idx_zero = idx_masked.argmin()
+        olr_saddle = hires_x[idx_zero]
+        plt.axes(ax1)
+    elif method=='fmin':
+        import scipy.optimize as spo
+        [olr_saddle] = spo.fmin(Interpolator,first_guess,full_output=0,disp=0)
+    if showplot: plt.plot(olr_saddle,0,'k^',markersize=30)
+    return olr_saddle
+
 def gethists(vrb,time,lat,lon,varstr,sub='SA',b=50,interact=False,figd=False):
     '''showhist = gethists(vrb,time,lat,lon,varstr,b=50,interact=False)
 
