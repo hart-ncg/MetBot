@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
+    <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="New wrapper to run on flagged days only">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/wrap/get_ttcbs_test.py" afterPath="$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dset_dict.py" afterPath="$PROJECT_DIR$/MetBot/dset_dict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" afterPath="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,7 +17,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/MetBot$output_tsteps4SOM.coverage" NAME="output_tsteps4SOM Coverage Results" MODIFIED="1491576002310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_loop_autothresh.coverage" NAME="get_ttcbs_loop_autothresh Coverage Results" MODIFIED="1492595581103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
-    <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_test.coverage" NAME="get_ttcbs_test Coverage Results" MODIFIED="1492529775176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
+    <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_test.coverage" NAME="get_ttcbs_test Coverage Results" MODIFIED="1494262199840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$plot_compare_olr_dist_thresh.coverage" NAME="plot_compare_olr_dist_thresh Coverage Results" MODIFIED="1491906956542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -30,7 +28,30 @@
     <favorites_list name="MetBot" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="get_ttcbs_test_onlyflagged.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="188">
+              <caret line="73" column="5" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="5" />
+              <folding>
+                <element signature="e#880#898#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -66,6 +87,7 @@
       <find>addevet</find>
       <find>with</find>
       <find>open</find>
+      <find>bkdir</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -89,6 +111,7 @@
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" />
         <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
+        <option value="$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py" />
       </list>
     </option>
   </component>
@@ -99,10 +122,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1877" />
-    <option name="y" value="43" />
-    <option name="width" value="1590" />
-    <option name="height" value="907" />
+    <option name="x" value="1680" />
+    <option name="y" value="27" />
+    <option name="width" value="1920" />
+    <option name="height" value="1053" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -199,7 +222,7 @@
       <recent name="$PROJECT_DIR$/wrap" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.get_ttcbs_loop_autothresh">
+  <component name="RunManager" selected="Python.get_ttcbs_test">
     <configuration default="false" name="plot_compare_olr_dist_thresh" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -267,7 +290,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MetBot" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -505,8 +528,8 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.get_ttcbs_loop_autothresh" />
-        <item index="1" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.get_ttcbs_loop_autothresh" />
         <item index="2" class="java.lang.String" itemvalue="Python.plot_compare_olr_dist_thresh" />
         <item index="3" class="java.lang.String" itemvalue="Python.output_tsteps4SOM" />
       </list>
@@ -558,32 +581,39 @@
       <option name="project" value="LOCAL" />
       <updated>1491906989474</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="New wrapper to run on flagged days only">
+      <created>1494259930486</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1494259930486</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1877" y="43" width="1590" height="907" extended-state="0" />
+    <frame x="1680" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30314466" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25104168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32112333" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30198675" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262032" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32736573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -626,14 +656,15 @@
     <MESSAGE value="Small edits to re-run test on server" />
     <MESSAGE value="Small edits to fix dtime for cdr" />
     <MESSAGE value="Fix open_multi" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix open_multi" />
+    <MESSAGE value="New wrapper to run on flagged days only" />
+    <option name="LAST_COMMIT_MESSAGE" value="New wrapper to run on flagged days only" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test.py">
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -654,7 +685,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test.py">
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="49" column="16" lean-forward="false" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
@@ -917,13 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="144" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/filterdict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -945,13 +969,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/scatter_nttt_precip.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="727">
@@ -964,6 +981,24 @@
         <state relative-caret-position="915">
           <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="73" column="5" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="5" />
+          <folding>
+            <element signature="e#880#898#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
