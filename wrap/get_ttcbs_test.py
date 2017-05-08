@@ -1,5 +1,6 @@
 # MetBlobs wrapper
 #
+# RUN AS A TEST ON TTCB NC FILE
 # Designed to be flexible to dataset
 # and run on multiple models in a loop
 # input at the top
@@ -46,7 +47,7 @@ testfile=True    # Uses a test file with short period
 testyear=True    # Only uses first 365 days of olr data
                  # (testfile designed to be used together with testyear
                  # ..but testyear can be used on any file)
-calcthresh=True    # If calc thresh true, calculates again
+calcthresh=False    # If calc thresh true, calculates again
                     # if false uses text file already computed
                     #(not test txtfile...
                     # ...so it allows you to use the real threshold on test data)
@@ -71,7 +72,9 @@ bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 sub="SA"
 subrain="SA_TR"
 
-bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
+#bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
+tfile=cwd+"/../../../CTdata/somsfromc/olrdata_ttcbdays/"\
+    "test/um.anqjn.olr.day.mean.ttcbdays.thresh_actual.nc"
 
 ### Multi dset?
 dsets='spec'     # "all" or "spec" to choose specific dset(s)
@@ -80,7 +83,7 @@ if dsets=='all':
     dsetnames=list(dsetdict.dset_deets)
 elif dsets=='spec': # edit for the dset you want
     ndset=1
-    dsetnames=['noaa']
+    dsetnames=['um']
 ndstr=str(ndset)
 
 for d in range(ndset):
@@ -96,7 +99,7 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['noaa']
+        mnames=['anqjn']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -118,7 +121,8 @@ for d in range(ndset):
 
         ### Location for olr input & outputs
         indir=bkdir+dset+"/"
-        infile=indir+name+".olr.day.mean."+ys+".nc"
+        infile=tfile
+        #infile=indir+name+".olr.day.mean."+ys+".nc"
         print infile
         outdir=indir+name+"/"
         if testyear: outdir=outdir+'test/'

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dset_dict.py" afterPath="$PROJECT_DIR$/MetBot/dset_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" afterPath="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" />
@@ -17,7 +18,8 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/MetBot$output_tsteps4SOM.coverage" NAME="output_tsteps4SOM Coverage Results" MODIFIED="1491576002310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
-    <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_loop_autothresh.coverage" NAME="get_ttcbs_loop_autothresh Coverage Results" MODIFIED="1491907859449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
+    <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_loop_autothresh.coverage" NAME="get_ttcbs_loop_autothresh Coverage Results" MODIFIED="1492595581103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
+    <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_test.coverage" NAME="get_ttcbs_test Coverage Results" MODIFIED="1492529775176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$plot_compare_olr_dist_thresh.coverage" NAME="plot_compare_olr_dist_thresh Coverage Results" MODIFIED="1491906956542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -28,30 +30,7 @@
     <favorites_list name="MetBot" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="get_ttcbs_loop_autothresh.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="133" column="0" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="140" selection-end-column="52" />
-              <folding>
-                <element signature="e#848#866#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -83,9 +62,10 @@
       <find>dim_ext</find>
       <find>kh</find>
       <find>exdict</find>
-      <find>open</find>
       <find>openolr</find>
       <find>addevet</find>
+      <find>with</find>
+      <find>open</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -106,6 +86,7 @@
         <option value="$PROJECT_DIR$/wrap/SOM_play.py" />
         <option value="$PROJECT_DIR$/wrap/output_tsteps4SOM.py" />
         <option value="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" />
+        <option value="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" />
         <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
       </list>
@@ -118,9 +99,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="27" />
-    <option name="width" value="1600" />
-    <option name="height" value="873" />
+    <option name="x" value="1877" />
+    <option name="y" value="43" />
+    <option name="width" value="1590" />
+    <option name="height" value="907" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -137,6 +119,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -173,6 +156,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MetBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MetBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="MetBot" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -180,7 +177,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -197,6 +193,11 @@
         <option name="myWorkingDirectory" value="$PROJECT_DIR$/wrap" />
       </console-settings>
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/wrap" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.get_ttcbs_loop_autothresh">
     <configuration default="false" name="plot_compare_olr_dist_thresh" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -251,6 +252,35 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrap/output_tsteps4SOM.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="get_ttcbs_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/etc/skel/miniconda2/envs/flory/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/wrap" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="false" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MetBot" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -467,16 +497,18 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python.plot_compare_olr_dist_thresh" />
       <item index="1" class="java.lang.String" itemvalue="Python.get_ttcbs_loop_autothresh" />
       <item index="2" class="java.lang.String" itemvalue="Python.output_tsteps4SOM" />
+      <item index="3" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
     </list>
     <recent_temporary>
-      <list size="3">
+      <list size="4">
         <item index="0" class="java.lang.String" itemvalue="Python.get_ttcbs_loop_autothresh" />
-        <item index="1" class="java.lang.String" itemvalue="Python.plot_compare_olr_dist_thresh" />
-        <item index="2" class="java.lang.String" itemvalue="Python.output_tsteps4SOM" />
+        <item index="1" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
+        <item index="2" class="java.lang.String" itemvalue="Python.plot_compare_olr_dist_thresh" />
+        <item index="3" class="java.lang.String" itemvalue="Python.output_tsteps4SOM" />
       </list>
     </recent_temporary>
   </component>
@@ -530,28 +562,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1600" height="873" extended-state="6" />
-    <editor active="true" />
+    <frame x="1877" y="43" width="1590" height="907" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30314466" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32112333" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30198675" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32847682" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32736573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -601,6 +633,83 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="38" column="31" lean-forward="false" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/scatter_nttt_precip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3615">
+          <caret line="244" column="48" lean-forward="false" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="49" column="16" lean-forward="false" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/scatter_nttt_precip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/scatter_nttt_precip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="20" lean-forward="false" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/SynopticAnatomy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -737,20 +846,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/scatter_nttt_precip.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="160" column="32" lean-forward="false" selection-start-line="160" selection-start-column="24" selection-end-line="160" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/filterdict_default.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -762,13 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="693">
           <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="96" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10">
-          <caret line="190" column="63" lean-forward="true" selection-start-line="190" selection-start-column="63" selection-end-line="190" selection-end-column="63" />
         </state>
       </provider>
     </entry>
@@ -801,27 +889,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/output_tsteps4SOM.py" />
-    <entry file="file://$PROJECT_DIR$/MetBot/dimensions_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="416" column="4" lean-forward="true" selection-start-line="416" selection-start-column="4" selection-end-line="416" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="78" column="14" lean-forward="false" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -829,25 +900,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
           <caret line="558" column="28" lean-forward="true" selection-start-line="558" selection-start-column="16" selection-end-line="558" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="133" column="0" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="140" selection-end-column="52" />
-          <folding>
-            <element signature="e#848#866#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="345">
+          <caret line="82" column="22" lean-forward="false" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/dimensions_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="144" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/filterdict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/filterdict_default.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="190" column="63" lean-forward="true" selection-start-line="190" selection-start-column="63" selection-end-line="190" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/scatter_nttt_precip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="727">
+          <caret line="244" column="48" lean-forward="false" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
