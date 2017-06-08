@@ -502,7 +502,10 @@ def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
     # Silly dataset specific tweaks
     if dset == 'cmip5':
         lat = lat[::-1]
-        exec (varstr + '=' + varstr + '[:,::-1,:]')
+        if len(dimlist)==3:
+            exec (varstr + '=' + varstr + '[:,::-1,:]')
+        elif len(dimlist)==4:
+            exec (varstr + '=' + varstr + '[:,:,::-1,:]')
     if dset == 'noaa':
         if mname == 'cdr':
             lat = lat[::-1]
