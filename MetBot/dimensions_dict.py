@@ -18,3 +18,7 @@ dim_deets['pr']={
 "um": ['t','latitude','longitude','surface'],
 "cmip5": ['time','lat','lon'],
 }
+
+dim_deets['omega']={
+"cmip5": ['time','lat','lon','plev'],
+}

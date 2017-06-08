@@ -422,7 +422,7 @@ def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
 
     if not subtime:
         if sub and levselect:
-            #print "lat, lon, lev subset"
+            print "lat, lon, lev subset"
             exec('ilats, ilons, ilev = isubs(sub,'+dimlist[1]+','+dimlist[2]+\
                  ','+dimlist[3]+',levselect)')
             if ilats==-99:
