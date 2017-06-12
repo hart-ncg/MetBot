@@ -22,3 +22,13 @@ dim_deets['omega']={
 "ncep": ['time','lat','lon','level'],
 "cmip5": ['time','lat','lon','plev'],
 }
+
+dim_deets['u']={
+"ncep": ['time','lat','lon','level'],
+"cmip5": ['time','lat','lon','plev'],
+}
+
+dim_deets['v']={
+"ncep": ['time','lat','lon','level'],
+"cmip5": ['time','lat','lon','plev'],
+}
