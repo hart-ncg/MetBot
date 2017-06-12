@@ -9,7 +9,6 @@ dim_deets['olr']={
 "cmip5": ['time','lat','lon'],
 }
 
-
 dim_deets['pr']={
 "trmm": ['time','latitude','longitude'],
 "ncep": ['time','lat','lon'],
@@ -20,5 +19,6 @@ dim_deets['pr']={
 }
 
 dim_deets['omega']={
+"ncep": ['time','lat','lon','level'],
 "cmip5": ['time','lat','lon','plev'],
 }
