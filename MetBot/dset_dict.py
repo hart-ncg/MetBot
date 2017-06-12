@@ -19,7 +19,7 @@ dset_deets['trmm']={
 
 # NCEP
 dset_deets['ncep']={
-'ncep2': {'name': "ncep2", 'calendar':"gregorian", 'olrtimeunit':"hours since 1800-01-01 00:00:0.0", 'prtimeunit':"hours since 1800-01-01 00:00:0.0", 'omegatimeunit':"hours since 1800-1-1 00:00:00", 'startdate':"1979-01-01", 'olrname':"ulwrf", 'prname':"prate", 'yrfname':"1979_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
+'ncep2': {'name': "ncep2", 'calendar':"gregorian", 'olrtimeunit':"hours since 1800-01-01 00:00:0.0", 'prtimeunit':"hours since 1800-01-01 00:00:0.0", 'omegatimeunit':"hours since 1800-1-1 00:00:00", 'startdate':"1979-01-01", 'olrname':"ulwrf", 'prname':"prate", 'omeganame':"omega", 'yrfname':"1979_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
 }
 
 # ERA

@@ -62,8 +62,8 @@
       <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="21" column="188" lean-forward="false" selection-start-line="21" selection-start-column="188" selection-end-line="21" selection-end-column="188" />
+            <state relative-caret-position="190">
+              <caret line="21" column="280" lean-forward="false" selection-start-line="21" selection-start-column="280" selection-end-line="21" selection-end-column="280" />
               <folding />
             </state>
           </provider>
@@ -615,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497255420694</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Editing dictionaries for NCEP omega">
+      <created>1497255669663</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1497255669663</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -686,11 +693,19 @@
     <MESSAGE value="New wrapper to run on flagged days only" />
     <MESSAGE value="Editing dictionaries to open OLR data" />
     <MESSAGE value="Fix mynetcdf for multilev cmip5 files - latitude switch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix mynetcdf for multilev cmip5 files - latitude switch" />
+    <MESSAGE value="Editing dictionaries for NCEP omega" />
+    <option name="LAST_COMMIT_MESSAGE" value="Editing dictionaries for NCEP omega" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/MetBot/dset_dict.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1026,8 +1041,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="21" column="188" lean-forward="false" selection-start-line="21" selection-start-column="188" selection-end-line="21" selection-end-column="188" />
+        <state relative-caret-position="190">
+          <caret line="21" column="280" lean-forward="false" selection-start-line="21" selection-start-column="280" selection-end-line="21" selection-end-column="280" />
           <folding />
         </state>
       </provider>
