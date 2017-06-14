@@ -20,16 +20,18 @@ dim_deets['pr']={
 
 dim_deets['omega']={
 "ncep": ['time','lat','lon','level'],
-"era": ['time','latitude','longitude'],
+"era": ['time','latitude','longitude'],  # set up for 500 only file
 "cmip5": ['time','lat','lon','plev'],
 }
 
 dim_deets['u']={
 "ncep": ['time','lat','lon','level'],
+"era": ['time','lat','lon'], # for now only using 850 file - interp to NCEP2
 "cmip5": ['time','lat','lon','plev'],
 }
 
 dim_deets['v']={
 "ncep": ['time','lat','lon','level'],
+"era": ['time','lat','lon'], # for now only using 850 file - interp to NCEP2
 "cmip5": ['time','lat','lon','plev'],
 }
