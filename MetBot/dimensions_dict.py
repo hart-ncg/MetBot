@@ -35,3 +35,8 @@ dim_deets['v']={
 "era": ['time','lat','lon'], # for now only using 850 file - interp to NCEP2
 "cmip5": ['time','lat','lon','plev'],
 }
+
+dim_deets['q']={
+"ncep": ['time','lat','lon','level'],
+"cmip5": ['time','lat','lon','plev'],
+}
