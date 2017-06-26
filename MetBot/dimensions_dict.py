@@ -40,3 +40,8 @@ dim_deets['q']={
 "ncep": ['time','lat','lon','level'],
 "cmip5": ['time','lat','lon','plev'],
 }
+
+dim_deets['gpth']={
+"ncep": ['time','lat','lon','level'],
+"cmip5": ['time','lat','lon','plev'],
+}
