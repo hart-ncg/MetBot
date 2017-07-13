@@ -12,7 +12,7 @@ def massweight_vertintegral(var,levels,sfc_prs,prs_top,lev_units="hPa"):
     
     USAGE: var    - time x lev x lat x lon
            levels - levels coordinate
-           sfc_prs- surface pressure
+           sfc_prs- surface pressure - ?a field (time x lat x lon)?
            prs_top- user-specified top level to integrate to needs to
                     be at least lower (higher P) than topmost level
            lev_units[="hPa"] equivalently "mb", indicating units of lev coord.
