@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dimensions_dict.py" afterPath="$PROJECT_DIR$/MetBot/dimensions_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dset_dict.py" afterPath="$PROJECT_DIR$/MetBot/dset_dict.py" />
     </list>
     <ignored path="MetBot.iws" />
@@ -33,8 +32,8 @@
       <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="39" column="289" lean-forward="true" selection-start-line="39" selection-start-column="289" selection-end-line="40" selection-end-column="1" />
+            <state relative-caret-position="540">
+              <caret line="36" column="563" lean-forward="false" selection-start-line="36" selection-start-column="563" selection-end-line="36" selection-end-column="563" />
               <folding />
             </state>
           </provider>
@@ -706,7 +705,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502709608962</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Edits to dset dict for ERAI plev data">
+      <created>1502710432579</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1502710432579</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -787,7 +793,8 @@
     <MESSAGE value="Edits to dictionaries to add T on p levels" />
     <MESSAGE value="Small edit to mynetcdf" />
     <MESSAGE value="Corrections to precip in dset dict" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrections to precip in dset dict" />
+    <MESSAGE value="Edits to dset dict for ERAI plev data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edits to dset dict for ERAI plev data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1126,8 +1133,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="289" lean-forward="true" selection-start-line="39" selection-start-column="289" selection-end-line="40" selection-end-column="1" />
+        <state relative-caret-position="540">
+          <caret line="36" column="563" lean-forward="false" selection-start-line="36" selection-start-column="563" selection-end-line="36" selection-end-column="563" />
           <folding />
         </state>
       </provider>
