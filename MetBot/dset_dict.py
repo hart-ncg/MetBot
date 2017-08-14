@@ -24,7 +24,7 @@ dset_deets['ncep']={
 
 # ERA
 dset_deets['era']={
-'erai': {'name': "erai", 'calendar':"gregorian", 'olrtimeunit':"hours since 1900-01-01 00:00:0.0", 'prtimeunit':"hours since 1900-01-01 00:00:0.0", 'omegatimeunit':"hours since 1900-1-1 00:00:00", 'utimeunit':"hours since 1900-1-1 00:00:00", 'vtimeunit':"hours since 1900-1-1 00:00:00", 'startdate':"1979-01-01", 'olrname':"olr", 'prname':"tp", 'omeganame':"w", 'fullrun':"1998_2013", 'uname':"u", 'vname':"v", 'fullrun':"1998_2013", 'yrfname':"1979_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
+'erai': {'name': "erai", 'calendar':"gregorian", 'olrtimeunit':"hours since 1900-01-01 00:00:0.0", 'prtimeunit':"hours since 1900-01-01 00:00:0.0", 'omegatimeunit':"hours since 1900-1-1 00:00:00", 'utimeunit':"hours since 1900-1-1 00:00:00", 'vtimeunit':"hours since 1900-1-1 00:00:00", 'qtimeunit':"hours since 1900-1-1 00:00:00", 'gpthtimeunit':"hours since 1900-1-1 00:00:00", 'Ttimeunit':"hours since 1900-1-1 00:00:00", 'startdate':"1979-01-01", 'olrname':"olr", 'prname':"tp", 'omeganame':"w", 'uname':"u", 'vname':"v", 'qname':"q", 'gpthname':"z", 'Tname':"t", 'fullrun':"1998_2013", 'yrfname':"1979_2013", 'startyr':"1979", 'testfileyr':"1979_1979",'testyr':"1979"},
 }
 
 # 20cr

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dimensions_dict.py" afterPath="$PROJECT_DIR$/MetBot/dimensions_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dset_dict.py" afterPath="$PROJECT_DIR$/MetBot/dset_dict.py" />
     </list>
     <ignored path="MetBot.iws" />
@@ -29,21 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mynetcdf.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="69" column="48" lean-forward="false" selection-start-line="69" selection-start-column="48" selection-end-line="69" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="56" column="59" lean-forward="true" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
+            <state relative-caret-position="585">
+              <caret line="39" column="289" lean-forward="true" selection-start-line="39" selection-start-column="289" selection-end-line="40" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -111,8 +102,8 @@
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" />
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py" />
-        <option value="$PROJECT_DIR$/MetBot/dimensions_dict.py" />
         <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
+        <option value="$PROJECT_DIR$/MetBot/dimensions_dict.py" />
         <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
       </list>
     </option>
@@ -708,7 +699,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502026853689</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Corrections to precip in dset dict">
+      <created>1502709608962</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1502709608962</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -788,7 +786,8 @@
     <MESSAGE value="Edits to add gpth" />
     <MESSAGE value="Edits to dictionaries to add T on p levels" />
     <MESSAGE value="Small edit to mynetcdf" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small edit to mynetcdf" />
+    <MESSAGE value="Corrections to precip in dset dict" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrections to precip in dset dict" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1111,8 +1110,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/dimensions_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="37" lean-forward="false" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
+        <state relative-caret-position="594">
+          <caret line="58" column="39" lean-forward="false" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1126,8 +1126,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="56" column="59" lean-forward="true" selection-start-line="56" selection-start-column="59" selection-end-line="56" selection-end-column="59" />
+        <state relative-caret-position="585">
+          <caret line="39" column="289" lean-forward="true" selection-start-line="39" selection-start-column="289" selection-end-line="40" selection-end-column="1" />
           <folding />
         </state>
       </provider>
