@@ -87,8 +87,16 @@ def isubs(sub,lat,lon,*args):
     if getisubs:
         lt1,lt2 = domain[0]; ln1,ln2 = domain[1]
         ilats = ((lt1<=lat) & (lat<=lt2)).nonzero()[0]
-        ilons = ((ln1<=lon) & (lon<=ln2)).nonzero()[0]
-        ilat12=(ilats[0],ilats[-1]);ilon12=(ilons[0],ilons[-1])
+        ilat12 = (ilats[0], ilats[-1])
+        if ln1 < ln2:
+            ilons = ((ln1<=lon) & (lon<=ln2)).nonzero()[0]
+            ilon12 = (ilons[0], ilons[-1])
+        else:
+            eastlons = (lon<=ln2).nonzero()[0]
+            westlons = (lon>=ln1).nonzero()[0]
+            ilons = np.append(eastlons,westlons)
+            #ilon12 = eastlons[0], eastlons[-1], westlons[0], westlons[-1]
+            ilon12 = ilons
         ilev12=()
     if len(args)>0:
         lev, levselect = args
@@ -431,13 +439,22 @@ def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
                 ilt1, ilt2, iln1,iln2, ilv1, ilv2 = '0', '','0', '',\
                  str(ilev[0]),str(ilev[1]+1)
             else:
-                ilt1,ilt2,iln1,iln2,ilv1,ilv2 = str(ilats[0]), str(ilats[1]+1),\
-                  str(ilons[0]), str(ilons[1]+1),str(ilev[0]),str(ilev[1]+1)
-            exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilv1+':'+ilv2+','\
-                                      +ilt1+':'+ilt2+','+iln1+':'+iln2+']')
-            exec(dimlist[1]+'='+dimlist[1]+'['+ilt1+':'+ilt2+']')
-            exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
-            exec(dimlist[3]+'='+dimlist[3]+'['+ilv1+':'+ilv2+']')
+                ilt1, ilt2, ilv1, ilv2 = str(ilats[0]), str(ilats[1] + 1), \
+                                    str(ilev[0]), str(ilev[1] + 1)
+            exec (dimlist[1] + '=' + dimlist[1] + '[' + ilt1 + ':' + ilt2 + ']')
+            exec (dimlist[3] + '=' + dimlist[3] + '[' + ilv1 + ':' + ilv2 + ']')
+
+            # Special option for lons spanning 0
+            if len(ilons)==2:
+                iln1,iln2 = str(ilons[0]), str(ilons[1]+1)
+                exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilv1+':'+ilv2+','\
+                                          +ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+                exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
+            elif len(ilons)>2:
+                exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilv1+':'+ilv2+','\
+                                          +ilt1+':'+ilt2+',ilons]')
+                exec (dimlist[2] + '=' + dimlist[2] + '[ilons]')
+
         elif sub:
             print "lat, lon subset"
             exec('ilats,ilons,ilev = isubs(sub,'+dimlist[1]+','+dimlist[2]+')')

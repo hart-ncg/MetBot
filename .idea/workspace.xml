@@ -42,8 +42,8 @@
       <file leaf-file-name="mynetcdf.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="74" column="41" lean-forward="false" selection-start-line="74" selection-start-column="41" selection-end-line="74" selection-end-column="41" />
+            <state relative-caret-position="417">
+              <caret line="452" column="30" lean-forward="true" selection-start-line="452" selection-start-column="30" selection-end-line="452" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -60,8 +60,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>file</find>
-      <find>mkdir</find>
       <find>plotseasonbox</find>
       <find>geth</find>
       <find>plotseason</find>
@@ -85,10 +83,13 @@
       <find>bkdir</find>
       <find>ixdtimes</find>
       <find>np.zeros</find>
-      <find>isubs</find>
-      <find>opennc2</find>
       <find>ion</find>
       <find>sa</find>
+      <find>dtime2arr</find>
+      <find>opennc</find>
+      <find>isub</find>
+      <find>isubs</find>
+      <find>opennc2</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -736,7 +737,14 @@
       <option name="project" value="LOCAL" />
       <updated>1502960977885</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Adding another domain to mynetcdf">
+      <created>1502961557417</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1502961557417</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1158,8 +1166,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="74" column="41" lean-forward="false" selection-start-line="74" selection-start-column="41" selection-end-line="74" selection-end-column="41" />
+        <state relative-caret-position="417">
+          <caret line="452" column="30" lean-forward="true" selection-start-line="452" selection-start-column="30" selection-end-line="452" selection-end-column="30" />
           <folding />
         </state>
       </provider>
