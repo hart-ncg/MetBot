@@ -59,3 +59,8 @@ dim_deets['T']={
 "um": ['t','latitude','longitude','p'],
 "cmip5": ['time','lat','lon','plev'],
 }
+
+dim_deets['pres']={
+"ncep": ['time','lat','lon'],
+"era": ['time','latitude','longitude'],
+}
