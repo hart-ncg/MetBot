@@ -458,20 +458,30 @@ def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
         elif sub:
             print "lat, lon subset"
             exec('ilats,ilons,ilev = isubs(sub,'+dimlist[1]+','+dimlist[2]+')')
-            ilt1, ilt2, iln1,iln2 = str(ilats[0]), str(ilats[1]+1),\
-                                    str(ilons[0]), str(ilons[1]+1)
-            if len(dimlist)==3:
-                if varstr=='precipitation':
-                    exec('data = ncf.variables[\''+ varstr + '\']\
-                                 ['+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
-                else:
-                    exec('data = ncf.variables[\''+ varstr + '\']\
-                                 [:,'+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
-            elif len(dimlist)==4:
-                exec('data = ncf.variables[\''+ varstr + '\']\
-                             [:,:,'+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+            ilt1, ilt2 = str(ilats[0]), str(ilats[1]+1)
             exec(dimlist[1]+'='+dimlist[1]+'['+ilt1+':'+ilt2+']')
-            exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
+            # Special option for lons spanning 0
+            if len(ilons) == 2:
+                iln1, iln2 = str(ilons[0]), str(ilons[1] + 1)
+                if len(dimlist)==3:
+                    if varstr=='precipitation':
+                        exec('data = ncf.variables[\''+ varstr + '\']\
+                                     ['+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+                    else:
+                        exec('data = ncf.variables[\''+ varstr + '\']\
+                                     [:,'+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+                elif len(dimlist)==4:
+                    exec('data = ncf.variables[\''+ varstr + '\']\
+                                 [:,:,'+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+
+                exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
+            elif len(ilons)>2:
+                if len(dimlist)==3:
+                    exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilt1+':'+ilt2+',ilons]')
+                elif len(dimlist)==4:
+                    exec ('data = ncf.variables[\'' + varstr + '\'][:,:,' + ilt1 + ':' + ilt2 + ',ilons]')
+                exec (dimlist[2] + '=' + dimlist[2] + '[ilons]')
+
         else:
             #print "No subsetting"
             exec('data = ncf.variables[\''+ varstr + '\'][:]')
