@@ -34,14 +34,14 @@ sub="SA"
 seasopt="coreseason"    # for spatiofreq plots
                         # options: coreseason, dryseason, fullseason
 histplot=True           # to get olr histograms
-threshplot=True         # to get olr threshold plot
-threshtext=True         # to put olr thresholds in text file
-shiftdist=True          # to plot shifted distributions
+threshplot=False         # to get olr threshold plot
+threshtext=False         # to put olr thresholds in text file
+shiftdist=False          # to plot shifted distributions
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
-title=True      # plot title
+title=False      # plot title
 refdset="noaa"
 refmod="cdr"
 globv='olr'
@@ -56,8 +56,8 @@ if dsets=='all':
 elif dsets=='spec': # edit for the dset you want
 #    ndset=6
 #    dsetnames=['noaa','ncep','era','20cr','um','cmip5']
-    ndset=1
-    dsetnames=['cmip5']
+    ndset=2
+    dsetnames=['noaa','cmip5']
     dsetstr = '_'.join(dsetnames)
 ndstr=str(ndset)
 print 'Running on datasets:'
@@ -144,7 +144,7 @@ lws=[3,2,2,2,1]
 zorders=[3,2,2,2,1]
 
 ### Open figures
-if histplot: plt.figure(num='raw')
+if histplot: plt.figure(num='raw',figsize=[12,10])
 if threshtext:
     if testyear:
         txtfile = open(bkdir + "/thresholds.fmin." + dsetstr + ".test.txt", "w")
@@ -162,13 +162,20 @@ for d in range(ndset):
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='all'  # "all" or "spec" to choose specific model(s)
-    if mods=='all':
+    # mods='all'  # "all" or "spec" to choose specific model(s)
+    # if mods=='all':
+    #     nmod=len(dsetdict.dset_deets[dset])
+    #     mnames=list(dsetdict.dset_deets[dset])
+    # if mods=='spec': # edit for the models you want
+    #     nmod=1
+    #     mnames=['noaa']
+    # nmstr=str(nmod)
+    if dset=='noaa':
+        mnames=['cdr']
+        nmod=len(mnames)
+    elif dset=='cmip5':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])
-    if mods=='spec': # edit for the models you want
-        nmod=1
-        mnames=['noaa']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -276,14 +283,14 @@ if histplot:
     ### Plot legend and axis
     plt.xlim(100, 320)
     plt.yticks(np.arange(0.002, 0.016, 0.004))
-    plt.legend(modnm, loc='upper left',fontsize='xx-small')
-    plt.xlabel('OLR', fontsize=13.0, weight='demibold', color='k')
-    plt.ylabel('frequency density', fontsize=13.0, weight='demibold', color='k')
-    if title: plt.title('Histogram of OLR: '+dsetstr,\
-                        fontsize=13.0, weight='demibold', color='k')
+    #plt.legend(modnm, loc='upper left',fontsize='xx-small')
+    plt.xlabel('OLR', fontsize=14.0, weight='demibold', color='k')
+    plt.ylabel('frequency density', fontsize=14.0, weight='demibold', color='k')
+    #if title: plt.title('Histogram of OLR: '+dsetstr,\
+    #                    fontsize=13.0, weight='demibold', color='k')
 
     ### Save figure
-    rawfig=bkdir+'/olr_raw_hist.'+dsetstr+'.png'
+    rawfig=bkdir+'/4pres/olr_raw_hist.'+dsetstr+'.png'
     plt.savefig(rawfig)
 
 

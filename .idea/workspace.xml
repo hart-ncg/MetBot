@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dset_dict.py" afterPath="$PROJECT_DIR$/MetBot/dset_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/massweight_vertintegral.py" afterPath="$PROJECT_DIR$/MetBot/massweight_vertintegral.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" afterPath="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,22 +30,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="massweight_vertintegral.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MetBot/massweight_vertintegral.py">
+      <file leaf-file-name="plot_compare_olr_dist_thresh.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="86" column="76" lean-forward="false" selection-start-line="86" selection-start-column="76" selection-end-line="86" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mynetcdf.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1011">
-              <caret line="472" column="37" lean-forward="false" selection-start-line="472" selection-start-column="37" selection-end-line="472" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="15">
+              <caret line="115" column="18" lean-forward="true" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
+              <folding>
+                <element signature="e#757#775#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -53,8 +45,8 @@
       <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="40" column="1" lean-forward="true" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
+            <state relative-caret-position="600">
+              <caret line="40" column="1" lean-forward="false" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -91,7 +83,6 @@
       <find>addevet</find>
       <find>with</find>
       <find>open</find>
-      <find>bkdir</find>
       <find>ixdtimes</find>
       <find>np.zeros</find>
       <find>ion</find>
@@ -101,6 +92,7 @@
       <find>isubs</find>
       <find>opennc</find>
       <find>opennc2</find>
+      <find>bkdir</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -119,14 +111,14 @@
         <option value="$PROJECT_DIR$/wrap/plot_ttt_ts_sc_sf_loop_autothresh.py" />
         <option value="$PROJECT_DIR$/wrap/SOM_play.py" />
         <option value="$PROJECT_DIR$/wrap/output_tsteps4SOM.py" />
-        <option value="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" />
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_test.py" />
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" />
         <option value="$PROJECT_DIR$/wrap/get_ttcbs_test_onlyflagged.py" />
         <option value="$PROJECT_DIR$/MetBot/dimensions_dict.py" />
-        <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
         <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
+        <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
         <option value="$PROJECT_DIR$/MetBot/massweight_vertintegral.py" />
+        <option value="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" />
       </list>
     </option>
   </component>
@@ -137,10 +129,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1581" />
     <option name="y" value="27" />
-    <option name="width" value="1590" />
-    <option name="height" value="545" />
+    <option name="width" value="1920" />
+    <option name="height" value="1053" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -158,6 +149,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -180,13 +172,26 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="wrap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MetBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MetBot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="MetBot" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -792,15 +797,22 @@
       <option name="project" value="LOCAL" />
       <updated>1503308695267</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Edit to CMIP5 pressure in dict">
+      <created>1503406444216</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1503406444216</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1581" y="27" width="1590" height="545" extended-state="0" />
+    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22762646" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23023504" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -880,7 +892,8 @@
     <MESSAGE value="Edits to dictionaries to add surface pressure" />
     <MESSAGE value="Added comments to vint script" />
     <MESSAGE value="More changes to run on lons spanning 0" />
-    <option name="LAST_COMMIT_MESSAGE" value="More changes to run on lons spanning 0" />
+    <MESSAGE value="Edit to CMIP5 pressure in dict" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit to CMIP5 pressure in dict" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1110,13 +1123,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/output_tsteps4SOM.py" />
-    <entry file="file://$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="78" column="14" lean-forward="false" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/SynopticAnatomy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
@@ -1201,27 +1207,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1011">
-          <caret line="472" column="37" lean-forward="false" selection-start-line="472" selection-start-column="37" selection-end-line="472" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="40" column="1" lean-forward="true" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
+        <state relative-caret-position="600">
+          <caret line="40" column="1" lean-forward="false" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/massweight_vertintegral.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="86" column="76" lean-forward="false" selection-start-line="86" selection-start-column="76" selection-end-line="86" selection-end-column="76" />
+        <state relative-caret-position="1860">
+          <caret line="124" column="36" lean-forward="false" selection-start-line="124" selection-start-column="36" selection-end-line="124" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="853">
+          <caret line="429" column="0" lean-forward="false" selection-start-line="429" selection-start-column="0" selection-end-line="429" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="115" column="18" lean-forward="true" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
+          <folding>
+            <element signature="e#757#775#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

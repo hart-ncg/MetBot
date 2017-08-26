@@ -77,7 +77,7 @@ def massweight_vertintegral(var,levels,sfc_prs,prs_top,lev_units="hPa"):
 
 
 def massweight_vint_nosurf(var, levels, prs_top, lev_units="hPa"):
-    ''' integrated = massweight_vertintegral(var,levels,sfc_prs,prs_top,
+    ''' integrated = massweight_vertintegral(var,levels,prs_top,
                                             lev_units="hPa")
         Computed the mass weighted vertical integral of given gridded variable:
         verticalintegral = sum(var*dp/g) between surface and specified prs_top
@@ -110,22 +110,19 @@ def massweight_vint_nosurf(var, levels, prs_top, lev_units="hPa"):
         var = var[:, ::-1, :, :]
     levsgrid = np.tile(levels[nax, :, nax, nax], (nt, 1, ny, nx))  # grid with dimensions of var
     #  at each level values are all set to the level itself i.e. 1000, 925, 850, 700, etc.
-    sfcgrid = np.tile(sfc_prs[:, nax, :, :], (1, nz, 1, 1))  # copy the surface pressure input at all levels
     topgrid = np.tile(np.float32(prs_top),
                       (nt, nz, ny, nx))  # grid with dimensions of var, but all values are prs_top e.g. 700
     ilvs = np.int8(np.arange(len(levels)))  # integer counting each level, 0,1,2,3,4 etc. to nz in levels
     ilvgrid = np.tile(ilvs[nax, :, nax, nax], (nt, 1, ny, nx))  # grid size of var but with these counts at each level
     # equivalent to levsgrid but with counts - 0s instead of 1000s, 1s instead of 925s etc.
-    validlevels = ~(((levsgrid - topgrid) > 0) & (
-    (levsgrid - sfcgrid) < 0))  # boolean grid True/False to show levels we want to integrate
-    # removes levels above prs_top and below sfc_prs
+    validlevels = ~((levsgrid - topgrid) > 0) # boolean grid True/False to show levels we want to integrate
+    # removes levels above prs_top
     # but inverted so the ones we want are False (inverted using the tilde)
     # so it gives "True" for all the levels we want to mask
     # also it goes up to "prs_top" but not including
     levelsmasked = np.ma.MaskedArray(ilvgrid,
                                      mask=validlevels)  # Masks levels we dont want to integrate (from "count" grid)
-    ivalidbottom = levelsmasked.min(
-        1).data  # shape (time, lat, lon) for the count of the level we integrate from (often 0 or 1)
+    ivalidbottom = levelsmasked.min(1).data  # shape (time, lat, lon) for the count of the level we integrate from (often 0 or 1)
     ivalidbottom = np.tile(ivalidbottom[:, nax, :, :], (1, nz, 1, 1))  # copying this to all levels
     lowestlev_mask = ivalidbottom == ilvgrid  # mask to show where masked because below surface
     ivalidtop = levelsmasked.max(1).data  # shape (time, lat, lon) for the count of the level we integrate to
