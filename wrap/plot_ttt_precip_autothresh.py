@@ -38,7 +38,8 @@ import mpl_toolkits.basemap as bm
 ### Running options
 sub="SA"
 subrain="SA_TRMM"
-seasopt="coreseason"    # options: coreseason, dryseason, fullseason
+#subrain="SA_CONT"
+seasopt="fullseason"    # options: coreseason, dryseason, fullseason
 testyear=True           # To use output from a test
 testfile=True           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
@@ -225,7 +226,7 @@ for d in range(ndset):
             ### Plot rainmaps
             prbase=prdir+dset+"/"
             my.mkdir_p(prbase)
-            mapsuf = seasopt+'_'+dset+'_'+name+'_'+thre_str
+            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str
             if testfile or testyear:
                 testq=True
             else:

@@ -226,10 +226,10 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
     # Get multiplot
     if len(mns)==12:
         plt.close()
-        g, axls = plt.subplots(figsize=[12,10])
+        g, axls = plt.subplots(figsize=[12,12])
     elif len(mns)==6:
         plt.close()
-        g, axls = plt.subplots(figsize=[12,10])
+        g, axls = plt.subplots(figsize=[12,12])
     cnt=1
     msklist=[]
     for mn in mns:
@@ -312,7 +312,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 syp.redrawmap(m,lns=True,resol='verylow')
         cnt+=1
         msklist.append(data4plot)
-    plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.02,wspace=0.02,hspace=0.2)
+    plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.05,wspace=0.2,hspace=0.2)
     axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
     #axcl = g.add_axes([0.91, 0.1, 0.01, 0.12]) # small cbar for paper
     if test:
