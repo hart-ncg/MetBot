@@ -188,44 +188,40 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
             plt.savefig(stats.figdir+file_suffix+'_cbcount.png',dpi=150)
 
 
-def gridrainmap_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,season='coreseason',key='noaa-olr-0-0',ptype='per_ttt',file_suffix='test',savefig=False):
+def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',key='noaa-olr-0-0',\
+                       ptype='per_ttt',under_of='dayof',figdir='test',file_suffix='test',savefig=False, test=True):
     '''Produces subplots of ttt rainfall by month
     need to open the rain data with lon and lat and also the synop file
-    see e.g. rainmap_test_months.py
+    see e.g. plot_ttt_precip_autothresh.py
 
     plot types
         tot_all - sum of total precip
         tot_ttt - sum of precip under TTTs
         per_ttt - percent of precip under TTTs
+    under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
-    mbkl=key.split('-')
     if not eventkeys:
         eventkeys=[]
         for ed in s.uniques:
             eventkeys.append(ed[0])
 
-    if yrs == None:
-        print "No years specified"
-        yrs = np.unique(rdtime[:,0])
-    else:
-        print "years specified"
-        print yrs
-        yrs=yrs
-    print yrs
+    yrs = np.unique(rdtime[:,0])
 
-    nlon=len(lon)
-    nlat=len(lat)
+    nlon=len(rlon)
+    nlat=len(rlat)
 
-   # Get months
+    # Get months
     if isinstance(season,str):
         if season=='coreseason':mns=[10,11,12,1,2,3]
         elif season=='fullseason':mns=[8,9,10,11,12,1,2,3,4,5,6,7]
         elif season == 'dryseason':mns = [4, 5, 6, 7, 8, 9]
     elif isinstance(season,list):
         mns=season
+    print season
+    print mns
 
     # Draw basemap
-    m, f = blb.SAfrBasemap(lat,lon,drawstuff=True,prj='cyl',fno=figno,rsltn='l')
+    m, f = blb.SAfrBasemap(rlat,rlon,drawstuff=True,prj='cyl',fno=1,rsltn='l')
 
     # Get multiplot
     if len(mns)==12:
@@ -237,14 +233,12 @@ def gridrainmap_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,seas
     cnt=1
     msklist=[]
     for mn in mns:
-        print mn
+        print 'Plotting month '+str(mn)
 
         if len(mns)==12:plt.subplot(4,3,cnt)
         elif len(mns)==6:plt.subplot(3,2,cnt)
 
         # Get the plot data (allmask)
-        speckeys = stats.specificmon(s,eventkeys,yrs,mn,mbkl[0])
-
         #All rain
         firstyear=yrs[0]
         lastyear=yrs[len(yrs)-1]
@@ -258,10 +252,15 @@ def gridrainmap_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,seas
         rainsum_all=np.nansum(rainmon,0)
 
         if ptype=='tot_all':
-            allmask=rainsum_all
+            data4plot=rainsum_all
+
         else:
+
             #TTT rain
-            rain4plot = stats.griddedrainmasks(s,speckeys,raingrid,refkey=key)
+            speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
+            raingrid=(rain,rdtime,(rlon,rlat))
+            if under_of=='under':
+                rain4plot = stats.griddedrainmasks(s,speckeys,raingrid,refkey=key)
 
             nevent=rain4plot.shape[0]
             data2sum=np.zeros((nevent,nlat,nlon),dtype=np.float32)
@@ -273,39 +272,32 @@ def gridrainmap_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,seas
             rainsum_ttt=np.nansum(data2sum,0)
 
             if ptype=='tot_ttt':
-                allmask=rainsum_ttt
+                data4plot=rainsum_ttt
             elif ptype=='per_ttt':
                 rainperc_ttt=(rainsum_ttt/rainsum_all)*100
-                allmask=rainperc_ttt
-            elif ptype=='rainperttt':
-                dclim=(1,9,1)
-                spatiofreq=stats.spatiofreq2(m,s,lat,lon,yrs,speckeys,clim=dclim,key=key,month=mn,flagonly=True)
+                data4plot=rainperc_ttt
 
         #Plot
-        plon,plat = np.meshgrid(lon,lat)
+        plon,plat = np.meshgrid(rlon,rlat)
+
         if ptype=='per_ttt':
             clevs=[0,10,20,30,40,50,60,70,80]
-            #cm=plt.cm.viridis
+            cticks = clevs
             cm = plt.cm.YlGnBu
-            #cm=plt.cm.cubehelix
-            cs = m.contourf(plon,plat,allmask,clevs,cmap=cm,extend='both')
         elif ptype=='tot_all':
             clevs=[0,800,1600,2400,3200,4000,4800,5600]
+            cticks = clevs
             cm=plt.cm.viridis
-            #cm=plt.cm.cubehelix
-            cs = m.contourf(plon,plat,allmask,clevs,cmap=cm,extend='both')
         elif ptype=='tot_ttt':
-            #clevs=[0,150,300,450,600,750,900,1050,1200,1350,1500]
             clevs=[0,250,500,750,1000,1250,1500,1750,2000]
             cticks = [0,500,1000,1500,2000]
-            #cm=plt.cm.viridis
-            #cm=plt.cm.Blues
-            #cm=plt.cm.terrain_r
-            #cm=plt.cm.GnBu
             cm=plt.cm.YlGnBu
-            #cm=plt.cm.cubehelix
-            cs = m.contourf(plon,plat,allmask,clevs,cmap=cm,extend='both')
-        plt.title(monthname[mn-1])
+
+        if test:
+            cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
+        else:
+            cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
+        plt.title(stats.mndict[mn])
 
         # redraw - only label latitudes if plot is on left
         if len(mns)==12:
@@ -319,18 +311,21 @@ def gridrainmap_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,seas
             else:
                 syp.redrawmap(m,lns=True,resol='verylow')
         cnt+=1
-        msklist.append(allmask)
+        msklist.append(data4plot)
     plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.02,wspace=0.02,hspace=0.2)
-    #axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
-    axcl = g.add_axes([0.91, 0.1, 0.01, 0.12]) # small cbar for paper
-    cbar = plt.colorbar(cs,cax=axcl,ticks=cticks)
+    axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
+    #axcl = g.add_axes([0.91, 0.1, 0.01, 0.12]) # small cbar for paper
+    if test:
+        cbar = plt.colorbar(cs, cax=axcl)
+    else:
+        cbar = plt.colorbar(cs,cax=axcl,ticks=cticks)
     if ptype=='per_ttt':cbar.set_label('%')
     else:cbar.set_label('mm')
 
     if savefig:
-        plt.savefig('Grid_pcent_TTTrain_months_'+file_suffix+'.png',dpi=150)
+        plt.savefig(figdir+'/Rainmap_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
 
-    return msklist
+    return data4plot
 
 def gridrainmap_bias_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,season='coreseason',key='um-olr-0-0',ptype='diff_tot',file_suffix='test',savefig=False):
     '''Produces subplots of ttt rainfall by month

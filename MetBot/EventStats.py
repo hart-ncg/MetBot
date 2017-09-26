@@ -154,7 +154,7 @@ def specificseasons(s,eventkeys,seasonstartyr,startd=[10,01],endd=[4,30]):
 
     return specifickeys
 
-def specificmon(s,eventkeys,yrs,month,dset):
+def specificmon(s,eventkeys,yrs,month,cal):
     '''Uses timesubset function to return keys for specific month and years'''
     if not eventkeys:
         eventkeys=[]
@@ -163,8 +163,8 @@ def specificmon(s,eventkeys,yrs,month,dset):
     specifickeys=[]
     for yr in yrs:
         dstart=[yr,month,1,0]
-        if dset=='noaa':lastday=monthends[month-1]
-        if dset=='um':lastday=monthends360[month-1]
+        if cal=='360_day':lastday=monthends360[month-1]
+        else:lastday=monthends[month-1]
         dend = [yr,month,lastday,0]
         datetup = (dstart,dend)
         seasevents = timesubset(s,eventkeys,datetup)
