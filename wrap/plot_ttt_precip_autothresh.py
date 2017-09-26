@@ -37,9 +37,10 @@ import mpl_toolkits.basemap as bm
 
 ### Running options
 sub="SA"
-subrain="SA_TRMM"
+#subrain="SA_TRMM"
 #subrain="SA_CONT"
-seasopt="fullseason"    # options: coreseason, dryseason, fullseason
+subrain="UM_FOC"
+seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 testyear=True           # To use output from a test
 testfile=True           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
