@@ -163,8 +163,10 @@ def specificmon(s,eventkeys,yrs,month,cal):
     specifickeys=[]
     for yr in yrs:
         dstart=[yr,month,1,0]
-        if cal=='360_day':lastday=monthends360[month-1]
-        else:lastday=monthends[month-1]
+        if cal=='360_day':
+            lastday=monthends360[month-1]
+        else:
+            lastday=monthends[month-1]
         dend = [yr,month,lastday,0]
         datetup = (dstart,dend)
         seasevents = timesubset(s,eventkeys,datetup)

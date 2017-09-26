@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/mynetcdf.py" afterPath="$PROJECT_DIR$/MetBot/mynetcdf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/EventStats.py" afterPath="$PROJECT_DIR$/MetBot/EventStats.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -20,7 +18,7 @@
     <SUITE FILE_PATH="coverage/MetBot$output_tsteps4SOM.coverage" NAME="output_tsteps4SOM Coverage Results" MODIFIED="1491576002310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_loop_autothresh.coverage" NAME="get_ttcbs_loop_autothresh Coverage Results" MODIFIED="1492595581103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_test.coverage" NAME="get_ttcbs_test Coverage Results" MODIFIED="1494262199840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
-    <SUITE FILE_PATH="coverage/MetBot$plot_ttt_precip_autothresh.coverage" NAME="plot_ttt_precip_autothresh Coverage Results" MODIFIED="1506441255204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
+    <SUITE FILE_PATH="coverage/MetBot$plot_ttt_precip_autothresh.coverage" NAME="plot_ttt_precip_autothresh Coverage Results" MODIFIED="1506444208242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$AdvancedPlots.coverage" NAME="AdvancedPlots Coverage Results" MODIFIED="1506437594002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MetBot" />
     <SUITE FILE_PATH="coverage/MetBot$plot_compare_olr_dist_thresh.coverage" NAME="plot_compare_olr_dist_thresh Coverage Results" MODIFIED="1491906956542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
   </component>
@@ -33,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="41" column="13" lean-forward="false" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+            <state relative-caret-position="-1777">
+              <caret line="84" column="23" lean-forward="true" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -46,8 +44,8 @@
       <file leaf-file-name="mynetcdf.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="67" column="48" lean-forward="false" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
+            <state relative-caret-position="300">
+              <caret line="68" column="29" lean-forward="false" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -56,8 +54,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="314" column="75" lean-forward="false" selection-start-line="314" selection-start-column="75" selection-end-line="314" selection-end-column="75" />
+            <state relative-caret-position="198">
+              <caret line="259" column="67" lean-forward="true" selection-start-line="259" selection-start-column="12" selection-end-line="259" selection-end-column="67" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -65,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11745">
-              <caret line="793" column="59" lean-forward="false" selection-start-line="793" selection-start-column="54" selection-end-line="793" selection-end-column="59" />
+            <state relative-caret-position="323">
+              <caret line="164" column="29" lean-forward="true" selection-start-line="164" selection-start-column="29" selection-end-line="164" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -86,7 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>np.zeros</find>
       <find>ion</find>
       <find>sa</find>
       <find>dtime2arr</find>
@@ -95,7 +92,6 @@
       <find>opennc</find>
       <find>opennc2</find>
       <find>figsize</find>
-      <find>griddedrainmasks</find>
       <find>rain</find>
       <find>subrain</find>
       <find>thresh</find>
@@ -115,7 +111,9 @@
       <find>rdtime</find>
       <find>mndict</find>
       <find>rcal</find>
+      <find>monthends</find>
       <find>testq</find>
+      <find>griddedrainmasks</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,10 +138,10 @@
         <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
         <option value="$PROJECT_DIR$/MetBot/massweight_vertintegral.py" />
         <option value="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" />
-        <option value="$PROJECT_DIR$/MetBot/EventStats.py" />
+        <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
         <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
         <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-        <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
+        <option value="$PROJECT_DIR$/MetBot/EventStats.py" />
       </list>
     </option>
   </component>
@@ -863,7 +861,21 @@
       <option name="project" value="LOCAL" />
       <updated>1506440090396</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Edits to wrapper to plot rainfall maps">
+      <created>1506441295022</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1506441295022</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Edits to wrapper to plot rainfall maps">
+      <created>1506441857040</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1506441857040</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -927,7 +939,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Small edits to fix dtime for cdr" />
     <MESSAGE value="Fix open_multi" />
     <MESSAGE value="New wrapper to run on flagged days only" />
     <MESSAGE value="Editing dictionaries to open OLR data" />
@@ -952,7 +963,8 @@
     <MESSAGE value="Edit to CMIP5 pressure in dict" />
     <MESSAGE value="Edit to OLR hist wrapper to run for FCFA poster" />
     <MESSAGE value="Adding wrapper to plot rainfall maps" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding wrapper to plot rainfall maps" />
+    <MESSAGE value="Edits to wrapper to plot rainfall maps" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edits to wrapper to plot rainfall maps" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1268,14 +1280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11745">
-          <caret line="793" column="59" lean-forward="false" selection-start-line="793" selection-start-column="54" selection-end-line="793" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4230">
@@ -1288,26 +1292,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="67" column="48" lean-forward="false" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
+        <state relative-caret-position="300">
+          <caret line="68" column="29" lean-forward="false" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1777">
+          <caret line="84" column="23" lean-forward="true" selection-start-line="84" selection-start-column="23" selection-end-line="84" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="314" column="75" lean-forward="false" selection-start-line="314" selection-start-column="75" selection-end-line="314" selection-end-column="75" />
+        <state relative-caret-position="198">
+          <caret line="259" column="67" lean-forward="true" selection-start-line="259" selection-start-column="12" selection-end-line="259" selection-end-column="67" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
+    <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="41" column="13" lean-forward="false" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+        <state relative-caret-position="323">
+          <caret line="164" column="29" lean-forward="true" selection-start-line="164" selection-start-column="29" selection-end-line="164" selection-end-column="29" />
           <folding />
         </state>
       </provider>
