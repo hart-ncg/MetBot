@@ -248,6 +248,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         newdates=rdtime[raindat]
         ix=np.where((newdates[:,1]==mn))
         rainmon=rainperiod[ix,:,:]
+        datesmon=newdates[ix]
         rainmon=np.squeeze(rainmon)
         rainsum_all=np.nansum(rainmon,0)
 
@@ -257,19 +258,40 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         else:
 
             #TTT rain
-            speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
-            raingrid=(rain,rdtime,(rlon,rlat))
-            if under_of=='under':
+            if under_of=='dayof':
+                edts = []
+                indices = []
+                for k in ks:
+                    e = s.events[k]
+                    dts = s.blobs[key]['mbt'][e.ixflags]
+                    for dt in range(len(dts)):
+                        edts.append(dts[dt])
+                        # Check if it matches dtime
+                        ix = my.ixdtimes(datesmon, [dts[dt][0]], \
+                                         [dts[dt][1]], [dts[dt][2]], [0])
+                        indices.append(ix)
+                edts = np.asarray(edts)
+                edts[:, 3] = 0
+                indices = np.asarray(indices)
+                indices = np.unique(indices)
+                print "Number of original TTT days found =  " + str(len(indices_m1))
+
+                rainsel=rainmon[indices,:,:]
+                rainsum_ttt=np.nansum(rainsel,0)
+
+            elif under_of=='under':
+                speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
+                raingrid=(rain,rdtime,(rlon,rlat))
                 rain4plot = stats.griddedrainmasks(s,speckeys,raingrid,refkey=key)
 
-            nevent=rain4plot.shape[0]
-            data2sum=np.zeros((nevent,nlat,nlon),dtype=np.float32)
-            for e in xrange(nevent):
-                data=rain4plot[e]
-                ntstep=len(data[:,0,0])
-                data2sum[e,:,:]=np.nansum(data,0)
+                nevent=rain4plot.shape[0]
+                data2sum=np.zeros((nevent,nlat,nlon),dtype=np.float32)
+                for e in xrange(nevent):
+                    data=rain4plot[e]
+                    ntstep=len(data[:,0,0])
+                    data2sum[e,:,:]=np.nansum(data,0)
 
-            rainsum_ttt=np.nansum(data2sum,0)
+                rainsum_ttt=np.nansum(data2sum,0)
 
             if ptype=='tot_ttt':
                 data4plot=rainsum_ttt

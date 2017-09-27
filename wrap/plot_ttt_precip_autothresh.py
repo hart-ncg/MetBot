@@ -221,6 +221,8 @@ for d in range(ndset):
 
             ### Select events
             ks = s.events.keys();ks.sort() # all
+            count_all=str(int(len(ks)))
+            print "Total CB events ="+str(count_all)
             kw, ke = stats.spatialsubset(s,False,cutlon=40.) # events west and east of 40E
 
 
