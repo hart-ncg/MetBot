@@ -55,6 +55,7 @@ under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
 
 freecol=False           # free colour bar
+refkey='0'              # 0 or all
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 prdir=bkdir+"precip_figs/"
@@ -240,15 +241,15 @@ for d in range(ndset):
                 # Only plot this for one threshold
                 if t==0:
                     print 'Plotting all rain'
-                    msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-0',\
+                    msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
                            ptype='tot_all',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
 
             if tot_ttt_plot:
                 print 'Plotting all rain from TTTs'
-                msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-0',\
+                msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
                        ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
 
             if per_ttt_plot:
                 print 'Plotting percentage rain from TTTs'
-                msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-0',\
+                msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
                        ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)

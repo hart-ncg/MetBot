@@ -32,24 +32,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="228" column="29" lean-forward="true" selection-start-line="228" selection-start-column="29" selection-end-line="228" selection-end-column="29" />
+            <state relative-caret-position="-2424">
+              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="208" column="0" lean-forward="true" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
+            <state relative-caret-position="261">
+              <caret line="309" column="53" lean-forward="true" selection-start-line="309" selection-start-column="53" selection-end-line="309" selection-end-column="53" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SynopticAnatomy.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/SynopticAnatomy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="644" column="19" lean-forward="false" selection-start-line="644" selection-start-column="13" selection-end-line="644" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MetBlobs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/MetBlobs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5718">
+              <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="10" />
+              <folding>
+                <element signature="e#377#389#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mytools.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="476" column="12" lean-forward="false" selection-start-line="476" selection-start-column="4" selection-end-line="476" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,10 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sa</find>
-      <find>dtime2arr</find>
-      <find>isub</find>
-      <find>isubs</find>
       <find>opennc</find>
       <find>opennc2</find>
       <find>figsize</find>
@@ -105,6 +133,10 @@
       <find>griddedrainmasks</find>
       <find>timesubset</find>
       <find>gridded</find>
+      <find>mbopen</find>
+      <find>ixflags</find>
+      <find>trktim</find>
+      <find>refkey</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -873,7 +905,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506444710167</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Edits to wrapper to plot rainfall maps - rain on TTT days">
+      <created>1506502940229</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1506502940229</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -937,7 +976,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix open_multi" />
     <MESSAGE value="New wrapper to run on flagged days only" />
     <MESSAGE value="Editing dictionaries to open OLR data" />
     <MESSAGE value="Fix mynetcdf for multilev cmip5 files - latitude switch" />
@@ -962,11 +1000,12 @@
     <MESSAGE value="Edit to OLR hist wrapper to run for FCFA poster" />
     <MESSAGE value="Adding wrapper to plot rainfall maps" />
     <MESSAGE value="Edits to wrapper to plot rainfall maps" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edits to wrapper to plot rainfall maps" />
+    <MESSAGE value="Edits to wrapper to plot rainfall maps - rain on TTT days" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edits to wrapper to plot rainfall maps - rain on TTT days" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="67" />
+      <option name="time" value="70" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1178,13 +1217,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="476" column="12" lean-forward="false" selection-start-line="476" selection-start-column="4" selection-end-line="476" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_nttt_bar_multi_dset_oldthresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -1227,13 +1259,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/SynopticAnatomy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="129" column="14" lean-forward="false" selection-start-line="129" selection-start-column="10" selection-end-line="129" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_ts_sc_sf_loop_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -1262,13 +1287,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/MetBlobs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="26" lean-forward="true" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4230">
@@ -1292,21 +1310,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+    <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="208" column="0" lean-forward="true" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
+        <state relative-caret-position="379">
+          <caret line="476" column="12" lean-forward="false" selection-start-line="476" selection-start-column="4" selection-end-line="476" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/MetBlobs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5718">
+          <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="10" />
           <folding>
-            <element signature="e#19#47#0" expanded="true" />
+            <element signature="e#377#389#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/SynopticAnatomy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="644" column="19" lean-forward="false" selection-start-line="644" selection-start-column="13" selection-end-line="644" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="228" column="29" lean-forward="true" selection-start-line="228" selection-start-column="29" selection-end-line="228" selection-end-column="29" />
+        <state relative-caret-position="-2424">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="309" column="53" lean-forward="true" selection-start-line="309" selection-start-column="53" selection-end-line="309" selection-end-column="53" />
+          <folding>
+            <element signature="e#19#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

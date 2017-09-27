@@ -207,6 +207,29 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
     yrs = np.unique(rdtime[:,0])
 
+    # Get list of dates for these events
+    edts = []
+    ecnt=1
+    for k in eventkeys:
+        e = s.events[k]
+        dts = s.blobs[key]['mbt'][e.ixflags]
+        #dts=e.trkdtimes
+        for dt in range(len(dts)):
+            if ecnt==1:
+                edts.append(dts[dt])
+            else:
+                tmpdt=np.asarray(edts)
+                # Check if it exists already
+                ix = my.ixdtimes(tmpdt, [dts[dt][0]], \
+                     [dts[dt][1]], [dts[dt][2]], [0])
+                if len(ix)==0:
+                    edts.append(dts[dt])
+            ecnt+=1
+    edts = np.asarray(edts)
+    edts[:, 3] = 0
+    print "Number of original TTT days found =  " + str(len(edts))
+
+    # Get n lat and lon
     nlon=len(rlon)
     nlat=len(rlat)
 
@@ -259,22 +282,17 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
             #TTT rain
             if under_of=='dayof':
-                edts = []
+                ix2=np.where((edts[:,1]==mn))
+                edatesmon=edts[ix2]
+
                 indices = []
-                for k in ks:
-                    e = s.events[k]
-                    dts = s.blobs[key]['mbt'][e.ixflags]
-                    for dt in range(len(dts)):
-                        edts.append(dts[dt])
-                        # Check if it matches dtime
-                        ix = my.ixdtimes(datesmon, [dts[dt][0]], \
-                                         [dts[dt][1]], [dts[dt][2]], [0])
+                for edt in range(len(edatesmon)):
+                    ix = my.ixdtimes(datesmon, [edatesmon[edt][0]], \
+                                 [edatesmon[edt][1]], [edatesmon[edt][2]], [0])
+                    if len(ix)>=1:
                         indices.append(ix)
-                edts = np.asarray(edts)
-                edts[:, 3] = 0
-                indices = np.asarray(indices)
-                indices = np.unique(indices)
-                print "Number of original TTT days found =  " + str(len(indices_m1))
+                indices = np.squeeze(np.asarray(indices))
+                print "Number of TTT days found in rain dataset for mon "+str(mn)+" =  " + str(len(indices))
 
                 rainsel=rainmon[indices,:,:]
                 rainsum_ttt=np.nansum(rainsel,0)
@@ -296,7 +314,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             if ptype=='tot_ttt':
                 data4plot=rainsum_ttt
             elif ptype=='per_ttt':
-                rainperc_ttt=(rainsum_ttt/rainsum_all)*100
+                rainperc_ttt=(rainsum_ttt/rainsum_all)*100.0
                 data4plot=rainperc_ttt
 
         #Plot
