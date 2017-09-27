@@ -204,7 +204,7 @@ for d in range(ndset):
             uppert = thresh + 5
             threshs = [lowert, thresh, uppert]
         else:
-            threshs = thresh
+            threshs = [thresh]
         ### Loop threshes
         nthresh=len(threshs)
         for t in range(nthresh):

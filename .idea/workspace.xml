@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,65 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="41" column="17" lean-forward="true" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="328" column="55" lean-forward="true" selection-start-line="328" selection-start-column="55" selection-end-line="328" selection-end-column="55" />
-              <folding>
-                <element signature="e#19#47#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SynopticAnatomy.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/SynopticAnatomy.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="644" column="19" lean-forward="false" selection-start-line="644" selection-start-column="13" selection-end-line="644" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MetBlobs.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/MetBlobs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5718">
-              <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="10" />
-              <folding>
-                <element signature="e#377#389#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mytools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="476" column="12" lean-forward="false" selection-start-line="476" selection-start-column="4" selection-end-line="476" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="1184" column="11" lean-forward="false" selection-start-line="1184" selection-start-column="4" selection-end-line="1184" selection-end-column="11" />
+            <state relative-caret-position="279">
+              <caret line="210" column="33" lean-forward="true" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -106,7 +52,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>opennc</find>
       <find>opennc2</find>
       <find>figsize</find>
       <find>rain</find>
@@ -134,8 +79,9 @@
       <find>gridded</find>
       <find>mbopen</find>
       <find>ixflags</find>
-      <find>trktim</find>
       <find>refkey</find>
+      <find>trktim</find>
+      <find>threshtest</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -162,8 +108,8 @@
         <option value="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" />
         <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
         <option value="$PROJECT_DIR$/MetBot/EventStats.py" />
-        <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
         <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
+        <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
       </list>
     </option>
   </component>
@@ -174,10 +120,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-64" />
-    <option name="y" value="115" />
-    <option name="width" value="1590" />
-    <option name="height" value="654" />
+    <option name="y" value="27" />
+    <option name="width" value="1600" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -604,13 +549,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00003" summary="Small edits to re-run test on server">
-      <created>1491904086278</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1491904086278</updated>
-    </task>
     <task id="LOCAL-00004" summary="Small edits to fix dtime for cdr">
       <created>1491904957996</created>
       <option name="number" value="00004" />
@@ -947,21 +885,28 @@
       <option name="project" value="LOCAL" />
       <updated>1506510258912</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Edits to wrapper to plot rainfall maps - rain on TTT days">
+      <created>1506510403601</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1506510403601</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-64" y="115" width="1590" height="654" extended-state="0" />
+    <frame x="0" y="27" width="1600" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24124514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23969072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32112333" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32010943" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30198675" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46484375" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3255814" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1363,6 +1308,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="328" column="55" lean-forward="true" selection-start-line="328" selection-start-column="55" selection-end-line="328" selection-end-column="55" />
+          <folding>
+            <element signature="e#19#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/SynopticAnatomy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="537">
@@ -1373,19 +1328,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="41" column="17" lean-forward="true" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        <state relative-caret-position="279">
+          <caret line="210" column="33" lean-forward="true" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="328" column="55" lean-forward="true" selection-start-line="328" selection-start-column="55" selection-end-line="328" selection-end-column="55" />
-          <folding>
-            <element signature="e#19#47#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
