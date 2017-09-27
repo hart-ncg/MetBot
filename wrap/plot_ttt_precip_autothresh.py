@@ -45,9 +45,9 @@ testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
-threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
+threshtest=True         # Option to run on thresholds + and - 5Wm2 as a test
 
-allplot=True            # plot total rainfall
+allplot=False            # plot total rainfall
 tot_ttt_plot=True      # plot total rainfall from TTTs
 per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 
@@ -55,7 +55,7 @@ under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
 
 freecol=False           # free colour bar
-refkey='0'              # 0 or all
+refkey='all'              # 0 or all
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 prdir=bkdir+"precip_figs/"
