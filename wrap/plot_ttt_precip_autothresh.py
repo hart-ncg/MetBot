@@ -55,7 +55,9 @@ under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
 
 freecol=False           # free colour bar
-refkey='all'              # 0 or all
+refkey='0'            # 0 or all
+doms=['All','Cont','Mada'] # doms for TTT days selected
+
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 prdir=bkdir+"precip_figs/"
@@ -83,7 +85,7 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['noaa']
+        mnames=['cdr']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -225,7 +227,7 @@ for d in range(ndset):
             count_all=str(int(len(ks)))
             print "Total CB events ="+str(count_all)
             kw, ke = stats.spatialsubset(s,False,cutlon=40.) # events west and east of 40E
-
+            keys=[ks,kw,ke]
 
             ### Plot rainmaps
             prbase=prdir+dset+"/"
@@ -244,12 +246,19 @@ for d in range(ndset):
                     msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
                            ptype='tot_all',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
 
-            if tot_ttt_plot:
-                print 'Plotting all rain from TTTs'
-                msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                       ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+            # Loop domains
+            for do in range(len(doms)):
+                domname=doms[do]
+                eventkeys=keys[do]
 
-            if per_ttt_plot:
-                print 'Plotting percentage rain from TTTs'
-                msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                       ptype='per_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+                mapsuf=mapsuf+domname
+                
+                if tot_ttt_plot:
+                    print 'Plotting all rain from TTTs'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
+                           ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+
+                if per_ttt_plot:
+                    print 'Plotting percentage rain from TTTs'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
+                           ptype='per_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
