@@ -37,9 +37,9 @@ import mpl_toolkits.basemap as bm
 
 ### Running options
 sub="SA"
-#subrain="SA_TRMM"
+subrain="SA_TRMM"
 #subrain="SA_CONT"
-subrain="UM_FOC"
+#subrain="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
@@ -230,7 +230,7 @@ for d in range(ndset):
             ### Plot rainmaps
             prbase=prdir+dset+"/"
             my.mkdir_p(prbase)
-            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str
+            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey
             if testfile or testyear:
                 testq=True
             else:
@@ -252,4 +252,4 @@ for d in range(ndset):
             if per_ttt_plot:
                 print 'Plotting percentage rain from TTTs'
                 msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                       ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+                       ptype='per_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
