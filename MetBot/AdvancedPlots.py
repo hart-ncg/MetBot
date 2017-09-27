@@ -295,7 +295,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 print "Number of TTT days found in rain dataset for mon "+str(mn)+" =  " + str(len(indices))
 
                 if len(indices)==0:
-                    rainsum_ttt=np.zeros(nlon,nlat)
+                    rainsum_ttt=np.zeros((nlat,nlon),dtype=np.float32)
                 else:
                     rainsel=rainmon[indices,:,:]
                     rainsum_ttt=np.nansum(rainsel,0)

@@ -34,8 +34,8 @@
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="210" column="33" lean-forward="false" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
+            <state relative-caret-position="270">
+              <caret line="159" column="0" lean-forward="true" selection-start-line="150" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -44,8 +44,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="312" column="53" lean-forward="true" selection-start-line="312" selection-start-column="53" selection-end-line="312" selection-end-column="53" />
+            <state relative-caret-position="159">
+              <caret line="298" column="21" lean-forward="true" selection-start-line="298" selection-start-column="21" selection-end-line="298" selection-end-column="21" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -64,7 +64,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>opennc2</find>
       <find>figsize</find>
       <find>rain</find>
       <find>subrain</find>
@@ -93,6 +92,7 @@
       <find>ixflags</find>
       <find>refkey</find>
       <find>trktim</find>
+      <find>np.zeros</find>
       <find>threshtest</find>
     </findStrings>
   </component>
@@ -561,13 +561,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00005" summary="Fix open_multi">
-      <created>1491906989474</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1491906989474</updated>
-    </task>
     <task id="LOCAL-00006" summary="New wrapper to run on flagged days only">
       <created>1494259930486</created>
       <option name="number" value="00006" />
@@ -904,7 +897,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506515499225</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Small edits to precip function in AdvancedPlots.py">
+      <created>1506516753402</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1506516753402</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -968,7 +968,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Editing dictionaries to open OLR data" />
     <MESSAGE value="Fix mynetcdf for multilev cmip5 files - latitude switch" />
     <MESSAGE value="Editing dictionaries for NCEP omega" />
     <MESSAGE value="Editing dictionaries for NCEP wind" />
@@ -993,7 +992,8 @@
     <MESSAGE value="Edits to wrapper to plot rainfall maps" />
     <MESSAGE value="Edits to wrapper to plot rainfall maps - rain on TTT days" />
     <MESSAGE value="Small edits to precip wrapper" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small edits to precip wrapper" />
+    <MESSAGE value="Small edits to precip function in AdvancedPlots.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small edits to precip function in AdvancedPlots.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1330,16 +1330,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="210" column="33" lean-forward="false" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
+        <state relative-caret-position="270">
+          <caret line="159" column="0" lean-forward="true" selection-start-line="150" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="312" column="53" lean-forward="true" selection-start-line="312" selection-start-column="53" selection-end-line="312" selection-end-column="53" />
+        <state relative-caret-position="159">
+          <caret line="298" column="21" lean-forward="true" selection-start-line="298" selection-start-column="21" selection-end-line="298" selection-end-column="21" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
