@@ -40,12 +40,12 @@ sub="SA"
 subrain="SA_TRMM"
 #subrain="SA_CONT"
 #subrain="UM_FOC"
-seasopt="coreseason"    # options: coreseason, dryseason, fullseason
+seasopt="fullseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
-threshtest=True         # Option to run on thresholds + and - 5Wm2 as a test
+threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=True            # plot total rainfall
 tot_ttt_plot=True      # plot total rainfall from TTTs
