@@ -291,14 +291,20 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                                  [edatesmon[edt][1]], [edatesmon[edt][2]], [0])
                     if len(ix)>=1:
                         indices.append(ix)
-                indices = np.squeeze(np.asarray(indices))
+                if len(indices)>=2:
+                    indices = np.squeeze(np.asarray(indices))
+                else:
+                    indices = indices
                 print "Number of TTT days found in rain dataset for mon "+str(mn)+" =  " + str(len(indices))
 
                 if len(indices)==0:
                     rainsum_ttt=np.zeros((nlat,nlon),dtype=np.float32)
                 else:
                     rainsel=rainmon[indices,:,:]
-                    rainsum_ttt=np.nansum(rainsel,0)
+                    if len(indices)>=2:
+                        rainsum_ttt=np.nansum(rainsel,0)
+                    else:
+                        rainsum_ttt=np.squeeze(rainsel)
 
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
