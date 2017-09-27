@@ -330,7 +330,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         plon,plat = np.meshgrid(rlon,rlat)
 
         if ptype=='per_ttt':
-            clevs=[0,10,20,30,40,50,60,70,80]
+            #clevs=[0,10,20,30,40,50,60,70,80]
+            clevs=[0,5,10,15,20,25,30,35,40,45,50]
             cticks = clevs
             cm = plt.cm.gnuplot2
             #cm = plt.cm.cubehelix

@@ -4,7 +4,6 @@
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,8 +44,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="306" column="55" lean-forward="false" selection-start-line="306" selection-start-column="55" selection-end-line="306" selection-end-column="55" />
+            <state relative-caret-position="474">
+              <caret line="334" column="26" lean-forward="true" selection-start-line="334" selection-start-column="26" selection-end-line="334" selection-end-column="26" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -562,13 +561,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00009" summary="Editing dictionaries to open OLR data">
-      <created>1496935985233</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1496935985233</updated>
-    </task>
     <task id="LOCAL-00010" summary="Fix mynetcdf for multilev cmip5 files - latitude switch">
       <created>1497005858671</created>
       <option name="number" value="00010" />
@@ -905,7 +897,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506525305085</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Fix to wrapper to allow for 1 CB">
+      <created>1506526879314</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1506526879314</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -969,7 +968,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Editing dictionaries for NCEP omega" />
     <MESSAGE value="Editing dictionaries for NCEP wind" />
     <MESSAGE value="Editing dictionaries for CMIP5 wind" />
     <MESSAGE value="Editing dictionaries for ERAI wind" />
@@ -994,7 +992,8 @@
     <MESSAGE value="Small edits to precip wrapper" />
     <MESSAGE value="Small edits to precip function in AdvancedPlots.py" />
     <MESSAGE value="Edit to TTT precip wrapper to allow a split between the east and west" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit to TTT precip wrapper to allow a split between the east and west" />
+    <MESSAGE value="Fix to wrapper to allow for 1 CB" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix to wrapper to allow for 1 CB" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1339,8 +1338,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="306" column="55" lean-forward="false" selection-start-line="306" selection-start-column="55" selection-end-line="306" selection-end-column="55" />
+        <state relative-caret-position="474">
+          <caret line="334" column="26" lean-forward="true" selection-start-line="334" selection-start-column="26" selection-end-line="334" selection-end-column="26" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
