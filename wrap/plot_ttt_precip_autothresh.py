@@ -41,15 +41,15 @@ sub="SA"
 #subrain="SA_CONT"
 subrain="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
-testyear=True           # To use output from a test
-testfile=True           # Uses a test file with short period
+testyear=False           # To use output from a test
+testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
 threshtest=True         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=True            # plot total rainfall
-tot_ttt_plot=False      # plot total rainfall from TTTs
-per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
+tot_ttt_plot=True      # plot total rainfall from TTTs
+per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
