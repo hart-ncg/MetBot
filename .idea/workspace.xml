@@ -34,8 +34,8 @@
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="254" column="16" lean-forward="true" selection-start-line="254" selection-start-column="16" selection-end-line="254" selection-end-column="16" />
+            <state relative-caret-position="360">
+              <caret line="252" column="34" lean-forward="true" selection-start-line="252" selection-start-column="34" selection-end-line="252" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -561,13 +561,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00007" summary="New wrapper to run on flagged days only">
-      <created>1494262236770</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1494262236770</updated>
-    </task>
     <task id="LOCAL-00008" summary="Editing dictionaries to open OLR data">
       <created>1496932523917</created>
       <option name="number" value="00008" />
@@ -904,7 +897,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506517092994</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Edit to TTT precip wrapper to allow a split between the east and west">
+      <created>1506520069191</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1506520069192</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -968,7 +968,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix mynetcdf for multilev cmip5 files - latitude switch" />
     <MESSAGE value="Editing dictionaries for NCEP omega" />
     <MESSAGE value="Editing dictionaries for NCEP wind" />
     <MESSAGE value="Editing dictionaries for CMIP5 wind" />
@@ -993,7 +992,8 @@
     <MESSAGE value="Edits to wrapper to plot rainfall maps - rain on TTT days" />
     <MESSAGE value="Small edits to precip wrapper" />
     <MESSAGE value="Small edits to precip function in AdvancedPlots.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small edits to precip function in AdvancedPlots.py" />
+    <MESSAGE value="Edit to TTT precip wrapper to allow a split between the east and west" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit to TTT precip wrapper to allow a split between the east and west" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1340,8 +1340,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="254" column="16" lean-forward="true" selection-start-line="254" selection-start-column="16" selection-end-line="254" selection-end-column="16" />
+        <state relative-caret-position="360">
+          <caret line="252" column="34" lean-forward="true" selection-start-line="252" selection-start-column="34" selection-end-line="252" selection-end-column="34" />
           <folding />
         </state>
       </provider>

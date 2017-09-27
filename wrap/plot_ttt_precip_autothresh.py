@@ -79,7 +79,7 @@ for d in range(ndset):
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='spec'  # "all" or "spec" to choose specific model(s)
+    mods='all'  # "all" or "spec" to choose specific model(s)
     if mods=='all':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])
@@ -249,16 +249,17 @@ for d in range(ndset):
             # Loop domains
             for do in range(len(doms)):
                 domname=doms[do]
+                print "Running on domain: "+domname
                 eventkeys=keys[do]
 
-                mapsuf=mapsuf+domname
-                
+                newsuf=mapsuf+domname
+
                 if tot_ttt_plot:
                     print 'Plotting all rain from TTTs'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                           ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+                           ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)
 
                 if per_ttt_plot:
                     print 'Plotting percentage rain from TTTs'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                           ptype='per_ttt',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+                           ptype='per_ttt',under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)
