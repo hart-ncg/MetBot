@@ -58,7 +58,7 @@ monmean='mon'            # If true gets total TTT rainfall ave for each month
                         # 'mon' is monthly mean
                         # 'tot' is total
 
-freecol=True           # free colour bar
+freecol=False           # free colour bar
 refkey='0'            # 0 or all
 doms=['All']
 #doms=['All','Cont','Mada'] # doms for TTT days selected
