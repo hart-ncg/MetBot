@@ -189,7 +189,7 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
 
 
 def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',key='noaa-olr-0-0',\
-                       ptype='per_ttt',under_of='dayof',figdir='test',file_suffix='test',savefig=False, test=True):
+                       ptype='per_ttt',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',savefig=False, test=True):
     '''Produces subplots of ttt rainfall by month
     need to open the rain data with lon and lat and also the synop file
     see e.g. plot_ttt_precip_autothresh.py
@@ -274,9 +274,13 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         datesmon=newdates[ix]
         rainmon=np.squeeze(rainmon)
         rainsum_all=np.nansum(rainmon,0)
+        rainsum_monthly=rainsum_all/len(yrs)
 
         if ptype=='tot_all':
-            data4plot=rainsum_all
+            if mmean=='mon':
+                data4plot=rainsum_monthly
+            elif mmean=='tot':
+                data4plot=rainsum_all
 
         else:
 
@@ -305,6 +309,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                         rainsum_ttt=np.nansum(rainsel,0)
                     else:
                         rainsum_ttt=np.squeeze(rainsel)
+                rainsum_ttt_monthly=rainsum_ttt/len(yrs)
 
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
@@ -321,9 +326,15 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 rainsum_ttt=np.nansum(data2sum,0)
 
             if ptype=='tot_ttt':
-                data4plot=rainsum_ttt
+                if mmean == 'mon':
+                    data4plot = rainsum_ttt_monthly
+                elif mmean == 'tot':
+                    data4plot = rainsum_ttt
             elif ptype=='per_ttt':
-                rainperc_ttt=(rainsum_ttt/rainsum_all)*100.0
+                if mmean == 'mon':
+                    rainperc_ttt=(rainsum_ttt_monthly/rainsum_monthly)*100.0
+                elif mmean == 'tot':
+                    rainperc_ttt=(rainsum_ttt/rainsum_all)*100.0
                 data4plot=rainperc_ttt
 
         #Plot

@@ -40,23 +40,28 @@ sub="SA"
 subrain="SA_TRMM"
 #subrain="SA_CONT"
 #subrain="UM_FOC"
-seasopt="fullseason"    # options: coreseason, dryseason, fullseason
+seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
-threshtest=True         # Option to run on thresholds + and - 5Wm2 as a test
+threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
-allplot=False            # plot total rainfall
+allplot=True            # plot total rainfall
 tot_ttt_plot=True      # plot total rainfall from TTTs
 per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
+monmean='mon'            # If true gets total TTT rainfall ave for each month
+                        #   (rather than total for whole timeseries)
+                        # 'mon' is monthly mean
+                        # 'tot' is total
 
-freecol=False           # free colour bar
+freecol=True           # free colour bar
 refkey='0'            # 0 or all
-doms=['All','Cont','Mada'] # doms for TTT days selected
+doms=['All']
+#doms=['All','Cont','Mada'] # doms for TTT days selected
 
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
@@ -79,13 +84,13 @@ for d in range(ndset):
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='all'  # "all" or "spec" to choose specific model(s)
+    mods='spec'  # "all" or "spec" to choose specific model(s)
     if mods=='all':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['noaa']
+        mnames=['cdr']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -232,7 +237,7 @@ for d in range(ndset):
             ### Plot rainmaps
             prbase=prdir+dset+"/"
             my.mkdir_p(prbase)
-            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey
+            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
             if testfile or testyear:
                 testq=True
             else:
@@ -244,7 +249,7 @@ for d in range(ndset):
                 if t==0:
                     print 'Plotting all rain'
                     msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                           ptype='tot_all',under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+                           ptype='tot_all',mmean=monmean,under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
 
             # Loop domains
             for do in range(len(doms)):
@@ -252,14 +257,14 @@ for d in range(ndset):
                 print "Running on domain: "+domname
                 eventkeys=keys[do]
 
-                newsuf=mapsuf+domname
+                newsuf='_'+mapsuf+domname
 
                 if tot_ttt_plot:
                     print 'Plotting all rain from TTTs'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                           ptype='tot_ttt',under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)
+                           ptype='tot_ttt',mmean=monmean,under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)
 
                 if per_ttt_plot:
                     print 'Plotting percentage rain from TTTs'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                           ptype='per_ttt',under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)
+                           ptype='per_ttt',mmean=monmean,under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)
