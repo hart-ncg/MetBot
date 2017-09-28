@@ -40,7 +40,7 @@ sub="SA"
 subrain="SA_TRMM"
 #subrain="SA_CONT"
 #subrain="UM_FOC"
-seasopt="coreseason"    # options: coreseason, dryseason, fullseason
+seasopt="fullseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
@@ -48,9 +48,9 @@ testfile=False           # Uses a test file with short period
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=True            # plot total rainfall
-tot_ttt_plot=True      # plot total rainfall from TTTs
-per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
-rain_per_ttt_plot=False  # plot average rain per TTT day
+tot_ttt_plot=False      # plot total rainfall from TTTs
+per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
+rain_per_ttt_plot=True  # plot average rain per TTT day
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
@@ -60,10 +60,10 @@ monmean='day'            # If true gets total TTT rainfall ave for each month
                         # 'mon' is monthly mean
                         # 'tot' is total
 
-freecol=False           # free colour bar
+freecol=True           # free colour bar
 refkey='0'            # 0 or all
-doms=['All']
-#doms=['All','Cont','Mada'] # doms for TTT days selected
+#doms=['All']
+doms=['All','Cont','Mada'] # doms for TTT days selected
 
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
@@ -270,3 +270,8 @@ for d in range(ndset):
                     print 'Plotting percentage rain from TTTs'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
                            ptype='per_ttt',mmean=monmean,under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)
+
+                if rain_per_ttt_plot:
+                    print 'Plotting ave rain per TTT day'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
+                           ptype='rain_per_ttt',mmean=monmean,under_of=under_dayof,figdir=prbase,file_suffix=newsuf,savefig=True,test=testq)

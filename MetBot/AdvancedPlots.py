@@ -315,6 +315,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 rainsum_ttt_monthly=rainsum_ttt/len(yrs)
                 rainsum_ttt_daily=rainsum_ttt/len(datesmon)
 
+                rainperttt=rainsum_ttt/len(indices)
+
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
                 raingrid=(rain,rdtime,(rlon,rlat))
@@ -344,6 +346,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 elif mmean == 'tot':
                     rainperc_ttt=(rainsum_ttt/rainsum_all)*100.0
                 data4plot=rainperc_ttt
+            elif ptype=='rain_per_ttt':
+                data4plot=rainperttt
 
         #Plot
         plon,plat = np.meshgrid(rlon,rlat)
@@ -377,6 +381,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 clevs=[0,0.4,0.8,1.2,1.6,2.0,2.4,2.8,3.2,3.6,4.0]
                 cticks = clevs
             cm=plt.cm.YlGnBu
+        elif ptype=='rain_per_ttt':
+            cm = plt.cm.YlGnBu
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
