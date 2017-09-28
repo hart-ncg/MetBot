@@ -330,11 +330,11 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         plon,plat = np.meshgrid(rlon,rlat)
 
         if ptype=='per_ttt':
-            #clevs=[0,10,20,30,40,50,60,70,80]
             clevs=[0,10,20,30,40,50,60]
+            #clevs=[0,5,10,15,20,25,30,35,40,45,50,55,60]
             cticks = clevs
-            cm = plt.cm.gnuplot2_r
-            #cm = plt.cm.cubehelix
+            cm = plt.cm.gnuplot2
+            #cm = plt.cm.terrain_r
         elif ptype=='tot_all':
             clevs=[0,800,1600,2400,3200,4000,4800,5600]
             cticks = clevs
@@ -527,8 +527,8 @@ def gridrainmap_bias_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1
         plon,plat = np.meshgrid(lon,lat)
         if ptype=='diff_tot':
             clevs=[-1500,-1000,-500,0,500,1000,1500]
-            cm=plt.cm.RdBu
-            #cm=plt.cm.cubehelix
+            #cm=plt.cm.RdBu
+            cm=plt.cm.cubehelix_r
             cs = m.contourf(plon,plat,allmask,clevs,cmap=cm,extend='both')
         elif ptype=='diff_ttt':
             clevs=[-450,-300,-150,0,150,300,450]
