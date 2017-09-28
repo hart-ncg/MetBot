@@ -357,9 +357,10 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         elif ptype=='tot_all':
             if mmean=='tot':
                 clevs=[0,800,1600,2400,3200,4000,4800,5600]
+                cticks = clevs
             elif mmean=='mon':
                 clevs=[0,50,100,150,200,250,300,350]
-            cticks = clevs
+                cticks = clevs
             #cm=plt.cm.viridis
             cm = plt.cm.YlGnBu
         elif ptype=='tot_ttt':
