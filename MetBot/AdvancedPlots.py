@@ -375,6 +375,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 cticks = clevs
             elif mmean=='day':
                 clevs=[0,0.4,0.8,1.2,1.6,2.0,2.4,2.8,3.2,3.6,4.0]
+                cticks = clevs
             cm=plt.cm.YlGnBu
 
         if test:
