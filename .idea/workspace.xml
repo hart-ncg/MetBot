@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="Edit to precip wrapper to allow plotting per month">
+    <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
@@ -35,8 +35,8 @@
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="56" column="57" lean-forward="false" selection-start-line="56" selection-start-column="57" selection-end-line="56" selection-end-column="57" />
+            <state relative-caret-position="188">
+              <caret line="260" column="0" lean-forward="true" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -45,8 +45,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1793">
-              <caret line="199" column="46" lean-forward="true" selection-start-line="199" selection-start-column="46" selection-end-line="199" selection-end-column="46" />
+            <state relative-caret-position="112">
+              <caret line="347" column="34" lean-forward="true" selection-start-line="347" selection-start-column="34" selection-end-line="347" selection-end-column="34" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -121,8 +121,8 @@
         <option value="$PROJECT_DIR$/wrap/plot_compare_olr_dist_thresh.py" />
         <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
         <option value="$PROJECT_DIR$/MetBot/EventStats.py" />
-        <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
+        <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
       </list>
     </option>
   </component>
@@ -562,13 +562,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00013" summary="Editing dictionaries for NCEP omega">
-      <created>1497255783771</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1497255783771</updated>
-    </task>
     <task id="LOCAL-00014" summary="Editing dictionaries for NCEP wind">
       <created>1497260663139</created>
       <option name="number" value="00014" />
@@ -905,7 +898,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506588070525</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Edit to precip wrapper to allow plotting per month">
+      <created>1506610204452</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1506610204452</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -969,7 +969,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Editing dictionaries for ERAI wind" />
     <MESSAGE value="Editing dictionaries for CMIP5 models used in quicks" />
     <MESSAGE value="Editing dictionaries for CMIP5 models used in quicks - for q" />
     <MESSAGE value="Edits to add gpth" />
@@ -994,7 +993,8 @@
     <MESSAGE value="Fix to wrapper to allow for 1 CB" />
     <MESSAGE value="Change cbar for percent" />
     <MESSAGE value="Change cbar for percent - again" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change cbar for percent - again" />
+    <MESSAGE value="Edit to precip wrapper to allow plotting per month" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit to precip wrapper to allow plotting per month" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1324,8 +1324,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1793">
-          <caret line="199" column="46" lean-forward="true" selection-start-line="199" selection-start-column="46" selection-end-line="199" selection-end-column="46" />
+        <state relative-caret-position="112">
+          <caret line="347" column="34" lean-forward="true" selection-start-line="347" selection-start-column="34" selection-end-line="347" selection-end-column="34" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
@@ -1334,8 +1334,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="56" column="57" lean-forward="false" selection-start-line="56" selection-start-column="57" selection-end-line="56" selection-end-column="57" />
+        <state relative-caret-position="188">
+          <caret line="260" column="0" lean-forward="true" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
           <folding />
         </state>
       </provider>

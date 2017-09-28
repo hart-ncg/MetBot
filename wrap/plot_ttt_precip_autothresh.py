@@ -257,7 +257,7 @@ for d in range(ndset):
                 print "Running on domain: "+domname
                 eventkeys=keys[do]
 
-                newsuf='_'+mapsuf+domname
+                newsuf=mapsuf+'_'+domname
 
                 if tot_ttt_plot:
                     print 'Plotting all rain from TTTs'

@@ -347,13 +347,20 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             cm = plt.cm.gnuplot2
             #cm = plt.cm.terrain_r
         elif ptype=='tot_all':
-            clevs=[0,800,1600,2400,3200,4000,4800,5600]
+            if mmean=='tot':
+                clevs=[0,800,1600,2400,3200,4000,4800,5600]
+            elif mmean=='mon':
+                clevs=[0,50,100,150,200,250,300,350]
             cticks = clevs
             #cm=plt.cm.viridis
             cm = plt.cm.YlGnBu
         elif ptype=='tot_ttt':
-            clevs=[0,250,500,750,1000,1250,1500,1750,2000]
-            cticks = [0,500,1000,1500,2000]
+            if mmean=='tot':
+                clevs=[0,250,500,750,1000,1250,1500,1750,2000]
+                cticks = [0,500,1000,1500,2000]
+            elif mmean=='mon':
+                clevs=[0,20,40,60,80,100,120,140]
+                cticks = clevs
             cm=plt.cm.YlGnBu
 
         if test:
