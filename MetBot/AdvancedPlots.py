@@ -275,10 +275,13 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         rainmon=np.squeeze(rainmon)
         rainsum_all=np.nansum(rainmon,0)
         rainsum_monthly=rainsum_all/len(yrs)
+        rainsum_daily=rainsum_all/len(datesmon)
 
         if ptype=='tot_all':
             if mmean=='mon':
                 data4plot=rainsum_monthly
+            elif mmean=='day':
+                data4plot=rainsum_daily
             elif mmean=='tot':
                 data4plot=rainsum_all
 
@@ -310,6 +313,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                     else:
                         rainsum_ttt=np.squeeze(rainsel)
                 rainsum_ttt_monthly=rainsum_ttt/len(yrs)
+                rainsum_ttt_daily=rainsum_ttt/len(datesmon)
 
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
@@ -328,11 +332,15 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             if ptype=='tot_ttt':
                 if mmean == 'mon':
                     data4plot = rainsum_ttt_monthly
+                elif mmean == 'day':
+                    data4plot = rainsum_ttt_daily
                 elif mmean == 'tot':
                     data4plot = rainsum_ttt
             elif ptype=='per_ttt':
                 if mmean == 'mon':
                     rainperc_ttt=(rainsum_ttt_monthly/rainsum_monthly)*100.0
+                elif mmean == 'day':
+                    rainperc_ttt = (rainsum_ttt_daily / rainsum_daily) * 100.0
                 elif mmean == 'tot':
                     rainperc_ttt=(rainsum_ttt/rainsum_all)*100.0
                 data4plot=rainperc_ttt

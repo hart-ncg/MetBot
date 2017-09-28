@@ -50,15 +50,17 @@ threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 allplot=True            # plot total rainfall
 tot_ttt_plot=True      # plot total rainfall from TTTs
 per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
+rain_per_ttt_plot=False  # plot average rain per TTT day
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
-monmean='mon'            # If true gets total TTT rainfall ave for each month
+monmean='day'            # If true gets total TTT rainfall ave for each month
                         #   (rather than total for whole timeseries)
+                        # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total
 
-freecol=False           # free colour bar
+freecol=True           # free colour bar
 refkey='0'            # 0 or all
 doms=['All']
 #doms=['All','Cont','Mada'] # doms for TTT days selected
