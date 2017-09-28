@@ -331,9 +331,9 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
         if ptype=='per_ttt':
             #clevs=[0,10,20,30,40,50,60,70,80]
-            clevs=[0,5,10,15,20,25,30,35,40,45,50]
+            clevs=[0,10,20,30,40,50,60]
             cticks = clevs
-            cm = plt.cm.gnuplot2
+            cm = plt.cm.gnuplot2_r
             #cm = plt.cm.cubehelix
         elif ptype=='tot_all':
             clevs=[0,800,1600,2400,3200,4000,4800,5600]
