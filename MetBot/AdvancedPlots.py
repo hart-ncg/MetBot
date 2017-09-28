@@ -382,6 +382,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 cticks = clevs
             cm=plt.cm.YlGnBu
         elif ptype=='rain_per_ttt':
+            clevs = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+            cticks = clevs
             cm = plt.cm.YlGnBu
 
         if test:
