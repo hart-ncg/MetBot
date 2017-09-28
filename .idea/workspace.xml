@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -562,13 +560,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00020" summary="Editing dictionaries for CMIP5 models used in quicks">
-      <created>1498057131416</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1498057131416</updated>
-    </task>
     <task id="LOCAL-00021" summary="Editing dictionaries for CMIP5 models used in quicks - for q">
       <created>1498139913329</created>
       <option name="number" value="00021" />
@@ -905,7 +896,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506613456697</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Edit to precip wrapper to plot rain per TTT">
+      <created>1506614164067</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1506614164067</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -969,7 +967,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Editing dictionaries for CMIP5 models used in quicks - for q" />
     <MESSAGE value="Edits to add gpth" />
     <MESSAGE value="Edits to dictionaries to add T on p levels" />
     <MESSAGE value="Small edit to mynetcdf" />
@@ -994,7 +991,8 @@
     <MESSAGE value="Change cbar for percent - again" />
     <MESSAGE value="Edit to precip wrapper to allow plotting per month" />
     <MESSAGE value="Edit to precip wrapper to allow plotting per month - colourbar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit to precip wrapper to allow plotting per month - colourbar" />
+    <MESSAGE value="Edit to precip wrapper to plot rain per TTT" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit to precip wrapper to plot rain per TTT" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
