@@ -396,7 +396,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             cticks = clevs
             cm = plt.cm.YlGnBu
         elif ptype=='comp_anom_ttt':
-            clevs = np.arange(-7, 8, 1)
+            clevs = np.arange(-2, 2.25, 0.25)
             cticks = clevs
             cm = plt.cm.seismic_r
 

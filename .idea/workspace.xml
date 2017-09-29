@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,8 +45,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="322" column="0" lean-forward="true" selection-start-line="322" selection-start-column="0" selection-end-line="322" selection-end-column="0" />
+            <state relative-caret-position="386">
+              <caret line="402" column="16" lean-forward="true" selection-start-line="402" selection-start-column="16" selection-end-line="402" selection-end-column="16" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -562,13 +563,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00037" summary="More changes to run on lons spanning 0">
-      <created>1503308695267</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1503308695267</updated>
-    </task>
     <task id="LOCAL-00038" summary="Edit to CMIP5 pressure in dict">
       <created>1503406444216</created>
       <option name="number" value="00038" />
@@ -905,7 +899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506695364322</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Edits to precip and olr wrappers to plot composite anomaly">
+      <created>1506695403839</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1506695403842</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1335,8 +1336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="322" column="0" lean-forward="true" selection-start-line="322" selection-start-column="0" selection-end-line="322" selection-end-column="0" />
+        <state relative-caret-position="386">
+          <caret line="402" column="16" lean-forward="true" selection-start-line="402" selection-start-column="16" selection-end-line="402" selection-end-column="16" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
