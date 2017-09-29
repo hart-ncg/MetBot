@@ -199,6 +199,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         tot_all - sum of total precip
         tot_ttt - sum of precip from TTTs
         per_ttt - percent of precip from TTTs
+        rain_per_ttt - rain per ttt event
+        comp_anom_ttt - rain per ttt as anom from monthly mean precip
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -321,6 +323,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
                 rainperttt=rainsum_ttt/nttt_mon
 
+                comp_anom = rainperttt - rainsum_ttt_daily
+
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
                 raingrid=(rain,rdtime,(rlon,rlat))
@@ -352,6 +356,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 data4plot=rainperc_ttt
             elif ptype=='rain_per_ttt':
                 data4plot=rainperttt
+            elif ptype=='comp_anom_ttt':
+                data4plot=comp_anom
 
         #Plot
         plon,plat = np.meshgrid(rlon,rlat)
@@ -389,13 +395,16 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             clevs = [0.0,1.5,3.0,4.5,6.0,7.5,9.0,10.5,12.0]
             cticks = clevs
             cm = plt.cm.YlGnBu
+        elif ptype=='comp_anom_ttt':
+            clevs = np.arange(-15, 17.5, 2.5)
+            cm = plt.cm.seismic_r
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
         else:
             cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
         if labels:
-            if ptype=='tot_ttt':
+            if ptype=='tot_ttt' or ptype=='comp_anom_ttt':
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
             elif ptype=='per_ttt':
                 tit=stats.mndict[mn]+': '+str(int(round((float(nttt_mon)/float(ndays_mon))*100.0)))+'% of days have TTTs'

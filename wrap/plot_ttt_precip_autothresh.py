@@ -37,9 +37,9 @@ import mpl_toolkits.basemap as bm
 
 ### Running options
 sub="SA"
-#subrain="SA_TRMM"
+subrain="SA_TRMM"
 #subrain="SA_CONT"
-subrain="UM_FOC"
+#subrain="UM_FOC"
 seasopt="fullseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
@@ -48,20 +48,22 @@ testfile=False           # Uses a test file with short period
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=False            # plot total rainfall
-tot_ttt_plot=True      # plot total rainfall from TTTs
-per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
-rain_per_ttt_plot=False  # plot average rain per TTT day
+tot_ttt_plot=False      # plot total rainfall from TTTs
+per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
+rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
+comp_anom_ttt_plot=True  # plot rain per TTT as anom from long term daily mean for each month
+
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
-monmean='mon'           # to control the output - is there averaging?
+monmean='day'           # to control the output - is there averaging?
                         # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total
 nTTTlab=True            # labels each plot with # or % of TTTs
 
 freecol=False           # free colour bar
-refkey='0'            # 0 or all
+refkey='0'              # 0 or all
 #doms=['All']
 doms=['All','Cont','Mada'] # doms for TTT days selected
 
@@ -283,3 +285,10 @@ for d in range(ndset):
                                                   key=dset+'-olr-0-'+refkey,ptype='rain_per_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq)
+
+                if comp_anom_ttt_plot:
+                    print 'Plotting composite rainfall anomalies'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='comp_anom_ttt',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq,labels=nTTTlab)
