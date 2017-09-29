@@ -4,7 +4,6 @@
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,21 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="39" column="19" lean-forward="true" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
+            <state relative-caret-position="0">
+              <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="326">
-              <caret line="398" column="40" lean-forward="false" selection-start-line="398" selection-start-column="40" selection-end-line="398" selection-end-column="40" />
+              <caret line="398" column="37" lean-forward="false" selection-start-line="398" selection-start-column="37" selection-end-line="398" selection-end-column="37" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -123,8 +122,8 @@
         <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
         <option value="$PROJECT_DIR$/MetBot/EventStats.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py" />
-        <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
+        <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
       </list>
     </option>
   </component>
@@ -564,13 +563,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00039" summary="Edit to OLR hist wrapper to run for FCFA poster">
-      <created>1503770306089</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1503770306089</updated>
-    </task>
     <task id="LOCAL-00040" summary="Adding wrapper to plot rainfall maps">
       <created>1506440090396</created>
       <option name="number" value="00040" />
@@ -907,7 +899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506695779432</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Edits to precip and olr wrappers to plot composite anomaly">
+      <created>1506696960340</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1506696960340</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1327,21 +1326,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="398" column="40" lean-forward="false" selection-start-line="398" selection-start-column="40" selection-end-line="398" selection-end-column="40" />
-          <folding>
-            <element signature="e#19#47#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="30" column="29" lean-forward="true" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="39" column="19" lean-forward="true" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="326">
+          <caret line="398" column="37" lean-forward="false" selection-start-line="398" selection-start-column="37" selection-end-line="398" selection-end-column="37" />
+          <folding>
+            <element signature="e#19#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
