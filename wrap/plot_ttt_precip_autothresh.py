@@ -251,8 +251,10 @@ for d in range(ndset):
                 # Only plot this for one threshold
                 if t==0:
                     print 'Plotting all rain'
-                    msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,key=dset+'-olr-0-'+refkey,\
-                           ptype='tot_all',mmean=monmean,under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,savefig=True,test=testq)
+                    msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='tot_all',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,\
+                                                  savefig=True,test=testq)
 
             # Loop domains
             for do in range(len(doms)):
@@ -267,14 +269,14 @@ for d in range(ndset):
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='tot_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq)
+                                                  savefig=True,test=testq,labels=nTTTlab)
 
                 if per_ttt_plot:
                     print 'Plotting percentage rain from TTTs'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='per_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq,labels=nTTTlab)
+                                                  savefig=True,test=testq)
 
                 if rain_per_ttt_plot:
                     print 'Plotting ave rain per TTT day'

@@ -35,8 +35,8 @@
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="283" column="50" lean-forward="false" selection-start-line="283" selection-start-column="50" selection-end-line="283" selection-end-column="50" />
+            <state relative-caret-position="219">
+              <caret line="256" column="50" lean-forward="false" selection-start-line="256" selection-start-column="50" selection-end-line="256" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -45,8 +45,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="404" column="0" lean-forward="true" selection-start-line="404" selection-start-column="0" selection-end-line="404" selection-end-column="0" />
+            <state relative-caret-position="132">
+              <caret line="395" column="81" lean-forward="true" selection-start-line="395" selection-start-column="81" selection-end-line="395" selection-end-column="81" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -572,13 +572,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00024" summary="Edits to add gpth">
-      <created>1498489275486</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1498489275486</updated>
-    </task>
     <task id="LOCAL-00025" summary="Edits to dictionaries to add T on p levels">
       <created>1499169537711</created>
       <option name="number" value="00025" />
@@ -915,7 +908,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506614955932</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Edit to precip code to add nTTTs into the title">
+      <created>1506673857685</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1506673857686</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -979,7 +979,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edits to dictionaries to add T on p levels" />
     <MESSAGE value="Small edit to mynetcdf" />
     <MESSAGE value="Corrections to precip in dset dict" />
     <MESSAGE value="Edits to dset dict for ERAI plev data" />
@@ -1004,7 +1003,8 @@
     <MESSAGE value="Edit to precip wrapper to allow plotting per month - colourbar" />
     <MESSAGE value="Edit to precip wrapper to plot rain per TTT" />
     <MESSAGE value="Edit to precip wrapper to plot rain per TTT - edit to cbar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit to precip wrapper to plot rain per TTT - edit to cbar" />
+    <MESSAGE value="Edit to precip code to add nTTTs into the title" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit to precip code to add nTTTs into the title" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1325,14 +1325,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="283" column="50" lean-forward="false" selection-start-line="283" selection-start-column="50" selection-end-line="283" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -1341,10 +1333,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="256" column="50" lean-forward="false" selection-start-line="256" selection-start-column="50" selection-end-line="256" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="404" column="0" lean-forward="true" selection-start-line="404" selection-start-column="0" selection-end-line="404" selection-end-column="0" />
+        <state relative-caret-position="132">
+          <caret line="395" column="81" lean-forward="true" selection-start-line="395" selection-start-column="81" selection-end-line="395" selection-end-column="81" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
