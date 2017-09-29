@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,8 +45,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="574" column="28" lean-forward="true" selection-start-line="574" selection-start-column="28" selection-end-line="574" selection-end-column="28" />
+            <state relative-caret-position="277">
+              <caret line="602" column="37" lean-forward="true" selection-start-line="602" selection-start-column="37" selection-end-line="602" selection-end-column="37" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -565,13 +563,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00029" summary="Edits to dset dict for ERAI plev data">
-      <created>1502710432579</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1502710432579</updated>
-    </task>
     <task id="LOCAL-00030" summary="Edits to dset dict for anqjn plev data">
       <created>1502710908913</created>
       <option name="number" value="00030" />
@@ -908,7 +899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506676011038</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="New wrapper to get OLR associated with flagged CBs">
+      <created>1506679964170</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1506679964170</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -972,7 +970,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Small edit to mynetcdf" />
     <MESSAGE value="Corrections to precip in dset dict" />
     <MESSAGE value="Edits to dset dict for ERAI plev data" />
     <MESSAGE value="Edits to dset dict for anqjn plev data" />
@@ -997,7 +994,8 @@
     <MESSAGE value="Edit to precip wrapper to plot rain per TTT" />
     <MESSAGE value="Edit to precip wrapper to plot rain per TTT - edit to cbar" />
     <MESSAGE value="Edit to precip code to add nTTTs into the title" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit to precip code to add nTTTs into the title" />
+    <MESSAGE value="New wrapper to get OLR associated with flagged CBs" />
+    <option name="LAST_COMMIT_MESSAGE" value="New wrapper to get OLR associated with flagged CBs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1338,8 +1336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="574" column="28" lean-forward="true" selection-start-line="574" selection-start-column="28" selection-end-line="574" selection-end-column="28" />
+        <state relative-caret-position="277">
+          <caret line="602" column="37" lean-forward="true" selection-start-line="602" selection-start-column="37" selection-end-line="602" selection-end-column="37" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
