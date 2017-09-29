@@ -397,6 +397,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             cm = plt.cm.YlGnBu
         elif ptype=='comp_anom_ttt':
             clevs = np.arange(-15, 17.5, 2.5)
+            cticks = clevs
             cm = plt.cm.seismic_r
 
         if test:
@@ -450,6 +451,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
     plot types
         ave_all - ave olr (for reference)
         ave_ttt - ave olr from TTTs
+        comp_anom_ttt - ave_ttt as anom from monthly mean
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -535,6 +537,8 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         olrave_monthly=olrsum_all/nys
         olrave_daily=olrsum_all/ndays_mon
 
+
+
         if ptype=='ave_all':
             if mmean=='mon':
                 data4plot=olrave_monthly
@@ -570,8 +574,13 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
                     else:
                         olrave_ttt=np.squeeze(olrsel)
 
+                comp_anom = olrave_ttt - olrave_daily
+
             if ptype=='ave_ttt':
                 data4plot = olrave_ttt
+
+            elif ptype=='comp_anom_ttt':
+                data4plot = comp_anom
 
         #Plot
         plon,plat = np.meshgrid(lon,lat)
@@ -582,13 +591,16 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         elif ptype=='ave_ttt':
             clevs = np.arange(200, 280, 10)
             cm=plt.cm.gray_r
+        elif ptype='comp_anom_ttt':
+            clevs = np.arange(-40, 50, 10)
+            cm = plt.cm.BrBG_r
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
         else:
             cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
         if labels:
-            if ptype=='ave_ttt':
+            if ptype=='ave_ttt' or ptype=='comp_anom_ttt':
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
         else:
             tit=stats.mndict[mn]

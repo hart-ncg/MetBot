@@ -45,10 +45,12 @@ testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
-threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
+threshtest=True         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=True            # plot ave OLR
-ave_ttt_plot=True      # plot ave OLR on TTT dayss
+ave_ttt_plot=True      # plot ave OLR on TTT days - composite
+comp_anom_ttt_plot=True  # plot ave OLR on TTT days as anom from long term daily mean for each month
+
 
 under_dayof='dayof'     # if "dayof" plots OLR on TTT days
                         #   if "under" plots olr under TTTs (based on blobs)
@@ -82,7 +84,7 @@ for d in range(ndset):
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='spec'  # "all" or "spec" to choose specific model(s)
+    mods='all'  # "all" or "spec" to choose specific model(s)
     if mods=='all':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])
@@ -231,3 +233,9 @@ for d in range(ndset):
                                                   under_of=under_dayof,figdir=olrbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab)
 
+                if comp_anom_ttt_plot:
+                    print 'Plotting ave olr from TTTs'
+                    msklist=ap.gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='comp_anom_ttt',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=olrbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq,labels=nTTTlab)
