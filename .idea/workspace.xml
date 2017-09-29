@@ -4,7 +4,6 @@
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,8 +44,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="399" column="34" lean-forward="true" selection-start-line="399" selection-start-column="34" selection-end-line="399" selection-end-column="34" />
+            <state relative-caret-position="222">
+              <caret line="401" column="13" lean-forward="true" selection-start-line="401" selection-start-column="13" selection-end-line="401" selection-end-column="13" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -572,13 +571,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00027" summary="Small edit to mynetcdf">
-      <created>1502026853689</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1502026853689</updated>
-    </task>
     <task id="LOCAL-00028" summary="Corrections to precip in dset dict">
       <created>1502709608962</created>
       <option name="number" value="00028" />
@@ -915,7 +907,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506674846474</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Edit to precip code to add nTTTs into the title">
+      <created>1506675408840</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1506675408840</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1343,8 +1342,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="399" column="34" lean-forward="true" selection-start-line="399" selection-start-column="34" selection-end-line="399" selection-end-column="34" />
+        <state relative-caret-position="222">
+          <caret line="401" column="13" lean-forward="true" selection-start-line="401" selection-start-column="13" selection-end-line="401" selection-end-column="13" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
