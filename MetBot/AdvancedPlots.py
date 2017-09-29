@@ -591,7 +591,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         elif ptype=='ave_ttt':
             clevs = np.arange(200, 280, 10)
             cm=plt.cm.gray_r
-        elif ptype='comp_anom_ttt':
+        elif ptype=='comp_anom_ttt':
             clevs = np.arange(-40, 50, 10)
             cm = plt.cm.BrBG_r
 

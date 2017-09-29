@@ -4,7 +4,6 @@
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +32,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="plot_ttt_olr_autothresh.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_ttt_olr_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="368">
@@ -53,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-53">
-              <caret line="606" column="22" lean-forward="false" selection-start-line="606" selection-start-column="22" selection-end-line="606" selection-end-column="22" />
+            <state relative-caret-position="142">
+              <caret line="593" column="34" lean-forward="false" selection-start-line="593" selection-start-column="21" selection-end-line="593" selection-end-column="34" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -76,7 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>monthname</find>
       <find>month</find>
       <find>rdtime</find>
       <find>rcal</find>
@@ -106,6 +104,7 @@
       <find>spatiofreq2</find>
       <find>rlon</find>
       <find>comp_anom</find>
+      <find>comp_anom_ttt</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -574,13 +573,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00032" summary="Adding another domain to mynetcdf">
-      <created>1502961557417</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1502961557417</updated>
-    </task>
     <task id="LOCAL-00033" summary="Edits to netcdf to allow selection across 0 lon">
       <created>1502965437395</created>
       <option name="number" value="00033" />
@@ -917,7 +909,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506681838677</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Edits to precip and olr wrappers to plot composite anomaly">
+      <created>1506682380981</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1506682380982</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -981,7 +980,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edits to dset dict for ERAI plev data" />
     <MESSAGE value="Edits to dset dict for anqjn plev data" />
     <MESSAGE value="Adding another domain to mynetcdf" />
     <MESSAGE value="Edits to netcdf to allow selection across 0 lon" />
@@ -1006,7 +1004,8 @@
     <MESSAGE value="Edit to precip code to add nTTTs into the title" />
     <MESSAGE value="New wrapper to get OLR associated with flagged CBs" />
     <MESSAGE value="Edits to precip wrappers to plot composite anomaly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edits to precip wrappers to plot composite anomaly" />
+    <MESSAGE value="Edits to precip and olr wrappers to plot composite anomaly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edits to precip and olr wrappers to plot composite anomaly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1337,21 +1336,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53">
-          <caret line="606" column="22" lean-forward="false" selection-start-line="606" selection-start-column="22" selection-end-line="606" selection-end-column="22" />
-          <folding>
-            <element signature="e#19#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="238" column="96" lean-forward="false" selection-start-line="238" selection-start-column="96" selection-end-line="238" selection-end-column="96" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="593" column="34" lean-forward="false" selection-start-line="593" selection-start-column="21" selection-end-line="593" selection-end-column="34" />
+          <folding>
+            <element signature="e#19#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
