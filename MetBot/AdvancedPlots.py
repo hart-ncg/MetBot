@@ -323,7 +323,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
                 rainperttt=rainsum_ttt/nttt_mon
 
-                comp_anom = rainperttt - rainsum_ttt_daily
+                comp_anom = rainperttt - rainsum_daily
 
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)

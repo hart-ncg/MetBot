@@ -45,8 +45,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="398" column="39" lean-forward="true" selection-start-line="398" selection-start-column="39" selection-end-line="398" selection-end-column="39" />
+            <state relative-caret-position="176">
+              <caret line="322" column="0" lean-forward="true" selection-start-line="322" selection-start-column="0" selection-end-line="322" selection-end-column="0" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -563,13 +563,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00035" summary="Added comments to vint script">
-      <created>1503235038631</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1503235038631</updated>
-    </task>
     <task id="LOCAL-00036" summary="Added comments to vint script">
       <created>1503299460017</created>
       <option name="number" value="00036" />
@@ -906,7 +899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506683366654</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Edits to precip and olr wrappers to plot composite anomaly">
+      <created>1506694633047</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1506694633047</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1336,8 +1336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="398" column="39" lean-forward="true" selection-start-line="398" selection-start-column="39" selection-end-line="398" selection-end-column="39" />
+        <state relative-caret-position="176">
+          <caret line="322" column="0" lean-forward="true" selection-start-line="322" selection-start-column="0" selection-end-line="322" selection-end-column="0" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
