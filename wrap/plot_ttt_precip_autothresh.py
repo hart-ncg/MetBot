@@ -276,11 +276,11 @@ for d in range(ndset):
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='per_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq)
+                                                  savefig=True,test=testq,labels=nTTTlab)
 
                 if rain_per_ttt_plot:
                     print 'Plotting ave rain per TTT day'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='rain_per_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq,labels=nTTTlab)
+                                                  savefig=True,test=testq)
