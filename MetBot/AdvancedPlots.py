@@ -396,9 +396,9 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
         if labels:
             if ptype=='tot_ttt':
-                tit=stats.mndict[mn]+' '+str(nttt_mon)+'TTT days '+str(nttt_mon/nys)+'/yr'
+                tit=stats.mndict[mn]+': '+str(nttt_mon)+'TTT days '+str(nttt_mon/nys)+'/yr'
             elif ptype=='per_ttt':
-                tit=stats.mndict[mn]+' '+str((nttt_mon/ndays_mon)*100.0)+'% of days have TTTs'
+                tit=stats.mndict[mn]+': '+str((nttt_mon/ndays_mon)*100.0)+'% of days have TTTs'
         else:
             tit=stats.mndict[mn]
         plt.title(tit)
