@@ -1,6 +1,7 @@
 # Plotting wrapper
 # to plot
-# ....precip associated with TTTs
+# ....olr vals associated with TTTs
+# .... aim to explore the relationship with convection in tropics a bit
 #
 # OLR threshold is detected automatically using "find_saddle"
 # Option to run on other OLR thresholds a test - currently + and - 5Wm2
@@ -37,9 +38,8 @@ import mpl_toolkits.basemap as bm
 
 ### Running options
 sub="SA"
-#subrain="SA_TRMM"
-#subrain="SA_CONT"
-subrain="UM_FOC"
+#sub="SA_CONT"
+#sub="UM_FOC"
 seasopt="fullseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
@@ -47,27 +47,23 @@ testfile=False           # Uses a test file with short period
                         # ..but testyear can be used seperately)
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
-allplot=False            # plot total rainfall
-tot_ttt_plot=True      # plot total rainfall from TTTs
-per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
-rain_per_ttt_plot=False  # plot average rain per TTT day
+allplot=True            # plot ave OLR
+ave_ttt_plot=True      # plot ave OLR on TTT dayss
 
-under_dayof='dayof'     # if "dayof" plots all rain on TTT days
-                        #   if "under" plots rain under TTTs (based on blobs)
-monmean='mon'           # to control the output - is there averaging?
-                        # 'day' is daily mean
+under_dayof='dayof'     # if "dayof" plots OLR on TTT days
+                        #   if "under" plots olr under TTTs (based on blobs)
+monmean='day'           # 'day' is daily mean
                         # 'mon' is monthly mean
-                        # 'tot' is total
 nTTTlab=True            # labels each plot with # or % of TTTs
 
-freecol=False           # free colour bar
-refkey='0'            # 0 or all
+freecol=False            # free colour bar
+refkey='0'              # 0 or all
 #doms=['All']
 doms=['All','Cont','Mada'] # doms for TTT days selected
 
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
-prdir=bkdir+"precip_figs/"
+olrdir=bkdir+"olr_figs/"
 
 ### Multi dset?
 dsets='spec'     # "all" or "spec" to choose specific dset(s)
@@ -92,7 +88,7 @@ for d in range(ndset):
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['cdr']
+        mnames=['noaa']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -125,76 +121,41 @@ for d in range(ndset):
         my.mkdir_p(outdir)
         outsuf=outdir+name+'_'
 
-        ### Open rain data
-        globp = 'pr'
-        if dset == 'noaa':
-            raindset = 'trmm'
-            rainmod = 'trmm_3b42v7'
-            rmoddct = dsetdict.dset_deets[raindset][rainmod]
-            runits = rmoddct['prtimeunit']
-            rcal = rmoddct['calendar']
-            if testfile:
-                rys = rmoddct['testfileyr']
-            else:
-                rys = rmoddct['yrfname']
-            if testyear:
-                rbeginatyr = rmoddct['testyr']
-            else:
-                rbeginatyr = rmoddct['startyr']
-        else:
-            raindset = dset
-            rainmod = name
-            rmoddct = moddct
-            runits = units
-            rcal = cal
-            rys = ys
-            rbeginatyr = beginatyr
-
-        rainname = rmoddct['prname']
-        rainfile = bkdir + raindset + "/" + rainmod + "."+globp+".day.mean." + rys + ".nc"
-        print rainfile
-
-        rainout = mync.open_multi(rainfile, globp, rainmod, \
-                                  dataset=raindset, subs=subrain)
-
-        rdim = len(rainout)
-        if rdim == 5:
-            rain, rtime, rlat, rlon, rdtime = rainout
-        elif rdim == 6:
-            rain, rtime, rlat, rlon, rlev, rdtime = rainout
-            rain = np.squeeze(rain)
+        ### Open olr nc file
+        v = dset + "-olr-0-0"
+        daset, globv, lev, drv = v.split('-')
+        ncout = mync.open_multi(infile,globv,name,\
+                                                    dataset=dset,subs=sub)
+        ndim = len(ncout)
+        if ndim == 5:
+            olr, time, lat, lon, dtime = ncout
+        elif ndim == 6:
+            olr, time, lat, lon, lev, dtime = ncout
+            olr = np.squeeze(olr)
         else:
             print 'Check number of levels in ncfile'
-        rdtime[:, 3] = 0
 
-        ### Select data to run
+        ### Select olr data
+        ### Get time information
+        moddct = dsetdict.dset_deets[dset][name]
+        units = moddct['olrtimeunit']
+        cal = moddct['calendar']
         ### If testfile run on all days available
         if testfile:
-            rain = rain[:, :, :];
-            rtime = rtime[:];
-            rdtime = rdtime[:]
+            olr = olr[:, :, :];time = time[:];dtime = dtime[:]
         else:
             ### Find starting timestep
-            start = rmoddct['startdate']
-            ystart = int(start[0:4]);
-            mstart = int(start[5:7]);
-            dstart = int(start[8:10])
-            if rcal == "360_day":
-                startday = (ystart * 360) + ((mstart - 1) * 30) + dstart
-                beginday = ((int(rbeginatyr)) * 360) + 1
-                daysgap = beginday - startday + 1
+            start = moddct['startdate']
+            ystart=int(start[0:4]);mstart=int(start[5:7]);dstart=int(start[8:10])
+            if cal=="360_day":
+                startday=(ystart*360)+((mstart-1)*30)+dstart
+                beginday=((int(beginatyr))*360)+1
+                daysgap=beginday-startday+1
             else:
-                startd = date(ystart, mstart, dstart)
-                begind = date(int(rbeginatyr), 01, 01)
-                daysgap = (begind - startd).days
-            rain = rain[daysgap:, :, :];
-            rtime = rtime[daysgap:];
-            rdtime = rdtime[daysgap:]
-        if testyear:
-            if rcal == "360_day":
-                rain, rdtime, rtime = rain[:360, :, :], rdtime[:360], rtime[:360]
-            else:
-                rain, rdtime, rtime = rain[:365, :, :], rdtime[:365], rtime[:365]
+                startd=date(ystart,mstart,dstart)
+                begind=date(int(beginatyr),01,01)
+                daysgap=(begind-startd).days
+            olr=olr[daysgap:,:,:];time=time[daysgap:];dtime=dtime[daysgap:]
 
         ### Get thresholds and loop
         if testyear:
@@ -236,10 +197,10 @@ for d in range(ndset):
             kw, ke = stats.spatialsubset(s,False,cutlon=40.) # events west and east of 40E
             keys=[ks,kw,ke]
 
-            ### Plot rainmaps
-            prbase=prdir+dset+"/"
-            my.mkdir_p(prbase)
-            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
+            ### Plot olrmaps
+            olrbase=olrdir+dset+"/"
+            my.mkdir_p(olrbase)
+            mapsuf = seasopt+'_'+sub+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
             if testfile or testyear:
                 testq=True
             else:
@@ -247,12 +208,12 @@ for d in range(ndset):
 
 
             if allplot:
-                # Only plot this for one threshold
+                # Only plot this for one threshold and one dom
                 if t==0:
-                    print 'Plotting all rain'
-                    msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='tot_all',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,\
+                    print 'Plotting ave olr'
+                    msklist=ap.gridolrmap_season(s,ks,olr,lat,lon,dtime,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='ave_all',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=olrbase,file_suffix=mapsuf,\
                                                   savefig=True,test=testq)
 
             # Loop domains
@@ -263,23 +224,10 @@ for d in range(ndset):
 
                 newsuf=mapsuf+'_'+domname
 
-                if tot_ttt_plot:
-                    print 'Plotting all rain from TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='tot_ttt',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                if ave_ttt_plot:
+                    print 'Plotting ave olr from TTTs'
+                    msklist=ap.gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='ave_ttt',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=olrbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab)
 
-                if per_ttt_plot:
-                    print 'Plotting percentage rain from TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='per_ttt',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq,labels=nTTTlab)
-
-                if rain_per_ttt_plot:
-                    print 'Plotting ave rain per TTT day'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='rain_per_ttt',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq)

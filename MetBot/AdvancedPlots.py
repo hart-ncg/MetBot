@@ -197,8 +197,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
     plot types
         tot_all - sum of total precip
-        tot_ttt - sum of precip under TTTs
-        per_ttt - percent of precip under TTTs
+        tot_ttt - sum of precip from TTTs
+        per_ttt - percent of precip from TTTs
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -428,6 +428,186 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
     if savefig:
         plt.savefig(figdir+'/Rainmap_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
+
+    return data4plot
+
+def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='noaa-olr-0-0',\
+                       ptype='ave_all',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',\
+                       savefig=False, test=True, labels=False):
+    '''Produces subplots of ttt olr by month
+    need to open the olr data with lon and lat and also the synop file
+    see e.g. plot_ttt_olr_autothresh.py
+
+    plot types
+        ave_all - ave olr (for reference)
+        ave_ttt - ave olr from TTTs
+    under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
+    '''
+    if not eventkeys:
+        eventkeys=[]
+        for ed in s.uniques:
+            eventkeys.append(ed[0])
+
+    yrs = np.unique(dtime[:,0])
+    nys=len(yrs)
+
+    # Get list of dates for these events
+    edts = []
+    ecnt=1
+    for k in eventkeys:
+        e = s.events[k]
+        dts = s.blobs[key]['mbt'][e.ixflags]
+        #dts=e.trkdtimes
+        for dt in range(len(dts)):
+            if ecnt==1:
+                edts.append(dts[dt])
+            else:
+                tmpdt=np.asarray(edts)
+                # Check if it exists already
+                ix = my.ixdtimes(tmpdt, [dts[dt][0]], \
+                     [dts[dt][1]], [dts[dt][2]], [0])
+                if len(ix)==0:
+                    edts.append(dts[dt])
+            ecnt+=1
+    edts = np.asarray(edts)
+    edts[:, 3] = 0
+    print "Number of original TTT days found =  " + str(len(edts))
+
+    # Get n lat and lon
+    nlon=len(lon)
+    nlat=len(lat)
+
+    # Get months
+    if isinstance(season,str):
+        if season=='coreseason':mns=[10,11,12,1,2,3]
+        elif season=='fullseason':mns=[8,9,10,11,12,1,2,3,4,5,6,7]
+        elif season == 'dryseason':mns = [4, 5, 6, 7, 8, 9]
+    elif isinstance(season,list):
+        mns=season
+    print season
+    print mns
+
+    # Draw basemap
+    m, f = blb.SAfrBasemap(lat,lon,drawstuff=True,prj='cyl',fno=1,rsltn='l')
+
+    # Get multiplot
+    if len(mns)==12:
+        plt.close()
+        g, axls = plt.subplots(figsize=[12,12])
+    elif len(mns)==6:
+        plt.close()
+        g, axls = plt.subplots(figsize=[12,12])
+    cnt=1
+    msklist=[]
+    for mn in mns:
+        print 'Plotting month '+str(mn)
+
+        if len(mns)==12:plt.subplot(4,3,cnt)
+        elif len(mns)==6:plt.subplot(3,2,cnt)
+
+        # Get the plot data
+        #Ave OLR
+
+        # First select the years you want - keeping this to allow option to select years later
+        firstyear=yrs[0]
+        lastyear=yrs[nys-1]
+        olrdat=np.where((dtime[:,0]>=firstyear) & (dtime[:,0]<=lastyear))
+        olrperiod=olr[olrdat,:,:]
+        olrperiod=np.squeeze(olrperiod)
+        newdates=dtime[olrdat]
+
+        # Then select the month
+        ix=np.where((newdates[:,1]==mn))
+        olrmon=olrperiod[ix,:,:]
+        datesmon=newdates[ix]
+        ndays_mon=len(datesmon)
+        olrmon=np.squeeze(olrmon)
+        olrsum_all=np.nansum(olrmon,0)
+        olrave_monthly=olrsum_all/nys
+        olrave_daily=olrsum_all/ndays_mon
+
+        if ptype=='ave_all':
+            if mmean=='mon':
+                data4plot=olrave_monthly
+            elif mmean=='day':
+                data4plot=olrave_daily
+
+        else:
+
+            #TTT olr
+            if under_of=='dayof':
+                ix2=np.where((edts[:,1]==mn))
+                edatesmon=edts[ix2]
+
+                indices = []
+                for edt in range(len(edatesmon)):
+                    ix = my.ixdtimes(datesmon, [edatesmon[edt][0]], \
+                                 [edatesmon[edt][1]], [edatesmon[edt][2]], [0])
+                    if len(ix)>=1:
+                        indices.append(ix)
+                if len(indices)>=2:
+                    indices = np.squeeze(np.asarray(indices))
+                else:
+                    indices = indices
+                nttt_mon=len(indices)
+                print "Number of TTT days found in olr dataset for mon "+str(mn)+" =  " + str(nttt_mon)
+
+                if nttt_mon==0:
+                    olrave_ttt=np.zeros((nlat,nlon),dtype=np.float32)
+                else:
+                    olrsel=olrmon[indices,:,:]
+                    if nttt_mon >= 2:
+                        olrave_ttt=np.nanmean(olrsel,0)
+                    else:
+                        olrave_ttt=np.squeeze(olrsel)
+
+            if ptype=='ave_ttt':
+                data4plot = olrave_ttt
+
+        #Plot
+        plon,plat = np.meshgrid(lon,lat)
+
+        if ptype=='ave_all':
+            clevs = np.arange(200, 280, 10)
+            cm = plt.cm.gray_r
+        elif ptype=='ave_ttt':
+            clevs = np.arange(200, 280, 10)
+            cm=plt.cm.gray_r
+
+        if test:
+            cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
+        else:
+            cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
+        if labels:
+            if ptype=='ave_ttt':
+                tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
+        else:
+            tit=stats.mndict[mn]
+        plt.title(tit)
+
+        # redraw - only label latitudes if plot is on left
+        if len(mns)==12:
+            if cnt == 1 or cnt == 4 or cnt == 7 or cnt == 10:
+                syp.redrawmap(m,lns=True,resol='verylow')
+            else:
+                syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
+        elif len(mns)==6:
+            if cnt%2==0:
+                syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
+            else:
+                syp.redrawmap(m,lns=True,resol='verylow')
+        cnt+=1
+        msklist.append(data4plot)
+    plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.05,wspace=0.2,hspace=0.2)
+    axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
+    if test:
+        cbar = plt.colorbar(cs, cax=axcl)
+    else:
+        cbar = plt.colorbar(cs,cax=axcl,ticks=cticks)
+    cbar.set_label('W/m^2')
+
+    if savefig:
+        plt.savefig(figdir+'/OLRmap_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
 
     return data4plot
 
