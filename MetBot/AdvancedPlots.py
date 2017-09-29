@@ -189,7 +189,8 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
 
 
 def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',key='noaa-olr-0-0',\
-                       ptype='per_ttt',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',savefig=False, test=True):
+                       ptype='per_ttt',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',\
+                       savefig=False, test=True, labels=False):
     '''Produces subplots of ttt rainfall by month
     need to open the rain data with lon and lat and also the synop file
     see e.g. plot_ttt_precip_autothresh.py
@@ -206,6 +207,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             eventkeys.append(ed[0])
 
     yrs = np.unique(rdtime[:,0])
+    nys=len(yrs)
 
     # Get list of dates for these events
     edts = []
@@ -264,7 +266,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         # Get the plot data (allmask)
         #All rain
         firstyear=yrs[0]
-        lastyear=yrs[len(yrs)-1]
+        lastyear=yrs[nys-1]
         raindat=np.where((rdtime[:,0]>=firstyear) & (rdtime[:,0]<=lastyear))
         rainperiod=rain[raindat,:,:]
         rainperiod=np.squeeze(rainperiod)
@@ -272,9 +274,10 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         ix=np.where((newdates[:,1]==mn))
         rainmon=rainperiod[ix,:,:]
         datesmon=newdates[ix]
+        ndays_mon=len(datesmon)
         rainmon=np.squeeze(rainmon)
         rainsum_all=np.nansum(rainmon,0)
-        rainsum_monthly=rainsum_all/len(yrs)
+        rainsum_monthly=rainsum_all/nys
         rainsum_daily=rainsum_all/len(datesmon)
 
         if ptype=='tot_all':
@@ -302,20 +305,21 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                     indices = np.squeeze(np.asarray(indices))
                 else:
                     indices = indices
-                print "Number of TTT days found in rain dataset for mon "+str(mn)+" =  " + str(len(indices))
+                nttt_mon=len(indices)
+                print "Number of TTT days found in rain dataset for mon "+str(mn)+" =  " + str(nttt_mon)
 
-                if len(indices)==0:
+                if nttt_mon==0:
                     rainsum_ttt=np.zeros((nlat,nlon),dtype=np.float32)
                 else:
                     rainsel=rainmon[indices,:,:]
-                    if len(indices)>=2:
+                    if nttt_mon>=2:
                         rainsum_ttt=np.nansum(rainsel,0)
                     else:
                         rainsum_ttt=np.squeeze(rainsel)
-                rainsum_ttt_monthly=rainsum_ttt/len(yrs)
-                rainsum_ttt_daily=rainsum_ttt/len(datesmon)
+                rainsum_ttt_monthly=rainsum_ttt/nys
+                rainsum_ttt_daily=rainsum_ttt/ndays_mon
 
-                rainperttt=rainsum_ttt/len(indices)
+                rainperttt=rainsum_ttt/nttt_mon
 
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
@@ -390,7 +394,14 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
         else:
             cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
-        plt.title(stats.mndict[mn])
+        if labels:
+            if ptype=='tot_ttt':
+                tit=stats.mndict[mn]+' '+str(nttt_mon)+'TTT days '+str(nttt_mon/nys)+'/yr'
+            elif ptype=='per_ttt':
+                tit=stats.mndict[mn]+' '+str((nttt_mon/ndays_mon)*100)+'% of days have TTTs'
+        else:
+            tit=stats.mndict[mn]
+        plt.title(tit)
 
         # redraw - only label latitudes if plot is on left
         if len(mns)==12:
