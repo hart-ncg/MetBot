@@ -416,7 +416,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
             clevs = [0.0,1.5,3.0,4.5,6.0,7.5,9.0,10.5,12.0]
             cticks = clevs
             cm = plt.cm.YlGnBu
-        elif ptype=='comp_anom_ttt':
+        elif ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
             clevs = np.arange(-4, 4.5, 0.5)
             cticks = clevs
             cm = plt.cm.seismic_r
@@ -426,7 +426,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         else:
             cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
         if labels:
-            if ptype=='tot_ttt' or ptype=='comp_anom_ttt':
+            if ptype=='tot_ttt' or ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
             elif ptype=='per_ttt':
                 tit=stats.mndict[mn]+': '+str(int(round((float(nttt_mon)/float(ndays_mon))*100.0)))+'% of days have TTTs'
@@ -477,6 +477,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         ave_all - ave olr (for reference)
         ave_ttt - ave olr from TTTs
         comp_anom_ttt - ave_ttt as anom from monthly mean
+        comp_anom_ag - as comp anom but with ag test
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -601,10 +602,29 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
                 comp_anom = olrave_ttt - olrave_daily
 
+                if ptype=='comp_anom_ag':
+                    anoms = np.zeros(nttt_mon, nlat, nlon), dtype=np.float32)
+                    for day in range(nttt_mon):
+                        this_anom = olrsel[day, :, :] - olrave_daily
+                        anoms[day, :, :] = this_anom
+
+                    anoms_signs = np.sign(anoms)
+                    comp_signs = np.sign(comp_anom)
+
+                    mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+                    for i in range(nlat):
+                        for j in range(nlon):
+                            count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
+                            perc = (float(count) / float(size)) * 100
+                            if perc >= agthresh:
+                                mask_zeros[i, j] = 1
+                            else:
+                                mask_zeros[i, j] = 0
+
             if ptype=='ave_ttt':
                 data4plot = olrave_ttt
 
-            elif ptype=='comp_anom_ttt':
+            elif ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
                 data4plot = comp_anom
 
         #Plot
@@ -616,7 +636,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         elif ptype=='ave_ttt':
             clevs = np.arange(200, 280, 10)
             cm=plt.cm.gray_r
-        elif ptype=='comp_anom_ttt':
+        elif ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
             clevs = np.arange(-12, 14, 2)
             cm = plt.cm.BrBG_r
 
@@ -625,11 +645,14 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         else:
             cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
         if labels:
-            if ptype=='ave_ttt' or ptype=='comp_anom_ttt':
+            if ptype=='ave_ttt' or ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
         else:
             tit=stats.mndict[mn]
         plt.title(tit)
+
+        if ptype == 'comp_anom_ag':
+            hatch = m.contourf(plon, plat, mask_zeros, levels=[-1.0, 0.0, 1.0], hatches=["", '.'], alpha=0)
 
         # redraw - only label latitudes if plot is on left
         if len(mns)==12:

@@ -50,7 +50,8 @@ threshtest=True         # Option to run on thresholds + and - 5Wm2 as a test
 allplot=True            # plot ave OLR
 ave_ttt_plot=True      # plot ave OLR on TTT days - composite
 comp_anom_ttt_plot=True  # plot ave OLR on TTT days as anom from long term daily mean for each month
-
+comp_anom_ag_plot=True   # plot comp anom with agtest on composite
+perc_ag=90              # show if this % or more days agree
 
 under_dayof='dayof'     # if "dayof" plots OLR on TTT days
                         #   if "under" plots olr under TTTs (based on blobs)
@@ -202,7 +203,11 @@ for d in range(ndset):
             ### Plot olrmaps
             olrbase=olrdir+dset+"/"
             my.mkdir_p(olrbase)
-            mapsuf = seasopt+'_'+sub+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
+            if comp_anom_ag_plot:
+                mapsuf = seasopt + '_' + subrain + '_' + dset + '_'\
+                         + name + '_' + thre_str + '_key' + refkey + '_4' + monmean +'_agthr'+str(perc_ag)
+            else:
+                mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
             if testfile or testyear:
                 testq=True
             else:
@@ -239,3 +244,10 @@ for d in range(ndset):
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=olrbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab)
+
+                if comp_anom_ag_plot:
+                    print 'Plotting composite rainfall anomalies with ag test'
+                    msklist=ap.gridrainmap_season(s,eventkeys,olr,lat,lon,dtime,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=olrbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq,labels=nTTTlab, agthresh=perc_ag)
