@@ -53,7 +53,7 @@ per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
 comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
 comp_anom_ag_plot=True   # plot comp anom with agtest on composite
-perc_ag=80              # show if this % or more days agree
+perc_ag=70              # show if this % or more days agree
 
 
 
