@@ -327,23 +327,24 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 comp_anom = rainperttt - rainsum_daily
 
                 if ptype=='comp_anom_ag':
-                    anoms = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
-                    for day in range(nttt_mon):
-                        this_anom = rainsel[day, :, :] - rainsum_daily
-                        anoms[day, :, :] = this_anom
+                    if nttt_mon >= 1:
+                        anoms = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
+                        for day in range(nttt_mon):
+                            this_anom = rainsel[day, :, :] - rainsum_daily
+                            anoms[day, :, :] = this_anom
 
-                    anoms_signs = np.sign(anoms)
-                    comp_signs = np.sign(comp_anom)
+                        anoms_signs = np.sign(anoms)
+                        comp_signs = np.sign(comp_anom)
 
-                    mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
-                    for i in range(nlat):
-                        for j in range(nlon):
-                            count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
-                            perc = (float(count) / float(nttt_mon)) * 100
-                            if perc >= agthresh:
-                                mask_zeros[i, j] = 1
-                            else:
-                                mask_zeros[i, j] = 0
+                        mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+                        for i in range(nlat):
+                            for j in range(nlon):
+                                count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
+                                perc = (float(count) / float(nttt_mon)) * 100
+                                if perc >= agthresh:
+                                    mask_zeros[i, j] = 1
+                                else:
+                                    mask_zeros[i, j] = 0
 
 
             elif under_of=='under':
@@ -603,23 +604,25 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
                 comp_anom = olrave_ttt - olrave_daily
 
                 if ptype=='comp_anom_ag':
-                    anoms = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
-                    for day in range(nttt_mon):
-                        this_anom = olrsel[day, :, :] - olrave_daily
-                        anoms[day, :, :] = this_anom
+                    if nttt_mon >= 1:
 
-                    anoms_signs = np.sign(anoms)
-                    comp_signs = np.sign(comp_anom)
+                        anoms = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
+                        for day in range(nttt_mon):
+                            this_anom = olrsel[day, :, :] - olrave_daily
+                            anoms[day, :, :] = this_anom
 
-                    mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
-                    for i in range(nlat):
-                        for j in range(nlon):
-                            count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
-                            perc = (float(count) / float(nttt_mon)) * 100
-                            if perc >= agthresh:
-                                mask_zeros[i, j] = 1
-                            else:
-                                mask_zeros[i, j] = 0
+                        anoms_signs = np.sign(anoms)
+                        comp_signs = np.sign(comp_anom)
+
+                        mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+                        for i in range(nlat):
+                            for j in range(nlon):
+                                count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
+                                perc = (float(count) / float(nttt_mon)) * 100
+                                if perc >= agthresh:
+                                    mask_zeros[i, j] = 1
+                                else:
+                                    mask_zeros[i, j] = 0
 
             if ptype=='ave_ttt':
                 data4plot = olrave_ttt
