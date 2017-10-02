@@ -378,8 +378,10 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 data4plot=rainperc_ttt
             elif ptype=='rain_per_ttt':
                 data4plot=rainperttt
-            elif ptype=='comp_anom_ttt' or ptype=='comp_anom_ag':
+            elif ptype=='comp_anom_ttt':
                 data4plot=comp_anom
+            elif ptype=='comp_anom_ag':
+                data4plot=comp_anom[::2,::2]
 
         #Plot
         plon,plat = np.meshgrid(rlon,rlat)
@@ -627,9 +629,11 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
             if ptype=='ave_ttt':
                 data4plot = olrave_ttt
-
-            elif ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
+            elif ptype == 'comp_anom_ttt':
                 data4plot = comp_anom
+            elif ptype == 'comp_anom_ag':
+                data4plot = comp_anom[::2, ::2]
+
 
         #Plot
         plon,plat = np.meshgrid(lon,lat)
