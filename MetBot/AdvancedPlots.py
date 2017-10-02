@@ -436,6 +436,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         plt.title(tit)
 
         if ptype == 'comp_anom_ag':
+            mask_zeros=mask_zeros[::2,::2]
             hatch = m.contourf(plon, plat, mask_zeros, levels=[-1.0, 0.0, 1.0], hatches=["", '.'], alpha=0)
 
 
@@ -655,6 +656,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         plt.title(tit)
 
         if ptype == 'comp_anom_ag':
+            mask_zeros=mask_zeros[::2,::2]
             hatch = m.contourf(plon, plat, mask_zeros, levels=[-1.0, 0.0, 1.0], hatches=["", '.'], alpha=0)
 
         # redraw - only label latitudes if plot is on left

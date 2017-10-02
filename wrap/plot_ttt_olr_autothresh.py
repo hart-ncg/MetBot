@@ -51,7 +51,7 @@ allplot=False            # plot ave OLR
 ave_ttt_plot=False      # plot ave OLR on TTT days - composite
 comp_anom_ttt_plot=False  # plot ave OLR on TTT days as anom from long term daily mean for each month
 comp_anom_ag_plot=True   # plot comp anom with agtest on composite
-perc_ag=80              # show if this % or more days agree
+perc_ag=50              # show if this % or more days agree
 
 under_dayof='dayof'     # if "dayof" plots OLR on TTT days
                         #   if "under" plots olr under TTTs (based on blobs)
