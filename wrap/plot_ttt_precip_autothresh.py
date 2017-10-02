@@ -301,5 +301,5 @@ for d in range(ndset):
                     print 'Plotting composite rainfall anomalies with ag test'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=newnewsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab, agthresh=perc_ag)
