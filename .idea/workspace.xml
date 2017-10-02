@@ -45,8 +45,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="645" column="33" lean-forward="true" selection-start-line="645" selection-start-column="33" selection-end-line="645" selection-end-column="33" />
+            <state relative-caret-position="447">
+              <caret line="677" column="0" lean-forward="false" selection-start-line="677" selection-start-column="0" selection-end-line="678" selection-end-column="111" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -573,13 +573,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00053" summary="Small edits to precip wrapper">
-      <created>1506515499225</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1506515499225</updated>
-    </task>
     <task id="LOCAL-00054" summary="Small edits to precip function in AdvancedPlots.py">
       <created>1506516753402</created>
       <option name="number" value="00054" />
@@ -916,7 +909,14 @@
       <option name="project" value="LOCAL" />
       <updated>1506946008591</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Edits to olr to plot composite anomaly - ag test">
+      <created>1506946564657</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1506946564658</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1344,8 +1344,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="645" column="33" lean-forward="true" selection-start-line="645" selection-start-column="33" selection-end-line="645" selection-end-column="33" />
+        <state relative-caret-position="447">
+          <caret line="677" column="0" lean-forward="false" selection-start-line="677" selection-start-column="0" selection-end-line="678" selection-end-column="111" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
