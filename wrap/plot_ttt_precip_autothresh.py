@@ -51,7 +51,10 @@ allplot=False            # plot total rainfall
 tot_ttt_plot=False      # plot total rainfall from TTTs
 per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
-comp_anom_ttt_plot=True  # plot rain per TTT as anom from long term daily mean for each month
+comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
+comp_anom_ag_plot=True   # plot comp anom with agtest on composite
+perc_ag=90              # show if this % or more days agree
+
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
@@ -241,7 +244,11 @@ for d in range(ndset):
             ### Plot rainmaps
             prbase=prdir+dset+"/"
             my.mkdir_p(prbase)
-            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
+            if comp_anom_ag_plot:
+                mapsuf = seasopt + '_' + subrain + '_' + dset + '_'\
+                         + name + '_' + thre_str + '_key' + refkey + '_4' + monmean +'_agthr'+str(perc_ag)
+            else:
+                mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
             if testfile or testyear:
                 testq=True
             else:
@@ -292,3 +299,10 @@ for d in range(ndset):
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab)
+
+                if comp_anom_ag_plot:
+                    print 'Plotting composite rainfall anomalies with ag test'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq,labels=nTTTlab, agthresh=perc_ag)

@@ -190,7 +190,7 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
 
 def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',key='noaa-olr-0-0',\
                        ptype='per_ttt',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',\
-                       savefig=False, test=True, labels=False):
+                       savefig=False, test=True, labels=False,agthresh='perc_ag'):
     '''Produces subplots of ttt rainfall by month
     need to open the rain data with lon and lat and also the synop file
     see e.g. plot_ttt_precip_autothresh.py
@@ -201,6 +201,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         per_ttt - percent of precip from TTTs
         rain_per_ttt - rain per ttt event
         comp_anom_ttt - rain per ttt as anom from monthly mean precip
+        comp_anom_ag - as comp anom but with ag test
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -325,6 +326,26 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
                 comp_anom = rainperttt - rainsum_daily
 
+                if ptype=='comp_anom_ag':
+                    anoms = np.zeros(nttt_mon, nlat, nlon), dtype=np.float32)
+                    for day in range(nttt_mon):
+                        this_anom = rainsel[day, :, :] - rainsum_daily
+                        anoms[day, :, :] = this_anom
+
+                    anoms_signs = np.sign(anoms)
+                    comp_signs = np.sign(comp_anom)
+
+                    mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+                    for i in range(nlat):
+                        for j in range(nlon):
+                            count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
+                            perc = (float(count) / float(size)) * 100
+                            if perc >= agthresh:
+                                mask_zeros[i, j] = 1
+                            else:
+                                mask_zeros[i, j] = 0
+
+
             elif under_of=='under':
                 speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
                 raingrid=(rain,rdtime,(rlon,rlat))
@@ -356,7 +377,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 data4plot=rainperc_ttt
             elif ptype=='rain_per_ttt':
                 data4plot=rainperttt
-            elif ptype=='comp_anom_ttt':
+            elif ptype=='comp_anom_ttt' or ptype=='comp_anom_ag':
                 data4plot=comp_anom
 
         #Plot
@@ -412,6 +433,10 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
         else:
             tit=stats.mndict[mn]
         plt.title(tit)
+
+        if ptype == 'comp_anom_ag':
+            hatch = m.contourf(plon, plat, mask_zeros, levels=[-1.0, 0.0, 1.0], hatches=["", '.'], alpha=0)
+
 
         # redraw - only label latitudes if plot is on left
         if len(mns)==12:
