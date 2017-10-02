@@ -204,7 +204,7 @@ for d in range(ndset):
             olrbase=olrdir+dset+"/"
             my.mkdir_p(olrbase)
             if comp_anom_ag_plot:
-                mapsuf = seasopt + '_' + subrain + '_' + dset + '_'\
+                mapsuf = seasopt + '_' + sub + '_' + dset + '_'\
                          + name + '_' + thre_str + '_key' + refkey + '_4' + monmean +'_agthr'+str(perc_ag)
             else:
                 mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean

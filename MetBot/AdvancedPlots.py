@@ -339,7 +339,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                     for i in range(nlat):
                         for j in range(nlon):
                             count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
-                            perc = (float(count) / float(size)) * 100
+                            perc = (float(count) / float(nttt_mon)) * 100
                             if perc >= agthresh:
                                 mask_zeros[i, j] = 1
                             else:
@@ -615,7 +615,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
                     for i in range(nlat):
                         for j in range(nlon):
                             count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
-                            perc = (float(count) / float(size)) * 100
+                            perc = (float(count) / float(nttt_mon)) * 100
                             if perc >= agthresh:
                                 mask_zeros[i, j] = 1
                             else:
