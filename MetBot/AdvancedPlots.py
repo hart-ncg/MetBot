@@ -469,7 +469,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
 def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='noaa-olr-0-0',\
                        ptype='ave_all',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',\
-                       savefig=False, test=True, labels=False):
+                       savefig=False, test=True, labels=False,agthresh='perc_ag'):
     '''Produces subplots of ttt olr by month
     need to open the olr data with lon and lat and also the synop file
     see e.g. plot_ttt_olr_autothresh.py
