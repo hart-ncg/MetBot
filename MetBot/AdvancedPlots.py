@@ -640,14 +640,20 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
             elif ptype == 'comp_anom_ttt':
                 data4plot = comp_anom
             elif ptype == 'comp_anom_ag':
-                data4plot = comp_anom[::2, ::2]
+                #data4plot = comp_anom[::2, ::2]
+                data4plot = comp_anom
 
-            if ptype == 'comp_anom_ag':
-                newlon = lon[::2]
-                newlat = lat[::2]
-            else:
-                newlon = rlon
-                newlat = rlat
+
+            # if ptype == 'comp_anom_ag':
+            #     newlon = lon[::2]
+            #     newlat = lat[::2]
+            # else:
+            #     newlon = lon
+            #     newlat = lat
+
+            newlon = lon
+            newlat = lat
+
 
         #Plot
         plon,plat = np.meshgrid(newlon,newlat)
@@ -675,7 +681,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
         if ptype == 'comp_anom_ag':
             if nttt_mon >= 1:
-                mask_zeros=mask_zeros[::2,::2]
+                #mask_zeros=mask_zeros[::2,::2]
                 hatch = m.contourf(plon, plat, mask_zeros, levels=[-1.0, 0.0, 1.0], hatches=["", '.'], alpha=0)
 
         # redraw - only label latitudes if plot is on left
