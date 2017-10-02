@@ -45,11 +45,11 @@ testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
-threshtest=True         # Option to run on thresholds + and - 5Wm2 as a test
+threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
-allplot=True            # plot ave OLR
-ave_ttt_plot=True      # plot ave OLR on TTT days - composite
-comp_anom_ttt_plot=True  # plot ave OLR on TTT days as anom from long term daily mean for each month
+allplot=False            # plot ave OLR
+ave_ttt_plot=False      # plot ave OLR on TTT days - composite
+comp_anom_ttt_plot=False  # plot ave OLR on TTT days as anom from long term daily mean for each month
 comp_anom_ag_plot=True   # plot comp anom with agtest on composite
 perc_ag=90              # show if this % or more days agree
 
@@ -85,13 +85,13 @@ for d in range(ndset):
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='all'  # "all" or "spec" to choose specific model(s)
+    mods='spec'  # "all" or "spec" to choose specific model(s)
     if mods=='all':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])
     if mods=='spec': # edit for the models you want
         nmod=1
-        mnames=['noaa']
+        mnames=['cdr']
     nmstr=str(nmod)
 
     for m in range(nmod):
@@ -203,11 +203,7 @@ for d in range(ndset):
             ### Plot olrmaps
             olrbase=olrdir+dset+"/"
             my.mkdir_p(olrbase)
-            if comp_anom_ag_plot:
-                mapsuf = seasopt + '_' + sub + '_' + dset + '_'\
-                         + name + '_' + thre_str + '_key' + refkey + '_4' + monmean +'_agthr'+str(perc_ag)
-            else:
-                mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
+            mapsuf = seasopt+'_'+sub+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
             if testfile or testyear:
                 testq=True
             else:
@@ -246,8 +242,9 @@ for d in range(ndset):
                                                   savefig=True,test=testq,labels=nTTTlab)
 
                 if comp_anom_ag_plot:
+                    newnewsuf=newsuf+'_agthr'+perc_ag
                     print 'Plotting composite rainfall anomalies with ag test'
-                    msklist=ap.gridrainmap_season(s,eventkeys,olr,lat,lon,dtime,cal,season=seasopt,\
+                    msklist=ap.gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
                                                   under_of=under_dayof,figdir=olrbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab, agthresh=perc_ag)

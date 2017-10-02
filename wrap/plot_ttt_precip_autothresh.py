@@ -244,11 +244,7 @@ for d in range(ndset):
             ### Plot rainmaps
             prbase=prdir+dset+"/"
             my.mkdir_p(prbase)
-            if comp_anom_ag_plot:
-                mapsuf = seasopt + '_' + subrain + '_' + dset + '_'\
-                         + name + '_' + thre_str + '_key' + refkey + '_4' + monmean +'_agthr'+str(perc_ag)
-            else:
-                mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
+            mapsuf = seasopt+'_'+subrain+'_'+dset+'_'+name+'_'+thre_str+'_key'+refkey+'_4'+monmean
             if testfile or testyear:
                 testq=True
             else:
@@ -301,6 +297,7 @@ for d in range(ndset):
                                                   savefig=True,test=testq,labels=nTTTlab)
 
                 if comp_anom_ag_plot:
+                    newnewsuf=newsuf+'_agthr'+perc_ag
                     print 'Plotting composite rainfall anomalies with ag test'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
