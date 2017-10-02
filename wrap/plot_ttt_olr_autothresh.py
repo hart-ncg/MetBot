@@ -242,7 +242,7 @@ for d in range(ndset):
                                                   savefig=True,test=testq,labels=nTTTlab)
 
                 if comp_anom_ag_plot:
-                    newnewsuf=newsuf+'_agthr'+perc_ag
+                    newnewsuf=newsuf+'_agthr'+str(perc_ag)
                     print 'Plotting composite rainfall anomalies with ag test'
                     msklist=ap.gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\

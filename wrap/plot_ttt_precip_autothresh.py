@@ -38,8 +38,8 @@ import mpl_toolkits.basemap as bm
 ### Running options
 sub="SA"
 # subrain="SA_TRMM"
-#subrain="SA_CONT"
-subrain="UM_FOC"
+subrain="SA_CONT"
+#subrain="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
 testfile=False           # Uses a test file with short period
@@ -53,7 +53,7 @@ per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
 comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
 comp_anom_ag_plot=True   # plot comp anom with agtest on composite
-perc_ag=90              # show if this % or more days agree
+perc_ag=80              # show if this % or more days agree
 
 
 
@@ -297,7 +297,7 @@ for d in range(ndset):
                                                   savefig=True,test=testq,labels=nTTTlab)
 
                 if comp_anom_ag_plot:
-                    newnewsuf=newsuf+'_agthr'+perc_ag
+                    newnewsuf=newsuf+'_agthr'+str(perc_ag)
                     print 'Plotting composite rainfall anomalies with ag test'
                     msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
