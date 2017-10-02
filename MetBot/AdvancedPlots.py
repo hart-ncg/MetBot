@@ -382,6 +382,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
                 data4plot=comp_anom
             elif ptype=='comp_anom_ag':
                 data4plot=comp_anom[::2,::2]
+                rlon = rlon[::2]
+                rlat = rlat[::2]
 
         #Plot
         plon,plat = np.meshgrid(rlon,rlat)
@@ -633,7 +635,8 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
                 data4plot = comp_anom
             elif ptype == 'comp_anom_ag':
                 data4plot = comp_anom[::2, ::2]
-
+                lon = lon[::2]
+                lat = lat[::2]
 
         #Plot
         plon,plat = np.meshgrid(lon,lat)
