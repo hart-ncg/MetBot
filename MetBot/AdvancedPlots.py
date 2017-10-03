@@ -188,7 +188,7 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
             plt.savefig(stats.figdir+file_suffix+'_cbcount.png',dpi=150)
 
 
-def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',key='noaa-olr-0-0',\
+def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='coreseason',key='noaa-olr-0-0',\
                        ptype='per_ttt',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',\
                        savefig=False, test=True, labels=False,agthresh='perc_ag'):
     '''Produces subplots of ttt rainfall by month
@@ -348,7 +348,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,cl,season='coreseason',
 
 
             elif under_of=='under':
-                speckeys = stats.specificmon(s, eventkeys, yrs, mn, cl)
+                speckeys = stats.specificmon(s, eventkeys, yrs, mn, units, cl)
                 raingrid=(rain,rdtime,(rlon,rlat))
                 rain4plot = stats.griddedrainmasks(s,speckeys,raingrid,refkey=key)
 

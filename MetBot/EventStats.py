@@ -66,7 +66,7 @@ def spatialsubset(s,eventkeys,cutlon=45.0):
             eastkeys.append(k)
     return westkeys, eastkeys
 
-def timesubset(s,eventkeys,edates):
+def timesubset(s,eventkeys,edates,units,cal):
     '''subsetofkeys = timesubset(s,eventkeys,edates)
 
     Get tracks from certain months or years
@@ -118,16 +118,30 @@ def timesubset(s,eventkeys,edates):
             for hr in time24hr:
                 if np.any(hrs==hr): keysubset.append(k)
     elif isinstance(edates,tuple):
-        if 'noaa' in dlist:
-            hrs = my.dates2hrnum(edates)
-        elif 'hadam3p' in dlist:
-            hrs = my.dates2hrnum(edates,\
-                    units="hours since 1959-12-01 00:00:00",calendar="360_day")
+        # Edited this part to be flexible to model - RJ 2017
+        # if 'noaa' in dlist:
+        #     hrs = my.dates2hrnum(edates)
+        #     #hrs=hrs/24 - need this for noaa cdr but not noaa noaa
+        # elif 'hadam3p' in dlist:
+        #     hrs = my.dates2hrnum(edates,\
+        #             units="hours since 1959-12-01 00:00:00",calendar="360_day")
+        #     hrs=hrs/24
+        # elif 'um' in dlist:
+        #     hrs = my.dates2hrnum(edates, \
+        #             units="hours since 1978-09-01 00:00:00", calendar="360_day");
+        #     hrs = hrs / 24
+        hrs = my.dates2hrnum(edates,units,cal)
+        #Check the time unit
+        k=eventkeys[0]
+        e = s.events[k]
+        time24hr = e.trkarrstime[refkey]
+        num_digis=len(str(int(time24hr[0])))
+        if num_digits==5:
             hrs=hrs/24
-        elif 'um' in dlist:
-            hrs = my.dates2hrnum(edates, \
-                    units="hours since 1978-09-01 00:00:00", calendar="360_day");
-            hrs = hrs / 24
+        elif num_digits==7:
+            hrs=hrs
+        else:
+            print 'Unknown time listing'
         hrmn, hrmx = hrs
         for k in eventkeys:
             e = s.events[k]
@@ -154,7 +168,7 @@ def specificseasons(s,eventkeys,seasonstartyr,startd=[10,01],endd=[4,30]):
 
     return specifickeys
 
-def specificmon(s,eventkeys,yrs,month,cal):
+def specificmon(s,eventkeys,yrs,month,units,cal):
     '''Uses timesubset function to return keys for specific month and years'''
     if not eventkeys:
         eventkeys=[]
@@ -169,7 +183,7 @@ def specificmon(s,eventkeys,yrs,month,cal):
             lastday=monthends[month-1]
         dend = [yr,month,lastday,0]
         datetup = (dstart,dend)
-        seasevents = timesubset(s,eventkeys,datetup)
+        seasevents = timesubset(s,eventkeys,datetup,units,cal)
         specifickeys.extend(seasevents)
 
     return specifickeys
@@ -1200,7 +1214,7 @@ def griddedrainmasks(s,eventkeys,raindata,refkey='noaa-olr-0-0'):
     routput=[]
     for k in eventkeys:
         e=s.events[k]
-        rtmp=np.zeros(((len(e.trkdtimes)),nlat,nlon),dtype=np.float32)
+        rtmp=np.ma.zeros(((len(e.trkdtimes)),nlat,nlon),dtype=np.float32)
         for t in xrange(len(e.trkdtimes)):
             ix = my.ixdtimes(date,[e.trkdtimes[t,0]],\
                               [e.trkdtimes[t,1]],[e.trkdtimes[t,2]],[0])

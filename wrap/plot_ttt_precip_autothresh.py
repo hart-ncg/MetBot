@@ -37,8 +37,8 @@ import mpl_toolkits.basemap as bm
 
 ### Running options
 sub="SA"
-# subrain="SA_TRMM"
-subrain="SA_CONT"
+subrain="SA_TRMM"
+#subrain="SA_CONT"
 #subrain="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
@@ -48,18 +48,19 @@ testfile=False           # Uses a test file with short period
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=False            # plot total rainfall
-tot_ttt_plot=False      # plot total rainfall from TTTs
-per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
+tot_ttt_plot=True      # plot total rainfall from TTTs
+per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
 comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
-comp_anom_ag_plot=True   # plot comp anom with agtest on composite
+comp_anom_ag_plot=False   # plot comp anom with agtest on composite
+comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
 
 
-under_dayof='dayof'     # if "dayof" plots all rain on TTT days
+under_dayof='under'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
-monmean='day'           # to control the output - is there averaging?
+monmean='tot'           # to control the output - is there averaging?
                         # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total
@@ -255,7 +256,7 @@ for d in range(ndset):
                 # Only plot this for one threshold
                 if t==0:
                     print 'Plotting all rain'
-                    msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                    msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,units,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='tot_all',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,\
                                                   savefig=True,test=testq)
@@ -270,28 +271,28 @@ for d in range(ndset):
 
                 if tot_ttt_plot:
                     print 'Plotting all rain from TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='tot_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab)
 
                 if per_ttt_plot:
                     print 'Plotting percentage rain from TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='per_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab)
 
                 if rain_per_ttt_plot:
                     print 'Plotting ave rain per TTT day'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='rain_per_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq)
 
                 if comp_anom_ttt_plot:
                     print 'Plotting composite rainfall anomalies'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ttt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab)
@@ -299,7 +300,7 @@ for d in range(ndset):
                 if comp_anom_ag_plot:
                     newnewsuf=newsuf+'_agthr'+str(perc_ag)
                     print 'Plotting composite rainfall anomalies with ag test'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,rcal,season=seasopt,\
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,rcal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newnewsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab, agthresh=perc_ag)
