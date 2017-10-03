@@ -202,6 +202,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         rain_per_ttt - rain per ttt event
         comp_anom_ttt - rain per ttt as anom from monthly mean precip
         comp_anom_ag - as comp anom but with ag test
+        comp_anom_cnt - % days with +ve or -ve anomalies
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -348,7 +349,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
                 comp_anom = rainperttt - rainsum_daily
 
-                if ptype=='comp_anom_ag':
+                if ptype=='comp_anom_ag' or ptype=='comp_anom_cnt':
                     if nttt_mon >= 1:
                         anoms = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
                         for day in range(nttt_mon):
@@ -528,6 +529,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         ave_ttt - ave olr from TTTs
         comp_anom_ttt - ave_ttt as anom from monthly mean
         comp_anom_ag - as comp anom but with ag test
+        comp_anom_cnt - % of TTT days with +ve or -ve anomalies
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -652,7 +654,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
                 comp_anom = olrave_ttt - olrave_daily
 
-                if ptype=='comp_anom_ag':
+                if ptype=='comp_anom_ag' or ptype=='comp_anom_cnt':
                     if nttt_mon >= 1:
 
                         anoms = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
@@ -660,18 +662,38 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
                             this_anom = olrsel[day, :, :] - olrave_daily
                             anoms[day, :, :] = this_anom
 
-                        anoms_signs = np.sign(anoms)
-                        comp_signs = np.sign(comp_anom)
+                        if ptype=='comp_anom_ag':
 
-                        mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
-                        for i in range(nlat):
-                            for j in range(nlon):
-                                count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
-                                perc = (float(count) / float(nttt_mon)) * 100
-                                if perc >= agthresh:
-                                    mask_zeros[i, j] = 1
-                                else:
-                                    mask_zeros[i, j] = 0
+                            anoms_signs = np.sign(anoms)
+                            comp_signs = np.sign(comp_anom)
+
+                            mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+                            for i in range(nlat):
+                                for j in range(nlon):
+                                    count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
+                                    perc = (float(count) / float(nttt_mon)) * 100
+                                    if perc >= agthresh:
+                                        mask_zeros[i, j] = 1
+                                    else:
+                                        mask_zeros[i, j] = 0
+
+                        elif ptype=='comp_anom_cnt':
+
+                            pos_pcent=np.zeros((nlat, nlon), dtype=np.float32)
+                            neg_pcent=np.zeros((nlat, nlon), dtype=np.float32)
+
+
+                            for i in range(nlat):
+                                for j in range(nlon):
+                                    count_p = len(np.where(anoms[:, i, j] > 0)[0])
+                                    count_n = len(np.where(anoms[:, i, j] < 0)[0])
+
+                                    perc_p = (float(count_p) / float(nttt_mon)) * 100
+                                    perc_n = (float(count_n) / float(nttt_mon)) * 100
+
+
+                                    pos_pcent[:,i,j]=perc_p
+                                    neg_pcent[:,i,j]=perc_n
 
             if ptype=='ave_ttt':
                 data4plot = olrave_ttt
@@ -680,6 +702,8 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
             elif ptype == 'comp_anom_ag':
                 #data4plot = comp_anom[::2, ::2]
                 data4plot = comp_anom
+            elif ptype == 'comp_anom_cnt':
+                data4plot= neg_pcent
 
 
             # if ptype == 'comp_anom_ag':
@@ -705,6 +729,9 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         elif ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
             clevs = np.arange(-12, 14, 2)
             cm = plt.cm.BrBG_r
+        elif ptype == 'comp_anom_cnt':
+            clevs = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+            cm = plt.cm.GnBu_r
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')

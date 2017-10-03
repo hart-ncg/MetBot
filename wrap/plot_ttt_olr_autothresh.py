@@ -50,7 +50,8 @@ threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 allplot=False            # plot ave OLR
 ave_ttt_plot=False      # plot ave OLR on TTT days - composite
 comp_anom_ttt_plot=False  # plot ave OLR on TTT days as anom from long term daily mean for each month
-comp_anom_ag_plot=True   # plot comp anom with agtest on composite
+comp_anom_ag_plot=False   # plot comp anom with agtest on composite
+comp_anom_cnt_plot=True     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
 under_dayof='dayof'     # if "dayof" plots OLR on TTT days
@@ -248,3 +249,9 @@ for d in range(ndset):
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',mmean=monmean,\
                                                   under_of=under_dayof,figdir=olrbase,file_suffix=newnewsuf,\
                                                   savefig=True,test=testq,labels=nTTTlab, agthresh=perc_ag)
+
+                if comp_anom_cnt_plot:
+                    msklist=ap.gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='comp_anom_cnt',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=olrbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq)
