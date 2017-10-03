@@ -1197,42 +1197,42 @@ def raineventmask(allpolys,s,raindata):
 
     return rainmasks, masklist, maskdtimes, maskekeys
 
-def griddedrainmasks(s,eventkeys,raindata,refkey='noaa-olr-0-0'):
-    '''Returns a masked array of rainfall from TTT events (tstep, lon, lat)'''
-    # RJ 2016
-    # THIS IS BROKEN _ MASKED ARRAY FAILS - USED ALTERNATIVE APPROACH IN AP
-    #input raindata should be in the form raindata=(rain,dtime,(lon,lat))
-    #if want to choose particular years or mons need to do this with eventkey input
-    #e.g. using stats.specificseason
-    if not eventkeys:
-        eventkeys=[]
-        for ed in s.uniques:
-            eventkeys.append(ed[0])
-
-    rain,date,xypts = raindata
-    lon, lat = xypts
-    nlon=len(lon)
-    nlat=len(lat)
-    routput=[]
-    for k in eventkeys:
-        e=s.events[k]
-        rtmp=np.ma.zeros(((len(e.trkdtimes)),nlat,nlon),dtype=np.float32)
-        for t in xrange(len(e.trkdtimes)):
-            ix = my.ixdtimes(date,[e.trkdtimes[t,0]],\
-                              [e.trkdtimes[t,1]],[e.trkdtimes[t,2]],[0])
-            if len(ix)>1: print 'We have a problem'
-            elif len(ix)==0:
-                if t==0: print 'No time match',e.trkdtimes[t]
-                continue
-            ch = e.blobs[refkey]['ch'][e.trk[t]]
-            chmask = my.poly2mask(xypts[0],xypts[1],ch)
-            r=np.ma.MaskedArray(rain[ix,:,:],mask=~chmask)
-            rtmp[t,:,:]=r
-        rtmp=np.ma.squeeze(rtmp)
-        routput.append(rtmp)
-    routput=np.ma.asarray(routput)
-
-    return routput
+# def griddedrainmasks(s,eventkeys,raindata,refkey='noaa-olr-0-0'):
+#     '''Returns a masked array of rainfall from TTT events (tstep, lon, lat)'''
+#     # RJ 2016
+#     # THIS IS BROKEN _ MASKED ARRAY FAILS - USED ALTERNATIVE APPROACH IN AP
+#     #input raindata should be in the form raindata=(rain,dtime,(lon,lat))
+#     #if want to choose particular years or mons need to do this with eventkey input
+#     #e.g. using stats.specificseason
+#     if not eventkeys:
+#         eventkeys=[]
+#         for ed in s.uniques:
+#             eventkeys.append(ed[0])
+#
+#     rain,date,xypts = raindata
+#     lon, lat = xypts
+#     nlon=len(lon)
+#     nlat=len(lat)
+#     routput=[]
+#     for k in eventkeys:
+#         e=s.events[k]
+#         rtmp=np.ma.zeros(((len(e.trkdtimes)),nlat,nlon),dtype=np.float32)
+#         for t in xrange(len(e.trkdtimes)):
+#             ix = my.ixdtimes(date,[e.trkdtimes[t,0]],\
+#                               [e.trkdtimes[t,1]],[e.trkdtimes[t,2]],[0])
+#             if len(ix)>1: print 'We have a problem'
+#             elif len(ix)==0:
+#                 if t==0: print 'No time match',e.trkdtimes[t]
+#                 continue
+#             ch = e.blobs[refkey]['ch'][e.trk[t]]
+#             chmask = my.poly2mask(xypts[0],xypts[1],ch)
+#             r=np.ma.MaskedArray(rain[ix,:,:],mask=~chmask)
+#             rtmp[t,:,:]=r
+#         rtmp=np.ma.squeeze(rtmp)
+#         routput.append(rtmp)
+#     routput=np.ma.asarray(routput)
+#
+#     return routput
 
 def grideventmask(allpolys,s,lon,lat):
     '''Returns a mask for gridded dataset for each day of each event

@@ -239,6 +239,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             ecnt+=1
     edts = np.asarray(edts)
     edts[:, 3] = 0
+    if under_of == 'under':
+        chs=np.asarray(chs)
     print "Number of original TTT days found =  " + str(len(edts))
 
     # Get n lat and lon
@@ -307,18 +309,23 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 chs_mon=chs[ix2]
 
             indices = []
-            chs_4rain = []
+            if under_of == 'under':
+                chs_4rain = []
             for edt in range(len(edatesmon)):
                 ix = my.ixdtimes(datesmon, [edatesmon[edt][0]], \
                                  [edatesmon[edt][1]], [edatesmon[edt][2]], [0])
                 if len(ix) >= 1:
                     indices.append(ix)
                     if under_of=='under':
-                        chs_4rain.append(chs[edt])
+                        chs_4rain.append(chs_mon[edt])
             if len(indices) >= 2:
                 indices = np.squeeze(np.asarray(indices))
+                if under_of=='under':
+                    chs_4rain=np.asarray(chs_4rain)
             else:
                 indices = indices
+                if under_of=='under':
+                    chs_4rain=np.squeeze(np.asarray(chs_4rain))
             nttt_mon = len(indices)
             print "Number of TTT days found in rain dataset for mon " + str(mn) + " =  " + str(nttt_mon)
 
@@ -368,16 +375,16 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 else:
                     rainsel = rainmon[indices, :, :]
                     ttt_rain_dates = datesmon[indices]
-                    ndt=len(ttt_rain_dates)
+                    ndt=nttt_mon
 
                     masked_rain=np.ma.zeros((ndt,nlat,nlon),dtype=np.float32)
                     for rdt in range(ndt):
-                        chmask = my.poly2mask(rlon,rlat,ch_4rain[rdt])
+                        chmask = my.poly2mask(rlon,rlat,chs_4rain[rdt])
                         r=np.ma.MaskedArray(rainsel[rdt,:,:],mask=~chmask)
                         masked_rain[rdt,:,:]=r
 
                     if nttt_mon >= 2:
-                        rainsum_ttt = np.ma.nansum(masked_rain, 0)
+                        rainsum_ttt = np.ma.sum(masked_rain, 0) # maskd elements set to 0
                     else:
                         rainsum_ttt = np.ma.squeeze(masked_rain)
 
