@@ -135,7 +135,7 @@ def timesubset(s,eventkeys,edates,units,cal):
         k=eventkeys[0]
         e = s.events[k]
         time24hr = e.trkarrstime[refkey]
-        num_digis=len(str(int(time24hr[0])))
+        num_digits=len(str(int(time24hr[0])))
         if num_digits==5:
             hrs=hrs/24
         elif num_digits==7:
