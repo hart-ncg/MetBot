@@ -213,7 +213,10 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
     nys=len(yrs)
 
     # Get list of dates for these events
+    # and if 'under' a list of chs
     edts = []
+    if under_of == 'under':
+        chs = []
     ecnt=1
     for k in eventkeys:
         e = s.events[k]
@@ -222,6 +225,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         for dt in range(len(dts)):
             if ecnt==1:
                 edts.append(dts[dt])
+                if under_of=='under':
+                    chs.append(e.blobs[key]['ch'][e.trk[dt]])
             else:
                 tmpdt=np.asarray(edts)
                 # Check if it exists already
@@ -229,6 +234,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                      [dts[dt][1]], [dts[dt][2]], [0])
                 if len(ix)==0:
                     edts.append(dts[dt])
+                    if under_of == 'under':
+                        chs.append(e.blobs[key]['ch'][e.trk[dt]])
             ecnt+=1
     edts = np.asarray(edts)
     edts[:, 3] = 0
@@ -294,31 +301,39 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         else:
 
             #TTT rain
-            if under_of=='dayof':
-                ix2=np.where((edts[:,1]==mn))
-                edatesmon=edts[ix2]
+            ix2 = np.where((edts[:, 1] == mn))
+            edatesmon = edts[ix2]
+            if under_of=='under':
+                chs_mon=chs[ix2]
 
-                indices = []
-                for edt in range(len(edatesmon)):
-                    ix = my.ixdtimes(datesmon, [edatesmon[edt][0]], \
+            indices = []
+            chs_4rain = []
+            for edt in range(len(edatesmon)):
+                ix = my.ixdtimes(datesmon, [edatesmon[edt][0]], \
                                  [edatesmon[edt][1]], [edatesmon[edt][2]], [0])
-                    if len(ix)>=1:
-                        indices.append(ix)
-                if len(indices)>=2:
-                    indices = np.squeeze(np.asarray(indices))
-                else:
-                    indices = indices
-                nttt_mon=len(indices)
-                print "Number of TTT days found in rain dataset for mon "+str(mn)+" =  " + str(nttt_mon)
+                if len(ix) >= 1:
+                    indices.append(ix)
+                    if under_of=='under':
+                        chs_4rain.append(chs[edt])
+            if len(indices) >= 2:
+                indices = np.squeeze(np.asarray(indices))
+            else:
+                indices = indices
+            nttt_mon = len(indices)
+            print "Number of TTT days found in rain dataset for mon " + str(mn) + " =  " + str(nttt_mon)
 
-                if nttt_mon==0:
-                    rainsum_ttt=np.zeros((nlat,nlon),dtype=np.float32)
+            if under_of == 'dayof':
+
+                if nttt_mon == 0:
+                    rainsum_ttt = np.zeros((nlat, nlon), dtype=np.float32)
                 else:
-                    rainsel=rainmon[indices,:,:]
+                    rainsel = rainmon[indices, :, :]
+
                     if nttt_mon>=2:
                         rainsum_ttt=np.nansum(rainsel,0)
                     else:
                         rainsum_ttt=np.squeeze(rainsel)
+
                 rainsum_ttt_monthly=rainsum_ttt/nys
                 rainsum_ttt_daily=rainsum_ttt/ndays_mon
 
@@ -346,20 +361,31 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                                 else:
                                     mask_zeros[i, j] = 0
 
-
             elif under_of=='under':
-                speckeys = stats.specificmon(s, eventkeys, yrs, mn, units, cl)
-                raingrid=(rain,rdtime,(rlon,rlat))
-                rain4plot = stats.griddedrainmasks(s,speckeys,raingrid,refkey=key)
 
-                nevent=rain4plot.shape[0]
-                data2sum=np.zeros((nevent,nlat,nlon),dtype=np.float32)
-                for e in xrange(nevent):
-                    data=rain4plot[e]
-                    ntstep=len(data[:,0,0])
-                    data2sum[e,:,:]=np.nansum(data,0)
+                if nttt_mon == 0:
+                    rainsum_ttt = np.zeros((nlat, nlon), dtype=np.float32)
+                else:
+                    rainsel = rainmon[indices, :, :]
+                    ttt_rain_dates = datesmon[indices]
+                    ndt=len(ttt_rain_dates)
 
-                rainsum_ttt=np.nansum(data2sum,0)
+                    masked_rain=np.ma.zeros((ndt,nlat,nlon),dtype=np.float32)
+                    for rdt in range(ndt):
+                        chmask = my.poly2mask(rlon,rlat,ch_4rain[rdt])
+                        r=np.ma.MaskedArray(rainsel[rdt,:,:],mask=~chmask)
+                        masked_rain[rdt,:,:]=r
+
+                    if nttt_mon >= 2:
+                        rainsum_ttt = np.ma.nansum(masked_rain, 0)
+                    else:
+                        rainsum_ttt = np.ma.squeeze(masked_rain)
+
+                rainsum_ttt_monthly = rainsum_ttt / nys
+                rainsum_ttt_daily = rainsum_ttt / ndays_mon
+
+                rainperttt = rainsum_ttt / nttt_mon
+
 
             if ptype=='tot_ttt':
                 if mmean == 'mon':

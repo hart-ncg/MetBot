@@ -138,9 +138,9 @@ def timesubset(s,eventkeys,edates,units,cal):
         num_digits=len(str(int(time24hr[0])))
         print num_digits
         if num_digits==5:
-            hrs=hrs/24
-        elif num_digits==7:
             hrs=hrs
+        elif num_digits==7: # actually Im not sure if this is needed now that reading in units
+            hrs=hrs/24
         else:
             print 'Unknown time listing'
         hrmn, hrmx = hrs
@@ -1200,6 +1200,7 @@ def raineventmask(allpolys,s,raindata):
 def griddedrainmasks(s,eventkeys,raindata,refkey='noaa-olr-0-0'):
     '''Returns a masked array of rainfall from TTT events (tstep, lon, lat)'''
     # RJ 2016
+    # THIS IS BROKEN _ MASKED ARRAY FAILS - USED ALTERNATIVE APPROACH IN AP
     #input raindata should be in the form raindata=(rain,dtime,(lon,lat))
     #if want to choose particular years or mons need to do this with eventkey input
     #e.g. using stats.specificseason
@@ -1227,8 +1228,9 @@ def griddedrainmasks(s,eventkeys,raindata,refkey='noaa-olr-0-0'):
             chmask = my.poly2mask(xypts[0],xypts[1],ch)
             r=np.ma.MaskedArray(rain[ix,:,:],mask=~chmask)
             rtmp[t,:,:]=r
+        rtmp=np.ma.squeeze(rtmp)
         routput.append(rtmp)
-    routput=np.asarray(routput)
+    routput=np.ma.asarray(routput)
 
     return routput
 
