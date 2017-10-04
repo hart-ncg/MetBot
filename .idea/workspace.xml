@@ -56,8 +56,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-409">
-              <caret line="689" column="77" lean-forward="false" selection-start-line="689" selection-start-column="77" selection-end-line="689" selection-end-column="77" />
+            <state relative-caret-position="266">
+              <caret line="701" column="37" lean-forward="false" selection-start-line="701" selection-start-column="37" selection-end-line="701" selection-end-column="37" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -579,13 +579,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00072" summary="Edit to precip wrapper to plot rain per TTT - edit to cbar">
-      <created>1506614955932</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1506614955932</updated>
-    </task>
     <task id="LOCAL-00073" summary="Edit to precip code to add nTTTs into the title">
       <created>1506673857685</created>
       <option name="number" value="00073" />
@@ -922,7 +915,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507114069062</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="New option to plot % pos and neg anoms in OLR">
+      <created>1507114331141</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1507114331141</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1350,8 +1350,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-409">
-          <caret line="689" column="77" lean-forward="false" selection-start-line="689" selection-start-column="77" selection-end-line="689" selection-end-column="77" />
+        <state relative-caret-position="266">
+          <caret line="701" column="37" lean-forward="false" selection-start-line="701" selection-start-column="37" selection-end-line="701" selection-end-column="37" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>

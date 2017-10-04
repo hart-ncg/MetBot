@@ -699,7 +699,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
                                     pos_pcent[i,j]=perc_p
                                     neg_pcent[i,j]=perc_n
-                                    zero_pcent[i,j]=perc_z
+                                    #zero_pcent[i,j]=perc_z
 
             if ptype=='ave_ttt':
                 data4plot = olrave_ttt
