@@ -7,7 +7,6 @@
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,7 +56,7 @@
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
+            <state relative-caret-position="4005">
               <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
               <folding />
             </state>
@@ -67,8 +66,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="539" column="12" lean-forward="true" selection-start-line="539" selection-start-column="12" selection-end-line="539" selection-end-column="12" />
+            <state relative-caret-position="491">
+              <caret line="500" column="38" lean-forward="true" selection-start-line="500" selection-start-column="38" selection-end-line="500" selection-end-column="38" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -590,13 +589,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00079" summary="New wrapper to get OLR associated with flagged CBs">
-      <created>1506680075929</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1506680075929</updated>
-    </task>
     <task id="LOCAL-00080" summary="Edits to precip wrappers to plot composite anomaly">
       <created>1506681838677</created>
       <option name="number" value="00080" />
@@ -933,7 +925,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507119347129</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="New option to plot % pos and neg anoms in precip">
+      <created>1507120047413</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1507120047413</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -997,7 +996,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edit to CMIP5 pressure in dict" />
     <MESSAGE value="Edit to OLR hist wrapper to run for FCFA poster" />
     <MESSAGE value="Adding wrapper to plot rainfall maps" />
     <MESSAGE value="Edits to wrapper to plot rainfall maps" />
@@ -1022,7 +1020,8 @@
     <MESSAGE value="Edits to accurately plot the precip under a CB blob" />
     <MESSAGE value="Edits to accurately plot the precip under a CB blob - round 2" />
     <MESSAGE value="New option to plot % pos and neg anoms in OLR" />
-    <option name="LAST_COMMIT_MESSAGE" value="New option to plot % pos and neg anoms in OLR" />
+    <MESSAGE value="New option to plot % pos and neg anoms in precip" />
+    <option name="LAST_COMMIT_MESSAGE" value="New option to plot % pos and neg anoms in precip" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1353,7 +1352,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
+        <state relative-caret-position="4005">
           <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
           <folding />
         </state>
@@ -1361,8 +1360,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="539" column="12" lean-forward="true" selection-start-line="539" selection-start-column="12" selection-end-line="539" selection-end-column="12" />
+        <state relative-caret-position="491">
+          <caret line="500" column="38" lean-forward="true" selection-start-line="500" selection-start-column="38" selection-end-line="500" selection-end-column="38" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>

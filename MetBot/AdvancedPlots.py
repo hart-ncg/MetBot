@@ -377,24 +377,24 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
                             pos_pcent=np.zeros((nlat, nlon), dtype=np.float32)
                             neg_pcent=np.zeros((nlat, nlon), dtype=np.float32)
-                            zero_pcent=np.zeros((nlat, nlon), dtype=np.float32)
+                            #zero_pcent=np.zeros((nlat, nlon), dtype=np.float32)
 
                             for i in range(nlat):
                                 for j in range(nlon):
                                     count_p = len(np.where(anoms[:, i, j] > 0)[0])
                                     count_n = len(np.where(anoms[:, i, j] < 0)[0])
-                                    count_z = len(np.where(anoms[:, i, j] == 0)[0])
+                                    #count_z = len(np.where(anoms[:, i, j] == 0)[0])
 
 
                                     perc_p = (float(count_p) / float(nttt_mon)) * 100
                                     perc_n = (float(count_n) / float(nttt_mon)) * 100
-                                    perc_z = (float(count_z) / float(nttt_mon)) * 100
-                                    print perc_z
+                                    #perc_z = (float(count_z) / float(nttt_mon)) * 100
+                                    #print perc_z
 
 
                                     pos_pcent[i,j]=perc_p
                                     neg_pcent[i,j]=perc_n
-                                    zero_pcent[i,j]=perc_z
+                                    #zero_pcent[i,j]=perc_z
 
             elif under_of=='under':
 
@@ -445,7 +445,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 #data4plot=comp_anom[::3,::3]
                 data4plot=comp_anom
             elif ptype=='comp_anom_cnt':
-                data4plot=neg_pcent
+                data4plot=pos_pcent
 
             # if ptype=='comp_anom_ag':
             #     newlon = rlon[::3]
@@ -498,7 +498,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cticks = clevs
             cm = plt.cm.seismic_r
         elif ptype=='comp_anom_cnt':
-            clevs= np.arange(30,75,5)
+            clevs= np.arange(0,105,10)
             cticks = clevs
             cm = plt.cm.seismic_r
 
