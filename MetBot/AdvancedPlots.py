@@ -692,8 +692,8 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
                                     perc_n = (float(count_n) / float(nttt_mon)) * 100
 
 
-                                    pos_pcent[:,i,j]=perc_p
-                                    neg_pcent[:,i,j]=perc_n
+                                    pos_pcent[i,j]=perc_p
+                                    neg_pcent[i,j]=perc_n
 
             if ptype=='ave_ttt':
                 data4plot = olrave_ttt
@@ -730,8 +730,8 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
             clevs = np.arange(-12, 14, 2)
             cm = plt.cm.BrBG_r
         elif ptype == 'comp_anom_cnt':
-            clevs = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
-            cm = plt.cm.GnBu_r
+            clevs = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            cm = plt.cm.BrBG
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
