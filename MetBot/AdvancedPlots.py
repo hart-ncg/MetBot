@@ -197,6 +197,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
     plot types
         tot_all - sum of total precip
+        all_cnt - % of all days with +ve pr anoms
         tot_ttt - sum of precip from TTTs
         per_ttt - percent of precip from TTTs
         rain_per_ttt - rain per ttt event
@@ -300,6 +301,23 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 data4plot=rainsum_daily
             elif mmean=='tot':
                 data4plot=rainsum_all
+
+        elif ptype=='all_cnt':
+
+            all_anoms = np.zeros((ndays_mon, nlat, nlon), dtype=np.float32)
+            for day in range(ndays_mon):
+                this_anom = rainmon[day, :, :] - rainsum_daily
+                all_anoms[day, :, :] = this_anom
+
+            all_pos_pcent = np.zeros((nlat, nlon), dtype=np.float32)
+
+            for i in range(nlat):
+                for j in range(nlon):
+                    count_p = len(np.where(anoms[:, i, j] > 0)[0])
+                    perc_p = (float(count_p) / float(nttt_mon)) * 100
+                    all_pos_pcent[i, j] = perc_p
+
+            data4plot=all_pos_pcent
 
         else:
 
@@ -500,6 +518,9 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         elif ptype=='comp_anom_cnt':
             clevs= np.arange(0,50,5)
             cticks = clevs
+            cm = plt.cm.magma_r
+        elif ptype=='all_cnt':
+            clevs=np.arange(0,50,5)
             cm = plt.cm.magma_r
 
         if test:

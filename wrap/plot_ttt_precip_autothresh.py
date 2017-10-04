@@ -48,12 +48,13 @@ testfile=False           # Uses a test file with short period
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=False            # plot total rainfall
+all_cnt_anom=True       # plot % of days which have +ve anomalies
 tot_ttt_plot=False      # plot total rainfall from TTTs
 per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
 comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
 comp_anom_ag_plot=False   # plot comp anom with agtest on composite
-comp_anom_cnt_plot=True     # plot count of the number of days above or below average
+comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
 
@@ -260,6 +261,14 @@ for d in range(ndset):
                                                   key=dset+'-olr-0-'+refkey,ptype='tot_all',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=mapsuf,\
                                                   savefig=True,test=testq)
+
+            if all_cnt_anom:
+                if t == 0:
+                    print 'Plotting count of all days with positive anom'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='all_cnt', mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True, test=testq)
 
             # Loop domains
             for do in range(len(doms)):
