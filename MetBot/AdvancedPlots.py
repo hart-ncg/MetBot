@@ -687,7 +687,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
                             for i in range(nlat):
                                 for j in range(nlon):
                                     count_p = len(np.where(anoms[:, i, j] > 5)[0])
-                                    count_n = len(np.where(anoms[:, i, j] < 5)[0])
+                                    count_n = len(np.where(anoms[:, i, j] < -5)[0])
                                     #count_z = len(np.where(anoms[:, i, j] == 0)[0])
 
 
