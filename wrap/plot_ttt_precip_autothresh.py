@@ -70,7 +70,7 @@ nTTTlab=True            # labels each plot with # or % of TTTs
 freecol=False           # free colour bar
 refkey='0'              # 0 or all
 #doms=['All']
-doms=['All','Cont','W_Oc','E_Oc'] # doms for TTT days selected
+doms=['All','15-35','35-55','55-75','75-100'] # doms for TTT days selected
 
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
@@ -240,12 +240,14 @@ for d in range(ndset):
             ks = s.events.keys();ks.sort() # all
             count_all=str(int(len(ks)))
             print "Total CB events ="+str(count_all)
-            kw, ke = stats.spatialsubset(s,False,cutlon=40.) # events west and east of 40E
-            kew, kee=stats.spatialsubset(s,ke,cutlon=65.)
-            if len(doms)==3:
+            if len(doms) == 3:
+                kw, ke = stats.spatialsubset(s,False,cutlon=40.) # events west and east of 40E
                 keys=[ks,kw,ke]
-            elif len(doms)==4:
-                keys=[ks,kw,kew,kee]
+            elif len(doms) == 5:
+                k1, ktmp = stats.spatialsubset(s, False, cutlon=35.)
+                k2, ktmp2 = stats.spatialsubset(s,ktmp,cutlon=55.)
+                k3, k4 = stats.spatialsubset(s,ktmp2,cutlon=75.)
+                keys = [ks, k1, k2, k3, k4]
 
             ### Plot rainmaps
             prbase=prdir+dset+"/"
