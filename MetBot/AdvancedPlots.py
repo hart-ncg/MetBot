@@ -730,7 +730,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
             clevs = np.arange(-12, 14, 2)
             cm = plt.cm.BrBG_r
         elif ptype == 'comp_anom_cnt':
-            clevs = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            clevs = [30, 35, 40, 45, 50, 55, 60, 65, 70]
             cm = plt.cm.BrBG
 
         if test:
@@ -765,7 +765,10 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
     plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.05,wspace=0.2,hspace=0.2)
     axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
     cbar = plt.colorbar(cs, cax=axcl)
-    cbar.set_label('W/m^2')
+    if ptype=='comp_anom_cnt':
+        cbar.set_label('%')
+    else:
+        cbar.set_label('W/m^2')
 
     if savefig:
         plt.savefig(figdir+'/OLRmap_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
