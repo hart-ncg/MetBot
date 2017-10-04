@@ -738,7 +738,8 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
         elif ptype == 'comp_anom_cnt':
             clevs = [50, 55, 60, 65, 70]
             #cm = plt.cm.BrBG
-            cm = plt.cm.OrRd_r
+            cm = plt.cm.OrRd
+            #cm = plt.cm.PuBu
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
