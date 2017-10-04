@@ -356,18 +356,45 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                             this_anom = rainsel[day, :, :] - rainsum_daily
                             anoms[day, :, :] = this_anom
 
-                        anoms_signs = np.sign(anoms)
-                        comp_signs = np.sign(comp_anom)
+                        if ptype == 'comp_anom_ag':
 
-                        mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
-                        for i in range(nlat):
-                            for j in range(nlon):
-                                count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
-                                perc = (float(count) / float(nttt_mon)) * 100
-                                if perc >= agthresh:
-                                    mask_zeros[i, j] = 1
-                                else:
-                                    mask_zeros[i, j] = 0
+                            anoms_signs = np.sign(anoms)
+                            comp_signs = np.sign(comp_anom)
+
+
+                            mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+                            for i in range(nlat):
+                                for j in range(nlon):
+                                    count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
+                                    perc = (float(count) / float(nttt_mon)) * 100
+                                    if perc >= agthresh:
+                                        mask_zeros[i, j] = 1
+                                    else:
+                                        mask_zeros[i, j] = 0
+
+
+                        elif ptype=='comp_anom_cnt':
+
+                            pos_pcent=np.zeros((nlat, nlon), dtype=np.float32)
+                            neg_pcent=np.zeros((nlat, nlon), dtype=np.float32)
+                            zero_pcent=np.zeros((nlat, nlon), dtype=np.float32)
+
+                            for i in range(nlat):
+                                for j in range(nlon):
+                                    count_p = len(np.where(anoms[:, i, j] > 0)[0])
+                                    count_n = len(np.where(anoms[:, i, j] < 0)[0])
+                                    count_z = len(np.where(anoms[:, i, j] == 0)[0])
+
+
+                                    perc_p = (float(count_p) / float(nttt_mon)) * 100
+                                    perc_n = (float(count_n) / float(nttt_mon)) * 100
+                                    perc_z = (float(count_z) / float(nttt_mon)) * 100
+                                    print perc_z
+
+
+                                    pos_pcent[i,j]=perc_p
+                                    neg_pcent[i,j]=perc_n
+                                    zero_pcent[i,j]=perc_z
 
             elif under_of=='under':
 
@@ -417,7 +444,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             elif ptype=='comp_anom_ag':
                 #data4plot=comp_anom[::3,::3]
                 data4plot=comp_anom
-
+            elif ptype=='comp_anom_cnt':
+                data4plot=neg_pcent
 
             # if ptype=='comp_anom_ag':
             #     newlon = rlon[::3]
@@ -469,6 +497,10 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             clevs = np.arange(-4, 4.5, 0.5)
             cticks = clevs
             cm = plt.cm.seismic_r
+        elif ptype=='comp_anom_cnt':
+            clevs= np.arange(30,75,5)
+            cticks = clevs
+            cm = plt.cm.seismic_r
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
@@ -509,7 +541,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         cbar = plt.colorbar(cs, cax=axcl)
     else:
         cbar = plt.colorbar(cs,cax=axcl,ticks=cticks)
-    if ptype=='per_ttt':cbar.set_label('%')
+    if ptype=='per_ttt' or ptype=='comp_anom_cnt':cbar.set_label('%')
     else:cbar.set_label('mm')
 
     if savefig:
@@ -686,8 +718,8 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
                             for i in range(nlat):
                                 for j in range(nlon):
-                                    count_p = len(np.where(anoms[:, i, j] > 5)[0])
-                                    count_n = len(np.where(anoms[:, i, j] < -5)[0])
+                                    count_p = len(np.where(anoms[:, i, j] > 0)[0])
+                                    count_n = len(np.where(anoms[:, i, j] < 0)[0])
                                     #count_z = len(np.where(anoms[:, i, j] == 0)[0])
 
 
@@ -736,10 +768,11 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
             clevs = np.arange(-12, 14, 2)
             cm = plt.cm.BrBG_r
         elif ptype == 'comp_anom_cnt':
-            clevs = [50, 55, 60, 65, 70]
-            #cm = plt.cm.BrBG
+            clevs= np.arange(30,75,5)
+            cm = plt.cm.BrBG
+            #clevs = [50, 55, 60, 65, 70]
             #cm = plt.cm.OrRd
-            cm = plt.cm.PuBu
+            #cm = plt.cm.PuBu
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
