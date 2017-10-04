@@ -498,9 +498,9 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cticks = clevs
             cm = plt.cm.seismic_r
         elif ptype=='comp_anom_cnt':
-            clevs= np.arange(0,105,10)
+            clevs= np.arange(0,50,5)
             cticks = clevs
-            cm = plt.cm.seismic_r
+            cm = plt.cm.magma_r
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')

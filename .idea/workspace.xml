@@ -43,20 +43,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_ttt_olr_autothresh.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="251" column="0" lean-forward="true" selection-start-line="251" selection-start-column="0" selection-end-line="256" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4005">
+            <state relative-caret-position="3915">
               <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
               <folding />
             </state>
@@ -66,8 +56,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="500" column="38" lean-forward="true" selection-start-line="500" selection-start-column="38" selection-end-line="500" selection-end-column="38" />
+            <state relative-caret-position="251">
+              <caret line="502" column="31" lean-forward="false" selection-start-line="502" selection-start-column="31" selection-end-line="502" selection-end-column="31" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -589,13 +579,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00080" summary="Edits to precip wrappers to plot composite anomaly">
-      <created>1506681838677</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1506681838677</updated>
-    </task>
     <task id="LOCAL-00081" summary="Edits to precip and olr wrappers to plot composite anomaly">
       <created>1506682380981</created>
       <option name="number" value="00081" />
@@ -932,7 +915,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507120047413</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="New option to plot % pos and neg anoms in precip">
+      <created>1507121520521</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1507121520521</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1352,7 +1342,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4005">
+        <state relative-caret-position="3915">
           <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
           <folding />
         </state>
@@ -1360,8 +1350,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="500" column="38" lean-forward="true" selection-start-line="500" selection-start-column="38" selection-end-line="500" selection-end-column="38" />
+        <state relative-caret-position="251">
+          <caret line="502" column="31" lean-forward="false" selection-start-line="502" selection-start-column="31" selection-end-line="502" selection-end-column="31" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>
