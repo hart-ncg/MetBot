@@ -522,6 +522,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         elif ptype=='all_cnt':
             clevs=np.arange(0,50,5)
             cm = plt.cm.magma_r
+            cticks = clevs
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
