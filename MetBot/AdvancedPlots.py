@@ -472,8 +472,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             #     newlon=rlon
             #     newlat=rlat
 
-            newlon=rlon
-            newlat=rlat
+        newlon=rlon
+        newlat=rlat
 
         #Plot
         plon,plat = np.meshgrid(newlon,newlat)
