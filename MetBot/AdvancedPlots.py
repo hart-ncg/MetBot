@@ -681,20 +681,20 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
                             pos_pcent=np.zeros((nlat, nlon), dtype=np.float32)
                             neg_pcent=np.zeros((nlat, nlon), dtype=np.float32)
-                            zero_pcent=np.zeros((nlat, nlon), dtype=np.float32)
+                            #zero_pcent=np.zeros((nlat, nlon), dtype=np.float32)
 
 
                             for i in range(nlat):
                                 for j in range(nlon):
-                                    count_p = len(np.where(anoms[:, i, j] > 0)[0])
-                                    count_n = len(np.where(anoms[:, i, j] < 0)[0])
-                                    count_z = len(np.where(anoms[:, i, j] == 0)[0])
+                                    count_p = len(np.where(anoms[:, i, j] > 5)[0])
+                                    count_n = len(np.where(anoms[:, i, j] < 5)[0])
+                                    #count_z = len(np.where(anoms[:, i, j] == 0)[0])
 
 
                                     perc_p = (float(count_p) / float(nttt_mon)) * 100
                                     perc_n = (float(count_n) / float(nttt_mon)) * 100
-                                    perc_z = (float(count_z) / float(nttt_mon)) * 100
-                                    print perc_z
+                                    #perc_z = (float(count_z) / float(nttt_mon)) * 100
+                                    #print perc_z
 
 
                                     pos_pcent[i,j]=perc_p
