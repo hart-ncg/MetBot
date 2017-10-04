@@ -774,7 +774,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
     axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
     cbar = plt.colorbar(cs, cax=axcl)
     if ptype=='comp_anom_cnt':
-        cbar.set_label('% pos')
+        cbar.set_label('% neg')
     else:
         cbar.set_label('W/m^2')
 
