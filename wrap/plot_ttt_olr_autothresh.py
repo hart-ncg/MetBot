@@ -40,7 +40,7 @@ import mpl_toolkits.basemap as bm
 sub="SA"
 #sub="SA_CONT"
 #sub="UM_FOC"
-seasopt="fullseason"    # options: coreseason, dryseason, fullseason
+seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 testyear=True           # To use output from a test
 testfile=True           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
