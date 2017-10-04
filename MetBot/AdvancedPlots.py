@@ -313,8 +313,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
             for i in range(nlat):
                 for j in range(nlon):
-                    count_p = len(np.where(anoms[:, i, j] > 0)[0])
-                    perc_p = (float(count_p) / float(nttt_mon)) * 100
+                    count_p = len(np.where(all_anoms[:, i, j] > 0)[0])
+                    perc_p = (float(count_p) / float(ndays_mon)) * 100
                     all_pos_pcent[i, j] = perc_p
 
             data4plot=all_pos_pcent
