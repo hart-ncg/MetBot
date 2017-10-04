@@ -693,7 +693,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
                                     perc_p = (float(count_p) / float(nttt_mon)) * 100
                                     perc_n = (float(count_n) / float(nttt_mon)) * 100
-                                    perc_z = (float(count_n) / float(nttt_mon)) * 100
+                                    perc_z = (float(count_z) / float(nttt_mon)) * 100
                                     print perc_z
 
 
