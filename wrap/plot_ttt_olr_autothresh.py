@@ -52,7 +52,7 @@ ave_ttt_plot=False      # plot ave OLR on TTT days - composite
 comp_anom_ttt_plot=True  # plot ave OLR on TTT days as anom from long term daily mean for each month
 comp_anom_ag_plot=True   # plot comp anom with agtest on composite
 comp_anom_cnt_plot=True     # plot count of the number of days above or below average
-perc_ag=80              # show if this % or more days agree
+perc_ag=70              # show if this % or more days agree
 
 under_dayof='dayof'     # if "dayof" plots OLR on TTT days
                         #   if "under" plots olr under TTTs (based on blobs)
@@ -63,7 +63,7 @@ nTTTlab=True            # labels each plot with # or % of TTTs
 freecol=False            # free colour bar
 refkey='0'              # 0 or all
 #doms=['All']
-doms=['All','15-35','35-55','55-75','75-100'] # doms for TTT days selected
+doms=['All','nCont','nMada','nOcea'] # doms for TTT days selected
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 olrdir=bkdir+"olr_figs/"
@@ -200,11 +200,10 @@ for d in range(ndset):
             if len(doms) == 3:
                 kw, ke = stats.spatialsubset(s,False,cutlon=40.) # events west and east of 40E
                 keys=[ks,kw,ke]
-            elif len(doms) == 5:
-                k1, ktmp = stats.spatialsubset(s, False, cutlon=35.)
-                k2, ktmp2 = stats.spatialsubset(s,ktmp,cutlon=55.)
-                k3, k4 = stats.spatialsubset(s,ktmp2,cutlon=75.)
-                keys = [ks, k1, k2, k3, k4]
+            elif len(doms) == 4:
+                k1, ktmp = stats.spatialsubset(s, False, cutlon=37.5)
+                k2, k3 = stats.spatialsubset(s,ktmp,cutlon=67.5)
+                keys = [ks, k1, k2, k3]
 
             ### Plot olrmaps
             olrbase=olrdir+dset+"/"
