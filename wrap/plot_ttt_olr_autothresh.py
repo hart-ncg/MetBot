@@ -41,8 +41,8 @@ sub="SA"
 #sub="SA_CONT"
 #sub="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
-testyear=True           # To use output from a test
-testfile=True           # Uses a test file with short period
+testyear=False           # To use output from a test
+testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
