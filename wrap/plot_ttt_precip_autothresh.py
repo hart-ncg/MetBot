@@ -48,13 +48,13 @@ testfile=False           # Uses a test file with short period
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=False            # plot total rainfall
-all_cnt_anom=True       # plot % of days which have +ve anomalies
-tot_ttt_plot=False      # plot total rainfall from TTTs
-per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
-rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
-comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
-comp_anom_ag_plot=False   # plot comp anom with agtest on composite
-comp_anom_cnt_plot=False     # plot count of the number of days above or below average
+all_cnt_anom=False       # plot % of days which have +ve anomalies
+tot_ttt_plot=True      # plot total rainfall from TTTs
+per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
+rain_per_ttt_plot=True  # plot average rain per TTT day (rain composite)
+comp_anom_ttt_plot=True  # plot rain per TTT as anom from long term daily mean for each month
+comp_anom_ag_plot=True   # plot comp anom with agtest on composite
+comp_anom_cnt_plot=True     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
 
@@ -70,7 +70,7 @@ nTTTlab=True            # labels each plot with # or % of TTTs
 freecol=False           # free colour bar
 refkey='0'              # 0 or all
 #doms=['All']
-doms=['All','Cont','Mada'] # doms for TTT days selected
+doms=['All','Cont','W_Oc','E_Oc'] # doms for TTT days selected
 
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
@@ -93,7 +93,7 @@ for d in range(ndset):
     print 'This is dset '+dcnt+' of '+ndstr+' in list'
 
     ### Multi model?
-    mods='all'  # "all" or "spec" to choose specific model(s)
+    mods='spec'  # "all" or "spec" to choose specific model(s)
     if mods=='all':
         nmod=len(dsetdict.dset_deets[dset])
         mnames=list(dsetdict.dset_deets[dset])
@@ -241,7 +241,11 @@ for d in range(ndset):
             count_all=str(int(len(ks)))
             print "Total CB events ="+str(count_all)
             kw, ke = stats.spatialsubset(s,False,cutlon=40.) # events west and east of 40E
-            keys=[ks,kw,ke]
+            kew, kee=stats.spatialsubset(s,ke,cutlon=65.)
+            if len(doms)==3:
+                keys=[ks,kw,ke]
+            elif len(doms)==4:
+                keys=[ks,kw,kew,kee]
 
             ### Plot rainmaps
             prbase=prdir+dset+"/"
