@@ -80,7 +80,7 @@ tper_hv_sum=False        # % of heavy day precip contributed by TTTs
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
-monmean='tot'           # to control the output - is there averaging?
+monmean='mon'           # to control the output - is there averaging?
                         # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total

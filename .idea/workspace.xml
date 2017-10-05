@@ -47,8 +47,8 @@
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="58" column="65" lean-forward="true" selection-start-line="58" selection-start-column="65" selection-end-line="58" selection-end-column="65" />
+            <state relative-caret-position="330">
+              <caret line="82" column="12" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -69,8 +69,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="344" column="63" lean-forward="true" selection-start-line="344" selection-start-column="63" selection-end-line="344" selection-end-column="63" />
+            <state relative-caret-position="218">
+              <caret line="695" column="32" lean-forward="true" selection-start-line="695" selection-start-column="32" selection-end-line="695" selection-end-column="32" />
               <folding>
                 <element signature="e#19#47#0" expanded="true" />
               </folding>
@@ -592,13 +592,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00101" summary="Edits to olr to plot composite anomaly - ag test">
-      <created>1506946008591</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1506946008591</updated>
-    </task>
     <task id="LOCAL-00102" summary="Edits to olr to plot composite anomaly - ag test">
       <created>1506946564657</created>
       <option name="number" value="00102" />
@@ -935,7 +928,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507215611752</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="Temp changes to plot threshold of &gt; 25 mm rain">
+      <created>1507217275842</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1507217275842</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -999,7 +999,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Small edits to precip function in AdvancedPlots.py" />
     <MESSAGE value="Edit to TTT precip wrapper to allow a split between the east and west" />
     <MESSAGE value="Fix to wrapper to allow for 1 CB" />
     <MESSAGE value="Change cbar for percent" />
@@ -1024,7 +1023,8 @@
     <MESSAGE value="New option to split by diff longitudes - round3" />
     <MESSAGE value="New plot options for wet days and heavy rain days" />
     <MESSAGE value="Temp changes to plot % days where there is &gt; 0 rain" />
-    <option name="LAST_COMMIT_MESSAGE" value="Temp changes to plot % days where there is &gt; 0 rain" />
+    <MESSAGE value="Temp changes to plot threshold of &gt; 25 mm rain" />
+    <option name="LAST_COMMIT_MESSAGE" value="Temp changes to plot threshold of &gt; 25 mm rain" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1357,16 +1357,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="58" column="65" lean-forward="true" selection-start-line="58" selection-start-column="65" selection-end-line="58" selection-end-column="65" />
+        <state relative-caret-position="330">
+          <caret line="82" column="12" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="344" column="63" lean-forward="true" selection-start-line="344" selection-start-column="63" selection-end-line="344" selection-end-column="63" />
+        <state relative-caret-position="218">
+          <caret line="695" column="32" lean-forward="true" selection-start-line="695" selection-start-column="32" selection-end-line="695" selection-end-column="32" />
           <folding>
             <element signature="e#19#47#0" expanded="true" />
           </folding>

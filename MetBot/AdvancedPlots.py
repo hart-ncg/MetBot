@@ -691,7 +691,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
         elif ptype=='aper_hv_cnt':
-            clevs = np.arange(0,50,5)
+            clevs = np.arange(0,16,1)
             cticks = clevs
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
@@ -701,7 +701,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
         elif ptype=='aper_hv_sum':
-            clevs = np.arange(0,16,1)
+            clevs = np.arange(0,50,5)
             cticks = clevs
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
