@@ -310,6 +310,21 @@ for d in range(ndset):
                                                     under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
                                                     savefig=True,test=testq,labels=nTTTlab)
 
+            if aper_wet_cnt:
+                if t == 0:
+                    print 'Plotting % of days that are wet days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='aper_wet_cnt', mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True, test=testq, labels=nTTTlab)
+            if aper_wet_sum:
+                if t == 0:
+                    print 'Plotting % rainfall that falls on wet days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='aper_wet_sum', mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True, test=testq, labels=nTTTlab)
+
             if all_hv_cnt:
                 if t == 0:
                     print 'Plotting count of heavy rain days'
@@ -325,6 +340,26 @@ for d in range(ndset):
                                                     key=dset + '-olr-0-' + refkey, ptype='all_hv_sum', mmean=monmean, \
                                                     under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
                                                     savefig=True,test=testq,labels=nTTTlab)
+
+            if aper_hv_cnt:
+                if t == 0:
+                    print 'Plotting % of days that are heavy rain days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='aper_hv_cnt',
+                                                    mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True, test=testq, labels=nTTTlab)
+
+            if aper_hv_sum:
+                if t == 0:
+                    print 'Plotting % rain that falls on heavy rain days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='aper_hv_sum',
+                                                    mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True, test=testq, labels=nTTTlab)
+
+
 
             # Loop domains
             for do in range(len(doms)):

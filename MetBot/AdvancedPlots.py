@@ -484,9 +484,11 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
                 ttt_wetdays_p_mon = ttt_wetdaycnt / nys
                 ttt_wetdays_mean = np.nanmean(ttt_wetdays_p_mon)
+                ttt_wetdays_per = (ttt_wetdaycnt / wetdaycnt)* 100.0
 
                 ttt_wetsum_p_mon = ttt_wetdaysum / nys
                 ttt_wetsum_mean = np.nanmean(ttt_wetsum_p_mon)
+                ttt_wetsum_per = (ttt_wetdaysum / wetdaysum)* 100.0
 
                 # Heavy rain days
                 ttt_hvdaycnt = np.zeros((nlat, nlon), dtype=np.float32)
@@ -503,9 +505,11 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
                 ttt_hvdays_p_mon = ttt_hvdaycnt / nys
                 ttt_hvdays_mean = np.nanmean(ttt_hvdays_p_mon)
+                ttt_hvdays_per = (ttt_hvdaycnt / hvdaycnt) * 100.0
 
                 ttt_hvsum_p_mon = ttt_hvdaysum / nys
                 ttt_hvsum_mean = np.nanmean(ttt_hvsum_p_mon)
+                ttt_hvsum_per = (ttt_hvdaysum / hvdaysum) * 100.0
 
 
                 if ptype=='comp_anom_ag' or ptype=='comp_anom_cnt':
@@ -605,6 +609,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 data4plot=comp_anom
             elif ptype=='comp_anom_cnt':
                 data4plot=pos_pcent
+
+
 
 
 
