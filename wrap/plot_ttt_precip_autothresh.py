@@ -41,27 +41,32 @@ subrain="SA_TRMM"
 #subrain="SA_CONT"
 #subrain="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
-testyear=False           # To use output from a test
-testfile=False           # Uses a test file with short period
+testyear=True           # To use output from a test
+testfile=True           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=False            # plot total rainfall
 all_cnt_anom=False       # plot % of days which have +ve anomalies
-tot_ttt_plot=True      # plot total rainfall from TTTs
-per_ttt_plot=True      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
-rain_per_ttt_plot=True  # plot average rain per TTT day (rain composite)
-comp_anom_ttt_plot=True  # plot rain per TTT as anom from long term daily mean for each month
-comp_anom_ag_plot=True   # plot comp anom with agtest on composite
-comp_anom_cnt_plot=True     # plot count of the number of days above or below average
+all_wet_cnt=True        # plot number of wet days - either total or per mon depending on 'monmean'
+all_wet_sum=True        # plot rainfall from wet days - either total or per mon depending on 'monmean'
+all_hv_cnt=True         # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
+all_hv_sum=True         # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
+
+tot_ttt_plot=False      # plot total rainfall from TTTs
+per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
+rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
+comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
+comp_anom_ag_plot=False   # plot comp anom with agtest on composite
+comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
-monmean='day'           # to control the output - is there averaging?
+monmean='mon'           # to control the output - is there averaging?
                         # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total
@@ -274,6 +279,38 @@ for d in range(ndset):
                                                     key=dset + '-olr-0-' + refkey, ptype='all_cnt', mmean=monmean, \
                                                     under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
                                                     savefig=True, test=testq)
+
+            if all_wet_cnt:
+                if t == 0:
+                    print 'Plotting count of wet days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='all_wet_cnt', mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True,test=testq,labels=nTTTlab)
+
+            if all_wet_sum:
+                if t == 0:
+                    print 'Plotting sum of pr from wet days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='all_wet_sum', mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True,test=testq,labels=nTTTlab)
+
+            if all_hv_cnt:
+                if t == 0:
+                    print 'Plotting count of heavy rain days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='all_hv_cnt', mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True,test=testq,labels=nTTTlab)
+
+            if all_hv_sum:
+                if t == 0:
+                    print 'Plotting sum of pr from heavy rain days'
+                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='all_hv_sum', mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
+                                                    savefig=True,test=testq,labels=nTTTlab)
 
             # Loop domains
             for do in range(len(doms)):

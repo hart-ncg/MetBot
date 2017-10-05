@@ -198,6 +198,12 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
     plot types
         tot_all - sum of total precip
         all_cnt - % of all days with +ve pr anoms
+        all_wet_cnt - plot number of wet days - either total or per mon depending on 'monmean'
+        all_wet_sum - plot rainfall from wet days - either total or per mon depending on 'monmean'
+        all_hv_cnt - plot number of heavy rainfall days - either total or per mon depending on 'monmean'
+        all_hv_sum - plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
+
+
         tot_ttt - sum of precip from TTTs
         per_ttt - percent of precip from TTTs
         rain_per_ttt - rain per ttt event
@@ -294,6 +300,60 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         rainsum_monthly=rainsum_all/nys
         rainsum_daily=rainsum_all/len(datesmon)
 
+        #Wet days
+        wetdaycnt=np.zeros((nlat, nlon), dtype=np.float32)
+        wetdaysum=np.zeros((nlat, nlon), dtype=np.float32)
+        for i in range(nlat):
+            for j in range(nlon):
+                wet_ind = np.where(rainmon[:, i, j] >= 10.0)[0]
+                count = len(wet_ind)
+                wet_sel = rainmon[wet_ind,i,j]
+                wet_sum = np.nansum(wet_sel,0)
+
+                wetdaycnt[i,j] = count
+                wetdaysum[i,j] = wet_sum
+
+        wetdays_p_mon=wetdaycnt/nys
+        wetdays_mean=np.nanmean(wetdays_p_mon)
+
+        wetsum_p_mon=wetdaysum/nys
+        wetsum_mean=np.nanmean(wetsum_p_mon)
+
+        #Heavy rain days
+        hvdaycnt = np.zeros((nlat, nlon), dtype=np.float32)
+        hvdaysum = np.zeros((nlat, nlon), dtype=np.float32)
+        for i in range(nlat):
+            for j in range(nlon):
+                hv_ind = np.where(rainmon[:, i, j] >= 50.0)[0]
+                count = len(hv_ind)
+                hv_sel = rainmon[hv_ind, i, j]
+                hv_sum = np.nansum(hv_sel, 0)
+
+                hvdaycnt[i, j] = count
+                hvdaysum[i, j] = hv_sum
+
+        hvdays_p_mon = hvdaycnt / nys
+        hvdays_mean=np.nanmean(hvdays_p_mon)
+
+        hvsum_p_mon = hvdaysum / nys
+        hvsum_mean=np.nanmean(hvsum_p_mon)
+
+        # masked_rain = np.ma.zeros((ndt, nlat, nlon), dtype=np.float32)
+        # for rdt in range(ndt):
+        #     chmask = my.poly2mask(rlon, rlat, chs_4rain[rdt])
+        #     r = np.ma.MaskedArray(rainsel[rdt, :, :], mask=~chmask)
+        #     masked_rain[rdt, :, :] = r
+        #
+        #     mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+        #     for i in range(nlat):
+        #         for j in range(nlon):
+        #             count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
+        #             perc = (float(count) / float(nttt_mon)) * 100
+        #             if perc >= agthresh:
+        #                 mask_zeros[i, j] = 1
+        #             else:
+        #                 mask_zeros[i, j] = 0
+
         if ptype=='tot_all':
             if mmean=='mon':
                 data4plot=rainsum_monthly
@@ -301,6 +361,34 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 data4plot=rainsum_daily
             elif mmean=='tot':
                 data4plot=rainsum_all
+
+        elif ptype=='all_wet_cnt':
+            if mmean=='tot':
+                data4plot=wetdaycnt
+            elif mmean=='mon':
+                data4plot=wetdays_p_mon
+            titstat=wetdays_mean
+
+        elif ptype=='all_wet_sum':
+            if mmean=='tot':
+                data4plot=wetdaysum
+            elif mmean=='mon':
+                data4plot=wetsum_p_mon
+            titstat=wetsum_mean
+
+        elif ptype=='all_hv_cnt':
+            if mmean=='tot':
+                data4plot=hvdaycnt
+            elif mmean=='mon':
+                data4plot=hvdays_p_mon
+            titstat=hvdays_mean
+
+        elif ptype=='all_hv_sum':
+            if mmean=='tot':
+                data4plot=hvdaysum
+            elif mmean=='mon':
+                data4plot=hvsum_p_mon
+            titstat=hvsum_mean
 
         elif ptype=='all_cnt':
 
@@ -496,6 +584,24 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 cticks = clevs
             #cm=plt.cm.viridis
             cm = plt.cm.YlGnBu
+        elif ptype=='all_wet_cnt' or ptype=='all_hv_cnt':
+            if mmean == 'tot':
+                clevs=np.arange(0,225,25)
+                cticks = clevs
+                cm = plt.cm.YlGnBu
+            elif mmean =='mon':
+                clevs=np.arange(0,16,1)
+                cticks = clevs
+                cm = plt.cm.YlGnBu
+        elif ptype == 'all_wet_sum' or ptype=='all_hv_sum':
+            if mmean == 'tot':
+                clevs=[0,800,1600,2400,3200,4000,4800,5600]
+                cticks = clevs
+                cm = plt.cm.YlGnBu
+            elif mmean == 'mon':
+                clevs=[0,50,100,150,200,250,300,350]
+                cticks = clevs
+                cm = plt.cm.YlGnBu
         elif ptype=='tot_ttt':
             if mmean=='tot':
                 clevs=[0,250,500,750,1000,1250,1500,1750,2000]
@@ -533,6 +639,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
             elif ptype=='per_ttt':
                 tit=stats.mndict[mn]+': '+str(int(round((float(nttt_mon)/float(ndays_mon))*100.0)))+'% of days have TTTs'
+            elif ptype=='all_wet_cnt' or ptype=='all_wet_sum' or ptype=='all_hv_cnt' or ptype=='all_hv_sum':
+                tit=stats.mndict[mn]+': mean = '+str(int(round(titstat)))+' per mon'
         else:
             tit=stats.mndict[mn]
         plt.title(tit)
