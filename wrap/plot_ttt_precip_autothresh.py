@@ -66,7 +66,7 @@ perc_ag=70              # show if this % or more days agree
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
-monmean='mon'           # to control the output - is there averaging?
+monmean='tot'           # to control the output - is there averaging?
                         # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total

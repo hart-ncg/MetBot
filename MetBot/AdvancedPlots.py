@@ -455,6 +455,45 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
                 comp_anom = rainperttt - rainsum_daily
 
+                # Wet days
+                ttt_wetdaycnt = np.zeros((nlat, nlon), dtype=np.float32)
+                ttt_wetdaysum = np.zeros((nlat, nlon), dtype=np.float32)
+                for i in range(nlat):
+                    for j in range(nlon):
+                        wet_ind = np.where(rainsel[:, i, j] >= 10.0)[0]
+                        count = len(wet_ind)
+                        wet_sel = rainsel[wet_ind, i, j]
+                        wet_sum = np.nansum(wet_sel, 0)
+
+                        ttt_wetdaycnt[i, j] = count
+                        ttt_wetdaysum[i, j] = wet_sum
+
+                ttt_wetdays_p_mon = ttt_wetdaycnt / nys
+                ttt_wetdays_mean = np.nanmean(ttt_wetdays_p_mon)
+
+                ttt_wetsum_p_mon = ttt_wetdaysum / nys
+                ttt_wetsum_mean = np.nanmean(ttt_wetsum_p_mon)
+
+                # Heavy rain days
+                ttt_hvdaycnt = np.zeros((nlat, nlon), dtype=np.float32)
+                ttt_hvdaysum = np.zeros((nlat, nlon), dtype=np.float32)
+                for i in range(nlat):
+                    for j in range(nlon):
+                        hv_ind = np.where(rainsel[:, i, j] >= 50.0)[0]
+                        count = len(hv_ind)
+                        hv_sel = rainsel[hv_ind, i, j]
+                        hv_sum = np.nansum(hv_sel, 0)
+
+                        ttt_hvdaycnt[i, j] = count
+                        ttt_hvdaysum[i, j] = hv_sum
+
+                ttt_hvdays_p_mon = ttt_hvdaycnt / nys
+                ttt_hvdays_mean = np.nanmean(ttt_hvdays_p_mon)
+
+                ttt_hvsum_p_mon = ttt_hvdaysum / nys
+                ttt_hvsum_mean = np.nanmean(ttt_hvsum_p_mon)
+
+
                 if ptype=='comp_anom_ag' or ptype=='comp_anom_cnt':
                     if nttt_mon >= 1:
                         anoms = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
@@ -553,6 +592,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             elif ptype=='comp_anom_cnt':
                 data4plot=pos_pcent
 
+
             # if ptype=='comp_anom_ag':
             #     newlon = rlon[::3]
             #     newlat = rlat[::3]
@@ -595,7 +635,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 cm = plt.cm.YlGnBu
         elif ptype=='all_hv_cnt':
             if mmean == 'tot':
-                clevs=np.arange(0,100,10)
+                clevs=np.arange(0,16,1)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
             elif mmean =='mon':
@@ -604,7 +644,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 cm = plt.cm.YlGnBu
         elif ptype == 'all_wet_sum':
             if mmean == 'tot':
-                clevs=[0,800,1600,2400,3200,4000,4800,5600]
+                clevs=np.arange(0,3000,500)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
             elif mmean == 'mon':
@@ -613,7 +653,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 cm = plt.cm.YlGnBu
         elif ptype=='all_hv_sum':
             if mmean == 'tot':
-                clevs=[0,800,1600,2400,3200,4000,4800,5600]
+                clevs = np.arange(0, 3000, 500)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
             elif mmean == 'mon':
