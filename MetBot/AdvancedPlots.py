@@ -584,7 +584,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 cticks = clevs
             #cm=plt.cm.viridis
             cm = plt.cm.YlGnBu
-        elif ptype=='all_wet_cnt' or ptype=='all_hv_cnt':
+        elif ptype=='all_wet_cnt':
             if mmean == 'tot':
                 clevs=np.arange(0,225,25)
                 cticks = clevs
@@ -593,13 +593,31 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 clevs=np.arange(0,16,1)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
-        elif ptype == 'all_wet_sum' or ptype=='all_hv_sum':
+        elif ptype=='all_hv_cnt':
+            if mmean == 'tot':
+                clevs=np.arange(0,100,10)
+                cticks = clevs
+                cm = plt.cm.YlGnBu
+            elif mmean =='mon':
+                clevs=np.arange(0,5,0.5)
+                cticks = clevs
+                cm = plt.cm.YlGnBu
+        elif ptype == 'all_wet_sum':
             if mmean == 'tot':
                 clevs=[0,800,1600,2400,3200,4000,4800,5600]
                 cticks = clevs
                 cm = plt.cm.YlGnBu
             elif mmean == 'mon':
-                clevs=[0,50,100,150,200,250,300,350]
+                clevs=np.arange(0,300,30)
+                cticks = clevs
+                cm = plt.cm.YlGnBu
+        elif ptype=='all_hv_sum':
+            if mmean == 'tot':
+                clevs=[0,800,1600,2400,3200,4000,4800,5600]
+                cticks = clevs
+                cm = plt.cm.YlGnBu
+            elif mmean == 'mon':
+                clevs=np.arange(0,200,25)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
         elif ptype=='tot_ttt':
