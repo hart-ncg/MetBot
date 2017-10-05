@@ -210,6 +210,16 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         comp_anom_ttt - rain per ttt as anom from monthly mean precip
         comp_anom_ag - as comp anom but with ag test
         comp_anom_cnt - % days with +ve or -ve anomalies
+
+        ttt_wet_cnt- number of wet days - either total or per mon depending on 'monmean'
+        tper_wet_cnt- % of wet days contributed by TTTs
+        ttt_wet_sum- rainfall from wet days - either total or per mon depending on 'monmean'
+        tper_wet_sum- % of wet day precip contributed by TTTs
+
+        ttt_hv_cnt- number of heavy rainfall days - either total or per mon depending on 'monmean'
+        tper_hv_cnt- % of heavy days contributed by TTTs
+        ttt_hv_sum - rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
+        tper_hv_sum - % of heavy day precip contributed by TTTs
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -337,22 +347,6 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
         hvsum_p_mon = hvdaysum / nys
         hvsum_mean=np.nanmean(hvsum_p_mon)
-
-        # masked_rain = np.ma.zeros((ndt, nlat, nlon), dtype=np.float32)
-        # for rdt in range(ndt):
-        #     chmask = my.poly2mask(rlon, rlat, chs_4rain[rdt])
-        #     r = np.ma.MaskedArray(rainsel[rdt, :, :], mask=~chmask)
-        #     masked_rain[rdt, :, :] = r
-        #
-        #     mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
-        #     for i in range(nlat):
-        #         for j in range(nlon):
-        #             count = len(np.where(anoms_signs[:, i, j] == comp_signs[i, j])[0])
-        #             perc = (float(count) / float(nttt_mon)) * 100
-        #             if perc >= agthresh:
-        #                 mask_zeros[i, j] = 1
-        #             else:
-        #                 mask_zeros[i, j] = 0
 
         if ptype=='tot_all':
             if mmean=='mon':
@@ -593,12 +587,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 data4plot=pos_pcent
 
 
-            # if ptype=='comp_anom_ag':
-            #     newlon = rlon[::3]
-            #     newlat = rlat[::3]
-            # else:
-            #     newlon=rlon
-            #     newlat=rlat
+
+
 
         newlon=rlon
         newlat=rlat

@@ -41,8 +41,8 @@ subrain="SA_TRMM"
 #subrain="SA_CONT"
 #subrain="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
-testyear=True           # To use output from a test
-testfile=True           # Uses a test file with short period
+testyear=False           # To use output from a test
+testfile=False           # Uses a test file with short period
                         # (testfile designed to be used together with testyear
                         # ..but testyear can be used seperately)
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
@@ -62,6 +62,15 @@ comp_anom_ag_plot=False   # plot comp anom with agtest on composite
 comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
+ttt_wet_cnt=False        # plot number of wet days - either total or per mon depending on 'monmean'
+tper_wet_cnt=False       # % of wet days contributed by TTTs
+ttt_wet_sum=False       # plot rainfall from wet days - either total or per mon depending on 'monmean'
+tper_wet_sum=False       # % of wet day precip contributed by TTTs
+
+ttt_hv_cnt=False        # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
+tper_hv_cnt=False        # % of heavy days contributed by TTTs
+ttt_hv_sum=False        # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
+tper_hv_sum=False        # % of heavy day precip contributed by TTTs
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
@@ -362,3 +371,66 @@ for d in range(ndset):
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_cnt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq)
+                if ttt_wet_cnt:
+                    print 'Plotting number of wet days contributed by TTTs'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='ttt_wet_cnt',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq)
+
+                if tper_wet_cnt:
+                    print 'Plotting % of wet days contributed by TTTs'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='tper_wet_cnt',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq)
+
+                if ttt_wet_sum:
+                    print 'Plotting wet day precip contributed by TTTs'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='ttt_wet_sum',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq)
+
+                if tper_wet_sum:
+                    print 'Plotting % wet day precip contributed by TTTs'
+                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                  key=dset+'-olr-0-'+refkey,ptype='tper_wet_sum',mmean=monmean,\
+                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
+                                                  savefig=True,test=testq)
+
+                if ttt_hv_cnt:
+                    print 'Plotting number of heavy days contributed by TTTs'
+                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
+                                                    season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='ttt_hv_cnt',
+                                                    mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
+                                                    savefig=True, test=testq)
+
+                if tper_hv_cnt:
+                    print 'Plotting % of heavy days contributed by TTTs'
+                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
+                                                    season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='tper_hv_cnt',
+                                                    mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
+                                                    savefig=True, test=testq)
+
+                if ttt_hv_sum:
+                    print 'Plotting heavy day precip contributed by TTTs'
+                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
+                                                    season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='ttt_hv_sum',
+                                                    mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
+                                                    savefig=True, test=testq)
+
+                if tper_hv_sum:
+                    print 'Plotting % heavy day precip contributed by TTTs'
+                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
+                                                    season=seasopt, \
+                                                    key=dset + '-olr-0-' + refkey, ptype='tper_hv_sum',
+                                                    mmean=monmean, \
+                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
+                                                    savefig=True, test=testq)
