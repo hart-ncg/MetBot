@@ -54,8 +54,8 @@ all_wet_sum=False       # plot rainfall from wet days - either total or per mon 
 aper_wet_cnt=False       # plot % of days that are wet days
 aper_wet_sum=False       # plot % of precip which is falling on wet days
 
-all_hv_cnt=False         # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
-all_hv_sum=False         # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
+all_hv_cnt=True         # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
+all_hv_sum=True         # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
 aper_hv_cnt=True        # plot % of days that are heavy rain days
 aper_hv_sum=True        # plot % of rainfally that is falling in heavy rain days
 

@@ -342,7 +342,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         hvdaysum = np.zeros((nlat, nlon), dtype=np.float32)
         for i in range(nlat):
             for j in range(nlon):
-                hv_ind = np.where(rainmon[:, i, j] >= 50.0)[0]
+                #hv_ind = np.where(rainmon[:, i, j] >= 50.0)[0]
+                hv_ind = np.where(rainmon[:, i, j] >= 25.0)[0]
                 count = len(hv_ind)
                 hv_sel = rainmon[hv_ind, i, j]
                 hv_sum = np.nansum(hv_sel, 0)
@@ -690,7 +691,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
         elif ptype=='aper_hv_cnt':
-            clevs = np.arange(0,5,0.5)
+            clevs = np.arange(0,50,5)
             cticks = clevs
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
