@@ -200,9 +200,13 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         all_cnt - % of all days with +ve pr anoms
         all_wet_cnt - plot number of wet days - either total or per mon depending on 'monmean'
         all_wet_sum - plot rainfall from wet days - either total or per mon depending on 'monmean'
+        aper_wet_cnt - % of days that are wet days
+        aper_wet_sum - plot % of precip which is falling on wet days
+
         all_hv_cnt - plot number of heavy rainfall days - either total or per mon depending on 'monmean'
         all_hv_sum - plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
-
+        aper_hv_cnt - % of days that are heavy rain days
+        aper_hv_sum - % of rainfally that is falling in heavy rain days
 
         tot_ttt - sum of precip from TTTs
         per_ttt - percent of precip from TTTs
@@ -325,9 +329,11 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
         wetdays_p_mon=wetdaycnt/nys
         wetdays_mean=np.nanmean(wetdays_p_mon)
+        wetdays_per=(wetdayscnt/ndays_mon)*100.0
 
         wetsum_p_mon=wetdaysum/nys
         wetsum_mean=np.nanmean(wetsum_p_mon)
+        wetsum_per=(wetdaysum/rainsum_all)*100.0
 
         #Heavy rain days
         hvdaycnt = np.zeros((nlat, nlon), dtype=np.float32)
@@ -344,9 +350,11 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
         hvdays_p_mon = hvdaycnt / nys
         hvdays_mean=np.nanmean(hvdays_p_mon)
+        hvdays_per=(hvdaycnt/ndays_mon)*100.0
 
         hvsum_p_mon = hvdaysum / nys
         hvsum_mean=np.nanmean(hvsum_p_mon)
+        hvsum_per=(hvdaysum/rainsum_all)*100.0
 
         if ptype=='tot_all':
             if mmean=='mon':
@@ -370,6 +378,12 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 data4plot=wetsum_p_mon
             titstat=wetsum_mean
 
+        elif ptype=='aper_wet_cnt':
+            data4plot=wetdays_per
+
+        elif ptype=='aper_wet_sum':
+            data4plot=wetsum_per
+
         elif ptype=='all_hv_cnt':
             if mmean=='tot':
                 data4plot=hvdaycnt
@@ -383,6 +397,12 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             elif mmean=='mon':
                 data4plot=hvsum_p_mon
             titstat=hvsum_mean
+
+        elif ptype == 'aper_hv_cnt':
+            data4plot = hvdays_per
+
+        elif ptype == 'aper_hv_sum':
+            data4plot = hvsum_per
 
         elif ptype=='all_cnt':
 
@@ -602,6 +622,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cticks = clevs
             cm = plt.cm.gnuplot2
             #cm = plt.cm.terrain_r
+            cbar_lab='%'
         elif ptype=='tot_all':
             if mmean=='tot':
                 clevs=[0,800,1600,2400,3200,4000,4800,5600]
@@ -614,6 +635,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 cticks = clevs
             #cm=plt.cm.viridis
             cm = plt.cm.YlGnBu
+            cbar_lab='mm'
         elif ptype=='all_wet_cnt':
             if mmean == 'tot':
                 clevs=np.arange(0,225,25)
@@ -623,6 +645,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 clevs=np.arange(0,16,1)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
+            cbar_lab='days'
         elif ptype=='all_hv_cnt':
             if mmean == 'tot':
                 clevs=np.arange(0,16,1)
@@ -632,6 +655,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 clevs=np.arange(0,5,0.5)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
+            cbar_lab='days'
         elif ptype == 'all_wet_sum':
             if mmean == 'tot':
                 clevs=np.arange(0,3000,500)
@@ -641,6 +665,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 clevs=np.arange(0,300,30)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
+            cbar_lab='mm'
         elif ptype=='all_hv_sum':
             if mmean == 'tot':
                 clevs = np.arange(0, 3000, 500)
@@ -650,6 +675,27 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 clevs=np.arange(0,200,25)
                 cticks = clevs
                 cm = plt.cm.YlGnBu
+            cbar_lab='mm'
+        elif ptype=='aper_wet_cnt':
+            clevs = [0, 10, 20, 30, 40, 50]
+            cticks = clevs
+            cm = plt.cm.gnuplot2
+            cbar_lab = '%'
+        elif ptype=='aper_hv_cnt':
+            clevs = np.arange(0,10,0.5)
+            cticks = clevs
+            cm = plt.cm.gnuplot2
+            cbar_lab = '%'
+        elif ptype=='aper_wet_sum':
+            clevs = [0, 10, 20, 30, 40, 50, 60, 80, 90, 100]
+            cticks = clevs
+            cm = plt.cm.gnuplot2
+            cbar_lab = '%'
+        elif ptype=='aper_hv_sum':
+            clevs = [0, 10, 20, 30, 40, 50, 60, 80, 90, 100]
+            cticks = clevs
+            cm = plt.cm.gnuplot2
+            cbar_lab = '%'
         elif ptype=='tot_ttt':
             if mmean=='tot':
                 clevs=[0,250,500,750,1000,1250,1500,1750,2000]
@@ -661,22 +707,27 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 clevs=[0,0.4,0.8,1.2,1.6,2.0,2.4,2.8,3.2,3.6,4.0]
                 cticks = clevs
             cm=plt.cm.YlGnBu
+            cbar_lab='mm'
         elif ptype=='rain_per_ttt':
             clevs = [0.0,1.5,3.0,4.5,6.0,7.5,9.0,10.5,12.0]
             cticks = clevs
             cm = plt.cm.YlGnBu
+            cbar_lab='mm'
         elif ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
             clevs = np.arange(-4, 4.5, 0.5)
             cticks = clevs
             cm = plt.cm.seismic_r
+            cbar_lab='mm'
         elif ptype=='comp_anom_cnt':
             clevs= np.arange(0,50,5)
             cticks = clevs
             cm = plt.cm.magma_r
+            cbar_lab='%'
         elif ptype=='all_cnt':
             clevs=np.arange(0,50,5)
             cm = plt.cm.magma_r
             cticks = clevs
+            cbar_lab='%'
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
@@ -719,8 +770,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         cbar = plt.colorbar(cs, cax=axcl)
     else:
         cbar = plt.colorbar(cs,cax=axcl,ticks=cticks)
-    if ptype=='per_ttt' or ptype=='comp_anom_cnt':cbar.set_label('%')
-    else:cbar.set_label('mm')
+    cbar.set_label(cbar_lab)
 
     if savefig:
         plt.savefig(figdir+'/Rainmap_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
