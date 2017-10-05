@@ -319,7 +319,9 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         wetdaysum=np.zeros((nlat, nlon), dtype=np.float32)
         for i in range(nlat):
             for j in range(nlon):
-                wet_ind = np.where(rainmon[:, i, j] >= 10.0)[0]
+                #wet_ind = np.where(rainmon[:, i, j] >= 10.0)[0]
+                wet_ind = np.where(rainmon[:, i, j] > 0.0)[0]
+
                 count = len(wet_ind)
                 wet_sel = rainmon[wet_ind,i,j]
                 wet_sum = np.nansum(wet_sel,0)
