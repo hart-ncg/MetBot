@@ -329,7 +329,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
         wetdays_p_mon=wetdaycnt/nys
         wetdays_mean=np.nanmean(wetdays_p_mon)
-        wetdays_per=(wetdayscnt/ndays_mon)*100.0
+        wetdays_per=(wetdaycnt/ndays_mon)*100.0
 
         wetsum_p_mon=wetdaysum/nys
         wetsum_mean=np.nanmean(wetsum_p_mon)
