@@ -49,13 +49,13 @@ threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=False            # plot total rainfall
 all_cnt_anom=False       # plot % of days which have +ve anomalies
-all_wet_cnt=True        # plot number of wet days - either total or per mon depending on 'monmean'
-all_wet_sum=True        # plot rainfall from wet days - either total or per mon depending on 'monmean'
+all_wet_cnt=False       # plot number of wet days - either total or per mon depending on 'monmean'
+all_wet_sum=False       # plot rainfall from wet days - either total or per mon depending on 'monmean'
 aper_wet_cnt=True       # plot % of days that are wet days
 aper_wet_sum=True       # plot % of precip which is falling on wet days
 
-all_hv_cnt=True         # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
-all_hv_sum=True         # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
+all_hv_cnt=False         # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
+all_hv_sum=False         # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
 aper_hv_cnt=True        # plot % of days that are heavy rain days
 aper_hv_sum=True        # plot % of rainfally that is falling in heavy rain days
 

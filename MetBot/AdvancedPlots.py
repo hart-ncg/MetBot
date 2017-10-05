@@ -746,6 +746,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 tit=stats.mndict[mn]+': '+str(int(round((float(nttt_mon)/float(ndays_mon))*100.0)))+'% of days have TTTs'
             elif ptype=='all_wet_cnt' or ptype=='all_wet_sum' or ptype=='all_hv_cnt' or ptype=='all_hv_sum':
                 tit=stats.mndict[mn]+': mean = '+str(int(round(titstat)))+' per mon'
+            else:
+                tit = stats.mndict[mn]
         else:
             tit=stats.mndict[mn]
         plt.title(tit)
