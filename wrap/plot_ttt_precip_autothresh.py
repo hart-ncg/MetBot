@@ -68,9 +68,9 @@ aper_wet_cnt=False       # plot % of days that are over hvthr
 aper_wet_sum=False       # plot % of precip which is falling on days over hvthr
 
 # options to plot ttt - heavy pr
-ttt_wet_cnt=True        # plot number of  days over hvthr - either total or per mon depending on 'monmean'
-tper_wet_cnt=True       # % of days over hvthr contributed by TTTs
-ttt_wet_sum=True       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
+ttt_wet_cnt=False        # plot number of  days over hvthr - either total or per mon depending on 'monmean'
+tper_wet_cnt=False       # % of days over hvthr contributed by TTTs
+ttt_wet_sum=False       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
 tper_wet_sum=True       # % of precip from days over hvthr contributed by TTTs
 
 

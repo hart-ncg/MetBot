@@ -661,7 +661,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
             if hvthr==0:
-                clevs = [0, 10, 20, 30, 40, 50, 60] # should be the same as per_ttt
+                #clevs = [0, 10, 20, 30, 40, 50, 60] # should be the same as per_ttt
+                clevs = np.arange(0, 100, 10)
             else:
                 clevs=np.arange(0,100,10)
 
