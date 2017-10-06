@@ -70,8 +70,9 @@ aper_wet_sum=False       # plot % of precip which is falling on days over hvthr
 # options to plot ttt - heavy pr
 ttt_wet_cnt=False        # plot number of  days over hvthr - either total or per mon depending on 'monmean'
 tper_wet_cnt=False       # % of days over hvthr contributed by TTTs
+per_tttd_wet=True       # plot % of TTT days which have precip over this threshold
 ttt_wet_sum=False       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
-tper_wet_sum=True       # % of precip from days over hvthr contributed by TTTs
+tper_wet_sum=False       # % of precip from days over hvthr contributed by TTTs
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
@@ -415,5 +416,12 @@ for d in range(ndset):
                         print 'Plotting % hvthr day precip contributed by TTTs'
                         msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
                                                       key=dset+'-olr-0-'+refkey,ptype='tper_wet_sum',mmean=monmean,\
+                                                      under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
+                                                      savefig=True,test=testq, heavy=hvthr)
+
+                    if per_ttt_wet:
+                        print 'Plotting % of TTTs with precip over hvthr'
+                        msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                      key=dset+'-olr-0-'+refkey,ptype='per_ttt_wet',mmean=monmean,\
                                                       under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
                                                       savefig=True,test=testq, heavy=hvthr)

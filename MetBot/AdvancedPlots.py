@@ -214,6 +214,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
         ttt_wet_cnt- number of hvthr days - either total or per mon depending on 'monmean'
         tper_wet_cnt- % of hvthr days contributed by TTTs
+        per_tttd_wet - % of TTT days which have precip over this threshold
         ttt_wet_sum- rainfall from hvthr days - either total or per mon depending on 'monmean'
         tper_wet_sum- % of hvthr day precip contributed by TTTs
 
@@ -440,6 +441,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 ttt_wetdays_p_mon = ttt_wetdaycnt / nys
                 ttt_wetdays_mean = np.nanmean(ttt_wetdays_p_mon)
                 ttt_wetdays_per = (ttt_wetdaycnt / wetdaycnt)* 100.0
+                per_ttt_wthis = (ttt_wetdaycnt / nttt_mon)  * 100.0
 
                 ttt_wetsum_p_mon = ttt_wetdaysum / nys
                 ttt_wetsum_mean = np.nanmean(ttt_wetsum_p_mon)
@@ -556,6 +558,8 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                     data4plot=ttt_wetsum_p_mon
             elif ptype=='tper_wet_sum':
                 data4plot=ttt_wetsum_per
+            elif ptype=='per_tttd_wet':
+                data4plot=per_ttt_wthis
 
         newlon=rlon
         newlat=rlat
@@ -665,6 +669,11 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 clevs = np.arange(0, 100, 10)
             else:
                 clevs=np.arange(0,100,10)
+
+        elif ptype=='per_tttd_wet':
+            cm = plt.cm.gnuplot2
+            cbar_lab = '%'
+            clevs = np.arange(0, 100, 10)
 
 
         # ttt cbars
