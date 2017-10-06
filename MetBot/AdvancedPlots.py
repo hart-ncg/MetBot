@@ -190,7 +190,7 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
 
 def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='coreseason',key='noaa-olr-0-0',\
                        ptype='per_ttt',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',\
-                       savefig=False, test=True, labels=False,agthresh='perc_ag'):
+                       savefig=False, test=True, labels=False,agthresh='perc_ag',heavy='hvthr'):
     '''Produces subplots of ttt rainfall by month
     need to open the rain data with lon and lat and also the synop file
     see e.g. plot_ttt_precip_autothresh.py
@@ -198,15 +198,12 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
     plot types
         tot_all - sum of total precip
         all_cnt - % of all days with +ve pr anoms
-        all_wet_cnt - plot number of wet days - either total or per mon depending on 'monmean'
-        all_wet_sum - plot rainfall from wet days - either total or per mon depending on 'monmean'
-        aper_wet_cnt - % of days that are wet days
-        aper_wet_sum - plot % of precip which is falling on wet days
 
-        all_hv_cnt - plot number of heavy rainfall days - either total or per mon depending on 'monmean'
-        all_hv_sum - plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
-        aper_hv_cnt - % of days that are heavy rain days
-        aper_hv_sum - % of rainfally that is falling in heavy rain days
+        all_wet_cnt - plot number of days over hvthr - either total or per mon depending on 'monmean'
+        all_wet_sum - plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
+        aper_wet_cnt - % of days that are hvthr days
+        aper_wet_sum - plot % of precip which is falling on hvthr days
+
 
         tot_ttt - sum of precip from TTTs
         per_ttt - percent of precip from TTTs
@@ -215,15 +212,11 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         comp_anom_ag - as comp anom but with ag test
         comp_anom_cnt - % days with +ve or -ve anomalies
 
-        ttt_wet_cnt- number of wet days - either total or per mon depending on 'monmean'
-        tper_wet_cnt- % of wet days contributed by TTTs
-        ttt_wet_sum- rainfall from wet days - either total or per mon depending on 'monmean'
-        tper_wet_sum- % of wet day precip contributed by TTTs
+        ttt_wet_cnt- number of hvthr days - either total or per mon depending on 'monmean'
+        tper_wet_cnt- % of hvthr days contributed by TTTs
+        ttt_wet_sum- rainfall from hvthr days - either total or per mon depending on 'monmean'
+        tper_wet_sum- % of hvthr day precip contributed by TTTs
 
-        ttt_hv_cnt- number of heavy rainfall days - either total or per mon depending on 'monmean'
-        tper_hv_cnt- % of heavy days contributed by TTTs
-        ttt_hv_sum - rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
-        tper_hv_sum - % of heavy day precip contributed by TTTs
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
     '''
     if not eventkeys:
@@ -314,13 +307,13 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         rainsum_monthly=rainsum_all/nys
         rainsum_daily=rainsum_all/len(datesmon)
 
-        #Wet days
+        #Days over hvthr
+        hvthr=float(heavy)
         wetdaycnt=np.zeros((nlat, nlon), dtype=np.float32)
         wetdaysum=np.zeros((nlat, nlon), dtype=np.float32)
         for i in range(nlat):
             for j in range(nlon):
-                wet_ind = np.where(rainmon[:, i, j] >= 10.0)[0]
-                #wet_ind = np.where(rainmon[:, i, j] > 0.0)[0]
+                wet_ind = np.where(rainmon[:, i, j] > hvthr)[0]
 
                 count = len(wet_ind)
                 wet_sel = rainmon[wet_ind,i,j]
@@ -336,28 +329,6 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         wetsum_p_mon=wetdaysum/nys
         wetsum_mean=np.nanmean(wetsum_p_mon)
         wetsum_per=(wetdaysum/rainsum_all)*100.0
-
-        #Heavy rain days
-        hvdaycnt = np.zeros((nlat, nlon), dtype=np.float32)
-        hvdaysum = np.zeros((nlat, nlon), dtype=np.float32)
-        for i in range(nlat):
-            for j in range(nlon):
-                #hv_ind = np.where(rainmon[:, i, j] >= 50.0)[0]
-                hv_ind = np.where(rainmon[:, i, j] >= 25.0)[0]
-                count = len(hv_ind)
-                hv_sel = rainmon[hv_ind, i, j]
-                hv_sum = np.nansum(hv_sel, 0)
-
-                hvdaycnt[i, j] = count
-                hvdaysum[i, j] = hv_sum
-
-        hvdays_p_mon = hvdaycnt / nys
-        hvdays_mean=np.nanmean(hvdays_p_mon)
-        hvdays_per=(hvdaycnt/ndays_mon)*100.0
-
-        hvsum_p_mon = hvdaysum / nys
-        hvsum_mean=np.nanmean(hvsum_p_mon)
-        hvsum_per=(hvdaysum/rainsum_all)*100.0
 
         if ptype=='tot_all':
             if mmean=='mon':
@@ -387,25 +358,6 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         elif ptype=='aper_wet_sum':
             data4plot=wetsum_per
 
-        elif ptype=='all_hv_cnt':
-            if mmean=='tot':
-                data4plot=hvdaycnt
-            elif mmean=='mon':
-                data4plot=hvdays_p_mon
-            titstat=hvdays_mean
-
-        elif ptype=='all_hv_sum':
-            if mmean=='tot':
-                data4plot=hvdaysum
-            elif mmean=='mon':
-                data4plot=hvsum_p_mon
-            titstat=hvsum_mean
-
-        elif ptype == 'aper_hv_cnt':
-            data4plot = hvdays_per
-
-        elif ptype == 'aper_hv_sum':
-            data4plot = hvsum_per
 
         elif ptype=='all_cnt':
 
@@ -492,28 +444,6 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 ttt_wetsum_p_mon = ttt_wetdaysum / nys
                 ttt_wetsum_mean = np.nanmean(ttt_wetsum_p_mon)
                 ttt_wetsum_per = (ttt_wetdaysum / wetdaysum)* 100.0
-
-                # Heavy rain days
-                ttt_hvdaycnt = np.zeros((nlat, nlon), dtype=np.float32)
-                ttt_hvdaysum = np.zeros((nlat, nlon), dtype=np.float32)
-                for i in range(nlat):
-                    for j in range(nlon):
-                        hv_ind = np.where(rainsel[:, i, j] >= 50.0)[0]
-                        count = len(hv_ind)
-                        hv_sel = rainsel[hv_ind, i, j]
-                        hv_sum = np.nansum(hv_sel, 0)
-
-                        ttt_hvdaycnt[i, j] = count
-                        ttt_hvdaysum[i, j] = hv_sum
-
-                ttt_hvdays_p_mon = ttt_hvdaycnt / nys
-                ttt_hvdays_mean = np.nanmean(ttt_hvdays_p_mon)
-                ttt_hvdays_per = (ttt_hvdaycnt / hvdaycnt) * 100.0
-
-                ttt_hvsum_p_mon = ttt_hvdaysum / nys
-                ttt_hvsum_mean = np.nanmean(ttt_hvsum_p_mon)
-                ttt_hvsum_per = (ttt_hvdaysum / hvdaysum) * 100.0
-
 
                 if ptype=='comp_anom_ag' or ptype=='comp_anom_cnt':
                     if nttt_mon >= 1:
@@ -612,12 +542,20 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 data4plot=comp_anom
             elif ptype=='comp_anom_cnt':
                 data4plot=pos_pcent
-
-
-
-
-
-
+            elif ptype=='ttt_wet_cnt':
+                if mmean=='tot':
+                    data4plot=ttt_wetdaycnt
+                elif mmean=='mon':
+                    data4plot=ttt_wetdays_p_mon
+            elif ptype=='tper_wet_cnt':
+                data4plot=ttt_wetdays_per
+            elif ptype=='ttt_wet_sum':
+                if mmean=='tot':
+                    data4plot=ttt_wetdaysum
+                elif mmean=='mon':
+                    data4plot=ttt_wetsum_p_mon
+            elif ptype=='tper_wet_sum':
+                data4plot=ttt_wetsum_per
 
         newlon=rlon
         newlat=rlat
@@ -625,123 +563,142 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         #Plot
         plon,plat = np.meshgrid(newlon,newlat)
 
-        if ptype=='per_ttt':
-            clevs=[0,10,20,30,40,50,60]
-            #clevs=[0,5,10,15,20,25,30,35,40,45,50,55,60]
-            cticks = clevs
-            cm = plt.cm.gnuplot2
-            #cm = plt.cm.terrain_r
-            cbar_lab='%'
-        elif ptype=='tot_all':
+        # all plot cbars
+        if ptype=='tot_all':
             if mmean=='tot':
                 clevs=[0,800,1600,2400,3200,4000,4800,5600]
-                cticks = clevs
             elif mmean=='mon':
                 clevs=[0,50,100,150,200,250,300,350]
-                cticks = clevs
             elif mmean=='day':
                 clevs=[0.0,1.5,3.0,4.5,6.0,7.5,9.0,10.5,12.0]
-                cticks = clevs
-            #cm=plt.cm.viridis
             cm = plt.cm.YlGnBu
             cbar_lab='mm'
-        elif ptype=='all_wet_cnt':
-            if mmean == 'tot':
-                clevs=np.arange(0,225,25)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            elif mmean =='mon':
-                clevs=np.arange(0,16,1)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            cbar_lab='days'
-        elif ptype=='all_hv_cnt':
-            if mmean == 'tot':
-                clevs=np.arange(0,16,1)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            elif mmean =='mon':
-                clevs=np.arange(0,5,0.5)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            cbar_lab='days'
-        elif ptype == 'all_wet_sum':
-            if mmean == 'tot':
-                clevs=np.arange(0,3000,500)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            elif mmean == 'mon':
-                clevs=np.arange(0,300,30)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            cbar_lab='mm'
-        elif ptype=='all_hv_sum':
-            if mmean == 'tot':
-                clevs = np.arange(0, 3000, 500)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            elif mmean == 'mon':
-                clevs=np.arange(0,200,25)
-                cticks = clevs
-                cm = plt.cm.YlGnBu
-            cbar_lab='mm'
+        elif ptype=='all_cnt':
+            clevs=np.arange(0,50,5)
+            cm = plt.cm.magma_r
+            cbar_lab='%'
+
+        # all hvthr plot cbars
+        elif ptype=='all_wet_cnt' or 'ttt_wet_cnt':
+            cm = plt.cm.YlGnBu
+            cbar_lab = 'days'
+            if hvthr==0:
+                if mmean == 'tot':
+                    clevs=np.arange(0,400,40)
+                elif mmean =='mon':
+                    clevs=np.arange(0,22,2)
+            elif hvthr==10:
+                if mmean == 'tot':
+                    clevs=np.arange(0,225,25)
+                elif mmean =='mon':
+                    clevs=np.arange(0,16,1)
+            elif hvthr==25:
+                if mmean == 'tot':
+                    clevs=np.arange(0,60,5)
+                elif mmean =='mon':
+                    clevs=np.arange(0,5,0.5)
+            elif hvthr==50:
+                if mmean == 'tot':
+                    clevs=np.arange(0,16,1)
+                elif mmean =='mon':
+                    clevs=np.arange(0,2,0.25)
+
+        elif ptype=='all_wet_sum' or 'ttt_wet_sum':
+            cm = plt.cm.YlGnBu
+            cbar_lab = 'mm'
+            if hvthr==0:
+                if mmean == 'tot':
+                    clevs = [0, 800, 1600, 2400, 3200, 4000, 4800, 5600]
+                elif mmean =='mon':
+                    clevs = [0, 50, 100, 150, 200, 250, 300, 350]
+            elif hvthr==10:
+                if mmean == 'tot':
+                    clevs=np.arange(0,3000,500)
+                elif mmean =='mon':
+                    clevs=np.arange(0,300,30)
+            elif hvthr==25:
+                if mmean == 'tot':
+                    clevs=np.arange(0,2600,300)
+                elif mmean =='mon':
+                    clevs=np.arange(0,200,25)
+            elif hvthr==50:
+                if mmean == 'tot':
+                    clevs=np.arange(0,2000,400)
+                elif mmean =='mon':
+                    clevs=np.arange(0,100,10)
+
         elif ptype=='aper_wet_cnt':
-            clevs = np.arange(0,55,5)
-            cticks = clevs
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
-        elif ptype=='aper_hv_cnt':
-            clevs = np.arange(0,16,1)
-            cticks = clevs
-            cm = plt.cm.gnuplot2
-            cbar_lab = '%'
+            if hvthr==0:
+                clevs=np.arange(0,90,10)
+            elif hvthr==10:
+                clevs=np.arange(0,45,5)
+            elif hvthr==25:
+                clevs=np.arange(0,10,1)
+            elif hvthr==50:
+                clevs=np.arange(0,4.5,0.5)
+
         elif ptype=='aper_wet_sum':
-            clevs = np.arange(50,100,5)
-            cticks = clevs
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
-        elif ptype=='aper_hv_sum':
-            clevs = np.arange(0,50,5)
-            cticks = clevs
+            if hvthr==0:
+                clevs=np.arange(0,100,10) # this should be 100% everywhere
+            elif hvthr==10:
+                clevs=np.arange(50,95,5)
+            elif hvthr==25:
+                clevs=np.arange(0,70,10)
+            elif hvthr==50:
+                clevs=np.arange(0,40,5)
+
+
+        elif ptype=='tper_wet_cnt':
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
+            clevs = np.arange(0, 100, 10)
+
+        elif ptype=='tper_wet_sum':
+            cm = plt.cm.gnuplot2
+            cbar_lab = '%'
+            if hvthr==0:
+                clevs = [0, 10, 20, 30, 40, 50, 60] # should be the same as per_ttt
+            else:
+                clevs=np.arange(0,100,10)
+
+
+        # ttt cbars
         elif ptype=='tot_ttt':
             if mmean=='tot':
                 clevs=[0,250,500,750,1000,1250,1500,1750,2000]
-                cticks = [0,500,1000,1500,2000]
             elif mmean=='mon':
                 clevs=[0,20,40,60,80,100,120,140]
-                cticks = clevs
             elif mmean=='day':
                 clevs=[0,0.4,0.8,1.2,1.6,2.0,2.4,2.8,3.2,3.6,4.0]
-                cticks = clevs
             cm=plt.cm.YlGnBu
             cbar_lab='mm'
+        elif ptype=='per_ttt':
+            clevs=[0,10,20,30,40,50,60]
+            cm = plt.cm.gnuplot2
+            cbar_lab='%'
         elif ptype=='rain_per_ttt':
             clevs = [0.0,1.5,3.0,4.5,6.0,7.5,9.0,10.5,12.0]
-            cticks = clevs
             cm = plt.cm.YlGnBu
             cbar_lab='mm'
         elif ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
             clevs = np.arange(-4, 4.5, 0.5)
-            cticks = clevs
             cm = plt.cm.seismic_r
             cbar_lab='mm'
         elif ptype=='comp_anom_cnt':
             clevs= np.arange(0,50,5)
-            cticks = clevs
             cm = plt.cm.magma_r
             cbar_lab='%'
-        elif ptype=='all_cnt':
-            clevs=np.arange(0,50,5)
-            cm = plt.cm.magma_r
-            cticks = clevs
-            cbar_lab='%'
+
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
         else:
             cs = m.contourf(plon, plat, data4plot, clevs, cmap=cm, extend='both')
+
         if labels:
             if ptype=='tot_ttt' or ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
@@ -757,7 +714,6 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
 
         if ptype == 'comp_anom_ag':
             if nttt_mon >= 1:
-                #mask_zeros=mask_zeros[::3,::3]
                 hatch = m.contourf(plon, plat, mask_zeros, levels=[-1.0, 0.0, 1.0], hatches=["", '.'], alpha=0)
 
 
@@ -776,11 +732,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         msklist.append(data4plot)
     plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.05,wspace=0.2,hspace=0.2)
     axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
-    #axcl = g.add_axes([0.91, 0.1, 0.01, 0.12]) # small cbar for paper
-    if test:
-        cbar = plt.colorbar(cs, cax=axcl)
-    else:
-        cbar = plt.colorbar(cs,cax=axcl,ticks=cticks)
+    cbar = plt.colorbar(cs, cax=axcl)
     cbar.set_label(cbar_lab)
 
     if savefig:

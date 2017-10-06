@@ -47,18 +47,11 @@ testfile=False           # Uses a test file with short period
                         # ..but testyear can be used seperately)
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
+# options to plot all days
 allplot=False            # plot total rainfall
 all_cnt_anom=False       # plot % of days which have +ve anomalies
-all_wet_cnt=False       # plot number of wet days - either total or per mon depending on 'monmean'
-all_wet_sum=False       # plot rainfall from wet days - either total or per mon depending on 'monmean'
-aper_wet_cnt=False       # plot % of days that are wet days
-aper_wet_sum=False       # plot % of precip which is falling on wet days
 
-all_hv_cnt=True         # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
-all_hv_sum=True         # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
-aper_hv_cnt=True        # plot % of days that are heavy rain days
-aper_hv_sum=True        # plot % of rainfally that is falling in heavy rain days
-
+# options to plot ttt...
 tot_ttt_plot=False      # plot total rainfall from TTTs
 per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
@@ -67,15 +60,18 @@ comp_anom_ag_plot=False   # plot comp anom with agtest on composite
 comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
-ttt_wet_cnt=False        # plot number of wet days - either total or per mon depending on 'monmean'
-tper_wet_cnt=False       # % of wet days contributed by TTTs
-ttt_wet_sum=False       # plot rainfall from wet days - either total or per mon depending on 'monmean'
-tper_wet_sum=False       # % of wet day precip contributed by TTTs
+# options to plot all - heavy pr
+hvthrs=['0','10','25','50']
+all_wet_cnt=True       # plot number of days over hvthr - either total or per mon depending on 'monmean'
+all_wet_sum=True       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
+aper_wet_cnt=True       # plot % of days that are over hvthr
+aper_wet_sum=True       # plot % of precip which is falling on days over hvthr
 
-ttt_hv_cnt=False        # plot number of heavy rainfall days - either total or per mon depending on 'monmean'
-tper_hv_cnt=False        # % of heavy days contributed by TTTs
-ttt_hv_sum=False        # plot rainfall from heavy rainfall days - either total or per mon depending on 'monmean'
-tper_hv_sum=False        # % of heavy day precip contributed by TTTs
+# options to plot ttt - heavy pr
+ttt_wet_cnt=False        # plot number of  days over hvthr - either total or per mon depending on 'monmean'
+tper_wet_cnt=False       # % of days over hvthr contributed by TTTs
+ttt_wet_sum=False       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
+tper_wet_sum=False       # % of precip from days over hvthr contributed by TTTs
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
@@ -277,8 +273,9 @@ for d in range(ndset):
                 testq=freecol
 
 
+            # Plots for all days ...
+
             if allplot:
-                # Only plot this for one threshold
                 if t==0:
                     print 'Plotting all rain'
                     msklist=ap.gridrainmap_season(s,ks,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
@@ -294,71 +291,44 @@ for d in range(ndset):
                                                     under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
                                                     savefig=True, test=testq)
 
-            if all_wet_cnt:
-                if t == 0:
-                    print 'Plotting count of wet days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='all_wet_cnt', mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True,test=testq,labels=nTTTlab)
+            # Loop thresholds
+            for h in hvthrs:
+                hstr=hvthrs[h]
+                hvthr=float(hstr)
+                print 'Plotting for heavy threshold '+hstr
+                hvsuf=mapsuf+'_hvthr'+hstr
 
-            if all_wet_sum:
-                if t == 0:
-                    print 'Plotting sum of pr from wet days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='all_wet_sum', mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True,test=testq,labels=nTTTlab)
 
-            if aper_wet_cnt:
-                if t == 0:
-                    print 'Plotting % of days that are wet days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='aper_wet_cnt', mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True, test=testq, labels=nTTTlab)
-            if aper_wet_sum:
-                if t == 0:
-                    print 'Plotting % rainfall that falls on wet days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='aper_wet_sum', mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True, test=testq, labels=nTTTlab)
+                if all_wet_cnt:
+                    if t == 0:
+                        print 'Plotting count of days over hvthr'
+                        msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                        key=dset + '-olr-0-' + refkey, ptype='all_wet_cnt', mmean=monmean, \
+                                                        under_of=under_dayof, figdir=prbase, file_suffix=hvsuf, \
+                                                        savefig=True,test=testq,labels=nTTTlab, heavy=hvthr)
 
-            if all_hv_cnt:
-                if t == 0:
-                    print 'Plotting count of heavy rain days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='all_hv_cnt', mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True,test=testq,labels=nTTTlab)
+                if all_wet_sum:
+                    if t == 0:
+                        print 'Plotting sum of pr from days over hvthr'
+                        msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                        key=dset + '-olr-0-' + refkey, ptype='all_wet_sum', mmean=monmean, \
+                                                        under_of=under_dayof, figdir=prbase, file_suffix=hvsuf, \
+                                                        savefig=True,test=testq,labels=nTTTlab,heavy=hvthr)
 
-            if all_hv_sum:
-                if t == 0:
-                    print 'Plotting sum of pr from heavy rain days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='all_hv_sum', mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True,test=testq,labels=nTTTlab)
-
-            if aper_hv_cnt:
-                if t == 0:
-                    print 'Plotting % of days that are heavy rain days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='aper_hv_cnt',
-                                                    mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True, test=testq, labels=nTTTlab)
-
-            if aper_hv_sum:
-                if t == 0:
-                    print 'Plotting % rain that falls on heavy rain days'
-                    msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='aper_hv_sum',
-                                                    mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=mapsuf, \
-                                                    savefig=True, test=testq, labels=nTTTlab)
-
+                if aper_wet_cnt:
+                    if t == 0:
+                        print 'Plotting % of days that are over hvthr'
+                        msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                        key=dset + '-olr-0-' + refkey, ptype='aper_wet_cnt', mmean=monmean, \
+                                                        under_of=under_dayof, figdir=prbase, file_suffix=hvsuf, \
+                                                        savefig=True, test=testq, labels=nTTTlab, heavy=hvthr)
+                if aper_wet_sum:
+                    if t == 0:
+                        print 'Plotting % rainfall that falls on days over hvthr'
+                        msklist = ap.gridrainmap_season(s, ks, rain, rlat, rlon, rdtime, units, cal, season=seasopt, \
+                                                        key=dset + '-olr-0-' + refkey, ptype='aper_wet_sum', mmean=monmean, \
+                                                        under_of=under_dayof, figdir=prbase, file_suffix=hvsuf, \
+                                                        savefig=True, test=testq, labels=nTTTlab, heavy=hvthr)
 
 
             # Loop domains
@@ -411,66 +381,39 @@ for d in range(ndset):
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_cnt',mmean=monmean,\
                                                   under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq)
-                if ttt_wet_cnt:
-                    print 'Plotting number of wet days contributed by TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='ttt_wet_cnt',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq)
 
-                if tper_wet_cnt:
-                    print 'Plotting % of wet days contributed by TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='tper_wet_cnt',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq)
+                # Loop thresholds
+                for h in hvthrs:
+                    hstr = hvthrs[h]
+                    hvthr = float(hstr)
+                    print 'Plotting for TTT rain for heavy threshold ' + hstr
+                    newhvsuf = mapsuf + '_hvthr' + hstr+'_' + domname
 
-                if ttt_wet_sum:
-                    print 'Plotting wet day precip contributed by TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='ttt_wet_sum',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq)
 
-                if tper_wet_sum:
-                    print 'Plotting % wet day precip contributed by TTTs'
-                    msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
-                                                  key=dset+'-olr-0-'+refkey,ptype='tper_wet_sum',mmean=monmean,\
-                                                  under_of=under_dayof,figdir=prbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq)
+                    if ttt_wet_cnt:
+                        print 'Plotting number of days over hvthr contributed by TTTs'
+                        msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                      key=dset+'-olr-0-'+refkey,ptype='ttt_wet_cnt',mmean=monmean,\
+                                                      under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
+                                                      savefig=True,test=testq, heavy=hvthr)
 
-                if ttt_hv_cnt:
-                    print 'Plotting number of heavy days contributed by TTTs'
-                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
-                                                    season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='ttt_hv_cnt',
-                                                    mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
-                                                    savefig=True, test=testq)
+                    if tper_wet_cnt:
+                        print 'Plotting % of days over hvthr contributed by TTTs'
+                        msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                      key=dset+'-olr-0-'+refkey,ptype='tper_wet_cnt',mmean=monmean,\
+                                                      under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
+                                                      savefig=True,test=testq, heavy=hvthr)
 
-                if tper_hv_cnt:
-                    print 'Plotting % of heavy days contributed by TTTs'
-                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
-                                                    season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='tper_hv_cnt',
-                                                    mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
-                                                    savefig=True, test=testq)
+                    if ttt_wet_sum:
+                        print 'Plotting hvthr day precip contributed by TTTs'
+                        msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                      key=dset+'-olr-0-'+refkey,ptype='ttt_wet_sum',mmean=monmean,\
+                                                      under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
+                                                      savefig=True,test=testq, heavy=hvthr)
 
-                if ttt_hv_sum:
-                    print 'Plotting heavy day precip contributed by TTTs'
-                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
-                                                    season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='ttt_hv_sum',
-                                                    mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
-                                                    savefig=True, test=testq)
-
-                if tper_hv_sum:
-                    print 'Plotting % heavy day precip contributed by TTTs'
-                    msklist = ap.gridrainmap_season(s, eventkeys, rain, rlat, rlon, rdtime, units, cal,
-                                                    season=seasopt, \
-                                                    key=dset + '-olr-0-' + refkey, ptype='tper_hv_sum',
-                                                    mmean=monmean, \
-                                                    under_of=under_dayof, figdir=prbase, file_suffix=newsuf, \
-                                                    savefig=True, test=testq)
+                    if tper_wet_sum:
+                        print 'Plotting % hvthr day precip contributed by TTTs'
+                        msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
+                                                      key=dset+'-olr-0-'+refkey,ptype='tper_wet_sum',mmean=monmean,\
+                                                      under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
+                                                      savefig=True,test=testq, heavy=hvthr)
