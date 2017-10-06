@@ -579,7 +579,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
             cbar_lab='%'
 
         # all hvthr plot cbars
-        elif ptype=='all_wet_cnt' or 'ttt_wet_cnt':
+        elif ptype=='all_wet_cnt' or ptype=='ttt_wet_cnt':
             cm = plt.cm.YlGnBu
             cbar_lab = 'days'
             if hvthr==0:
@@ -603,7 +603,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 elif mmean =='mon':
                     clevs=np.arange(0,2,0.25)
 
-        elif ptype=='all_wet_sum' or 'ttt_wet_sum':
+        elif ptype=='all_wet_sum' or ptype=='ttt_wet_sum':
             cm = plt.cm.YlGnBu
             cbar_lab = 'mm'
             if hvthr==0:
@@ -704,7 +704,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
             elif ptype=='per_ttt':
                 tit=stats.mndict[mn]+': '+str(int(round((float(nttt_mon)/float(ndays_mon))*100.0)))+'% of days have TTTs'
-            elif ptype=='all_wet_cnt' or ptype=='all_wet_sum' or ptype=='all_hv_cnt' or ptype=='all_hv_sum':
+            elif ptype=='all_wet_cnt' or ptype=='all_wet_sum':
                 tit=stats.mndict[mn]+': mean = '+str(int(round(titstat)))+' per mon'
             else:
                 tit = stats.mndict[mn]
