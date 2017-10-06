@@ -673,7 +673,14 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         elif ptype=='per_tttd_wet':
             cm = plt.cm.gnuplot2
             cbar_lab = '%'
-            clevs = np.arange(0, 100, 10)
+            if hvthr==0:
+                clevs = np.arange(0, 100, 10)
+            elif hvthr==10:
+                clevs = np.arange(0,50,5)
+            elif hvthr==25:
+                clevs = np.arange(0,30,3)
+            elif hvthr==50:
+                clevs = np.arange(0,15,1)
 
 
         # ttt cbars
