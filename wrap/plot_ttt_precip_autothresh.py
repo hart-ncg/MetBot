@@ -419,9 +419,9 @@ for d in range(ndset):
                                                       under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
                                                       savefig=True,test=testq, heavy=hvthr)
 
-                    if per_ttt_wet:
+                    if per_tttd_wet:
                         print 'Plotting % of TTTs with precip over hvthr'
                         msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
-                                                      key=dset+'-olr-0-'+refkey,ptype='per_ttt_wet',mmean=monmean,\
+                                                      key=dset+'-olr-0-'+refkey,ptype='per_tttd_wet',mmean=monmean,\
                                                       under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
                                                       savefig=True,test=testq, heavy=hvthr)
