@@ -62,16 +62,16 @@ perc_ag=70              # show if this % or more days agree
 
 # options to plot all - heavy pr
 hvthrs=['0','10','25','50']
-all_wet_cnt=True       # plot number of days over hvthr - either total or per mon depending on 'monmean'
-all_wet_sum=True       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
-aper_wet_cnt=True       # plot % of days that are over hvthr
-aper_wet_sum=True       # plot % of precip which is falling on days over hvthr
+all_wet_cnt=False       # plot number of days over hvthr - either total or per mon depending on 'monmean'
+all_wet_sum=False       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
+aper_wet_cnt=False       # plot % of days that are over hvthr
+aper_wet_sum=False       # plot % of precip which is falling on days over hvthr
 
 # options to plot ttt - heavy pr
-ttt_wet_cnt=False        # plot number of  days over hvthr - either total or per mon depending on 'monmean'
-tper_wet_cnt=False       # % of days over hvthr contributed by TTTs
-ttt_wet_sum=False       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
-tper_wet_sum=False       # % of precip from days over hvthr contributed by TTTs
+ttt_wet_cnt=True        # plot number of  days over hvthr - either total or per mon depending on 'monmean'
+tper_wet_cnt=True       # % of days over hvthr contributed by TTTs
+ttt_wet_sum=True       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
+tper_wet_sum=True       # % of precip from days over hvthr contributed by TTTs
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
