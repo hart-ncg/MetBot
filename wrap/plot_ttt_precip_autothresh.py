@@ -292,7 +292,7 @@ for d in range(ndset):
                                                     savefig=True, test=testq)
 
             # Loop thresholds
-            for h in hvthrs:
+            for h in range(len(hvthrs)):
                 hstr=hvthrs[h]
                 hvthr=float(hstr)
                 print 'Plotting for heavy threshold '+hstr
@@ -383,7 +383,7 @@ for d in range(ndset):
                                                   savefig=True,test=testq)
 
                 # Loop thresholds
-                for h in hvthrs:
+                for h in range(len(hvthrs)):
                     hstr = hvthrs[h]
                     hvthr = float(hstr)
                     print 'Plotting for TTT rain for heavy threshold ' + hstr
