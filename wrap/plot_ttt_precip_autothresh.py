@@ -37,8 +37,8 @@ import mpl_toolkits.basemap as bm
 
 ### Running options
 sub="SA"
-#subrain="SA_TRMM"
-subrain="SA_CONT"
+subrain="SA_TRMM"
+#subrain="SA_CONT"
 #subrain="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 testyear=False           # To use output from a test
@@ -56,7 +56,7 @@ tot_ttt_plot=False      # plot total rainfall from TTTs
 per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
 comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
-comp_anom_ag_plot=False   # plot comp anom with agtest on composite
+comp_anom_ag_plot=True   # plot comp anom with agtest on composite
 comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
@@ -72,7 +72,7 @@ ttt_wet_cnt=False        # plot number of  days over hvthr - either total or per
 tper_wet_cnt=False       # % of days over hvthr contributed by TTTs
 per_tttd_wet=False       # plot % of TTT days which have precip over this threshold
 ttt_wet_sum=False       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
-tper_wet_sum=True       # % of precip from days over hvthr contributed by TTTs
+tper_wet_sum=False       # % of precip from days over hvthr contributed by TTTs
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
