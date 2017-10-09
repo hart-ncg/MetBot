@@ -1257,6 +1257,242 @@ def gridvarmap_season(s,eventkeys,varstr,vardata,varlat,varlon,vardtime,olrunits
 
     return data4plot
 
+def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vardtime,olrunits,olrcl,season='coreseason',key='noaa-olr-0-0',\
+                       ptype='comp_anom_ag',under_of='dayof',figdir='test',file_suffix='test',\
+                       savefig=False, test=True, agthresh='perc_ag'):
+    '''Produces composite plots assoc with TTTs
+    need to open the var data with lon and lat and also the synop file
+    see e.g. plot_ttt_qflux_autothresh.py
+
+    plot types
+        comp_anom_ttt - comp anom without ag test
+        comp_anom_ag - as comp anom but with ag test
+    under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
+    '''
+    if not eventkeys:
+        eventkeys=[]
+        for ed in s.uniques:
+            eventkeys.append(ed[0])
+
+    yrs = np.unique(vardtime[:,0])
+    nys=len(yrs)
+
+    # Get list of dates for these events
+    edts = []
+    ecnt=1
+    for k in eventkeys:
+        e = s.events[k]
+        dts = s.blobs[key]['mbt'][e.ixflags]
+        #dts=e.trkdtimes
+        for dt in range(len(dts)):
+            if ecnt==1:
+                edts.append(dts[dt])
+            else:
+                tmpdt=np.asarray(edts)
+                # Check if it exists already
+                ix = my.ixdtimes(tmpdt, [dts[dt][0]], \
+                     [dts[dt][1]], [dts[dt][2]], [0])
+                if len(ix)==0:
+                    edts.append(dts[dt])
+            ecnt+=1
+    edts = np.asarray(edts)
+    edts[:, 3] = 0
+    print "Number of original TTT days found =  " + str(len(edts))
+
+    # Get n lat and lon
+    nlon=len(varlon)
+    nlat=len(varlat)
+
+    # Get months
+    if isinstance(season,str):
+        if season=='coreseason':mns=[10,11,12,1,2,3]
+        elif season=='fullseason':mns=[8,9,10,11,12,1,2,3,4,5,6,7]
+        elif season == 'dryseason':mns = [4, 5, 6, 7, 8, 9]
+    elif isinstance(season,list):
+        mns=season
+    print season
+    print mns
+
+    # Draw basemap
+    m, f = blb.SAfrBasemap(varlat,varlon,drawstuff=True,prj='cyl',fno=1,rsltn='l')
+
+    # Get multiplot
+    if len(mns)==12:
+        plt.close()
+        g, axls = plt.subplots(figsize=[12,12])
+    elif len(mns)==6:
+        plt.close()
+        g, axls = plt.subplots(figsize=[12,12])
+    cnt=1
+    msklist=[]
+    for mn in mns:
+        print 'Plotting month '+str(mn)
+
+        if len(mns)==12:plt.subplot(4,3,cnt)
+        elif len(mns)==6:plt.subplot(3,2,cnt)
+
+        # Get the plot data
+
+        # First select the years you want - keeping this to allow option to select years later
+        firstyear=yrs[0]
+        lastyear=yrs[nys-1]
+        vardat=np.where((vardtime[:,0]>=firstyear) & (vardtime[:,0]<=lastyear))
+
+        varperiod_u=np.squeeze(vardata_u[vardat,:,:])
+        varperiod_v=np.squeeze(vardata_v[vardat,:,:])
+
+        newdates=vardtime[vardat]
+
+        # Then select the month
+        ix=np.where((newdates[:,1]==mn))
+
+        varmon_u=np.squeeze(varperiod_u[ix,:,:])
+        varmon_v=np.squeeze(varperiod_v[ix,:,:])
+
+        datesmon=newdates[ix]
+        ndays_mon=len(datesmon)
+
+        varsum_all_u=np.nansum(varmon_u,0)
+        varsum_all_v=np.nansum(varmon_v,0)
+
+
+        varave_monthly_u=varsum_all_u/nys
+        varave_monthly_v=varsum_all_v/nys
+
+        varave_daily_u=varsum_all_u/ndays_mon
+        varave_daily_v=varsum_all_v/ndays_mon
+
+        #Select TTT days
+        if under_of=='dayof':
+            ix2=np.where((edts[:,1]==mn))
+            edatesmon=edts[ix2]
+
+            indices = []
+            for edt in range(len(edatesmon)):
+                ix = my.ixdtimes(datesmon, [edatesmon[edt][0]], \
+                             [edatesmon[edt][1]], [edatesmon[edt][2]], [0])
+                if len(ix)>=1:
+                    indices.append(ix)
+            if len(indices)>=2:
+                indices = np.squeeze(np.asarray(indices))
+            else:
+                indices = indices
+            nttt_mon=len(indices)
+            print "Number of TTT days found in dataset for mon "+str(mn)+" =  " + str(nttt_mon)
+
+            if nttt_mon==0:
+                varave_ttt_u=np.zeros((nlat,nlon),dtype=np.float32)
+                varave_ttt_v=np.zeros((nlat,nlon),dtype=np.float32)
+
+            else:
+                varsel_u=varmon_u[indices,:,:]
+                varsel_v=varmon_v[indices,:,:]
+
+                if nttt_mon >= 2:
+                    varave_ttt_u=np.nanmean(varsel_u,0)
+                    varave_ttt_v=np.nanmean(varsel_v,0)
+
+                else:
+                    varave_ttt_u=np.squeeze(varsel_u)
+                    varave_ttt_v=np.squeeze(varsel_v)
+
+
+            comp_anom_u = varave_ttt_u - varave_daily_u
+            comp_anom_v = varave_ttt_v - varave_daily_v
+
+
+            if ptype=='comp_anom_ag' or ptype=='comp_anom_cnt':
+                if nttt_mon >= 1:
+
+                    anoms_u = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
+                    anoms_v = np.zeros((nttt_mon, nlat, nlon), dtype=np.float32)
+
+                    for day in range(nttt_mon):
+                        this_anom_u = varsel_u[day, :, :] - varave_daily_u
+                        this_anom_v = varsel_v[day, :, :] - varave_daily_v
+
+
+                        anoms_u[day, :, :] = this_anom_u
+                        anoms_v[day, :, :] = this_anom_v
+
+
+                    if ptype=='comp_anom_ag':
+
+                        anoms_signs_u = np.sign(anoms_u)
+                        anoms_signs_v = np.sign(anoms_v)
+
+                        comp_signs_u = np.sign(comp_anom_u)
+                        comp_signs_v = np.sign(comp_anom_v)
+
+
+                        mask_zeros = np.zeros((nlat, nlon), dtype=np.float32)
+                        for i in range(nlat):
+                            for j in range(nlon):
+                                count_u = len(np.where(anoms_signs_u[:, i, j] == comp_signs_u[i, j])[0])
+                                count_v = len(np.where(anoms_signs_v[:, i, j] == comp_signs_v[i, j])[0])
+
+                                perc_u = (float(count_u) / float(nttt_mon)) * 100
+                                perc_v = (float(count_v) / float(nttt_mon)) * 100
+
+                                if perc_u >= perc_ag and perc_v >= perc_ag:
+                                    mask_zeros[i, j] = 1
+                                else:
+                                    mask_zeros[i, j] = 0
+
+                        # Set masked as 0
+                        zeroed_comp_u = anom_comp_u * mask_zeros
+                        zeroed_comp_v = anom_comp_v * mask_zeros
+
+
+
+            if ptype =='comp_anom_ttt':
+                data4plot_u = comp_anom_u
+                data4plot_v = comp_anom_v
+
+
+            elif ptype == 'comp_anom_ag':
+                data4plot_u=zeroed_comp_u
+                data4plot_v=zeroed_comp_v
+
+            newlon = varlon
+            newlat = varlat
+
+
+        #Plot
+        plon,plat = np.meshgrid(newlon,newlat)
+
+        wind_sc = 1
+        usc = 0.05
+        lab = '0.05 kg/kg/ms'
+
+        q = plt.quiver(newlon, newlat, data4plot_u, data4plot_v, scale=wind_sc)
+        if cnt == 1:
+            plt.quiverkey(q, X=0.9, Y=1.1, U=usc, label=lab, labelpos='W', fontproperties={'size': 'xx-small'})
+
+        tit=stats.mndict[mn]
+        plt.title(tit)
+
+        # redraw - only label latitudes if plot is on left
+        if len(mns)==12:
+            if cnt == 1 or cnt == 4 or cnt == 7 or cnt == 10:
+                syp.redrawmap(m,lns=True,resol='verylow')
+            else:
+                syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
+        elif len(mns)==6:
+            if cnt%2==0:
+                syp.redrawmap(m,lns=True,resol='verylow',parallel=False)
+            else:
+                syp.redrawmap(m,lns=True,resol='verylow')
+        cnt+=1
+        msklist.append(data4plot)
+    plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.05,wspace=0.2,hspace=0.2)
+    axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
+    cbar = plt.colorbar(cs, cax=axcl)
+
+    if savefig:
+        plt.savefig(figdir+'/Map_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
+
+    return data4plot
 
 
 def gridrainmap_bias_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,season='coreseason',key='um-olr-0-0',ptype='diff_tot',file_suffix='test',savefig=False):
