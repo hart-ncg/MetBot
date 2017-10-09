@@ -719,7 +719,7 @@ def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='corese
         if labels:
             if ptype=='tot_ttt' or ptype=='comp_anom_ttt' or ptype == 'comp_anom_ag':
                 tit=stats.mndict[mn]+': '+str(nttt_mon)+' TTT days '+str(int(round(float(nttt_mon)/float(nys))))+'/yr'
-            elif ptype=='per_ttt':
+            elif ptype=='per_ttt' or ptype=='tper_wet_sum':
                 tit=stats.mndict[mn]+': '+str(int(round((float(nttt_mon)/float(ndays_mon))*100.0)))+'% of days have TTTs'
             elif ptype=='all_wet_cnt' or ptype=='all_wet_sum':
                 tit=stats.mndict[mn]+': mean = '+str(int(round(titstat)))+' per mon'
