@@ -51,7 +51,7 @@ threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 # options to plot ttt...
 comp_anom_ag_plot=True   # plot comp anom with agtest on composite
 comp_anom_cnt_plot=True     # plot count of the number of days above or below average
-perc_ag=80              # show if this % or more days agree
+perc_ag=70              # show if this % or more days agree
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
