@@ -32,6 +32,7 @@ import MetBot.MetBlobs as blb
 import MetBot.mytools as my
 import MetBot.mynetcdf as mync
 import MetBot.dset_dict as dsetdict
+import MetBot.dimensions_dict as dim_exdict
 import MetBot.find_saddle as fs
 import mpl_toolkits.basemap as bm
 
