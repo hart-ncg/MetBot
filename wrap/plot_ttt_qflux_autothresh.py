@@ -170,10 +170,10 @@ for d in range(ndset):
         if variable == 'qflux':
             vnamedict_q = globv3 + 'name'
 
-        varstr_u = moddct[vnamedict_u]
-        varstr_v = moddct[vnamedict_v]
+        varstr_u = gmoddct[vnamedict_u]
+        varstr_v = gmoddct[vnamedict_v]
         if variable == 'qflux':
-            varstr_q = moddct[vnamedict_q]
+            varstr_q = gmoddct[vnamedict_q]
 
         # Open raw file
         rawfile_u = bkdir + 'metbot_multi_dset/' + dset2 + '/' + name2 + \
