@@ -1470,9 +1470,9 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
             lab = '0.15 kg/kg/ms'
 
         elif ptype == 'comp_anom_ttt' or ptype == 'comp_anom_ag':
-            wind_sc = 1
-            usc = 0.01
-            lab = '0.01 kg/kg/ms'
+            wind_sc = 0.5
+            usc = 0.001
+            lab = '0.001 kg/kg/ms'
 
         q = plt.quiver(newlon, newlat, data4plot_u, data4plot_v, scale=wind_sc)
         if cnt == 1:
