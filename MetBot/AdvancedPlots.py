@@ -1462,8 +1462,8 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
         plon,plat = np.meshgrid(newlon,newlat)
 
         wind_sc = 1
-        usc = 0.05
-        lab = '0.05 kg/kg/ms'
+        usc = 0.01
+        lab = '0.01 kg/kg/ms'
 
         q = plt.quiver(newlon, newlat, data4plot_u, data4plot_v, scale=wind_sc)
         if cnt == 1:
