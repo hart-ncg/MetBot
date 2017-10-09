@@ -47,6 +47,7 @@ seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 # options to plot ttt...
+comp_abs_ttt_plot=True  # plot ave OLR on TTT days
 comp_anom_ttt_plot=True  # plot ave OLR on TTT days as anom from long term daily mean for each month
 comp_anom_ag_plot=True   # plot comp anom with agtest on composite
 perc_ag=70              # show if this % or more days agree

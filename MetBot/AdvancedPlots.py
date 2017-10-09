@@ -1265,6 +1265,7 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
     see e.g. plot_ttt_qflux_autothresh.py
 
     plot types
+        comp_abs_ttt - comp absolute
         comp_anom_ttt - comp anom without ag test
         comp_anom_ag - as comp anom but with ag test
     under_of -> "dayof" is rain on day of TTTs, "under" is rain under TTTs
@@ -1445,10 +1446,13 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
 
 
 
-            if ptype =='comp_anom_ttt':
+            if ptype=='comp_abs_ttt':
+                data4plot_u = varave_ttt_u
+                data4plot_v = varave_ttt_v
+
+            elif ptype =='comp_anom_ttt':
                 data4plot_u = comp_anom_u
                 data4plot_v = comp_anom_v
-
 
             elif ptype == 'comp_anom_ag':
                 data4plot_u=zeroed_comp_u
@@ -1459,11 +1463,16 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
 
 
         #Plot
-        plon,plat = np.meshgrid(newlon,newlat)
 
-        wind_sc = 1
-        usc = 0.01
-        lab = '0.01 kg/kg/ms'
+        if ptype=='comp_abs_ttt':
+            wind_sc = 2.5
+            usc = 0.15
+            lab = '0.15 kg/kg/ms'
+
+        elif ptype == 'comp_anom_ttt':
+            wind_sc = 1
+            usc = 0.01
+            lab = '0.01 kg/kg/ms'
 
         q = plt.quiver(newlon, newlat, data4plot_u, data4plot_v, scale=wind_sc)
         if cnt == 1:
