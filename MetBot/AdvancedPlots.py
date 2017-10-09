@@ -1484,7 +1484,7 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
             else:
                 syp.redrawmap(m,lns=True,resol='verylow')
         cnt+=1
-        msklist.append(data4plot)
+        msklist.append(data4plot_u)
     plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.05,wspace=0.2,hspace=0.2)
     axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
     cbar = plt.colorbar(cs, cax=axcl)
@@ -1492,7 +1492,7 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
     if savefig:
         plt.savefig(figdir+'/Map_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
 
-    return data4plot
+    return data4plot_u
 
 
 def gridrainmap_bias_season(s,raingrid,rain,lat,lon,rdtime,eventkeys,yrs,figno=1,season='coreseason',key='um-olr-0-0',ptype='diff_tot',file_suffix='test',savefig=False):

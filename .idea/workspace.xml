@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py" afterPath="$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" afterPath="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,7 +44,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_ttt_qflux_autothresh.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="plot_ttt_qflux_autothresh.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="262">
@@ -54,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="1232" column="22" lean-forward="false" selection-start-line="1232" selection-start-column="22" selection-end-line="1232" selection-end-column="22" />
+            <state relative-caret-position="337">
+              <caret line="1491" column="15" lean-forward="true" selection-start-line="1491" selection-start-column="15" selection-end-line="1491" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -75,7 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>my.poly</find>
       <find>under</find>
       <find>spatialsub</find>
       <find>newlon</find>
@@ -105,6 +104,7 @@
       <find>varstr</find>
       <find>moddct</find>
       <find>bkdir</find>
+      <find>era</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,8 +134,8 @@
         <option value="$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py" />
-        <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py" />
+        <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
       </list>
     </option>
   </component>
@@ -580,13 +580,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00129" summary="New option to plot % pos and neg anoms in precip">
-      <created>1507121520521</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1507121520521</updated>
-    </task>
     <task id="LOCAL-00130" summary="New option to plot % pos and neg anoms in precip">
       <created>1507122101493</created>
       <option name="number" value="00130" />
@@ -923,7 +916,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507556186618</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary="New wrapper to plot metbot composites of qflux">
+      <created>1507556460846</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1507556460846</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1347,18 +1347,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="1232" column="22" lean-forward="false" selection-start-line="1232" selection-start-column="22" selection-end-line="1232" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
           <caret line="269" column="50" lean-forward="false" selection-start-line="269" selection-start-column="50" selection-end-line="269" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="1491" column="15" lean-forward="true" selection-start-line="1491" selection-start-column="15" selection-end-line="1491" selection-end-column="15" />
           <folding />
         </state>
       </provider>
