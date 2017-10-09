@@ -113,22 +113,14 @@ for d in range(ndset):
         # Get details - OLR
         moddct=dsetdict.dset_deets[dset][name]
         vname=moddct['olrname']
-        if testfile:
-            ys=moddct['testfileyr']
-        else:
-            ys=moddct['yrfname']
-        if testyear:
-            beginatyr=moddct['testyr']
-        else:
-            beginatyr = moddct['startyr']
+        ys=moddct['yrfname']
+        beginatyr = moddct['startyr']
         units = moddct['olrtimeunit']
         cal = moddct['calendar']
 
         ### Location for input & outputs
         indir=bkdir+dset+"/"
         outdir=indir+name+"/"
-        if testyear: outdir=outdir+'test/'
-        else: outdir=outdir
         my.mkdir_p(outdir)
         outsuf=outdir+name+'_'
 
@@ -162,17 +154,11 @@ for d in range(ndset):
             globv3 = 'q'
 
         gmoddct=dsetdict.dset_deets[dset2][name2]
-        if testfile:
-            gys=gmoddct['testfileyr']
+        if globv == 'qflux':
+            gys = gmoddct['fullrun']
         else:
-            if globv == 'qflux':
-                gys = gmoddct['fullrun']
-            else:
-                print 'Need to specify years'
-        if testyear:
-            gbeginatyr=gmoddct['testyr']
-        else:
-            gbeginatyr = gmoddct['startyr']
+            print 'Need to specify years'
+        gbeginatyr = gmoddct['startyr']
         gunits = gmoddct[globv+'timeunit']
         gcal = gmoddct['calendar']
         dimdict = dim_exdict.dim_deets[globv][dset2]
@@ -308,10 +294,7 @@ for d in range(ndset):
             prodata_v = qv
 
         ### Get thresholds and loop
-        if testyear:
-            threshtxt = bkdir + 'thresholds.fmin.'+dset+'.test.txt'
-        else:
-            threshtxt=bkdir+'thresholds.fmin.all_dset.txt'
+        threshtxt=bkdir+'thresholds.fmin.all_dset.txt'
         print threshtxt
         with open(threshtxt) as f:
             for line in f:
@@ -357,10 +340,7 @@ for d in range(ndset):
             gbase=vardir+dset+"/"
             my.mkdir_p(gbase)
             mapsuf = seasopt+'_'+subvar+'_'+dset+'_'+name+'_'+dset2+'_'+name2+'_'+thre_str+'_key'+refkey
-            if testfile or testyear:
-                testq=True
-            else:
-                testq=freecol
+            testq=freecol
 
 
             # Loop domains
