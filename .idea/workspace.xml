@@ -46,8 +46,8 @@
       <file leaf-file-name="plot_ttt_omega_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="34" column="43" lean-forward="false" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+            <state relative-caret-position="222">
+              <caret line="169" column="23" lean-forward="false" selection-start-line="169" selection-start-column="23" selection-end-line="169" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -64,8 +64,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>trkarr</find>
-      <find>date2num</find>
       <find>units</find>
       <find>specificmon</find>
       <find>dates2hrnum</find>
@@ -94,6 +92,8 @@
       <find>per_tttd_wet</find>
       <find>pr</find>
       <find>subrain</find>
+      <find>ncfile</find>
+      <find>bkdir</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -568,13 +568,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00113" summary="Edits to accurately plot the precip under a CB blob - round 2">
-      <created>1507044263651</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1507044263651</updated>
-    </task>
     <task id="LOCAL-00114" summary="New option to plot % pos and neg anoms in OLR">
       <created>1507111337400</created>
       <option name="number" value="00114" />
@@ -911,7 +904,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507541973397</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="New wrapper to plot metbot composites of omega">
+      <created>1507542106963</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1507542106963</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1343,8 +1343,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="34" column="43" lean-forward="false" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+        <state relative-caret-position="222">
+          <caret line="169" column="23" lean-forward="false" selection-start-line="169" selection-start-column="23" selection-end-line="169" selection-end-column="23" />
           <folding />
         </state>
       </provider>

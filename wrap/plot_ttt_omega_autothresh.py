@@ -167,7 +167,7 @@ for d in range(ndset):
         glonname = dimdict[2]
 
         # Open raw file
-        rawfile = bkdir + 'metbot_multi_dset/' + dset2 + '/' + name2 + \
+        rawfile = bkdir + dset2 + '/' + name2 + \
                   '.' + globv + '.day.mean.' + ys + '.nc'
 
         if levsel:
