@@ -55,7 +55,7 @@ under_dayof='dayof'     # if "dayof" plots all rain on TTT days
 
 freecol=False           # free colour bar
 refkey='0'              # 0 or all
-swapd='era'
+swapd='ncep'
 #doms=['All']
 doms=['All','nCont','nMada','nOcea'] # doms for TTT days selected
 varlist=['qflux']
