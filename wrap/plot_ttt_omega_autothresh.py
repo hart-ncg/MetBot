@@ -283,14 +283,14 @@ for d in range(ndset):
                 if comp_anom_ag_plot:
                     newnewsuf=newsuf+'_agthr'+str(perc_ag)
                     print 'Plotting composite anomalies with ag test'
-                    msklist=ap.gridvarmap_season(s,eventkeys,rawdata,glat,glon,gdtime,units,cal,season=seasopt,\
+                    msklist=ap.gridvarmap_season(s,eventkeys,globv,rawdata,glat,glon,gdtime,units,cal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ag',\
                                                   under_of=under_dayof,figdir=gbase,file_suffix=newnewsuf,\
                                                   savefig=True,test=testq, agthresh=perc_ag)
 
 
                 if comp_anom_cnt_plot:
-                    msklist=ap.gridvarmap_season(s,eventkeys,rawdata,glat,glon,gdtime,units,cal,season=seasopt,\
+                    msklist=ap.gridvarmap_season(s,eventkeys,globv,rawdata,glat,glon,gdtime,units,cal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_cnt',\
                                                   under_of=under_dayof,figdir=gbase,file_suffix=newsuf,\
                                                   savefig=True,test=testq)

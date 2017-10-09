@@ -1024,7 +1024,7 @@ def gridolrmap_season(s,eventkeys,olr,lat,lon,dtime,cl,season='coreseason',key='
 
     return data4plot
 
-def gridvarmap_season(s,eventkeys,vardata,varlat,varlon,vardtime,olrunits,olrcl,season='coreseason',key='noaa-olr-0-0',\
+def gridvarmap_season(s,eventkeys,varstr,vardata,varlat,varlon,vardtime,olrunits,olrcl,season='coreseason',key='noaa-olr-0-0',\
                        ptype='comp_anom_ag',under_of='dayof',figdir='test',file_suffix='test',\
                        savefig=False, test=True, agthresh='perc_ag'):
     '''Produces composite plots assoc with TTTs
@@ -1207,11 +1207,13 @@ def gridvarmap_season(s,eventkeys,vardata,varlat,varlon,vardtime,olrunits,olrcl,
         plon,plat = np.meshgrid(newlon,newlat)
 
         if ptype=='comp_anom_ag':
-            clevs = np.arange(-12, 14, 2)
-            cm = plt.cm.BrBG_r
+            if varstr=='omega':
+                clevs = np.arange(-0.15, 0.18, 0.03)
+                cm = plt.cm.seismic
         elif ptype == 'comp_anom_cnt':
-            clevs= np.arange(30,75,5)
-            cm = plt.cm.BrBG
+            if varstr == 'omega':
+                clevs= np.arange(30,75,5)
+                cm = plt.cm.seismic
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')
@@ -1242,8 +1244,6 @@ def gridvarmap_season(s,eventkeys,vardata,varlat,varlon,vardtime,olrunits,olrcl,
     cbar = plt.colorbar(cs, cax=axcl)
     if ptype=='comp_anom_cnt':
         cbar.set_label('% neg')
-    else:
-        cbar.set_label('W/m^2')
 
     if savefig:
         plt.savefig(figdir+'/Map_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
