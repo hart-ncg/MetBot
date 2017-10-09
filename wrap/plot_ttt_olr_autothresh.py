@@ -48,10 +48,10 @@ testfile=False           # Uses a test file with short period
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test
 
 allplot=False            # plot ave OLR
-ave_ttt_plot=False      # plot ave OLR on TTT days - composite
-comp_anom_ttt_plot=True  # plot ave OLR on TTT days as anom from long term daily mean for each month
-comp_anom_ag_plot=True   # plot comp anom with agtest on composite
-comp_anom_cnt_plot=True     # plot count of the number of days above or below average
+ave_ttt_plot=True      # plot ave OLR on TTT days - composite
+comp_anom_ttt_plot=False  # plot ave OLR on TTT days as anom from long term daily mean for each month
+comp_anom_ag_plot=False  # plot comp anom with agtest on composite
+comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
 under_dayof='dayof'     # if "dayof" plots OLR on TTT days

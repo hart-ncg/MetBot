@@ -54,7 +54,7 @@ all_cnt_anom=False       # plot % of days which have +ve anomalies
 # options to plot ttt...
 tot_ttt_plot=False      # plot total rainfall from TTTs
 per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
-rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
+rain_per_ttt_plot=True  # plot average rain per TTT day (rain composite)
 comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
 comp_anom_ag_plot=False   # plot comp anom with agtest on composite
 comp_anom_cnt_plot=False     # plot count of the number of days above or below average
@@ -70,14 +70,14 @@ aper_wet_sum=False       # plot % of precip which is falling on days over hvthr
 # options to plot ttt - heavy pr
 ttt_wet_cnt=False        # plot number of  days over hvthr - either total or per mon depending on 'monmean'
 tper_wet_cnt=False       # % of days over hvthr contributed by TTTs
-per_tttd_wet=True       # plot % of TTT days which have precip over this threshold
+per_tttd_wet=False       # plot % of TTT days which have precip over this threshold
 ttt_wet_sum=False       # plot rainfall from days over hvthr - either total or per mon depending on 'monmean'
 tper_wet_sum=False       # % of precip from days over hvthr contributed by TTTs
 
 
 under_dayof='dayof'     # if "dayof" plots all rain on TTT days
                         #   if "under" plots rain under TTTs (based on blobs)
-monmean='mon'           # to control the output - is there averaging?
+monmean='day'           # to control the output - is there averaging?
                         # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total
