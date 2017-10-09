@@ -190,7 +190,7 @@ def spatiofreq2_seasonanoms(s,lat,lon,yrs,eventkeys,msklist,figno=1,\
 
 def gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cl,season='coreseason',key='noaa-olr-0-0',\
                        ptype='per_ttt',mmean='mon',under_of='dayof',figdir='test',file_suffix='test',\
-                       savefig=False, test=True, labels=False,agthresh='perc_ag',heavy='hvthr'):
+                       savefig=False, test=True, labels=False,agthresh='perc_ag',heavy='0'):
     '''Produces subplots of ttt rainfall by month
     need to open the rain data with lon and lat and also the synop file
     see e.g. plot_ttt_precip_autothresh.py
