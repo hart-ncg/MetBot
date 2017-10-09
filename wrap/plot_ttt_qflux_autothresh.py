@@ -159,9 +159,9 @@ for d in range(ndset):
         else:
             print 'Need to specify years'
         gbeginatyr = gmoddct['startyr']
-        gunits = gmoddct[globv+'timeunit']
+        gunits = gmoddct[globv1+'timeunit']
         gcal = gmoddct['calendar']
-        dimdict = dim_exdict.dim_deets[globv][dset2]
+        dimdict = dim_exdict.dim_deets[globv1][dset2]
         glatname = dimdict[1]
         glonname = dimdict[2]
 
