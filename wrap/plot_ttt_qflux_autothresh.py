@@ -176,13 +176,13 @@ for d in range(ndset):
             varstr_q = gmoddct[vnamedict_q]
 
         # Open raw file
-        rawfile_u = bkdir + 'metbot_multi_dset/' + dset2 + '/' + name2 + \
+        rawfile_u = bkdir  + dset2 + '/' + name2 + \
                     '.' + globv1 + '.day.mean.' + gys + '.nc'
-        rawfile_v = bkdir + 'metbot_multi_dset/' + dset2 + '/' + name2 + \
+        rawfile_v = bkdir + dset2 + '/' + name2 + \
                     '.' + globv2 + '.day.mean.' + gys + '.nc'
 
         if variable == 'qflux':
-            rawfile_q = bkdir + 'metbot_multi_dset/' + dset2 + '/' + name2 + \
+            rawfile_q = bkdir + dset2 + '/' + name2 + \
                         '.' + globv3 + '.day.mean.' + gys + '.nc'
 
         print 'Opening ' + rawfile_u

@@ -47,8 +47,8 @@
       <file leaf-file-name="plot_ttt_qflux_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-262">
-              <caret line="174" column="31" lean-forward="true" selection-start-line="174" selection-start-column="31" selection-end-line="174" selection-end-column="31" />
+            <state relative-caret-position="112">
+              <caret line="176" column="0" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -95,7 +95,6 @@
       <find>pr</find>
       <find>subrain</find>
       <find>ncfile</find>
-      <find>bkdir</find>
       <find>gridvar</find>
       <find>mkdir</find>
       <find>comp_anom_ag</find>
@@ -105,6 +104,7 @@
       <find>globv</find>
       <find>varstr</find>
       <find>moddct</find>
+      <find>bkdir</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -580,13 +580,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00125" summary="New option to plot % pos and neg anoms in OLR">
-      <created>1507119023362</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1507119023362</updated>
-    </task>
     <task id="LOCAL-00126" summary="New option to plot % pos and neg anoms in OLR">
       <created>1507119063914</created>
       <option name="number" value="00126" />
@@ -923,7 +916,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507555786666</updated>
     </task>
-    <option name="localTasksCounter" value="174" />
+    <task id="LOCAL-00174" summary="New wrapper to plot metbot composites of qflux">
+      <created>1507555855234</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1507555855234</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1356,8 +1356,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-262">
-          <caret line="174" column="31" lean-forward="true" selection-start-line="174" selection-start-column="31" selection-end-line="174" selection-end-column="31" />
+        <state relative-caret-position="112">
+          <caret line="176" column="0" lean-forward="true" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
           <folding />
         </state>
       </provider>
