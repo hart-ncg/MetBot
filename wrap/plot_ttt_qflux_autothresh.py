@@ -364,7 +364,7 @@ for d in range(ndset):
                     msklist=ap.gridvectmap_season(s,eventkeys,globv,prodata_u,prodata_v,newlat,newlon,gdtime,units,cal,season=seasopt,\
                                                   key=dset+'-olr-0-'+refkey,ptype='comp_anom_ttt',\
                                                   under_of=under_dayof,figdir=gbase,file_suffix=newsuf,\
-                                                  savefig=True,test=testq, agthresh=perc_ag)
+                                                  savefig=True,test=testq)
 
 
                 if comp_anom_ag_plot:

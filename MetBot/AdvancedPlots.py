@@ -1434,7 +1434,7 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
                                 perc_u = (float(count_u) / float(nttt_mon)) * 100
                                 perc_v = (float(count_v) / float(nttt_mon)) * 100
 
-                                if perc_u >= perc_ag and perc_v >= perc_ag:
+                                if perc_u >= agthresh and perc_v >= agthresh:
                                     mask_zeros[i, j] = 1
                                 else:
                                     mask_zeros[i, j] = 0
