@@ -417,7 +417,7 @@ for d in range(ndset):
                         msklist=ap.gridrainmap_season(s,eventkeys,rain,rlat,rlon,rdtime,units,cal,season=seasopt,\
                                                       key=dset+'-olr-0-'+refkey,ptype='tper_wet_sum',mmean=monmean,\
                                                       under_of=under_dayof,figdir=prbase,file_suffix=newhvsuf,\
-                                                      savefig=True,test=testq, heavy=hvthr)
+                                                      savefig=True,test=testq, labels=nTTTlab, heavy=hvthr)
 
                     if per_tttd_wet:
                         print 'Plotting % of TTTs with precip over hvthr'
