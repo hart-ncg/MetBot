@@ -60,11 +60,11 @@ freecol=False           # free colour bar
 refkey='0'              # 0 or all
 #doms=['All']
 doms=['All','nCont','nMada','nOcea'] # doms for TTT days selected
-varlist=['omega']
+varlist=['q']
 v=0 # for now don't loop variables, just one
 levsel=True
 if levsel:
-    choosel=['500'] # can add a list
+    choosel=['850'] # can add a list
 else:
     choosel=['1']
 l=0 # for now don't loop variables, just one
@@ -72,6 +72,7 @@ l=0 # for now don't loop variables, just one
 
 bkdir=cwd+"/../../../CTdata/metbot_multi_dset/"
 vardir=bkdir+varlist[v]+"_figs/"
+my.mkdir_p(vardir)
 
 ### Multi dset?
 dsets='spec'     # "all" or "spec" to choose specific dset(s)
