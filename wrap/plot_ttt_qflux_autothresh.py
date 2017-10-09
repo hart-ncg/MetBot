@@ -20,6 +20,7 @@ import iris
 iris.FUTURE.netcdf_promote=True
 iris.FUTURE.cell_datetime_objects=True
 import numpy as np
+import scipy.interpolate as spi
 import matplotlib.pyplot as plt
 from datetime import date
 import sys,os
