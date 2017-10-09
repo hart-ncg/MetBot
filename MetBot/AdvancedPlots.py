@@ -1440,8 +1440,8 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
                                     mask_zeros[i, j] = 0
 
                         # Set masked as 0
-                        zeroed_comp_u = anom_comp_u * mask_zeros
-                        zeroed_comp_v = anom_comp_v * mask_zeros
+                        zeroed_comp_u = comp_anom_u * mask_zeros
+                        zeroed_comp_v = comp_anom_v * mask_zeros
 
 
 
