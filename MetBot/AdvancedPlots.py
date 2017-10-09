@@ -1486,8 +1486,6 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
         cnt+=1
         msklist.append(data4plot_u)
     plt.subplots_adjust(left=0.05,right=0.85,top=0.95,bottom=0.05,wspace=0.2,hspace=0.2)
-    axcl=g.add_axes([0.9, 0.15, 0.02, 0.7])
-    cbar = plt.colorbar(cs, cax=axcl)
 
     if savefig:
         plt.savefig(figdir+'/Map_'+ptype+'_'+file_suffix+'_'+under_of+'.png',dpi=150)
