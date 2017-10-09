@@ -168,7 +168,9 @@ for d in range(ndset):
 
         # Open raw file
         rawfile = bkdir + dset2 + '/' + name2 + \
-                  '.' + globv + '.day.mean.' + ys + '.nc'
+                  '.' + globv + '.day.mean.' + gys + '.nc'
+
+        print 'Opening file: '+rawfile
 
         if levsel:
             ncout = mync.open_multi(rawfile, globv, name2, \

@@ -24,6 +24,7 @@
     <SUITE FILE_PATH="coverage/MetBot$plot_ttt_olr_autothresh.coverage" NAME="plot_ttt_olr_autothresh Coverage Results" MODIFIED="1507111207667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$plot_ttt_precip_autothresh.coverage" NAME="plot_ttt_precip_autothresh Coverage Results" MODIFIED="1507192981149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$AdvancedPlots.coverage" NAME="AdvancedPlots Coverage Results" MODIFIED="1506437594002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/MetBot" />
+    <SUITE FILE_PATH="coverage/MetBot$plot_ttt_omega_autothresh.coverage" NAME="plot_ttt_omega_autothresh Coverage Results" MODIFIED="1507542325729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$plot_compare_olr_dist_thresh.coverage" NAME="plot_compare_olr_dist_thresh Coverage Results" MODIFIED="1491906956542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -46,8 +47,8 @@
       <file leaf-file-name="plot_ttt_omega_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="169" column="23" lean-forward="false" selection-start-line="169" selection-start-column="23" selection-end-line="169" selection-end-column="23" />
+            <state relative-caret-position="162">
+              <caret line="165" column="29" lean-forward="true" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -224,25 +225,7 @@
       <recent name="$PROJECT_DIR$/wrap" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.plot_ttt_precip_autothresh">
-    <configuration default="false" name="get_ttcbs_loop_autothresh" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/etc/skel/miniconda2/envs/flory/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/wrap" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MetBot" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.plot_ttt_omega_autothresh">
     <configuration default="false" name="get_ttcbs_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -311,6 +294,24 @@
       <module name="MetBot" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="plot_ttt_omega_autothresh" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/etc/skel/miniconda2/envs/flory/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/wrap" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MetBot" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -541,19 +542,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.get_ttcbs_loop_autothresh" />
-      <item index="1" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
-      <item index="2" class="java.lang.String" itemvalue="Python.AdvancedPlots" />
-      <item index="3" class="java.lang.String" itemvalue="Python.plot_ttt_precip_autothresh" />
-      <item index="4" class="java.lang.String" itemvalue="Python.plot_ttt_olr_autothresh" />
+      <item index="0" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
+      <item index="1" class="java.lang.String" itemvalue="Python.AdvancedPlots" />
+      <item index="2" class="java.lang.String" itemvalue="Python.plot_ttt_precip_autothresh" />
+      <item index="3" class="java.lang.String" itemvalue="Python.plot_ttt_olr_autothresh" />
+      <item index="4" class="java.lang.String" itemvalue="Python.plot_ttt_omega_autothresh" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.plot_ttt_precip_autothresh" />
-        <item index="1" class="java.lang.String" itemvalue="Python.plot_ttt_olr_autothresh" />
-        <item index="2" class="java.lang.String" itemvalue="Python.AdvancedPlots" />
-        <item index="3" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.get_ttcbs_loop_autothresh" />
+        <item index="0" class="java.lang.String" itemvalue="Python.plot_ttt_omega_autothresh" />
+        <item index="1" class="java.lang.String" itemvalue="Python.plot_ttt_precip_autothresh" />
+        <item index="2" class="java.lang.String" itemvalue="Python.plot_ttt_olr_autothresh" />
+        <item index="3" class="java.lang.String" itemvalue="Python.AdvancedPlots" />
+        <item index="4" class="java.lang.String" itemvalue="Python.get_ttcbs_test" />
       </list>
     </recent_temporary>
   </component>
@@ -567,13 +568,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
-    </task>
-    <task id="LOCAL-00114" summary="New option to plot % pos and neg anoms in OLR">
-      <created>1507111337400</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1507111337400</updated>
     </task>
     <task id="LOCAL-00115" summary="New option to plot % pos and neg anoms in OLR">
       <created>1507111915157</created>
@@ -911,7 +905,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507542106963</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="New wrapper to plot metbot composites of omega">
+      <created>1507542229888</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1507542229888</updated>
+    </task>
+    <option name="localTasksCounter" value="164" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -925,18 +926,18 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925257" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32147744" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3009576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3255814" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.253866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994528" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3255814" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994528" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1343,8 +1344,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="169" column="23" lean-forward="false" selection-start-line="169" selection-start-column="23" selection-end-line="169" selection-end-column="23" />
+        <state relative-caret-position="162">
+          <caret line="165" column="29" lean-forward="true" selection-start-line="165" selection-start-column="29" selection-end-line="165" selection-end-column="29" />
           <folding />
         </state>
       </provider>
