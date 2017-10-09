@@ -262,6 +262,13 @@ for d in range(ndset):
             if variable == 'qflux':
                 prodata_q = np.zeros((nsteps, nlat, nlon), dtype=np.float32)
 
+            # Get rid of nans
+            nonan_u = np.nan_to_num(rawdata_u)
+            nonan_v = np.nan_to_num(rawdata_v)
+
+            if variable == 'qflux':
+                nonan_q = np.nan_to_num(rawdata_q)
+
             for step in range(nsteps):
                 Interpolator_u = spi.interp2d(glon, glat, nonan_u[step, :, :], kind='linear')
                 Interpolator_v = spi.interp2d(glon, glat, nonan_v[step, :, :], kind='linear')
