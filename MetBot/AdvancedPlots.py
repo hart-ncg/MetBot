@@ -1104,7 +1104,7 @@ def gridvarmap_season(s,eventkeys,vardata,varlat,varlon,vardtime,olrunits,olrcl,
         firstyear=yrs[0]
         lastyear=yrs[nys-1]
         vardat=np.where((vardtime[:,0]>=firstyear) & (vardtime[:,0]<=lastyear))
-        varperiod=var[vardat,:,:]
+        varperiod=vardata[vardat,:,:]
         varperiod=np.squeeze(varperiod)
         newdates=vardtime[vardat]
 
