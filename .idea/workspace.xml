@@ -45,21 +45,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_ttt_omega_autothresh.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="plot_ttt_omega_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="68" column="17" lean-forward="true" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+            <state relative-caret-position="225">
+              <caret line="141" column="40" lean-forward="true" selection-start-line="141" selection-start-column="40" selection-end-line="141" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="1218" column="37" lean-forward="true" selection-start-line="1218" selection-start-column="37" selection-end-line="1218" selection-end-column="37" />
+            <state relative-caret-position="352">
+              <caret line="1220" column="31" lean-forward="false" selection-start-line="1220" selection-start-column="31" selection-end-line="1220" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -104,8 +104,8 @@
       <find>subrain</find>
       <find>ncfile</find>
       <find>bkdir</find>
-      <find>gridvar</find>
       <find>mkdir</find>
+      <find>gridvar</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,8 +134,8 @@
         <option value="$PROJECT_DIR$/MetBot/EventStats.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_olr_autothresh.py" />
         <option value="$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py" />
-        <option value="$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py" />
         <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
+        <option value="$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py" />
       </list>
     </option>
   </component>
@@ -580,13 +580,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00120" summary="New option to plot % pos and neg anoms in OLR">
-      <created>1507114069062</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1507114069062</updated>
-    </task>
     <task id="LOCAL-00121" summary="New option to plot % pos and neg anoms in OLR">
       <created>1507114331141</created>
       <option name="number" value="00121" />
@@ -923,7 +916,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507543868914</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="New wrapper to plot metbot composites of omega">
+      <created>1507544407698</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1507544407699</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1345,18 +1345,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py">
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="68" column="17" lean-forward="true" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+        <state relative-caret-position="352">
+          <caret line="1220" column="31" lean-forward="false" selection-start-line="1220" selection-start-column="31" selection-end-line="1220" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_omega_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="1218" column="37" lean-forward="true" selection-start-line="1218" selection-start-column="37" selection-end-line="1218" selection-end-column="37" />
+        <state relative-caret-position="225">
+          <caret line="141" column="40" lean-forward="true" selection-start-line="141" selection-start-column="40" selection-end-line="141" selection-end-column="40" />
           <folding />
         </state>
       </provider>

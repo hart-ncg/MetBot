@@ -1215,9 +1215,12 @@ def gridvarmap_season(s,eventkeys,varstr,vardata,varlat,varlon,vardtime,olrunits
                 cm = plt.cm.seismic_r
 
         elif ptype == 'comp_anom_cnt':
-            #if varstr == 'omega':
-            clevs= np.arange(30,75,5)
-            cm = plt.cm.seismic_r
+            if varstr == 'omega':
+                clevs= np.arange(30,75,5)
+                cm = plt.cm.seismic_r
+            elif varstr == 'q':
+                clevs= np.arange(30,75,5)
+                cm = plt.cm.seismic
 
         if test:
             cs = m.contourf(plon, plat, data4plot, cmap=cm, extend='both')

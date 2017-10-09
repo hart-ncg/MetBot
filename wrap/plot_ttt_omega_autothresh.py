@@ -58,13 +58,14 @@ under_dayof='dayof'     # if "dayof" plots all rain on TTT days
 
 freecol=False           # free colour bar
 refkey='0'              # 0 or all
+swapd='era'
 #doms=['All']
 doms=['All','nCont','nMada','nOcea'] # doms for TTT days selected
-varlist=['q']
+varlist=['omega']
 v=0 # for now don't loop variables, just one
 levsel=True
 if levsel:
-    choosel=['850'] # can add a list
+    choosel=['500'] # can add a list
 else:
     choosel=['1']
 l=0 # for now don't loop variables, just one
@@ -140,8 +141,12 @@ for d in range(ndset):
                 ds4noaa = 'trmm'
                 mod4noaa = 'trmm_3b42v7'
             else:
-                ds4noaa = 'ncep'
-                mod4noaa = 'ncep2'
+                if swapd=='era':
+                    ds4noaa='era'
+                    mod4noaa='erai'
+                elif swapd=='ncep':
+                    ds4noaa = 'ncep'
+                    mod4noaa = 'ncep2'
             dset2 = ds4noaa
             name2 = mod4noaa
         else:
