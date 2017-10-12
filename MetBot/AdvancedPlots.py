@@ -1465,7 +1465,7 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
         #Plot
 
         if ptype=='comp_abs_ttt':
-            wind_sc = 2.5
+            wind_sc = 1.5
             usc = 0.15
             lab = '0.15 kg/kg/ms'
 

@@ -194,23 +194,23 @@ for d in range(ndset):
 
         if levsel:
             ncout_u = mync.open_multi(rawfile_u, globv1, name2, \
-                                      dataset=dset2, subs=sub, levsel=levc)
+                                      dataset=dset2, subs=subvar, levsel=levc)
             ncout_v = mync.open_multi(rawfile_v, globv2, name2, \
-                                      dataset=dset2, subs=sub, levsel=levc)
+                                      dataset=dset2, subs=subvar, levsel=levc)
 
             if variable == 'qflux':
                 ncout_q = mync.open_multi(rawfile_q, globv3, name2, \
-                                          dataset=dset2, subs=sub, levsel=levc)
+                                          dataset=dset2, subs=subvar, levsel=levc)
 
         else:
             ncout_u = mync.open_multi(rawfile_u, globv1, name2, \
-                                      dataset=dset2, subs=sub)
+                                      dataset=dset2, subs=subvar)
             ncout_v = mync.open_multi(rawfile_v, globv2, name2, \
-                                      dataset=dset2, subs=sub)
+                                      dataset=dset2, subs=subvar)
 
             if variable == 'qflux':
                 ncout_q = mync.open_multi(rawfile_q, globv3, name2, \
-                                          dataset=dset2, subs=sub)
+                                          dataset=dset2, subs=subvar)
 
         ndim = len(ncout_u)
 
