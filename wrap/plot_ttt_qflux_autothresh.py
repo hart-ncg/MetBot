@@ -39,9 +39,9 @@ import mpl_toolkits.basemap as bm
 
 ### Running options
 sub="SA"
-subvar="SA_TRMM"
+#subvar="SA_TRMM"
 #subvar="SA_CONT"
-#subvar="UM_FOC"
+subvar="UM_FOC"
 seasopt="coreseason"    # options: coreseason, dryseason, fullseason
 
 threshtest=False         # Option to run on thresholds + and - 5Wm2 as a test

@@ -1470,7 +1470,7 @@ def gridvectmap_season(s,eventkeys,varstr,vardata_u,vardata_v,varlat,varlon,vard
             lab = '0.15 kg/kg/ms'
 
         elif ptype == 'comp_anom_ttt' or ptype == 'comp_anom_ag':
-            wind_sc = 0.5
+            wind_sc = 0.2
             usc = 0.001
             lab = '0.001 kg/kg/ms'
 
