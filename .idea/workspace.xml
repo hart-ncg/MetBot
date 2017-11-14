@@ -76,7 +76,7 @@
       <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
+            <state relative-caret-position="174">
               <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="40" />
               <folding />
             </state>
@@ -660,13 +660,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00149" summary="Temp changes to plot % days where there is &gt; 0 rain">
-      <created>1507215611752</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1507215611752</updated>
-    </task>
     <task id="LOCAL-00150" summary="Temp changes to plot threshold of &gt; 25 mm rain">
       <created>1507217275842</created>
       <option name="number" value="00150" />
@@ -1003,7 +996,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507815984312</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="New wrapper to plot metbot composites of qflux">
+      <created>1510655585064</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1510655585065</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1440,7 +1440,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
+        <state relative-caret-position="174">
           <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="40" />
           <folding />
         </state>
