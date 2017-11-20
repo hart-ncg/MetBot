@@ -68,8 +68,8 @@
       <file leaf-file-name="plot_hist_centroids_angles.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="124" column="12" lean-forward="true" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="12" />
+            <state relative-caret-position="380">
+              <caret line="110" column="56" lean-forward="false" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
               <folding>
                 <element signature="e#287#305#0" expanded="true" />
               </folding>
@@ -143,11 +143,11 @@
       <find>outsuf</find>
       <find>mcnt</find>
       <find>nthreshi</find>
-      <find>thresh</find>
       <find>thr</find>
       <find>thri</find>
       <find>thnames</find>
       <find>xticks</find>
+      <find>thresh</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -626,13 +626,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00153" summary="Edit to wet day and heavy day set up">
-      <created>1507277035725</created>
-      <option name="number" value="00153" />
-      <option name="presentableId" value="LOCAL-00153" />
-      <option name="project" value="LOCAL" />
-      <updated>1507277035725</updated>
-    </task>
     <task id="LOCAL-00154" summary="Edit to wet day and heavy day set up - fixing small looping error">
       <created>1507277784493</created>
       <option name="number" value="00154" />
@@ -969,7 +962,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511168622063</updated>
     </task>
-    <option name="localTasksCounter" value="202" />
+    <task id="LOCAL-00202" summary="New wrapper to plot histogram of centroid and angle values">
+      <created>1511170077324</created>
+      <option name="number" value="00202" />
+      <option name="presentableId" value="LOCAL-00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1511170077325</updated>
+    </task>
+    <option name="localTasksCounter" value="203" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1404,8 +1404,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="124" column="12" lean-forward="true" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="12" />
+        <state relative-caret-position="380">
+          <caret line="110" column="56" lean-forward="false" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
           <folding>
             <element signature="e#287#305#0" expanded="true" />
           </folding>

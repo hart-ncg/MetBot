@@ -103,8 +103,12 @@ for t in range(nthresh):
     for d in range(ndset):
         dset=dsetnames[d]
         if cmip5_spec:
-            nmod=4
-            mnames=['ACCESS1-0','CanESM2','GFDL-CM3','MIROC-ESM']
+            if dset=='cmip5':
+                nmod=4
+                mnames=['ACCESS1-0','CanESM2','GFDL-CM3','MIROC-ESM']
+            else:
+                nmod = len(dsetdict.dset_deets[dset])
+                mnames = list(dsetdict.dset_deets[dset])
         else:
             nmod=len(dsetdict.dset_deets[dset])
             mnames=list(dsetdict.dset_deets[dset])
