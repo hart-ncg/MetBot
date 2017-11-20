@@ -33,6 +33,7 @@ title=True
 testyear=False  # plot based on 1 year of test data
 testfile=False
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
+cmip5_spec=True
 
 refdset="noaa"
 refmod="cdr"
@@ -58,10 +59,10 @@ for t in range(nthresh):
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
-	ndset=5
-	dsetnames=['noaa','ncep','era','20cr','um']
-        #ndset=2
-        #dsetnames=['noaa','cmip5']
+	    #ndset=5
+	    #dsetnames=['noaa','ncep','era','20cr','um']
+        ndset=2
+        dsetnames=['noaa','cmip5']
         #ndset=6
 	    #dsetnames=['noaa','ncep','era','20cr','um','cmip5']
         dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
@@ -72,7 +73,13 @@ for t in range(nthresh):
     nm_dset=np.zeros(ndset)
     for d in range(ndset):
         dset = dsetnames[d]
-        nmod = len(dsetdict.dset_deets[dset])
+        if cmip5_spec:
+            if dset=='cmip5':
+                nmod=4
+            else:
+                nmod = len(dsetdict.dset_deets[dset])
+        else:
+            nmod = len(dsetdict.dset_deets[dset])
         nm_dset[d]=nmod
     nallmod=np.sum(nm_dset)
     nallmod=int(nallmod)
@@ -95,8 +102,12 @@ for t in range(nthresh):
     z=0
     for d in range(ndset):
         dset=dsetnames[d]
-        nmod=len(dsetdict.dset_deets[dset])
-        mnames=list(dsetdict.dset_deets[dset])
+        if cmip5_spec:
+            nmod=4
+            mnames=['ACCESS1-0','CanESM2','GFDL-CM3','MIROC-ESM']
+        else:
+            nmod=len(dsetdict.dset_deets[dset])
+            mnames=list(dsetdict.dset_deets[dset])
         print 'Looping through models'
         print mnames
         nmstr=str(nmod)
