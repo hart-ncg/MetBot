@@ -30,9 +30,9 @@ cenlatplot=True
 angleplot=True
 title=True
 
-testyear=True  # plot based on 1 year of test data
-testfile=True
-threshtest=True # Option to run on thresholds + and - 5Wm2 as a test
+testyear=False  # plot based on 1 year of test data
+testfile=False
+threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 
 refdset="noaa"
 refmod="cdr"
@@ -168,19 +168,19 @@ for t in range(nthresh):
 
             if cenlonplot:
                 plt.figure(num='cenlon')
-                y, binEdges = np.histogram(cXs, bins=50, density=True)
+                y, binEdges = np.histogram(cXs, bins=25, density=True)
                 bincentres = 0.5 * (binEdges[1:] + binEdges[:-1])
                 plt.plot(bincentres, y, linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
 
             if cenlatplot:
                 plt.figure(num='cenlat')
-                y, binEdges = np.histogram(cYs, bins=50, density=True)
+                y, binEdges = np.histogram(cYs, bins=25, density=True)
                 bincentres = 0.5 * (binEdges[1:] + binEdges[:-1])
                 plt.plot(bincentres, y, linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
 
             if angleplot:
                 plt.figure(num='angle')
-                y, binEdges = np.histogram(degs, bins=50, density=True)
+                y, binEdges = np.histogram(degs, bins=25, density=True)
                 bincentres = 0.5 * (binEdges[1:] + binEdges[:-1])
                 plt.plot(bincentres, y, linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
 
@@ -194,6 +194,7 @@ for t in range(nthresh):
     if cenlonplot:
         plt.figure(num='cenlon')
         plt.xlim(7.5,100.0)
+        plt.xticks([10,20,30,40,50,60,70,80,90,100])
         plt.legend(modnm,loc='upper left',fontsize='xx-small')
         plt.xlabel('Longitude', fontsize=14.0, weight='demibold', color='k')
         plt.ylabel('frequency density', fontsize=14.0, weight='demibold', color='k')
