@@ -25,15 +25,16 @@ import MetBot.find_saddle as fs
 
 
 ### Running options
-cenlonplot=True
-cenlatplot=True
-angleplot=True
+cenlonplot=False
+cenlatplot=False
+angleplot=False
+scatter_lon_angle=True
 title=True
 
-testyear=False  # plot based on 1 year of test data
-testfile=False
+testyear=True  # plot based on 1 year of test data
+testfile=True
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
-cmip5_spec=True
+cmip5_spec=False
 
 refdset="noaa"
 refmod="cdr"
@@ -59,10 +60,10 @@ for t in range(nthresh):
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
-	    #ndset=5
+        # #ndset=5
 	    #dsetnames=['noaa','ncep','era','20cr','um']
-        ndset=2
-        dsetnames=['noaa','cmip5']
+        ndset=1
+        dsetnames=['noaa']
         #ndset=6
 	    #dsetnames=['noaa','ncep','era','20cr','um','cmip5']
         if cmip5_spec:
@@ -95,11 +96,13 @@ for t in range(nthresh):
     styls = ['solid', 'dashed', 'dotted', 'dashed', 'solid']
     lws = [3, 2, 2, 2, 1]
     zorders = [3, 2, 2, 2, 1]
+    mkrs = ["o","^","<",">","x"]
 
     ### Open figures
     if cenlonplot: plt.figure(num='cenlon',figsize=[12,10])
     if cenlatplot: plt.figure(num='cenlat',figsize=[12,10])
     if angleplot: plt.figure(num='angle',figsize=[12,10])
+    if scatter_lon_angle: plt.figure(num='lon_ang',figsize=[12,10])
 
     ### Loop dsets and models
     z=0
@@ -204,6 +207,10 @@ for t in range(nthresh):
                 bincentres = 0.5 * (binEdges[1:] + binEdges[:-1])
                 plt.plot(bincentres, y, linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
 
+            if scatter_lon_angle:
+                plt.figure(num='lon_ang')
+                plt.scatter(cXs,degs,marker=mkrs[d],s=lws[d],zorder=zorders[d])
+
             z += 1
 
 
@@ -250,6 +257,19 @@ for t in range(nthresh):
         ### Save figure
         anglefig = figdir + '/hist_angle.' + dsetstr + '.'+thnames[t]+'.png'
         plt.savefig(anglefig)
+
+    if scatter_lon_angle:
+        plt.figure(num='lon_ang')
+        plt.xlim(7.5,100.0)
+        plt.ylim(-90.0,-5.0)
+        plt.xlabel('Longitude of Centroid',fontsize=14.0, weight='demibold', color='k')
+        plt.ylabel('Cloudband Orientation', fontsize=14.0, weight='demibold', color='k')
+        if title: plt.title('Relationship between CB longitude and orientation: ' + dsetstr, \
+                            fontsize=13.0, weight='demibold', color='k')
+
+        ### Save figure
+        lonangfig = figdir + '/scatter_lon_angle.' + dsetstr + '.'+thnames[t]+'.png'
+        plt.savefig(lonangfig)
 
     plt.close('all')
 
