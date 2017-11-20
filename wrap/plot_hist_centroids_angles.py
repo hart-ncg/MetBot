@@ -58,8 +58,10 @@ for t in range(nthresh):
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
-        ndset=1
-        dsetnames=['noaa']
+	ndset=5
+	dsetnames=['noaa','ncep','era','20cr','um']
+        #ndset=2
+        #dsetnames=['noaa','cmip5']
         #ndset=6
 	    #dsetnames=['noaa','ncep','era','20cr','um','cmip5']
         dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
