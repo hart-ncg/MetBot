@@ -65,7 +65,10 @@ for t in range(nthresh):
         dsetnames=['noaa','cmip5']
         #ndset=6
 	    #dsetnames=['noaa','ncep','era','20cr','um','cmip5']
-        dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
+        if cmip5_spec:
+            dsetstr = ('_'.join(dsetnames)) + '_spec'
+        else:
+            dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
     print 'Running on datasets:'
     print dsetnames
 
