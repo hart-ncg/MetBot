@@ -31,8 +31,8 @@ angleplot=False
 scatter_lon_angle=True
 title=True
 
-testyear=True  # plot based on 1 year of test data
-testfile=True
+testyear=False  # plot based on 1 year of test data
+testfile=False
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 cmip5_spec=False
 
@@ -55,17 +55,18 @@ for t in range(nthresh):
 
     ### Multi dset?
     dsets='spec'     # "all" or "spec" to choose specific dset(s)
+			# all doesn't really work because of TRMM
     if dsets=='all':
         ndset=len(dsetdict.dset_deets)
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
-        # #ndset=5
-	    #dsetnames=['noaa','ncep','era','20cr','um']
+        #ndset=5
+	#dsetnames=['noaa','ncep','era','20cr','um']
         ndset=1
-        dsetnames=['noaa']
+        dsetnames=['cmip5']
         #ndset=6
-	    #dsetnames=['noaa','ncep','era','20cr','um','cmip5']
+	#dsetnames=['noaa','ncep','era','20cr','um','cmip5']
         if cmip5_spec:
             dsetstr = ('_'.join(dsetnames)) + '_spec'
         else:
@@ -93,10 +94,10 @@ for t in range(nthresh):
     modnm=["" for x in range(nallmod)] # creates a list of strings for modnames
 
     ### Display options for plot
-    styls = ['solid', 'dashed', 'dotted', 'dashed', 'solid']
-    lws = [3, 2, 2, 2, 1]
-    zorders = [3, 2, 2, 2, 1]
-    mkrs = ["o","^","<",">","x"]
+    styls = ['solid', 'dashed', 'dotted', 'dashed', 'solid', 'dotted']
+    lws = [3, 2, 2, 2, 1, 1]
+    zorders = [3, 2, 2, 2, 1, 1]
+    mkrs = ["o","^","<",">","x","o"]
 
     ### Open figures
     if cenlonplot: plt.figure(num='cenlon',figsize=[12,10])
@@ -122,6 +123,7 @@ for t in range(nthresh):
         print mnames
         nmstr=str(nmod)
 
+#	for m in range(1):
         for m in range(nmod):
             name=mnames[m]
             mcnt = str(m + 1)
