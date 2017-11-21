@@ -29,15 +29,15 @@ import MetBot.find_saddle as fs
 cenlonplot=False
 cenlatplot=False
 angleplot=False
-monplot=True
+monplot=False
 
-scatter_lon_angle=False
+scatter_lon_angle=True
 scatter_lat_angle=False
 scatter_lon_lat=False
 
-scatter_lon_mon=True
-scatter_lat_mon=True
-scatter_ang_mon=True
+scatter_lon_mon=False
+scatter_lat_mon=False
+scatter_ang_mon=False
 
 title=True
 
@@ -81,12 +81,14 @@ for t in range(nthresh):
             dsetstr = ('_'.join(dsetnames)) + '_spec'
         else:
             dsetstr=('_'.join(dsetnames))+'_'+str(ndset)
+    ndstr = str(ndset)
     print 'Running on datasets:'
     print dsetnames
 
     ### Count total number of models
     nm_dset=np.zeros(ndset)
     for d in range(ndset):
+        dcnt = str(d + 1)
         dset = dsetnames[d]
         if cmip5_spec:
             if dset=='cmip5':
@@ -133,6 +135,9 @@ for t in range(nthresh):
             'k','r', 'b', 'c', 'm', 'g', 'y']
     for d in range(ndset):
         dset=dsetnames[d]
+        dcnt=str(d+1)
+        print 'Running on '+dset
+        print 'This is dset '+dcnt+' of '+ndstr+' in list'
         if cmip5_spec:
             if dset=='cmip5':
                 nmod=4
@@ -141,16 +146,24 @@ for t in range(nthresh):
                 nmod = len(dsetdict.dset_deets[dset])
                 mnames = list(dsetdict.dset_deets[dset])
         else:
-            nmod=len(dsetdict.dset_deets[dset])
-            mnames=list(dsetdict.dset_deets[dset])
+            mods = 'spec'  # "all" or "spec" to choose specific model(s)
+            if mods == 'all':
+                nmod = len(dsetdict.dset_deets[dset])
+                mnames = list(dsetdict.dset_deets[dset])
+            if mods == 'spec':  # edit for the models you want
+                nmod = 1
+                mnames = ['cdr']
+            nmstr = str(nmod)
         print 'Looping through models'
         print mnames
         nmstr=str(nmod)
 
-        #	for m in range(1):
         for m in range(nmod):
             name=mnames[m]
             mcnt = str(m + 1)
+
+            print 'Running on ' + name
+            print 'This is model ' + mcnt + ' of ' + nmstr + ' in list'
 
             ### Find location of mbs file
             sydir=botdir+dset+"/"+name+"/"
