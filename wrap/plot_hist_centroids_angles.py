@@ -1,5 +1,6 @@
 # Wrapper to plot distribution of centroids and angles from different models
 #   for all datasets or specific dataset
+#   now also has some scatter plot options to plot relationship between centroid and angle
 
 # .....dset: noaa, ncep, era, 20cr, um, cmip5
 # .....name: model names will be taken from dset dictionary
@@ -31,8 +32,8 @@ angleplot=False
 scatter_lon_angle=True
 title=True
 
-testyear=False  # plot based on 1 year of test data
-testfile=False
+testyear=True  # plot based on 1 year of test data
+testfile=True
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 cmip5_spec=False
 
@@ -55,18 +56,18 @@ for t in range(nthresh):
 
     ### Multi dset?
     dsets='spec'     # "all" or "spec" to choose specific dset(s)
-			# all doesn't really work because of TRMM
+    #  all doesn't really work because of TRMM
     if dsets=='all':
         ndset=len(dsetdict.dset_deets)
         dsetnames=list(dsetdict.dset_deets)
         dsetstr='all_dset'+'_'+str(ndset)
     elif dsets=='spec': # edit for the dset you want
         #ndset=5
-	#dsetnames=['noaa','ncep','era','20cr','um']
+	    #dsetnames=['noaa','ncep','era','20cr','um']
         ndset=1
-        dsetnames=['cmip5']
+        dsetnames=['noaa']
         #ndset=6
-	#dsetnames=['noaa','ncep','era','20cr','um','cmip5']
+	    #dsetnames=['noaa','ncep','era','20cr','um','cmip5']
         if cmip5_spec:
             dsetstr = ('_'.join(dsetnames)) + '_spec'
         else:
@@ -97,7 +98,8 @@ for t in range(nthresh):
     styls = ['solid', 'dashed', 'dotted', 'dashed', 'solid', 'dotted']
     lws = [3, 2, 2, 2, 1, 1]
     zorders = [3, 2, 2, 2, 1, 1]
-    mkrs = ["o","^","<",">","x","o"]
+    mkrs = ["o","^","<",">","x"]
+    msiz = [20,10,10,10,10,10]
 
     ### Open figures
     if cenlonplot: plt.figure(num='cenlon',figsize=[12,10])
@@ -107,6 +109,11 @@ for t in range(nthresh):
 
     ### Loop dsets and models
     z=0
+    cols = ['k','r', 'b', 'c', 'm', 'g', 'y',\
+            'k','r', 'b', 'c', 'm', 'g', 'y',\
+            'k','r', 'b', 'c', 'm', 'g', 'y',\
+            'k','r', 'b', 'c', 'm', 'g', 'y',\
+            'k','r', 'b', 'c', 'm', 'g', 'y']
     for d in range(ndset):
         dset=dsetnames[d]
         if cmip5_spec:
@@ -123,7 +130,7 @@ for t in range(nthresh):
         print mnames
         nmstr=str(nmod)
 
-#	for m in range(1):
+        #	for m in range(1):
         for m in range(nmod):
             name=mnames[m]
             mcnt = str(m + 1)
@@ -211,8 +218,7 @@ for t in range(nthresh):
 
             if scatter_lon_angle:
                 plt.figure(num='lon_ang')
-                plt.scatter(cXs,degs,marker=mkrs[d],s=lws[d],zorder=zorders[d])
-
+                plt.scatter(cXs,degs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
             z += 1
 
 
@@ -264,6 +270,7 @@ for t in range(nthresh):
         plt.figure(num='lon_ang')
         plt.xlim(7.5,100.0)
         plt.ylim(-90.0,-5.0)
+        plt.legend(modnm, loc='lower right', fontsize='xx-small')
         plt.xlabel('Longitude of Centroid',fontsize=14.0, weight='demibold', color='k')
         plt.ylabel('Cloudband Orientation', fontsize=14.0, weight='demibold', color='k')
         if title: plt.title('Relationship between CB longitude and orientation: ' + dsetstr, \
