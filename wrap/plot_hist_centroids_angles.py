@@ -30,6 +30,8 @@ cenlonplot=False
 cenlatplot=False
 angleplot=False
 scatter_lon_angle=True
+scatter_lat_angle=True
+scatter_lon_lat=True
 title=True
 
 testyear=True  # plot based on 1 year of test data
@@ -99,13 +101,15 @@ for t in range(nthresh):
     lws = [3, 2, 2, 2, 1, 1]
     zorders = [3, 2, 2, 2, 1, 1]
     mkrs = ["o","^","<",">","x"]
-    msiz = [20,10,10,10,10,10]
+    msiz = [5,5,5,5,5,5]
 
     ### Open figures
     if cenlonplot: plt.figure(num='cenlon',figsize=[12,10])
     if cenlatplot: plt.figure(num='cenlat',figsize=[12,10])
     if angleplot: plt.figure(num='angle',figsize=[12,10])
     if scatter_lon_angle: plt.figure(num='lon_ang',figsize=[12,10])
+    if scatter_lat_angle: plt.figure(num='lat_ang', figsize=[12, 10])
+    if scatter_lon_lat: plt.figure(num='lon_lat', figsize=[12, 10])
 
     ### Loop dsets and models
     z=0
@@ -219,6 +223,15 @@ for t in range(nthresh):
             if scatter_lon_angle:
                 plt.figure(num='lon_ang')
                 plt.scatter(cXs,degs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+
+            if scatter_lat_angle:
+                plt.figure(num='lat_ang')
+                plt.scatter(degs,cYs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+
+            if scatter_lon_lat:
+                plt.figure(num='lon_lat')
+                plt.scatter(cXs,cYs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+
             z += 1
 
 
@@ -279,6 +292,34 @@ for t in range(nthresh):
         ### Save figure
         lonangfig = figdir + '/scatter_lon_angle.' + dsetstr + '.'+thnames[t]+'.png'
         plt.savefig(lonangfig)
+
+    if scatter_lat_angle:
+        plt.figure(num='lat_ang')
+        plt.xlim(-90.0,-5.0)
+        plt.ylim(-40.0,-15.0)
+        plt.legend(modnm, loc='lower right', fontsize='xx-small')
+        plt.xlabel('Cloudband Orientation',fontsize=14.0, weight='demibold', color='k')
+        plt.ylabel('Latitude of Centroid', fontsize=14.0, weight='demibold', color='k')
+        if title: plt.title('Relationship between CB orientation and latitude: ' + dsetstr, \
+                            fontsize=13.0, weight='demibold', color='k')
+
+        ### Save figure
+        latangfig = figdir + '/scatter_lat_angle.' + dsetstr + '.'+thnames[t]+'.png'
+        plt.savefig(latangfig)
+
+    if scatter_lon_lat:
+        plt.figure(num='lon_lat')
+        plt.xlim(7.5,100.0)
+        plt.ylim(-40.0,-15.0)
+        plt.legend(modnm, loc='lower right', fontsize='xx-small')
+        plt.xlabel('Longitude of Centroid',fontsize=14.0, weight='demibold', color='k')
+        plt.ylabel('Latitude of Centroid', fontsize=14.0, weight='demibold', color='k')
+        if title: plt.title('Relationship between CB longitude and latitude: ' + dsetstr, \
+                            fontsize=13.0, weight='demibold', color='k')
+
+        ### Save figure
+        lonlatfig = figdir + '/scatter_lon_lat.' + dsetstr + '.'+thnames[t]+'.png'
+        plt.savefig(lonlatfig)
 
     plt.close('all')
 
