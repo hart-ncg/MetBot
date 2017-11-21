@@ -29,9 +29,16 @@ import MetBot.find_saddle as fs
 cenlonplot=False
 cenlatplot=False
 angleplot=False
-scatter_lon_angle=True
-scatter_lat_angle=True
-scatter_lon_lat=True
+monplot=True
+
+scatter_lon_angle=False
+scatter_lat_angle=False
+scatter_lon_lat=False
+
+scatter_lon_mon=True
+scatter_lat_mon=True
+scatter_ang_mon=True
+
 title=True
 
 testyear=True  # plot based on 1 year of test data
@@ -107,9 +114,15 @@ for t in range(nthresh):
     if cenlonplot: plt.figure(num='cenlon',figsize=[12,10])
     if cenlatplot: plt.figure(num='cenlat',figsize=[12,10])
     if angleplot: plt.figure(num='angle',figsize=[12,10])
+    if monplot: plt.figure(num='month',figsize=[12,10])
+
     if scatter_lon_angle: plt.figure(num='lon_ang',figsize=[12,10])
     if scatter_lat_angle: plt.figure(num='lat_ang', figsize=[12, 10])
     if scatter_lon_lat: plt.figure(num='lon_lat', figsize=[12, 10])
+
+    if scatter_lon_mon: plt.figure(num='lon_mon', figsize=[12, 10])
+    if scatter_lat_mon: plt.figure(num='lat_mon', figsize=[12, 10])
+    if scatter_ang_mon: plt.figure(num='ang_mon', figsize=[12, 10])
 
     ### Loop dsets and models
     z=0
@@ -181,9 +194,11 @@ for t in range(nthresh):
             cXs = []
             cYs = []
             degs = []
+            mons = []
 
             for b in range(len(refmbt)):
                 date = refmbt[b]
+                mon = int(date[1])
                 cX = refmbs[b, 3]
                 cY = refmbs[b, 4]
                 deg = refmbs[b, 2]
@@ -192,12 +207,14 @@ for t in range(nthresh):
                 cXs.append(cX)
                 cYs.append(cY)
                 degs.append(deg)
+                mons.append(mon)
 
             edts = np.asarray(edts)
             edts[:, 3] = 0
             cXs = np.asarray(cXs)
             cYs = np.asarray(cYs)
             degs = np.asarray(degs)
+            mons = np.asarray(mons)
 
             ### Put name into string list
             modnm[z]=dset+"_"+name
@@ -220,6 +237,17 @@ for t in range(nthresh):
                 bincentres = 0.5 * (binEdges[1:] + binEdges[:-1])
                 plt.plot(bincentres, y, linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
 
+            if monplot:
+                plt.figure(num='mon')
+                season = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7]
+                mon_count=np.zeros(len(season))
+                for imn in xrange(len(mon_count)):
+                    mn=season[imn]
+                    ix = np.where(mons==mn)[0]
+                    mon_count[imn]=len(ix)
+                seaspos=np.arange(1,13,1)
+                plt.plot(seaspos,mon_count,linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
+
             if scatter_lon_angle:
                 plt.figure(num='lon_ang')
                 plt.scatter(cXs,degs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
@@ -231,6 +259,25 @@ for t in range(nthresh):
             if scatter_lon_lat:
                 plt.figure(num='lon_lat')
                 plt.scatter(cXs,cYs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+
+            mon4scatter=np.zeros(len(mons))
+            for mn in range(len(mon4scatter)):
+                if mons[mn] <=7:
+                    mon4scatter[mn]=mons[mn]+5
+                elif mons[mn] >=8:
+                    mon4scatter[mn]=mons[mn]-7
+
+            if scatter_lon_mon:
+                plt.figure(num='lon_mon')
+                plt.scatter(cXs,mon4scatter,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+
+            if scatter_lat_mon:
+                plt.figure(num='lat_mon')
+                plt.scatter(mon4scatter,cYs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+
+            if scatter_ang_mon:
+                plt.figure(num='ang_mon')
+                plt.scatter(degs,mon4scatter,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
 
             z += 1
 
@@ -279,6 +326,23 @@ for t in range(nthresh):
         anglefig = figdir + '/hist_angle.' + dsetstr + '.'+thnames[t]+'.png'
         plt.savefig(anglefig)
 
+    monthstr = ['Aug', 'Sept', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
+
+    if monplot:
+        plt.figure(num='mon')
+        plt.xticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
+        plt.xlim(1,12)
+        plt.legend(modnm, loc='upper left', fontsize='xx-small')
+        plt.xlabel('Months', fontsize=14.0, weight='demibold', color='k')
+        plt.ylabel('frequency', fontsize=14.0, weight='demibold', color='k')
+        if title: plt.title('Total count of CBs by month: ' + dsetstr, \
+                            fontsize=13.0, weight='demibold', color='k')
+
+        ### Save figure
+        monfig = figdir + '/hist_mon.' + dsetstr + '.'+thnames[t]+'.png'
+        plt.savefig(monfig)
+
+
     if scatter_lon_angle:
         plt.figure(num='lon_ang')
         plt.xlim(7.5,100.0)
@@ -320,6 +384,52 @@ for t in range(nthresh):
         ### Save figure
         lonlatfig = figdir + '/scatter_lon_lat.' + dsetstr + '.'+thnames[t]+'.png'
         plt.savefig(lonlatfig)
+
+    if scatter_lon_mon:
+        plt.figure(num='lon_mon')
+        plt.xlim(7.5,100.0)
+        plt.yticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
+        #plt.ylim()
+        plt.legend(modnm, loc='lower right', fontsize='xx-small')
+        plt.xlabel('Longitude of Centroid',fontsize=14.0, weight='demibold', color='k')
+        plt.ylabel('Months', fontsize=14.0, weight='demibold', color='k')
+        if title: plt.title('Relationship between CB longitude and month: ' + dsetstr, \
+                            fontsize=13.0, weight='demibold', color='k')
+
+        ### Save figure
+        lonmonfig = figdir + '/scatter_lon_mon.' + dsetstr + '.'+thnames[t]+'.png'
+        plt.savefig(lonmonfig)
+
+    if scatter_lat_mon:
+        plt.figure(num='lat_mon')
+        #plt.xlim()
+        plt.xticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
+        plt.ylim(-40.0,-15.0)
+        plt.legend(modnm, loc='lower right', fontsize='xx-small')
+        plt.xlabel('Months',fontsize=14.0, weight='demibold', color='k')
+        plt.ylabel('Latitude of Centroid', fontsize=14.0, weight='demibold', color='k')
+        if title: plt.title('Relationship between CB latitude and month: ' + dsetstr, \
+                            fontsize=13.0, weight='demibold', color='k')
+
+        ### Save figure
+        latmonfig = figdir + '/scatter_lat_mon.' + dsetstr + '.'+thnames[t]+'.png'
+        plt.savefig(latmonfig)
+
+    if scatter_ang_mon:
+        plt.figure(num='ang_mon')
+        plt.xlim(-90.0,-5.0)
+        plt.yticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
+        #plt.ylim()
+        plt.legend(modnm, loc='lower right', fontsize='xx-small')
+        plt.xlabel('Cloudband Orientation',fontsize=14.0, weight='demibold', color='k')
+        plt.ylabel('Months', fontsize=14.0, weight='demibold', color='k')
+        if title: plt.title('Relationship between CB orientation and month: ' + dsetstr, \
+                            fontsize=13.0, weight='demibold', color='k')
+
+        ### Save figure
+        angmonfig = figdir + '/scatter_ang_mon.' + dsetstr + '.'+thnames[t]+'.png'
+        plt.savefig(angmonfig)
+
 
     plt.close('all')
 
