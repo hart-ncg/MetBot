@@ -49,8 +49,8 @@
       <file leaf-file-name="plot_freqbymonth_centroids_angles.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="52" column="14" lean-forward="false" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+            <state relative-caret-position="448">
+              <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -87,7 +87,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>thri</find>
       <find>thnames</find>
       <find>xticks</find>
       <find>thresh</find>
@@ -117,6 +116,7 @@
       <find>cm</find>
       <find>angs</find>
       <find>season</find>
+      <find>season4mesh</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -596,13 +596,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00164" summary="New wrapper to plot metbot composites of omega">
-      <created>1507542331734</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1507542331734</updated>
-    </task>
     <task id="LOCAL-00165" summary="New wrapper to plot metbot composites of omega">
       <created>1507542483602</created>
       <option name="number" value="00165" />
@@ -939,7 +932,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511352197759</updated>
     </task>
-    <option name="localTasksCounter" value="213" />
+    <task id="LOCAL-00213" summary="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month">
+      <created>1511353597160</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1511353597160</updated>
+    </task>
+    <option name="localTasksCounter" value="214" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1378,8 +1378,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="52" column="14" lean-forward="false" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+        <state relative-caret-position="448">
+          <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
           <folding />
         </state>
       </provider>
