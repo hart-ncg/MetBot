@@ -103,7 +103,7 @@ for t in range(nthresh):
     angs=np.arange(minang,maxang+1,1)
 
     season = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7]
-    season4mesh = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8]
+    season4mesh = [0,1,2,3,4,5,6,7,8,9,10,11,12]
     monthstr = ['Aug', 'Sept', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
     nmon = len(season)
 

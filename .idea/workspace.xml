@@ -49,8 +49,8 @@
       <file leaf-file-name="plot_freqbymonth_centroids_angles.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="105" column="22" lean-forward="false" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -596,13 +596,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00162" summary="New wrapper to plot metbot composites of omega">
-      <created>1507542106963</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1507542106963</updated>
-    </task>
     <task id="LOCAL-00163" summary="New wrapper to plot metbot composites of omega">
       <created>1507542229888</created>
       <option name="number" value="00163" />
@@ -939,7 +932,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511347453417</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL-00211" summary="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month">
+      <created>1511352009421</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1511352009421</updated>
+    </task>
+    <option name="localTasksCounter" value="212" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1378,8 +1378,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
+        <state relative-caret-position="90">
+          <caret line="105" column="22" lean-forward="false" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
           <folding />
         </state>
       </provider>
