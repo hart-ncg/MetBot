@@ -253,7 +253,7 @@ for t in range(nthresh):
                 plt.xlim(7,100)
                 plt.colorbar()
                 plt.xlabel('Centroid Longitude', fontsize=12.0, color='k')
-                if title: plt.title('Frequency of CB longitudes by month: ' + dsetstr, \
+                if title: plt.title('Frequency of CB longitudes by month: ' + dset +'_'+name, \
                                     fontsize=12.0, weight='demibold', color='k')
 
                 freqlonfig = figdir + '/freqbymon_lon.' + dset +'_'+name+'.'+ thnames[t] + '.png'
@@ -272,7 +272,7 @@ for t in range(nthresh):
                 plt.colorbar()
 
                 plt.ylabel('Centroid Latitude', fontsize=12.0, color='k')
-                if title: plt.title('Frequency of CB latitudes by month: ' + dsetstr, \
+                if title: plt.title('Frequency of CB latitudes by month:' + dset +'_'+name, \
                                     fontsize=12.0, weight='demibold', color='k')
 
 
@@ -292,7 +292,7 @@ for t in range(nthresh):
                 plt.colorbar()
 
                 plt.xlabel('Centroid Orientation', fontsize=12.0, color='k')
-                if title: plt.title('Frequency of CB angles by month: ' + dsetstr, \
+                if title: plt.title('Frequency of CB angles by month: ' + dset +'_'+name, \
                                     fontsize=12.0, weight='demibold', color='k')
 
 
