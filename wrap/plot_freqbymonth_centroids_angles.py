@@ -49,8 +49,8 @@ maxang=-5
 
 title=True
 
-testyear=True  # plot based on 1 year of test data
-testfile=True
+testyear=False  # plot based on 1 year of test data
+testfile=False
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 allmodplots=False # Default is to make separate plots for each model,
                     # this option allows one with accumulations from all models to be included
@@ -94,15 +94,16 @@ for t in range(nthresh):
 
     ### Get info for arrays
     nlon = maxlon - minlon
-    lons=np.arange(minlon,maxlon,1)
+    lons=np.arange(minlon,maxlon+1,1)
 
     nlat = maxlat - minlat
-    lats=np.arange(minlat,maxlat,1)
+    lats=np.arange(minlat,maxlat+1,1)
 
     nang = maxang - minang
-    angs=np.arange(minang,maxang,1)
+    angs=np.arange(minang,maxang+1,1)
 
     season = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7]
+    season4mesh = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8]
     monthstr = ['Aug', 'Sept', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
     nmon = len(season)
 
@@ -244,7 +245,7 @@ for t in range(nthresh):
             if freqlonplot:
 
                 plt.figure(figsize=[8,5])
-                pmon,plon=np.meshgrid(season,lons)
+                pmon,plon=np.meshgrid(season4mesh,lons)
                 cm=plt.cm.viridis
                 cs=plt.pcolormesh(plon,pmon,mon_lon_count,cmap=cm)
                 plt.yticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels

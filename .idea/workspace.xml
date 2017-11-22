@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py" afterPath="$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,28 +40,6 @@
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
   </component>
-  <component name="DockManager">
-    <window id="3">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="plot_hist_centroids_angles.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="534">
-                    <caret line="347" column="0" lean-forward="false" selection-start-line="347" selection-start-column="0" selection-end-line="347" selection-end-column="0" />
-                    <folding>
-                      <element signature="e#378#396#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="MetBot" />
@@ -71,8 +49,8 @@
       <file leaf-file-name="plot_freqbymonth_centroids_angles.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="249" column="0" lean-forward="false" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
+            <state relative-caret-position="206">
+              <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -109,8 +87,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nthreshi</find>
-      <find>thr</find>
       <find>thri</find>
       <find>thnames</find>
       <find>xticks</find>
@@ -122,7 +98,6 @@
       <find>cols</find>
       <find>scatt</find>
       <find>z</find>
-      <find>season</find>
       <find>pos</find>
       <find>density</find>
       <find>seasonalcycle</find>
@@ -139,6 +114,9 @@
       <find>scycle</find>
       <find>fig</find>
       <find>figsize</find>
+      <find>cm</find>
+      <find>angs</find>
+      <find>season</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -618,13 +596,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00161" summary="New wrapper to plot metbot composites of omega">
-      <created>1507541973396</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1507541973397</updated>
-    </task>
     <task id="LOCAL-00162" summary="New wrapper to plot metbot composites of omega">
       <created>1507542106963</created>
       <option name="number" value="00162" />
@@ -961,7 +932,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511271692645</updated>
     </task>
-    <option name="localTasksCounter" value="210" />
+    <task id="LOCAL-00210" summary="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month">
+      <created>1511347453417</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1511347453417</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1025,7 +1003,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edit to precip wrapper to allow plotting per month - colourbar" />
     <MESSAGE value="Edit to precip wrapper to plot rain per TTT" />
     <MESSAGE value="Edit to precip wrapper to plot rain per TTT - edit to cbar" />
     <MESSAGE value="Edit to precip code to add nTTTs into the title" />
@@ -1050,7 +1027,8 @@
     <MESSAGE value="New wrapper to plot metbot composites of omega" />
     <MESSAGE value="New wrapper to plot metbot composites of qflux" />
     <MESSAGE value="New wrapper to plot histogram of centroid and angle values" />
-    <option name="LAST_COMMIT_MESSAGE" value="New wrapper to plot histogram of centroid and angle values" />
+    <MESSAGE value="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month" />
+    <option name="LAST_COMMIT_MESSAGE" value="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1400,8 +1378,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="249" column="0" lean-forward="false" selection-start-line="249" selection-start-column="0" selection-end-line="249" selection-end-column="0" />
+        <state relative-caret-position="206">
+          <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
           <folding />
         </state>
       </provider>
