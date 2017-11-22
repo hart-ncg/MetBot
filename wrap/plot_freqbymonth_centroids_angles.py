@@ -49,8 +49,8 @@ maxang=-5
 
 title=True
 
-testyear=True  # plot based on 1 year of test data
-testfile=True
+testyear=False  # plot based on 1 year of test data
+testfile=False
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 allmodplots=False # Default is to make separate plots for each model,
                     # this option allows one with accumulations from all models to be included
@@ -263,8 +263,8 @@ for t in range(nthresh):
                 plat,pmon=np.meshgrid(lats,season4mesh)
                 cm=plt.cm.viridis
                 cs=plt.pcolormesh(pmon,plat,mon_lat_count,cmap=cm)
-                plt.xticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
-                plt.xlim(1, 12)
+                plt.xticks(np.arange(0.5, 12.5, 1), monthstr, fontsize=13.0)  # month labels
+                plt.xlim(0, 12)
                 plt.ylim(-40,-15)
                 plt.colorbar()
 
@@ -278,8 +278,8 @@ for t in range(nthresh):
                 pmon,pang=np.meshgrid(season4mesh,angs)
                 cm=plt.cm.viridis
                 cs=plt.pcolormesh(pang,pmon,mon_ang_count,cmap=cm)
-                plt.yticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
-                plt.ylim(1, 12)
+                plt.yticks(np.arange(0.5, 12.5, 1), monthstr, fontsize=13.0)  # month labels
+                plt.ylim(0, 12)
                 plt.xlim(-90,-5)
                 plt.colorbar()
 
