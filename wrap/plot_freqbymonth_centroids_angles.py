@@ -252,9 +252,9 @@ for t in range(nthresh):
                 plt.ylim(0, 12)
                 plt.xlim(7,100)
                 plt.colorbar()
-                plt.xlabel('Centroid Longitude', fontsize=14.0, weight='demibold', color='k')
+                plt.xlabel('Centroid Longitude', fontsize=12.0, color='k')
                 if title: plt.title('Frequency of CB longitudes by month: ' + dsetstr, \
-                                    fontsize=13.0, weight='demibold', color='k')
+                                    fontsize=12.0, weight='demibold', color='k')
 
                 freqlonfig = figdir + '/freqbymon_lon.' + dset +'_'+name+'.'+ thnames[t] + '.png'
                 plt.savefig(freqlonfig)
@@ -271,9 +271,9 @@ for t in range(nthresh):
                 plt.ylim(-40,-15)
                 plt.colorbar()
 
-                plt.ylabel('Centroid Latitude', fontsize=14.0, weight='demibold', color='k')
+                plt.ylabel('Centroid Latitude', fontsize=12.0, color='k')
                 if title: plt.title('Frequency of CB latitudes by month: ' + dsetstr, \
-                                    fontsize=13.0, weight='demibold', color='k')
+                                    fontsize=12.0, weight='demibold', color='k')
 
 
                 freqlatfig = figdir + '/freqbymon_lat.' + dset +'_'+name+'.'+ thnames[t] + '.png'
@@ -291,9 +291,9 @@ for t in range(nthresh):
                 plt.xlim(-90,-5)
                 plt.colorbar()
 
-                plt.xlabel('Centroid Orientation', fontsize=14.0, weight='demibold', color='k')
+                plt.xlabel('Centroid Orientation', fontsize=12.0, color='k')
                 if title: plt.title('Frequency of CB angles by month: ' + dsetstr, \
-                                    fontsize=13.0, weight='demibold', color='k')
+                                    fontsize=12.0, weight='demibold', color='k')
 
 
                 freqangfig = figdir + '/freqbymon_ang.' + dset +'_'+name+'.'+ thnames[t] + '.png'
