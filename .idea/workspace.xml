@@ -21,7 +21,7 @@
     <SUITE FILE_PATH="coverage/MetBot$output_tsteps4SOM.coverage" NAME="output_tsteps4SOM Coverage Results" MODIFIED="1491576002310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_loop_autothresh.coverage" NAME="get_ttcbs_loop_autothresh Coverage Results" MODIFIED="1510741324352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$get_ttcbs_test.coverage" NAME="get_ttcbs_test Coverage Results" MODIFIED="1494262199840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
-    <SUITE FILE_PATH="coverage/MetBot$plot_freqbymonth_centroids_angles.coverage" NAME="plot_freqbymonth_centroids_angles Coverage Results" MODIFIED="1511353522334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
+    <SUITE FILE_PATH="coverage/MetBot$plot_freqbymonth_centroids_angles.coverage" NAME="plot_freqbymonth_centroids_angles Coverage Results" MODIFIED="1511354052704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$plot_ttt_olr_autothresh.coverage" NAME="plot_ttt_olr_autothresh Coverage Results" MODIFIED="1507111207667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$plot_ttt_precip_autothresh.coverage" NAME="plot_ttt_precip_autothresh Coverage Results" MODIFIED="1507192981149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
     <SUITE FILE_PATH="coverage/MetBot$plot_hist_centroids_angles.coverage" NAME="plot_hist_centroids_angles Coverage Results" MODIFIED="1511271681678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wrap" />
@@ -46,11 +46,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="plot_hist_centroids_angles.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="448">
+              <caret line="352" column="0" lean-forward="true" selection-start-line="348" selection-start-column="0" selection-end-line="352" selection-end-column="0" />
+              <folding>
+                <element signature="e#378#396#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="plot_freqbymonth_centroids_angles.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="448">
-              <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+              <caret line="294" column="59" lean-forward="false" selection-start-line="294" selection-start-column="59" selection-end-line="294" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -596,20 +608,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00165" summary="New wrapper to plot metbot composites of omega">
-      <created>1507542483602</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1507542483602</updated>
-    </task>
-    <task id="LOCAL-00166" summary="New wrapper to plot metbot composites of omega">
-      <created>1507542997323</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL-00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1507542997324</updated>
-    </task>
     <task id="LOCAL-00167" summary="New wrapper to plot metbot composites of omega">
       <created>1507543397163</created>
       <option name="number" value="00167" />
@@ -939,7 +937,21 @@
       <option name="project" value="LOCAL" />
       <updated>1511353597160</updated>
     </task>
-    <option name="localTasksCounter" value="214" />
+    <task id="LOCAL-00214" summary="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month">
+      <created>1511353959081</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1511353959082</updated>
+    </task>
+    <task id="LOCAL-00215" summary="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month">
+      <created>1511354075051</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1511354075051</updated>
+    </task>
+    <option name="localTasksCounter" value="216" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1368,8 +1380,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="347" column="0" lean-forward="false" selection-start-line="347" selection-start-column="0" selection-end-line="347" selection-end-column="0" />
+        <state relative-caret-position="448">
+          <caret line="352" column="0" lean-forward="true" selection-start-line="348" selection-start-column="0" selection-end-line="352" selection-end-column="0" />
           <folding>
             <element signature="e#378#396#0" expanded="true" />
           </folding>
@@ -1379,7 +1391,7 @@
     <entry file="file://$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
-          <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+          <caret line="294" column="59" lean-forward="false" selection-start-line="294" selection-start-column="59" selection-end-line="294" selection-end-column="59" />
           <folding />
         </state>
       </provider>
