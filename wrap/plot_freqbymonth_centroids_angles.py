@@ -39,11 +39,11 @@ freqlonplot=True
 minlon=7
 maxlon=100
 
-freqlatplot=False
+freqlatplot=True
 minlat=-40
 maxlat=-15
 
-freqangplot=False
+freqangplot=True
 minang=-90
 maxang=-5
 
@@ -114,7 +114,7 @@ for t in range(nthresh):
         if freqlatplot:
             all_lat_array=np.zeros([nmon,nlat,nallmod])
         if freqangplot:
-            all_ang_array=np.zeros([nmon,nang,nallmod])
+            all_ang_array=np.zeros([nang,nmon,nallmod])
 
     ### Loop dsets and models
     z=0
@@ -209,7 +209,7 @@ for t in range(nthresh):
             ### Get month by longitude array
             mon_lon_count=np.zeros([nlon,nmon])
             mon_lat_count=np.zeros([nmon,nlat])
-            mon_ang_count=np.zeros([nmon,nang])
+            mon_ang_count=np.zeros([nang,nmon])
 
             for imn in xrange(nmon):
                 mn = season[imn]
@@ -238,9 +238,9 @@ for t in range(nthresh):
                     ag=angs[an]
                     ix4=np.where((degs_thismon>=ag) & (degs_thismon<ag+1))[0]
 
-                    mon_ang_count[imn,an]=len(ix4)
+                    mon_ang_count[an,imn]=len(ix4)
                     if allmodplots:
-                        all_ang_array[imn,an,z]=len(ix4)
+                        all_ang_array[an,imn,z]=len(ix4)
 
             if freqlonplot:
 
@@ -257,8 +257,35 @@ for t in range(nthresh):
                 plt.savefig(freqlonfig)
                 plt.close()
 
+            if freqlatplot:
 
+                plt.figure(figsize=[8,5])
+                plat,pmon=np.meshgrid(lats,season4mesh)
+                cm=plt.cm.viridis
+                cs=plt.pcolormesh(pmon,plat,mon_lat_count,cmap=cm)
+                plt.xticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
+                plt.xlim(1, 12)
+                plt.ylim(-40,-15)
+                plt.colorbar()
 
+                freqlatfig = figdir + '/freqbymon_lat.' + dset +'_'+name+'.'+ thnames[t] + '.png'
+                plt.savefig(freqlatfig)
+                plt.close()
+
+            if freqangplot:
+
+                plt.figure(figsize=[8,5])
+                pmon,pang=np.meshgrid(season4mesh,angs)
+                cm=plt.cm.viridis
+                cs=plt.pcolormesh(pang,pmon,mon_ang_count,cmap=cm)
+                plt.yticks(np.arange(1, 13), monthstr, fontsize=13.0)  # month labels
+                plt.ylim(1, 12)
+                plt.xlim(-90,-5)
+                plt.colorbar()
+
+                freqangfig = figdir + '/freqbymon_ang.' + dset +'_'+name+'.'+ thnames[t] + '.png'
+                plt.savefig(freqangfig)
+                plt.close()
 
 
             z += 1
