@@ -41,6 +41,8 @@ scatter_ang_mon=False
 
 title=True
 
+group_event=True
+
 testyear=True  # plot based on 1 year of test data
 testfile=True
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
@@ -202,6 +204,15 @@ for t in range(nthresh):
             count_all = len(refmbt)
             print "Total CBs flagged =" + str(count_all)
 
+            ### Open synop file
+            if group_event:
+                syfile = outsuf + thre_str + '_' + dset + '-OLR.synop'
+                s = sy.SynopticEvents((), [syfile], COL=False)
+                refkey=dset+'-olr-0-0'
+                ks = s.events.keys();ks.sort() # all
+                count_all=str(int(len(ks)))
+                print "Total CB events ="+str(count_all)
+
             ### Get array of centroids and angles
             edts = []
             cXs = []
@@ -262,8 +273,46 @@ for t in range(nthresh):
                 plt.plot(seaspos,mon_count,linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
 
             if scatter_lon_angle:
-                plt.figure(num='lon_ang')
-                plt.scatter(cXs,degs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+                if not group_event:
+                    plt.figure(num='lon_ang')
+                    plt.scatter(cXs,degs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+
+                elif group_event:
+
+                    for k in ks:
+                        e = s.events[k]
+                        dts = s.blobs[refkey]['mbt'][e.ixflags]
+                        cXs_ent = []
+                        degs_ent = []
+
+                        for dt in range(len(dts)):
+                            x,y = e.trkcX[dt], e.trkcY[dt]
+                            cXs_ent.append(x)
+
+                            # Find angle
+                            ix4 = my.ixdtimes(edts, [dts[dt][0]], [dts[dt][1]], [dts[dt][2]], [0])
+                            if len(ix4)==1:
+                                degs_ent.append(degs[ix4])
+                            elif len(ix4)==0:
+                                print 'Date from event not found in mbt...'
+                                degs_ent.append(0)
+                            elif len(ix4)>1:
+                                print 'Date from event found more than once in mbt'
+                                all_dates_event=edts[ix4]
+                                print all_dates_event
+                                all_cXs_event=cXs[ix4]
+                                print all_cXs_event
+                                print 'this cX='+str(x)
+                                ix5=np.where(all_cXs_event==x)[0]
+                                right_ind=ix4[ix5]
+                                print 'right_ind='+str(right_ind)
+                                degs_ent.append(degs[right_ind])
+
+                        cXs_ent=np.squeeze(np.asarray(cXs_ent))
+                        degs_ent=np.squeeze(np.asarray(degs_ent))
+
+                        plt.figure(num='lon_ang')
+                        plt.plot(cXs_ent,degs_ent)
 
             if scatter_lat_angle:
                 plt.figure(num='lat_ang')
