@@ -50,8 +50,8 @@ maxang=-5
 group_event=True # If want to plot events as lines True, if individual CBs, false
 title=True
 
-testyear=True  # plot based on 1 year of test data
-testfile=True
+testyear=False  # plot based on 1 year of test data
+testfile=False
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 allmodplots=False # Default is to make separate plots for each model,
                     # this option allows one with accumulations from all models to be included
@@ -204,7 +204,12 @@ for t in range(nthresh):
             for y in range(len(years)):
 
                 thisyear=years[y]
-                ix=np.where(edts[:,0]==thisyear)[0]
+                if testyear:
+                    ix=np.where(edts[:,0]==thisyear)[0]
+                else:
+                    part1=np.where([edts[:,0]==thisyear] & [edts[:,1]>=8])[0]
+                    part2=np.where([edts[:,0]==thisyear+1] & [edts[:,1]<=7])[0]
+                    ix=np.concantenate(part1 + part2)
                 thesedates=edts[ix]
 
                 thesecXs=cXs[ix]
@@ -212,14 +217,26 @@ for t in range(nthresh):
                 thesedegs=degs[ix]
 
                 # Find these dates as indices of the full year
-                firstday=datetime.strptime("01-01-"+str(thisyear),"%d-%m-%Y")
-                fullyear=list(rrule.rrule(rrule.DAILY,count=365,dtstart=firstday))
+                if testyear:
+                    firstday=datetime.strptime("01-01-"+str(thisyear),"%d-%m-%Y")
+                else:
+                    firstday=datetime.strptime("01-08-"+str(thisyear),"%d-%m-%Y")
+                fullyear = list(rrule.rrule(rrule.DAILY, count=365, dtstart=firstday))
+
                 full_y_ar=np.zeros([len(fullyear),4],dtype=np.int64)
 
                 for f in range(len(fullyear)):
                     datestr=datetime.strftime(fullyear[f],"%Y-%m-%d-%H")
                     datebits=datestr.split('-')
                     full_y_ar[f,:]=datebits
+
+                # Get labels
+                if testyear:
+                    monthstr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                else:
+                    monthstr= ['Aug','Sep','Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar','Apr','May','Jun','Jul']
+
+                monbegins=np.where(full_y_ar[:,2]==1)[0]
 
                 if not group_event:
 
@@ -236,6 +253,7 @@ for t in range(nthresh):
                         #,marker="o",edgecolour='face',size=20)
                         plt.xlim(7.5,100)
                         plt.ylim(365,0)
+                        plt.yticks(monbegins, monthstr, fontsize=13.0)  # month labels
                         plt.xlabel('Centroid Longitude', fontsize=12.0, color='k')
                         if title: plt.title('CB longitudes against time: ' + dset +'_'+name, \
                                         fontsize=12.0, weight='demibold', color='k')
@@ -251,6 +269,7 @@ for t in range(nthresh):
                         #,marker="o",edgecolour='face',size=20)
                         plt.xlim(0,365)
                         plt.ylim(-40,-15)
+                        plt.xticks(monbegins, monthstr, fontsize=13.0)  # month labels
                         plt.xlabel('Centroid Latitude', fontsize=12.0, color='k')
                         if title: plt.title('CB latitudes against time: ' + dset +'_'+name, \
                                         fontsize=12.0, weight='demibold', color='k')
@@ -266,6 +285,7 @@ for t in range(nthresh):
                         #,marker="o",edgecolour='face',size=20)
                         plt.ylim(365,0)
                         plt.xlim(-90,-5)
+                        plt.yticks(monbegins, monthstr, fontsize=13.0)  # month labels
                         plt.xlabel('Cloudband Orientation', fontsize=12.0, color='k')
                         if title: plt.title('CB angles against time: ' + dset +'_'+name, \
                                         fontsize=12.0, weight='demibold', color='k')
@@ -326,21 +346,22 @@ for t in range(nthresh):
 
                         if timelonplot:
                             plt.figure(num='time_lon')
-                            plt.plot(cXs_ent,indices_ent)
+                            plt.plot(cXs_ent,indices_ent,marker='x')
 
                         if timelatplot:
                             plt.figure(num='time_lat')
-                            plt.plot(indices_ent,cYs_ent)
+                            plt.plot(indices_ent,cYs_ent,marker='x')
 
                         if timeangplot:
                             plt.figure(num='time_ang')
-                            plt.plot(degs_ent,indices_ent)
+                            plt.plot(degs_ent,indices_ent,marker='x')
 
                     if timelonplot:
                         plt.figure(num='time_lon')
                         plt.xlim(7.5,100)
                         plt.ylim(365,0)
                         plt.xlabel('Centroid Longitude', fontsize=12.0, color='k')
+                        plt.yticks(monbegins, monthstr, fontsize=13.0)  # month labels
                         if title: plt.title('CB longitudes against time: ' + dset +'_'+name, \
                                         fontsize=12.0, weight='demibold', color='k')
 
@@ -353,6 +374,7 @@ for t in range(nthresh):
                         plt.xlim(0,365)
                         plt.ylim(-40,-15)
                         plt.ylabel('Centroid Latitude', fontsize=12.0, color='k')
+                        plt.xticks(monbegins, monthstr, fontsize=13.0)  # month labels
                         if title: plt.title('CB latitudes against time: ' + dset +'_'+name, \
                                         fontsize=12.0, weight='demibold', color='k')
 
@@ -365,6 +387,7 @@ for t in range(nthresh):
                         plt.ylim(365,0)
                         plt.xlim(-90,-5)
                         plt.xlabel('Cloudband Orientation', fontsize=12.0, color='k')
+                        plt.yticks(monbegins, monthstr, fontsize=13.0)  # month labels
                         if title: plt.title('CB angles against time: ' + dset +'_'+name, \
                                         fontsize=12.0, weight='demibold', color='k')
 
