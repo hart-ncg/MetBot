@@ -71,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/wrap/plot_time_centroids_angles.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="173">
-              <caret line="211" column="31" lean-forward="false" selection-start-line="211" selection-start-column="31" selection-end-line="211" selection-end-column="31" />
+              <caret line="211" column="51" lean-forward="false" selection-start-line="211" selection-start-column="51" selection-end-line="211" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -608,13 +608,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00173" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507555786666</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1507555786666</updated>
-    </task>
     <task id="LOCAL-00174" summary="New wrapper to plot metbot composites of qflux">
       <created>1507555855234</created>
       <option name="number" value="00174" />
@@ -951,7 +944,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511529016333</updated>
     </task>
-    <option name="localTasksCounter" value="222" />
+    <task id="LOCAL-00222" summary="New wrapper to plot centroid and angle over time for each year">
+      <created>1511529148008</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1511529148008</updated>
+    </task>
+    <option name="localTasksCounter" value="223" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1382,7 +1382,7 @@
     <entry file="file://$PROJECT_DIR$/wrap/plot_time_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
-          <caret line="211" column="31" lean-forward="false" selection-start-line="211" selection-start-column="31" selection-end-line="211" selection-end-column="31" />
+          <caret line="211" column="51" lean-forward="false" selection-start-line="211" selection-start-column="51" selection-end-line="211" selection-end-column="51" />
           <folding />
         </state>
       </provider>
