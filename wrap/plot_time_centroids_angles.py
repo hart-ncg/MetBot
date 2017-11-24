@@ -207,8 +207,8 @@ for t in range(nthresh):
                 if testyear:
                     ix=np.where(edts[:,0]==thisyear)[0]
                 else:
-                    part1=np.where([edts[:,0]==thisyear] & [edts[:,1]>=8])[0]
-                    part2=np.where([edts[:,0]==thisyear+1] & [edts[:,1]<=7])[0]
+                    part1=np.where((edts[:,0]==thisyear) & (edts[:,1]>=8))[0]
+                    part2=np.where((edts[:,0]==thisyear+1) & (edts[:,1]<=7))[0]
                     ix=np.concantenate(part1 + part2)
                 thesedates=edts[ix]
 
