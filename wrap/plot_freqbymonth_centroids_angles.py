@@ -28,11 +28,12 @@ import MetBot.find_saddle as fs
 ### Which datasets and models?
 dsets='spec' # spec or all
 if dsets=='spec':
-    dsetnames = ['noaa']
+    dsetnames = ['cmip5']
     # dsetnames=['noaa','ncep','era','20cr','um']
 mods='spec' # spec or all
 if mods=='spec':
-    mnames = ['cdr']
+    #mnames = ['cdr']
+    mnames= ['ACCESS1-0','CanESM2','GFDL-CM3','MIROC-ESM']
 
 ### Running options
 freqlonplot=True

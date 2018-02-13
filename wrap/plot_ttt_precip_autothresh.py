@@ -55,8 +55,8 @@ all_cnt_anom=False       # plot % of days which have +ve anomalies
 tot_ttt_plot=False      # plot total rainfall from TTTs
 per_ttt_plot=False      # plot percentage rainfall from TTTs (tot_ttt/tot_all)
 rain_per_ttt_plot=False  # plot average rain per TTT day (rain composite)
-comp_anom_ttt_plot=False  # plot rain per TTT as anom from long term daily mean for each month
-comp_anom_ag_plot=True   # plot comp anom with agtest on composite
+comp_anom_ttt_plot=True  # plot rain per TTT as anom from long term daily mean for each month
+comp_anom_ag_plot=False # plot comp anom with agtest on composite
 comp_anom_cnt_plot=False     # plot count of the number of days above or below average
 perc_ag=70              # show if this % or more days agree
 
@@ -81,7 +81,7 @@ monmean='day'           # to control the output - is there averaging?
                         # 'day' is daily mean
                         # 'mon' is monthly mean
                         # 'tot' is total
-nTTTlab=True            # labels each plot with # or % of TTTs
+nTTTlab=False            # labels each plot with # or % of TTTs
 
 freecol=False           # free colour bar
 refkey='0'              # 0 or all

@@ -43,8 +43,8 @@ title=True
 
 group_event=True
 
-testyear=True  # plot based on 1 year of test data
-testfile=True
+testyear=False  # plot based on 1 year of test data
+testfile=False
 threshtest=False # Option to run on thresholds + and - 5Wm2 as a test
 cmip5_spec=False
 
@@ -312,7 +312,7 @@ for t in range(nthresh):
                         degs_ent=np.squeeze(np.asarray(degs_ent))
 
                         plt.figure(num='lon_ang')
-                        plt.plot(cXs_ent,degs_ent)
+                        plt.plot(cXs_ent,degs_ent,marker="o")
 
             if scatter_lat_angle:
                 plt.figure(num='lat_ang')
