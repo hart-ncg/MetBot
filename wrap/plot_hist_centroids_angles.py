@@ -262,7 +262,7 @@ for t in range(nthresh):
 
             ### Find sample
             if show_sample:
-                if sample='rw50':
+                if sample=='rw50':
                     tmp_edts=[]
                     tmp_cXs=[]
                     tmp_cYs=[]

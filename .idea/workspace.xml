@@ -70,8 +70,8 @@
       <file leaf-file-name="plot_hist_centroids_angles.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="472" column="27" lean-forward="true" selection-start-line="472" selection-start-column="27" selection-end-line="472" selection-end-column="27" />
+            <state relative-caret-position="270">
+              <caret line="269" column="31" lean-forward="true" selection-start-line="269" selection-start-column="31" selection-end-line="269" selection-end-column="31" />
               <folding>
                 <element signature="e#378#396#0" expanded="true" />
               </folding>
@@ -90,7 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mkdir</find>
       <find>spatio</find>
       <find>nmod</find>
       <find>mods</find>
@@ -120,6 +119,7 @@
       <find>n_cen</find>
       <find>sample</find>
       <find>ndays</find>
+      <find>if sample</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -600,13 +600,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00177" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507556186618</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1507556186618</updated>
-    </task>
     <task id="LOCAL-00178" summary="New wrapper to plot metbot composites of qflux">
       <created>1507556460846</created>
       <option name="number" value="00178" />
@@ -943,7 +936,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518605222932</updated>
     </task>
-    <option name="localTasksCounter" value="226" />
+    <task id="LOCAL-00226" summary="Edit scatter plot to show sample on top">
+      <created>1518608864880</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1518608864880</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1007,7 +1007,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edit to precip wrapper to plot rain per TTT - edit to cbar" />
     <MESSAGE value="Edit to precip code to add nTTTs into the title" />
     <MESSAGE value="New wrapper to get OLR associated with flagged CBs" />
     <MESSAGE value="Edits to precip wrappers to plot composite anomaly" />
@@ -1032,7 +1031,8 @@
     <MESSAGE value="New wrapper to plot histogram of centroid and angle values" />
     <MESSAGE value="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month" />
     <MESSAGE value="New wrapper to plot centroid and angle over time for each year" />
-    <option name="LAST_COMMIT_MESSAGE" value="New wrapper to plot centroid and angle over time for each year" />
+    <MESSAGE value="Edit scatter plot to show sample on top" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit scatter plot to show sample on top" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1373,8 +1373,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="472" column="27" lean-forward="true" selection-start-line="472" selection-start-column="27" selection-end-line="472" selection-end-column="27" />
+        <state relative-caret-position="270">
+          <caret line="269" column="31" lean-forward="true" selection-start-line="269" selection-start-column="31" selection-end-line="269" selection-end-column="31" />
           <folding>
             <element signature="e#378#396#0" expanded="true" />
           </folding>
