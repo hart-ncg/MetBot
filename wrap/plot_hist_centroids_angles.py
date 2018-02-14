@@ -39,9 +39,12 @@ scatter_lon_mon=False
 scatter_lat_mon=False
 scatter_ang_mon=False
 
+show_sample=True
+sample='rw50'
+
 title=True
 
-group_event=True
+group_event=False
 
 testyear=False  # plot based on 1 year of test data
 testfile=False
@@ -55,6 +58,20 @@ refmod="cdr"
 bkdir=cwd+"/../../../CTdata/"
 botdir=bkdir+"metbot_multi_dset/"
 figdir=botdir+"cen_ang_figs/"
+
+if sample=='rw50':
+
+    best_lon = 33
+    ndays=50
+
+    n_cen = -26
+    s_cen = -30
+
+    t_ang = -50
+    b_ang = -35
+
+    f_seas = 11
+    l_seas = 3
 
 ### Loop threshs
 if threshtest:
@@ -243,6 +260,56 @@ for t in range(nthresh):
             ### Put name into string list
             modnm[z]=dset+"_"+name
 
+            ### Find sample
+            if show_sample:
+                if sample='rw50':
+                    tmp_edts=[]
+                    tmp_cXs=[]
+                    tmp_cYs=[]
+                    tmp_degs=[]
+                    tmp_mons=[]
+
+                    for b in range(len(edts)):
+                        date=edts[b]
+                        mon=mons[b]
+                        cX=cXs[b]
+                        cY=cYs[b]
+                        deg=degs[b]
+
+                        # Check on the latitude of centroid
+                        if cY > s_cen and cY < n_cen:
+
+                            # Check on the angle
+                            if deg > t_ang and deg < b_ang:
+
+                                # Check on the month
+                                if mon >= f_seas or mon <= l_seas:
+
+                                    tmp_edts.append(date)
+                                    tmp_cXs.append(cX)
+                                    tmp_cYs.append(cY)
+                                    tmp_degs.append(deg)
+                                    tmp_mons.append(mon)
+
+                    tmp_edts=np.asarray(tmp_edts)
+                    tmp_cXs=np.asarray(tmp_cXs)
+                    tmp_cYs=np.asarray(tmp_cYs)
+                    tmp_degs=np.asarray(tmp_degs)
+                    tmp_mons=np.asarray(tmp_mons)
+
+                    # Get the 50 closest to best_lon
+                    dists = best_lon - tmp_cXs
+                    abs_dists = np.absolute(dists)
+                    inds = np.argsort(abs_dists)
+                    dists_sort = abs_dists[inds]
+                    first50_ind = inds[0:ndays]
+
+                    smp_cXs=tmp_cXs[first50_ind]
+                    smp_cYs=tmp_cYs[first50_ind]
+                    smp_edts=tmp_edts[first50_ind]
+                    smp_degs=tmp_degs[first50_ind]
+                    smp_mons=tmp_mons[first50_ind]
+
             if cenlonplot:
                 plt.figure(num='cenlon')
                 y, binEdges = np.histogram(cXs, bins=25, density=True)
@@ -276,6 +343,7 @@ for t in range(nthresh):
                 if not group_event:
                     plt.figure(num='lon_ang')
                     plt.scatter(cXs,degs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
+                    plt.scatter(smp_cXs,smp_degs,c='fuchsia',marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
 
                 elif group_event:
 
