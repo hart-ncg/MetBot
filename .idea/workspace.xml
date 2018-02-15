@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MetBot/mast_dset_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/mynetcdf.py" afterPath="$PROJECT_DIR$/MetBot/mynetcdf.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/dset_dict.py" afterPath="$PROJECT_DIR$/MetBot/dset_dict.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,7 +57,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mynetcdf.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mynetcdf.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -68,11 +67,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dset_dict.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="99" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="99" />
+            <state relative-caret-position="511">
+              <caret line="64" column="218" lean-forward="false" selection-start-line="64" selection-start-column="218" selection-end-line="64" selection-end-column="218" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_ttcbs_loop_autothresh.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="276" column="51" lean-forward="false" selection-start-line="276" selection-start-column="44" selection-end-line="276" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -121,7 +130,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mods</find>
       <find>mon</find>
       <find>scycle</find>
       <find>fig</find>
@@ -151,6 +159,7 @@
       <find>if sample</find>
       <find>opennc2</find>
       <find>opennc</find>
+      <find>startyr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,11 +193,11 @@
         <option value="$PROJECT_DIR$/MetBot/MetBlobs.py" />
         <option value="$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py" />
         <option value="$PROJECT_DIR$/wrap/plot_time_centroids_angles.py" />
-        <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
         <option value="$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py" />
         <option value="$PROJECT_DIR$/MetBot/cmip_dict.py" />
         <option value="$PROJECT_DIR$/MetBot/mast_dset_dict.py" />
         <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
+        <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
       </list>
     </option>
   </component>
@@ -635,13 +644,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00179" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507556832003</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1507556832003</updated>
-    </task>
     <task id="LOCAL-00180" summary="New wrapper to plot metbot composites of qflux">
       <created>1507557466846</created>
       <option name="number" value="00180" />
@@ -978,7 +980,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518608947169</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="Changes to dictionaries so that I can run composite plotting on all of CMIP5">
+      <created>1518689885970</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1518689885970</updated>
+    </task>
+    <option name="localTasksCounter" value="229" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1042,7 +1051,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edit to precip code to add nTTTs into the title" />
     <MESSAGE value="New wrapper to get OLR associated with flagged CBs" />
     <MESSAGE value="Edits to precip wrappers to plot composite anomaly" />
     <MESSAGE value="Edits to precip and olr wrappers to plot composite anomaly" />
@@ -1067,11 +1075,12 @@
     <MESSAGE value="New wrapper to plot frequency of cloud bands at each lon, lat, ang by month" />
     <MESSAGE value="New wrapper to plot centroid and angle over time for each year" />
     <MESSAGE value="Edit scatter plot to show sample on top" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit scatter plot to show sample on top" />
+    <MESSAGE value="Changes to dictionaries so that I can run composite plotting on all of CMIP5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to dictionaries so that I can run composite plotting on all of CMIP5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="72" />
+      <option name="time" value="77" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1310,13 +1319,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
@@ -1401,14 +1403,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="10" column="99" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/mast_dset_dict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1421,6 +1415,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wrap/get_ttcbs_loop_autothresh.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="276" column="51" lean-forward="false" selection-start-line="276" selection-start-column="44" selection-end-line="276" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/dset_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="64" column="218" lean-forward="false" selection-start-line="64" selection-start-column="218" selection-end-line="64" selection-end-column="218" />
           <folding />
         </state>
       </provider>
