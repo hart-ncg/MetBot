@@ -16,6 +16,7 @@ import time as tm
 import datetime
 import MetBot.dset_dict as dsetdict
 import MetBot.dimensions_dict as dim_exdict
+import MetBot.mast_dset_dict as mast_dict
 
 # Add to this dictionary as need be by looking at ncdump -h ????.nc
 # There is an alternative (using "dimensions_dict.py" and opennc2) - all dsets already
@@ -423,10 +424,15 @@ def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
 
     # HUMAN TIME CONVERSION
     moddct = dsetdict.dset_deets[dset][mname]
-    units = moddct[globv+'timeunit']
     cal = moddct['calendar']
     vnamedict = globv+'name'
-    varstr = moddct[vnamedict]
+    if dset!='cmip5':
+        units = moddct[globv+'timeunit']
+        varstr = moddct[vnamedict]
+    else:
+        units = moddct['olrtimeunit'] # this used to be selected from the individual var time unit but they are all the same
+        mastdct = mast_dict.mast_dset_deets[dset]
+        varstr = mastdct[vnamedict]
     exec('dtime=num2date((' + timestr + '),units="' + units + '",calendar="' + cal + '")')
     if cal == '360_day':
         dtime = fix360d(dtime)
