@@ -9,7 +9,7 @@ mast_dset_deets['noaa']={
 }
 
 # TRMM
-dset_deets['trmm']={
+mast_dset_deets['trmm']={
 'prname':"pcp",
 }
 
@@ -19,7 +19,7 @@ mast_dset_deets['ncep']={
 }
 
 # ERA
-dset_deets['era']={
+mast_dset_deets['era']={
 'olrname':"olr", 'prname':"tp", 'omeganame':"w", 'uname':"u", 'vname':"v", 'qname':"q", 'gpthname':"z", 'Tname':"t", 'presname':"sp",
 }
 
