@@ -1286,7 +1286,7 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
             else:
                 plt.ylabel('grid-point count / year', fontdict=fd)
             plt.axes(ax)
-            plt.title(name)
+            plt.title(modname)
     elif month:
         f,ax=plt.gcf(),plt.gca()
         axcol=f.add_axes([0.93,0.2,0.02,0.6])

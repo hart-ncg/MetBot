@@ -51,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="86" column="6" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="6" />
+              <caret line="269" column="85" lean-forward="false" selection-start-line="269" selection-start-column="79" selection-end-line="269" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -60,8 +60,8 @@
       <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="1288" column="27" lean-forward="true" selection-start-line="1288" selection-start-column="27" selection-end-line="1288" selection-end-column="27" />
+            <state relative-caret-position="283">
+              <caret line="1288" column="30" lean-forward="true" selection-start-line="1288" selection-start-column="30" selection-end-line="1288" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -112,10 +112,10 @@
       <find>nos4cbar</find>
       <find>seasonalcycle</find>
       <find>timeseries</find>
-      <find>spatiofreq3</find>
       <find>ks</find>
       <find>syno</find>
       <find>synop</find>
+      <find>spatiofreq3</find>
       <find>refkey</find>
       <find>gridrainmap</find>
     </findStrings>
@@ -603,13 +603,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00184" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507562866496</created>
-      <option name="number" value="00184" />
-      <option name="presentableId" value="LOCAL-00184" />
-      <option name="project" value="LOCAL" />
-      <updated>1507562866496</updated>
-    </task>
     <task id="LOCAL-00185" summary="New wrapper to plot metbot composites of qflux">
       <created>1507563215549</created>
       <option name="number" value="00185" />
@@ -946,7 +939,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519044458482</updated>
     </task>
-    <option name="localTasksCounter" value="233" />
+    <task id="LOCAL-00233" summary="Edit to spatiofreq">
+      <created>1519052449943</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1519052449943</updated>
+    </task>
+    <option name="localTasksCounter" value="234" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1010,7 +1010,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edits to precip wrappers to plot composite anomaly" />
     <MESSAGE value="Edits to precip and olr wrappers to plot composite anomaly" />
     <MESSAGE value="Edits to precip to plot composite anomaly - ag test" />
     <MESSAGE value="Edits to olr to plot composite anomaly - ag test" />
@@ -1035,7 +1034,8 @@
     <MESSAGE value="Edit scatter plot to show sample on top" />
     <MESSAGE value="Changes to dictionaries so that I can run composite plotting on all of CMIP5" />
     <MESSAGE value="Changes to dictionaries so that I can run composite plotting on all of CMIP5 - fix MIROC5 error" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes to dictionaries so that I can run composite plotting on all of CMIP5 - fix MIROC5 error" />
+    <MESSAGE value="Edit to spatiofreq" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit to spatiofreq" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1386,7 +1386,7 @@
     <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="86" column="6" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="6" />
+          <caret line="269" column="85" lean-forward="false" selection-start-line="269" selection-start-column="79" selection-end-line="269" selection-end-column="85" />
           <folding />
         </state>
       </provider>
@@ -1401,8 +1401,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="1288" column="27" lean-forward="true" selection-start-line="1288" selection-start-column="27" selection-end-line="1288" selection-end-column="27" />
+        <state relative-caret-position="283">
+          <caret line="1288" column="30" lean-forward="true" selection-start-line="1288" selection-start-column="30" selection-end-line="1288" selection-end-column="30" />
           <folding />
         </state>
       </provider>
