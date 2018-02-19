@@ -427,7 +427,11 @@ def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
     cal = moddct['calendar']
     vnamedict = globv+'name'
     units = moddct[globv+'timeunit']
-    varstr = moddct[vnamedict]
+    if dset=='cmip5':
+        mastdct=mast_dict.mast_dset_deets[dset]
+        varstr=mastdct[vnamedict]
+    else:
+        varstr = moddct[vnamedict]
     exec('dtime=num2date((' + timestr + '),units="' + units + '",calendar="' + cal + '")')
     if cal == '360_day':
         dtime = fix360d(dtime)
