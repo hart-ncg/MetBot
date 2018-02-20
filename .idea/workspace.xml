@@ -50,8 +50,8 @@
       <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="1236" column="43" lean-forward="false" selection-start-line="1236" selection-start-column="43" selection-end-line="1236" selection-end-column="43" />
+            <state relative-caret-position="343">
+              <caret line="1230" column="69" lean-forward="true" selection-start-line="1230" selection-start-column="69" selection-end-line="1230" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -623,13 +623,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00188" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507564578968</created>
-      <option name="number" value="00188" />
-      <option name="presentableId" value="LOCAL-00188" />
-      <option name="project" value="LOCAL" />
-      <updated>1507564578968</updated>
-    </task>
     <task id="LOCAL-00189" summary="New wrapper to plot metbot composites of qflux">
       <created>1507565669087</created>
       <option name="number" value="00189" />
@@ -966,7 +959,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519121311697</updated>
     </task>
-    <option name="localTasksCounter" value="237" />
+    <task id="LOCAL-00237" summary="Edit to spatiofreq">
+      <created>1519121669597</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1519121669597</updated>
+    </task>
+    <option name="localTasksCounter" value="238" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1412,8 +1412,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="1236" column="43" lean-forward="false" selection-start-line="1236" selection-start-column="43" selection-end-line="1236" selection-end-column="43" />
+        <state relative-caret-position="343">
+          <caret line="1230" column="69" lean-forward="true" selection-start-line="1230" selection-start-column="69" selection-end-line="1230" selection-end-column="69" />
           <folding />
         </state>
       </provider>

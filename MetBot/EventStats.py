@@ -1234,7 +1234,7 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,\
             f, ax = plt.gcf(), plt.gca() # get reference and set axes
             axcol = f.add_axes([0.91, 0.15, 0.01, 0.6])
             plt.colorbar(cax=axcol, boundaries=bounds)
-            my.ytickfonts(fontweight=normal,fontsize=10)
+            my.ytickfonts(fontweight='normal',fontsize=10)
             if isinstance(meanmask, np.ndarray):
                 plt.ylabel('anomaly grid-point count / year', fontsize=10)
             else:
