@@ -407,6 +407,45 @@ def SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1,rsltn='c',\
 
     return m, f1
 
+def SAfrBasemap2(lat,lon,drawstuff=False,prj='cyl', rsltn='c',\
+    fontdict=False):
+    '''m, f = SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1)
+
+    This creates a basemap instance from lat's and lon's provided.
+    Specific for this application of metblobs, so currently using proj='cyl',
+    however Albers equal area is here uncommented.
+    USAGE: lat, lon
+    RETURNS: m, basemap object pointer (handle in matlab language)
+             f, pointer figure'''
+    xy=(lat.min(),lat.max(),lon.min(),lon.max())
+    nx = len(lon); ny = len(lat)
+    if not fontdict: fontdict = {'fontsize':14,'fontweight':'bold'}
+    if prj=='cyl':
+        m = bm.Basemap(llcrnrlon=xy[2],llcrnrlat=xy[0],urcrnrlon=xy[3],\
+                       urcrnrlat=xy[1],resolution=rsltn,area_thresh=10000.,\
+                       projection='cyl')
+    if prj=='aea':
+        m = bm.Basemap(llcrnrlon=xy[2]-5.,llcrnrlat=xy[0],urcrnrlon=xy[3],\
+                       urcrnrlat=xy[1]+5,resolution=rsltn,projection='aea',\
+                        lat_1=-45.,lat_2=0.,lon_0=40.)
+
+    ### SET UP FIGURE AND MERIDIANS
+    delon = 10.
+    meridians = np.arange(10.,360.,delon)
+    delat = 5.
+    circles = np.arange(0.,90.+delat,delat).tolist()+\
+              np.arange(-delat,-90.-delat,-delat).tolist()
+
+    if drawstuff:
+        m.drawcoastlines()
+        m.drawcountries()
+        m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0],\
+                        fontdict=fontdict)
+        m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1],\
+                        fontdict=fontdict)
+
+    return m
+
 def BlobContour(blbim,blob,gpx):
     '''chtype=convexhull or simple (which is more complex)'''
     boolblob = blbim==blob.label

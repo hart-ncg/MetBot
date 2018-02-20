@@ -7,6 +7,7 @@
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/EventStats.py" afterPath="$PROJECT_DIR$/MetBot/EventStats.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/MetBlobs.py" afterPath="$PROJECT_DIR$/MetBot/MetBlobs.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,8 +51,28 @@
       <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="1230" column="69" lean-forward="true" selection-start-line="1230" selection-start-column="69" selection-end-line="1230" selection-end-column="69" />
+            <state relative-caret-position="225">
+              <caret line="1177" column="5" lean-forward="false" selection-start-line="1177" selection-start-column="5" selection-end-line="1177" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MetBlobs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/MetBlobs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="433">
+              <caret line="425" column="40" lean-forward="true" selection-start-line="425" selection-start-column="40" selection-end-line="425" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SynopticPlot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/SynopticPlot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="198" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -80,8 +101,8 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="57" />
+            <state relative-caret-position="87">
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -108,10 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>year</find>
-      <find>yeari</find>
-      <find>mont</find>
-      <find>monthstr</find>
       <find>&amp;</find>
       <find>n_cen</find>
       <find>sample</find>
@@ -138,6 +155,10 @@
       <find>descr</find>
       <find>varstr</find>
       <find>spatiofreq4</find>
+      <find>syp</find>
+      <find>redraw</find>
+      <find>dirty</find>
+      <find>SAf</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -167,7 +188,6 @@
         <option value="$PROJECT_DIR$/wrap/plot_ttt_qflux_autothresh.py" />
         <option value="$PROJECT_DIR$/MetBot/SynopticAnatomy.py" />
         <option value="$PROJECT_DIR$/MetBot/AdvancedPlots.py" />
-        <option value="$PROJECT_DIR$/MetBot/MetBlobs.py" />
         <option value="$PROJECT_DIR$/wrap/plot_freqbymonth_centroids_angles.py" />
         <option value="$PROJECT_DIR$/wrap/plot_time_centroids_angles.py" />
         <option value="$PROJECT_DIR$/wrap/plot_hist_centroids_angles.py" />
@@ -175,6 +195,7 @@
         <option value="$PROJECT_DIR$/MetBot/mast_dset_dict.py" />
         <option value="$PROJECT_DIR$/MetBot/mynetcdf.py" />
         <option value="$PROJECT_DIR$/MetBot/dset_dict.py" />
+        <option value="$PROJECT_DIR$/MetBot/MetBlobs.py" />
         <option value="$PROJECT_DIR$/MetBot/EventStats.py" />
       </list>
     </option>
@@ -623,13 +644,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00189" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507565669087</created>
-      <option name="number" value="00189" />
-      <option name="presentableId" value="LOCAL-00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1507565669087</updated>
-    </task>
     <task id="LOCAL-00190" summary="New wrapper to plot metbot composites of qflux">
       <created>1507566732183</created>
       <option name="number" value="00190" />
@@ -966,7 +980,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519121669597</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL-00238" summary="Edit to spatiofreq">
+      <created>1519121877531</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1519121877531</updated>
+    </task>
+    <option name="localTasksCounter" value="239" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1071,13 +1092,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_ts_sc_sf_loop_autothresh.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2400">
-          <caret line="160" column="13" lean-forward="false" selection-start-line="160" selection-start-column="13" selection-end-line="160" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/scatter_thresh_nttt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1365">
@@ -1270,13 +1284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/MetBlobs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="307" column="0" lean-forward="false" selection-start-line="307" selection-start-column="0" selection-end-line="310" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../quicks/allCMIPplot_sf_autothresh.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1386,22 +1393,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -1410,10 +1401,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/SynopticPlot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="198" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/MetBlobs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="425" column="40" lean-forward="true" selection-start-line="425" selection-start-column="40" selection-end-line="425" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="1230" column="69" lean-forward="true" selection-start-line="1230" selection-start-column="69" selection-end-line="1230" selection-end-column="69" />
+        <state relative-caret-position="225">
+          <caret line="1177" column="5" lean-forward="false" selection-start-line="1177" selection-start-column="5" selection-end-line="1177" selection-end-column="5" />
           <folding />
         </state>
       </provider>

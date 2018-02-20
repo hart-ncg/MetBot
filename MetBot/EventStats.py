@@ -1052,7 +1052,9 @@ def spatiofreq3(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
     #
     ### Next is dirty trick to drop out permanent mid-latitude cloudiness
     ### allowing colormap to enhance cloud bands better
-    allmask[-9:,:]=0
+    allmask[-9:,:]=0 # the -9: sets all of the values from 9 below the bottom to 0
+                        # for the SA domain and NOAA res this is to 37.5
+                        # I dont think it does anything because these parts are excluded anyway!
     std_mask=allmask/len(yrs)
     if isinstance(m,bool):
         return std_mask
@@ -1171,8 +1173,10 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,\
             allmask=allmask+np.float32(mask)
 
     if isinstance(meanmask,np.ndarray):cm=plt.cm.RdBu;
-    else:cm=plt.cm.gist_gray_r
-    cm.set_under(color='w')
+    else:
+        #cm=plt.cm.gist_gray_r
+        cm=plt.cm.magma
+    #cm.set_under(color='w')
 
     std_mask=allmask/len(yrs)
     if isinstance(meanmask,np.ndarray):
