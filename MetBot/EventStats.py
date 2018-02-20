@@ -1127,42 +1127,22 @@ def spatiofreq3(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
 
     return std_mask
 
-def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
-                clim=(4,36,4),month=False,savefig=False,flagonly=False,fontdict=False):
+def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,\
+                clim=(4,36,4),month=False,savefig=False,flagonly=False):
     '''Get grid-cell frequencies for no. of times a grid-cell falls within a
        contour describing a feature from metblobs.
-       spatiofreq3 similar to spatiofreq2 but edited by RJ
-    USAGE: If wish to create Basemap within function, m will be "create"
-           if wish to have only for particular month, month=yourchoice
+       spatiofreq4 similar to spatiofreq2 but edited by RJ for CMIP5 multiplotting
+    USAGE: if wish to have only for particular month, month=yourchoice
            if wish to only count for flagged days, flagonly=True'''
-    if not fontdict: fd = {'fontsize':14,'fontweight':'bold'}
-    else: fd=fontdict
-    mbskeys = s.mbskeys
-    refkey = s.events.values()[0].refkey
-    basekey = refkey
-    try:
-        dset, varstr, levsel, deriv, expid = basekey.split('-')
-        descr = dset+'-'+varstr
-    except:
-        dset, varstr, levsel, deriv = basekey.split('-')
-        descr = dset+'-'+varstr
-    #vkey='%s-%s-%s-%s' %(dset, varstr, levsel, deriv)
-    #x1,x2,y1,y2=blb.blobfilters[sub+'cloudband'][vkey]['ROI']
-    #nx, ny = np.abs(x1-x2)/res, np.abs(y1-y2)/res
-    #grdsz = (np.int32(nx),np.int32(ny))
-
     if not eventkeys:
         eventkeys=[]
         for ed in s.uniques:
             eventkeys.append(ed[0])
-    x,y=np.array(()),np.array(())
 
-    #lon=np.arange(lon[0],lon[-1]+1,0.5)
-    #lat=np.arange(lat[0],lat[-1]-1,-0.5)
     allmask = np.zeros((lat.shape[0],lon.shape[0]),dtype=np.float32)
 
     #Determine which variable we dealing with
-    countkey=refkey
+    countkey=s.events.values()[0].refkey
     if flagonly: countkey = s.flagkey
 
     for k in eventkeys:
@@ -1177,9 +1157,7 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
             trkarr = np.int32(e.trkarrs[countkey])
             if trkarr.ndim==2:
                 ixt = np.where(trkarr[:,1]>0)[0]
-                uni,iu=np.unique(trkarr[ixt,0],return_index=True)
                 itrk = trkarr[ixt,1]
-                #print len(itrk),":",itrk
             elif trkarr.ndim==3:
                 itrk = np.ndarray((0,),dtype=np.int32)
                 for d in xrange(trkarr.shape[2]):
@@ -1192,33 +1170,11 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
             mask = my.poly2mask(lon,lat,e.blobs[countkey]['ch'][ixtrk])
             allmask=allmask+np.float32(mask)
 
-    #cm=plt.cm.PuBu
-    #cm=plt.cm.gist_earth_r
-    #cm=plt.cm.YlGnBu
-    #cm=plt.cm.binary
-    #cm=plt.cm.OrRd
-    if isinstance(meanmask,np.ndarray):cm=plt.cm.RdBu;#cm=plt.cm.bwr
+    if isinstance(meanmask,np.ndarray):cm=plt.cm.RdBu;
     else:cm=plt.cm.gist_gray_r
-    #cm=plt.cm.jet
-    #cm=plt.cm.gray_r
     cm.set_under(color='w')
-    if m=='create':
-        m, f = blb.SAfrBasemap(lat[3:-6],lon[3:-3],drawstuff=True,\
-                               prj='cyl',fno=figno,rsltn='l')
-    #df=m.transform_scalar(allmask[::-1,:],lon,lat[::-1],len(lon),len(lat))
-    #m.imshow(df,cm,interpolation='nearest')
-    #m.pcolor(lon,lat,allmask,cmap=cm)
-    #plt.clim(300,1200)
-    lon,lat = np.meshgrid(lon,lat)
-    #m.contourf(lon,lat,(allmask/len(yrs)),cmap=cm)
-    #
-    ### Next is dirty trick to drop out permanent mid-latitude cloudiness
-    ### allowing colormap to enhance cloud bands better
-    allmask[-9:,:]=0
+
     std_mask=allmask/len(yrs)
-    if isinstance(m,bool):
-        return std_mask
-    # IF M WAS NOT A BOOLEAN (False) THIS WILL CONTINUE TO PLOTTING
     if isinstance(meanmask,np.ndarray):
         std_mask=std_mask-meanmask
         std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
@@ -1227,14 +1183,13 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
         latmask = (lat<latmn) & (lat>latmx) # this is for S. Hemisphere
         meanmasked = np.ma.MaskedArray(meanmask,mask=~latmask)
         m.contour(lon,lat,meanmasked,[2,4],colors='k')
-        #m.contourf(lon,lat,meanmasked,[2,4,14],hatches=['.','..'],\
-        #          colors='none',linestyles='-',linewidths='1',alpha=.1)
+
     ## NEED TO DO THIS SINCE PCOLOR IS NOT SHADING VALUES OUTSIDE OF THE CLIMS
     cstd_mask=np.where(std_mask>clim[1],clim[1],std_mask)
     cstd_mask=np.where(cstd_mask<clim[0],clim[0],cstd_mask)
     # Plot pcolor
     pcolmap=m.pcolormesh(lon,lat,cstd_mask,cmap=cm,zorder=1)
-    img=plt.gci()
+    img=plt.gci() # gets a reference for the image
 
     #Plotting centroids
     # for k in eventkeys:
@@ -1256,9 +1211,8 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
     #                 plt.sci(img)
     #     #m.plot(e.trkcX,e.trkcY,'0.5')
 
-    plt.clim(clim[0],clim[1])
+    plt.clim(clim[0],clim[1]) # sets color limits of current image
     bounds=np.arange(clim[0],clim[1]+clim[2],clim[2])
-    #vals=np.arange(0,35,2)
     if not month:
         if savefig:
             f,ax=plt.gcf(),plt.gca()
@@ -1270,16 +1224,16 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
             else:
                 plt.ylabel('grid-point count / year',fontdict=fd)
             plt.axes(ax)
-            plt.title('Cloudband Annual Grid-Point Count Climatology: '\
+            plt.title('Cloudband Grid-Point Count Climatology: '\
                       +descr.upper(),fontsize='14',fontdict=fd)
-            fname=figdir+'/FootprintFreqencygray-'+descr+'.png'
+            fname='/FootprintFreqencygray-'+descr+'.png'
             if flagonly:
-                fname=figdir+'/FootprintFreqencygray-'+descr+'_flagonly.png'
+                fname='/FootprintFreqencygray-'+descr+'_flagonly.png'
             plt.savefig(fname,dpi=150)
         else:
-            f, ax = plt.gcf(), plt.gca()
-            axcol = f.add_axes([0.93, 0.2, 0.02, 0.6])
-            plt.colorbar(cax=axcol, boundaries=bounds)
+            f, ax = plt.gcf(), plt.gca() # get reference and set axes
+            axcol = f.add_axes([0.91, 0.15, 0.01, 0.6])
+            plt.colorbar(cax=axcol, boundaries=bounds,fontsize=10)
             #my.ytickfonts()
             if isinstance(meanmask, np.ndarray):
                 plt.ylabel('anomaly grid-point count / year', fontsize=10)
@@ -1293,9 +1247,9 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
         plt.colorbar(cax=axcol,boundaries=bounds)
         my.ytickfonts()
         if isinstance(meanmask,np.ndarray):
-            plt.ylabel('anomaly grid-point count / year',fontdict=fd)
+            plt.ylabel('anomaly grid-point count / year',fontsize=10)
         else:
-            plt.ylabel('grid-point count / year',fontdict=fd)
+            plt.ylabel('grid-point count / year',fontsize=10)
         plt.axes(ax)
         plt.title(mndict[month], fontweight='demibold')
 

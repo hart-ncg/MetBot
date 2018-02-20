@@ -47,31 +47,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="plot_ttt_precip_autothresh.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wrap/plot_ttt_precip_autothresh.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4035">
-              <caret line="269" column="85" lean-forward="false" selection-start-line="269" selection-start-column="79" selection-end-line="269" selection-end-column="85" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="1282" column="13" lean-forward="false" selection-start-line="1282" selection-start-column="13" selection-end-line="1282" selection-end-column="13" />
+            <state relative-caret-position="448">
+              <caret line="1234" column="55" lean-forward="false" selection-start-line="1234" selection-start-column="55" selection-end-line="1234" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mytools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
+      <file leaf-file-name="mynetcdf.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="1963" column="14" lean-forward="false" selection-start-line="1963" selection-start-column="4" selection-end-line="1963" selection-end-column="14" />
+            <state relative-caret-position="189">
+              <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -80,8 +70,18 @@
       <file leaf-file-name="AdvancedPlots.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="111" column="18" lean-forward="true" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="18" />
+            <state relative-caret-position="384">
+              <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filterdict_default.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/filterdict_default.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="94" lean-forward="false" selection-start-line="3" selection-start-column="94" selection-end-line="3" selection-end-column="94" />
               <folding />
             </state>
           </provider>
@@ -98,10 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>label</find>
-      <find>indices_e</find>
-      <find>edge</find>
-      <find>edgecolour</find>
       <find>year</find>
       <find>yeari</find>
       <find>mont</find>
@@ -123,11 +119,15 @@
       <find>syno</find>
       <find>synop</find>
       <find>spatiofreq3</find>
-      <find>refkey</find>
       <find>gridrainmap</find>
       <find>spatiofreq</find>
-      <find>plt.ti</find>
       <find>ytickfonts</find>
+      <find>plt.ti</find>
+      <find>basekey</find>
+      <find>refkey</find>
+      <find>descr</find>
+      <find>varstr</find>
+      <find>spatiofreq4</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -613,13 +613,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00186" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507563853179</created>
-      <option name="number" value="00186" />
-      <option name="presentableId" value="LOCAL-00186" />
-      <option name="project" value="LOCAL" />
-      <updated>1507563853179</updated>
-    </task>
     <task id="LOCAL-00187" summary="New wrapper to plot metbot composites of qflux">
       <created>1507564029911</created>
       <option name="number" value="00187" />
@@ -956,7 +949,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519053052790</updated>
     </task>
-    <option name="localTasksCounter" value="235" />
+    <task id="LOCAL-00235" summary="Edit to spatiofreq">
+      <created>1519117796531</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1519117796531</updated>
+    </task>
+    <option name="localTasksCounter" value="236" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1218,13 +1218,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/filterdict_default.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="94" lean-forward="false" selection-start-line="3" selection-start-column="94" selection-end-line="3" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wrap/scatter_thresh_nttt.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="716">
@@ -1279,13 +1272,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="433" column="8" lean-forward="false" selection-start-line="433" selection-start-column="8" selection-end-line="433" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -1382,14 +1368,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="111" column="18" lean-forward="true" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1398,10 +1376,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/filterdict_default.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="94" lean-forward="false" selection-start-line="3" selection-start-column="94" selection-end-line="3" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/mynetcdf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="58" column="39" lean-forward="true" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/AdvancedPlots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="122" column="57" lean-forward="true" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="1282" column="13" lean-forward="false" selection-start-line="1282" selection-start-column="13" selection-end-line="1282" selection-end-column="13" />
+        <state relative-caret-position="448">
+          <caret line="1234" column="55" lean-forward="false" selection-start-line="1234" selection-start-column="55" selection-end-line="1234" selection-end-column="55" />
           <folding />
         </state>
       </provider>
