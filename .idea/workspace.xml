@@ -50,8 +50,18 @@
       <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="1234" column="55" lean-forward="false" selection-start-line="1234" selection-start-column="55" selection-end-line="1234" selection-end-column="55" />
+            <state relative-caret-position="478">
+              <caret line="1236" column="43" lean-forward="false" selection-start-line="1236" selection-start-column="43" selection-end-line="1236" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mytools.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="1964" column="0" lean-forward="false" selection-start-line="1964" selection-start-column="0" selection-end-line="1967" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -613,13 +623,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00187" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507564029911</created>
-      <option name="number" value="00187" />
-      <option name="presentableId" value="LOCAL-00187" />
-      <option name="project" value="LOCAL" />
-      <updated>1507564029911</updated>
-    </task>
     <task id="LOCAL-00188" summary="New wrapper to plot metbot composites of qflux">
       <created>1507564578968</created>
       <option name="number" value="00188" />
@@ -956,7 +959,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519117796531</updated>
     </task>
-    <option name="localTasksCounter" value="236" />
+    <task id="LOCAL-00236" summary="Edit to spatiofreq">
+      <created>1519121311697</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1519121311697</updated>
+    </task>
+    <option name="localTasksCounter" value="237" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1368,14 +1378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="1963" column="14" lean-forward="false" selection-start-line="1963" selection-start-column="4" selection-end-line="1963" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/filterdict_default.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -1400,10 +1402,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MetBot/mytools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="1964" column="0" lean-forward="false" selection-start-line="1964" selection-start-column="0" selection-end-line="1967" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="1234" column="55" lean-forward="false" selection-start-line="1234" selection-start-column="55" selection-end-line="1234" selection-end-column="55" />
+        <state relative-caret-position="478">
+          <caret line="1236" column="43" lean-forward="false" selection-start-line="1236" selection-start-column="43" selection-end-line="1236" selection-end-column="43" />
           <folding />
         </state>
       </provider>
