@@ -1280,13 +1280,13 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
             f, ax = plt.gcf(), plt.gca()
             axcol = f.add_axes([0.93, 0.2, 0.02, 0.6])
             plt.colorbar(cax=axcol, boundaries=bounds)
-            my.ytickfonts()
+            #my.ytickfonts()
             if isinstance(meanmask, np.ndarray):
-                plt.ylabel('anomaly grid-point count / year', fontdict=fd)
+                plt.ylabel('anomaly grid-point count / year', fontsize=10)
             else:
-                plt.ylabel('grid-point count / year', fontdict=fd)
+                plt.ylabel('grid-point count / year', fontsize=10)
             plt.axes(ax)
-            plt.title(modname)
+            plt.title(modname,fontsize=8)
     elif month:
         f,ax=plt.gcf(),plt.gca()
         axcol=f.add_axes([0.93,0.2,0.02,0.6])
