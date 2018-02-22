@@ -340,8 +340,8 @@ for t in range(nthresh):
                 plt.plot(seaspos,mon_count,linestyle=styls[d], linewidth=lws[d], zorder=zorders[d])
 
             if scatter_lon_angle:
+                plt.figure(num='lon_ang')
                 if not group_event:
-                    plt.figure(num='lon_ang')
                     plt.scatter(cXs,degs,c=cols[z],marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
                     plt.scatter(smp_cXs,smp_degs,c='fuchsia',marker=mkrs[d],s=msiz[d],edgecolors='face',zorder=zorders[d])
 
