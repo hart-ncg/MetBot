@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="da1d8ab4-5a15-4ca9-8222-e7a9193447e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MetBot/EventStats.py" afterPath="$PROJECT_DIR$/MetBot/EventStats.py" />
     </list>
     <ignored path="MetBot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,8 +49,8 @@
       <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="1182" column="0" lean-forward="false" selection-start-line="1182" selection-start-column="0" selection-end-line="1182" selection-end-column="0" />
+            <state relative-caret-position="346">
+              <caret line="1168" column="68" lean-forward="true" selection-start-line="1168" selection-start-column="68" selection-end-line="1168" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -583,13 +582,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00192" summary="New wrapper to plot metbot composites of qflux">
-      <created>1507567827415</created>
-      <option name="number" value="00192" />
-      <option name="presentableId" value="LOCAL-00192" />
-      <option name="project" value="LOCAL" />
-      <updated>1507567827415</updated>
-    </task>
     <task id="LOCAL-00193" summary="New wrapper to plot metbot composites of qflux">
       <created>1507567849462</created>
       <option name="number" value="00193" />
@@ -926,7 +918,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519313315982</updated>
     </task>
-    <option name="localTasksCounter" value="241" />
+    <task id="LOCAL-00241" summary="Test to see if I can plot spatiofreq / total events for that model&#10;">
+      <created>1520443653029</created>
+      <option name="number" value="00241" />
+      <option name="presentableId" value="LOCAL-00241" />
+      <option name="project" value="LOCAL" />
+      <updated>1520443653029</updated>
+    </task>
+    <option name="localTasksCounter" value="242" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -990,7 +989,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Edits to olr to plot composite anomaly - ag test" />
     <MESSAGE value="Edits to pr to plot composite anomaly - ag test" />
     <MESSAGE value="Edits to accurately plot the precip under a CB blob" />
     <MESSAGE value="Edits to accurately plot the precip under a CB blob - round 2" />
@@ -1015,7 +1013,8 @@
     <MESSAGE value="Edit to spatiofreq" />
     <MESSAGE value="Edit to spatiofreq4 - for CMIP5&#10;New version of SAfrBasemap without changing figsize" />
     <MESSAGE value="Small correction to histogram plotter&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small correction to histogram plotter&#10;" />
+    <MESSAGE value="Test to see if I can plot spatiofreq / total events for that model&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test to see if I can plot spatiofreq / total events for that model&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1372,8 +1371,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="1182" column="0" lean-forward="false" selection-start-line="1182" selection-start-column="0" selection-end-line="1182" selection-end-column="0" />
+        <state relative-caret-position="346">
+          <caret line="1168" column="68" lean-forward="true" selection-start-line="1168" selection-start-column="68" selection-end-line="1168" selection-end-column="68" />
           <folding />
         </state>
       </provider>
