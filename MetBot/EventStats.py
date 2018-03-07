@@ -1129,7 +1129,7 @@ def spatiofreq3(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
 
     return std_mask
 
-def spatiofreq4(m,s,modname,lat,lon,per='year',yrs,eventkeys,meanmask=False,\
+def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
                 clim=(4,36,4),month=False,savefig=False,flagonly=False):
     '''Get grid-cell frequencies for no. of times a grid-cell falls within a
        contour describing a feature from metblobs.
