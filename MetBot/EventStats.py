@@ -1129,11 +1129,12 @@ def spatiofreq3(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
 
     return std_mask
 
-def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,\
+def spatiofreq4(m,s,modname,lat,lon,per='year',yrs,eventkeys,meanmask=False,\
                 clim=(4,36,4),month=False,savefig=False,flagonly=False):
     '''Get grid-cell frequencies for no. of times a grid-cell falls within a
        contour describing a feature from metblobs.
        spatiofreq4 similar to spatiofreq2 but edited by RJ for CMIP5 multiplotting
+       per is used to determine if it's plotting per year or per CBs in this model
     USAGE: if wish to have only for particular month, month=yourchoice
            if wish to only count for flagged days, flagonly=True'''
     if not eventkeys:
@@ -1178,8 +1179,10 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,\
         cm=plt.cm.magma
     #cm.set_under(color='w')
 
-    #std_mask=allmask/len(yrs)
-    std_mask=allmask/len(eventkeys)
+    if per=='year':
+        std_mask=allmask/len(yrs)
+    if per='cbs':
+        std_mask=allmask/len(eventkeys)*100
     if isinstance(meanmask,np.ndarray):
         std_mask=std_mask-meanmask
         std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
