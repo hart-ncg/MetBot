@@ -1178,7 +1178,8 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,meanmask=False,\
         cm=plt.cm.magma
     #cm.set_under(color='w')
 
-    std_mask=allmask/len(yrs)
+    #std_mask=allmask/len(yrs)
+    std_mask=allmask/len(eventkeys)
     if isinstance(meanmask,np.ndarray):
         std_mask=std_mask-meanmask
         std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
