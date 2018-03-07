@@ -1181,7 +1181,7 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
 
     if per=='year':
         std_mask=allmask/len(yrs)
-    if per='cbs':
+    elif per=='cbs':
         std_mask=allmask/len(eventkeys)*100
     if isinstance(meanmask,np.ndarray):
         std_mask=std_mask-meanmask
