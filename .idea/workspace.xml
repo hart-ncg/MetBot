@@ -50,8 +50,8 @@
       <file leaf-file-name="EventStats.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="1226" column="29" lean-forward="true" selection-start-line="1226" selection-start-column="29" selection-end-line="1226" selection-end-column="29" />
+            <state relative-caret-position="164">
+              <caret line="1208" column="78" lean-forward="true" selection-start-line="1208" selection-start-column="78" selection-end-line="1208" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -583,13 +583,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00199" summary="New wrapper to plot metbot composites of qflux">
-      <created>1510655671257</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1510655671257</updated>
-    </task>
     <task id="LOCAL-00200" summary="New wrapper to plot histogram of centroid and angle values">
       <created>1511167341731</created>
       <option name="number" value="00200" />
@@ -926,7 +919,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520501591247</updated>
     </task>
-    <option name="localTasksCounter" value="248" />
+    <task id="LOCAL-00248" summary="Test to see if I can plot spatiofreq / total events for that model&#10;">
+      <created>1520507868867</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1520507868867</updated>
+    </task>
+    <option name="localTasksCounter" value="249" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1370,8 +1370,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="1226" column="29" lean-forward="true" selection-start-line="1226" selection-start-column="29" selection-end-line="1226" selection-end-column="29" />
+        <state relative-caret-position="164">
+          <caret line="1208" column="78" lean-forward="true" selection-start-line="1208" selection-start-column="78" selection-end-line="1208" selection-end-column="78" />
           <folding />
         </state>
       </provider>
