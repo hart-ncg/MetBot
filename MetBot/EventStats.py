@@ -1148,6 +1148,7 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
     countkey=s.events.values()[0].refkey
     if flagonly: countkey = s.flagkey
 
+    cnt=0
     for k in eventkeys:
         e = s.events[k]
         if month:
@@ -1172,6 +1173,9 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
         for ixtrk in itrk:
             mask = my.poly2mask(lon,lat,e.blobs[countkey]['ch'][ixtrk])
             allmask=allmask+np.float32(mask)
+            cnt+=1
+
+    nblobs=cnt
 
     if isinstance(meanmask,np.ndarray):cm=plt.cm.RdBu;
     else:
@@ -1182,7 +1186,7 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
     if per=='year':
         std_mask=allmask/len(yrs)
     elif per=='cbs':
-        std_mask=allmask/len(eventkeys)*100
+        std_mask=allmask/nblobs
     if isinstance(meanmask,np.ndarray):
         std_mask=std_mask-meanmask
         std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
@@ -1246,7 +1250,10 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
             if isinstance(meanmask, np.ndarray):
                 plt.ylabel('anomaly grid-point count / year', fontsize=10)
             else:
-                plt.ylabel('grid-point count / year', fontsize=10)
+                if per=='year':
+                    plt.ylabel('grid-point count / year', fontsize=10)
+                elif per='cbs':
+                    plt.ylabel('% of cbs covering gridbox', fontsize=10)
             plt.axes(ax)
             plt.title(modname,fontsize=8)
     elif month:
