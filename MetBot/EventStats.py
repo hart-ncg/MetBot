@@ -1252,7 +1252,7 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
             else:
                 if per=='year':
                     plt.ylabel('grid-point count / year', fontsize=10)
-                elif per='cbs':
+                elif per=='cbs':
                     plt.ylabel('% of cbs covering gridbox', fontsize=10)
             plt.axes(ax)
             plt.title(modname,fontsize=8)
