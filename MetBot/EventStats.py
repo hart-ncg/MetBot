@@ -1237,8 +1237,8 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
             print 'Plotting centroids for sample '
             cont_cens=cens[0]
             mada_cens=cens[1]
-            m.plot(cont_cens[:,0], cont_cens[:,1], color='fuchsia', marker='o', markersize=0.5,markeredgecolor='face')
-            m.plot(mada_cens[:,0], mada_cens[:,1], color='blue', marker='o', markersize=0.5,markeredgecolor='face')
+            m.plot(cont_cens[:,0], cont_cens[:,1], color='fuchsia', marker='o', markersize=0.5,markeredgecolor='fuchsia')
+            m.plot(mada_cens[:,0], mada_cens[:,1], color='blue', marker='o', markersize=0.5,markeredgecolor='blue')
 
 
     plt.clim(clim[0],clim[1]) # sets color limits of current image

@@ -51,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="554">
-              <caret line="1240" column="107" lean-forward="false" selection-start-line="1240" selection-start-column="107" selection-end-line="1240" selection-end-column="107" />
+              <caret line="1240" column="113" lean-forward="false" selection-start-line="1240" selection-start-column="113" selection-end-line="1240" selection-end-column="113" />
               <folding />
             </state>
           </provider>
@@ -583,13 +583,6 @@
       <option name="presentableId" value="Default" />
       <updated>1485937718275</updated>
     </task>
-    <task id="LOCAL-00204" summary="New wrapper to plot histogram of centroid and angle values">
-      <created>1511170393147</created>
-      <option name="number" value="00204" />
-      <option name="presentableId" value="LOCAL-00204" />
-      <option name="project" value="LOCAL" />
-      <updated>1511170393147</updated>
-    </task>
     <task id="LOCAL-00205" summary="New wrapper to plot histogram of centroid and angle values">
       <created>1511183853807</created>
       <option name="number" value="00205" />
@@ -926,7 +919,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520519611692</updated>
     </task>
-    <option name="localTasksCounter" value="253" />
+    <task id="LOCAL-00253" summary="Test to see if I can plot spatiofreq / total events for that model&#10;">
+      <created>1520519876114</created>
+      <option name="number" value="00253" />
+      <option name="presentableId" value="LOCAL-00253" />
+      <option name="project" value="LOCAL" />
+      <updated>1520519876114</updated>
+    </task>
+    <option name="localTasksCounter" value="254" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1371,7 +1371,7 @@
     <entry file="file://$PROJECT_DIR$/MetBot/EventStats.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="554">
-          <caret line="1240" column="107" lean-forward="false" selection-start-line="1240" selection-start-column="107" selection-end-line="1240" selection-end-column="107" />
+          <caret line="1240" column="113" lean-forward="false" selection-start-line="1240" selection-start-column="113" selection-end-line="1240" selection-end-column="113" />
           <folding />
         </state>
       </provider>
