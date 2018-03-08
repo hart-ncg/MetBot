@@ -1130,11 +1130,13 @@ def spatiofreq3(m,s,lat,lon,yrs,eventkeys,meanmask=False,figno=1,\
     return std_mask
 
 def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
-                clim=(4,36,4),month=False,savefig=False,flagonly=False):
+                clim=(4,36,4),month=False,savefig=False,\
+                flagonly=False,col='col',cens=False,frm_event='all'):
     '''Get grid-cell frequencies for no. of times a grid-cell falls within a
        contour describing a feature from metblobs.
        spatiofreq4 similar to spatiofreq2 but edited by RJ for CMIP5 multiplotting
        per is used to determine if it's plotting per year or per CBs in this model
+       cens is for plotting centroids - if None, no cens, if 'All' all, if array, that array
     USAGE: if wish to have only for particular month, month=yourchoice
            if wish to only count for flagged days, flagonly=True'''
     if not eventkeys:
@@ -1170,23 +1172,31 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
                     ixt=ixt[iu]
                     itrk = np.append(itrk,trkarr[ixt,1,d].squeeze())
         # Get masks for each contour feature of a track
-        for ixtrk in itrk:
-            mask = my.poly2mask(lon,lat,e.blobs[countkey]['ch'][ixtrk])
-            allmask=allmask+np.float32(mask)
-            cnt+=1
+        if frm_event=='all':
+            for ixtrk in itrk:
+                mask = my.poly2mask(lon,lat,e.blobs[countkey]['ch'][ixtrk])
+                allmask=allmask+np.float32(mask)
+                cnt+=1
+        elif frm_event=='first':
+            ixtrk=itrk[0]
+            mask = my.poly2mask(lon, lat, e.blobs[countkey]['ch'][ixtrk])
+            allmask = allmask + np.float32(mask)
+            cnt += 1
 
     nblobs=cnt
 
     if isinstance(meanmask,np.ndarray):cm=plt.cm.RdBu;
     else:
-        #cm=plt.cm.gist_gray_r
-        cm=plt.cm.magma
+        if col=='col':
+            cm = plt.cm.magma
+        elif col=='bw':
+            cm=plt.cm.gist_gray_r
     #cm.set_under(color='w')
 
     if per=='year':
         std_mask=allmask/len(yrs)
     elif per=='cbs':
-        std_mask=allmask/nblobs
+        std_mask=allmask/nblobs*100
     if isinstance(meanmask,np.ndarray):
         std_mask=std_mask-meanmask
         std_mask=np.where(np.abs(std_mask)<.5,np.nan,std_mask)
@@ -1203,25 +1213,22 @@ def spatiofreq4(m,s,modname,lat,lon,yrs,eventkeys,per='year',meanmask=False,\
     pcolmap=m.pcolormesh(lon,lat,cstd_mask,cmap=cm,zorder=1)
     img=plt.gci() # gets a reference for the image
 
-    #Plotting centroids
-    # for k in eventkeys:
-    #     e = s.events[k]
-    #     if month:
-    #         mn = month
-    #         mst = e.trkdtimes[0,1]
-    #         if mst != mn: continue
-    #     m.plot(e.trkcX[0],e.trkcY[0],color='w',marker='o',markersize=4)
-    #     if 'COL' in e.mbskeys:
-    #         if len(e.assoctrks['COL'])>0:
-    #             trar=e.trkarrs['COL']
-    #             for ntrk in xrange(trar.shape[2]):
-    #                 ixx = np.where(trar[:,1,ntrk]>0)[0]
-    #                 xx, yy = trar[ixx,2,ntrk],trar[ixx,3,ntrk]
-    #                 off=np.random.rand()*.5
-    #                 m.scatter(xx[-1]+off,yy[-1]+off,50,color='none',\
-    #                           edgecolor='k',marker='o',linewidth='2')
-    #                 plt.sci(img)
-    #     #m.plot(e.trkcX,e.trkcY,'0.5')
+    if cens !='None':
+        #Plotting centroids
+        if cens=='all':
+            for k in eventkeys:
+                e = s.events[k]
+                if month:
+                    mn = month
+                    mst = e.trkdtimes[0,1]
+                    if mst != mn: continue
+                m.plot(e.trkcX[0],e.trkcY[0],color='w',marker='o',markersize=4)
+        else:
+            cont_cens=cens[0]
+            mada_cens=cens[1]
+            m.plot(cont_cens[0], cont_cens[1], color='fuchsia', marker='o', markersize=4)
+            m.plot(mada_cens[0], mada_cens[1], color='blue', marker='o', markersize=4)
+
 
     plt.clim(clim[0],clim[1]) # sets color limits of current image
     bounds=np.arange(clim[0],clim[1]+clim[2],clim[2])
