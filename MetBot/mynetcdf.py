@@ -14,16 +14,28 @@ except ImportError:
     date2index,date2num,num2date = kh.date2index,kh.date2num,kh.num2date
 import time as tm
 import datetime
+import MetBot.dset_dict as dsetdict
+import MetBot.dimensions_dict as dim_exdict
+import MetBot.mast_dset_dict as mast_dict
 
 # Add to this dictionary as need be by looking at ncdump -h ????.nc
+# There is an alternative (using "dimensions_dict.py" and opennc2) - all dsets already
+# ...listed with that method are now commented out below
 dimdict={"ncep2": ['time','lat','lon','level','lev'],
+#"ncep": ['time','lat','lon'],
+#"20cr": ['time','lat','lon'],
 "interp_olr": ['time','lat','lon'],
+#"noaa": ['time','lat','lon'],
 "tamsat_ccd": ['time','lat','lon'],
 "had": ['time','latitude','longitude','level'],
+#"um": ['t','latitude','longitude','toa'],
+#"cmip5": ['time','lat','lon'],
 "era": ['date','latitude','longitude','level'],
+#"era": ['time','latitude','longitude'],
 "hadam3p": ['t','latitude','longitude','p','theta','surface','toa'],
 "cfsr": ['time','latitude','longitude','level'],
-"nddiagnc": ['t','y','x','p']}
+"nddiagnc": ['t','y','x','p'],
+"trmm": ['time','latitude','longitude']}
 writedict={}
 
 def isubs(sub,lat,lon,*args):
@@ -52,9 +64,19 @@ def isubs(sub,lat,lon,*args):
     domains['SH60'] = ((-60.0,0.0),(0,360))
     domains['imkf'] = ((-46.25,-10.0),(0.0,91.875))
     domains['SA'] = ((-60.0,0.0),(0.0,100.0))
+    domains['SA_TR'] = ((-40.0,-15.0),(7.5,100.0))
+    domains['SA_TRMM'] = ((-49.0, 0.0), (0.0, 100.0))
+    domains['SA_CONT'] = ((-40.0, 0.0), (5.0, 55.0))
+    domains['UM_FOC'] = ((-30.0, 0.0), (20.0, 50.0))
     domains['NA'] = ((0.0,60.0),(280.0,359.0))
     domains['NP'] = ((0.0,60.0),(180.0,260.0))
-    domains['SAROI'] = ((-35,-23),(7.5, 100))
+    domains['SAROI'] = ((-35,-23),(7.5, 80))
+    domains['WPR'] = ((-40.0,-15.0),(7.5, 40.0))
+    domains['EPR'] = ((-40.0,-15.0),(40.0, 100.0))
+    domains['WCONT'] = ((-40.0,-15.0),(7.5, 25.0))
+    domains['ECONT'] = ((-40.0, -15.0), (25.0, 40.0))
+    domains['bigtrop'] = ((-60.0,60.0), (0,360))
+    domains['SASA'] = ((-50.0,0.0),(310.0,75.0))
     if isinstance(sub,str):
         domain=domains[sub]; getisubs=True
     elif isinstance(sub,tuple):
@@ -69,8 +91,16 @@ def isubs(sub,lat,lon,*args):
     if getisubs:
         lt1,lt2 = domain[0]; ln1,ln2 = domain[1]
         ilats = ((lt1<=lat) & (lat<=lt2)).nonzero()[0]
-        ilons = ((ln1<=lon) & (lon<=ln2)).nonzero()[0]
-        ilat12=(ilats[0],ilats[-1]);ilon12=(ilons[0],ilons[-1])
+        ilat12 = (ilats[0], ilats[-1])
+        if ln1 < ln2:
+            ilons = ((ln1<=lon) & (lon<=ln2)).nonzero()[0]
+            ilon12 = (ilons[0], ilons[-1])
+        else:
+            eastlons = (lon<=ln2).nonzero()[0]
+            westlons = (lon>=ln1).nonzero()[0]
+            ilons = np.append(eastlons,westlons)
+            #ilon12 = eastlons[0], eastlons[-1], westlons[0], westlons[-1]
+            ilon12 = ilons
         ilev12=()
     if len(args)>0:
         lev, levselect = args
@@ -350,12 +380,192 @@ def opennc(ncfile,varstr,dset,sub=False,levselect=False,subtime=False):
 
     return out
 
+def opennc2(ncfile,globv,mname,dset,sub=False,levselect=False,subtime=False):
+    '''var, time, lat, lon, [[,lev], [,time_bnds]]= opennc2(ncfile,varstr,mname,dset,
+                                        sub=False,levselect=False,subtime=False)
+
+    Main function to open some observational and reanalysis data sets with ease.
+    Flexibility comes from dimdict dictionary which holds dimension names,
+    Option to open only subset lat, lon & lev which is necessary for
+    some large files.
+
+    opennc2 is an edited version for greater flexibility for multiple models using dset_dict.py
+
+    NOTE:- COARDS & CF compliance assumed variable.shape = time, [lev,] lat, lon
+         - flexibility and exceptions for subsetting not fully implemented,
+           will work but you may find buginess
+         - hadam3p is .nc output from subset.tcl (uses xconv), where input was
+           UM .pp files
+
+    USAGE: globv  - string - global variable name - not nec the one
+                    for each netcdf file, which is called from dset_dict below
+                    string valid: olr, pr
+           dset   - string valid: um, noaa, cmip5, ncep, era, 20cr
+           sub    - tuple - ((latmin,latmax),(lonmin,lonmax))
+                   or string - see options availble in mynetcdf.isubs
+           levselect - will return level slice closest to given value
+                       NOTE: to use this option without subsetting lat,lon grid
+                             set sub=True
+           subtime - tuple (yyyy, mm ,dd ,hh, ss) each entry can be a list of
+                    years to select
+
+    RETURNS: var, lat, lon, lev'''
+
+    dimlist = dim_exdict.dim_deets[globv][dset]
+    timestr = dimlist[0]
+    ncf = kh.NetCDFFile(ncfile,'r')
+    #vkeys = ncf.variables.keys() # could use something with this?
+    for i in dimlist[:]:
+        try:
+            exec(i + ' = np.float32(ncf.variables[\''+ i + '\'][:])')
+        except:
+            print 'Variable \"'+i+ '\" does not exist in '+ncfile
+            dimlist.remove(i);continue
+
+    # HUMAN TIME CONVERSION
+    moddct = dsetdict.dset_deets[dset][mname]
+    cal = moddct['calendar']
+    vnamedict = globv+'name'
+    units = moddct[globv+'timeunit']
+    if dset=='cmip5':
+        mastdct=mast_dict.mast_dset_deets[dset]
+        varstr=mastdct[vnamedict]
+    else:
+        varstr = moddct[vnamedict]
+    exec('dtime=num2date((' + timestr + '),units="' + units + '",calendar="' + cal + '")')
+    if cal == '360_day':
+        dtime = fix360d(dtime)
+
+    dtarr=dtime2arr(dtime)
+
+    if not subtime:
+        if sub and levselect:
+            print "lat, lon, lev subset"
+            exec('ilats, ilons, ilev = isubs(sub,'+dimlist[1]+','+dimlist[2]+\
+                 ','+dimlist[3]+',levselect)')
+            if ilats==-99:
+                ilt1, ilt2, iln1,iln2, ilv1, ilv2 = '0', '','0', '',\
+                 str(ilev[0]),str(ilev[1]+1)
+            else:
+                ilt1, ilt2, ilv1, ilv2 = str(ilats[0]), str(ilats[1] + 1), \
+                                    str(ilev[0]), str(ilev[1] + 1)
+            exec (dimlist[1] + '=' + dimlist[1] + '[' + ilt1 + ':' + ilt2 + ']')
+            exec (dimlist[3] + '=' + dimlist[3] + '[' + ilv1 + ':' + ilv2 + ']')
+
+            # Special option for lons spanning 0
+            if len(ilons)==2:
+                iln1,iln2 = str(ilons[0]), str(ilons[1]+1)
+                exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilv1+':'+ilv2+','\
+                                          +ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+                exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
+            elif len(ilons)>2:
+                exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilv1+':'+ilv2+','\
+                                          +ilt1+':'+ilt2+',ilons]')
+                exec (dimlist[2] + '=' + dimlist[2] + '[ilons]')
+
+        elif sub:
+            print "lat, lon subset"
+            exec('ilats,ilons,ilev = isubs(sub,'+dimlist[1]+','+dimlist[2]+')')
+            ilt1, ilt2 = str(ilats[0]), str(ilats[1]+1)
+            exec(dimlist[1]+'='+dimlist[1]+'['+ilt1+':'+ilt2+']')
+            # Special option for lons spanning 0
+            if len(ilons) == 2:
+                iln1, iln2 = str(ilons[0]), str(ilons[1] + 1)
+                if len(dimlist)==3:
+                    if varstr=='precipitation':
+                        exec('data = ncf.variables[\''+ varstr + '\']\
+                                     ['+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+                    else:
+                        exec('data = ncf.variables[\''+ varstr + '\']\
+                                     [:,'+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+                elif len(dimlist)==4:
+                    exec('data = ncf.variables[\''+ varstr + '\']\
+                                 [:,:,'+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+
+                exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
+            elif len(ilons)>2:
+                if len(dimlist)==3:
+                    exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilt1+':'+ilt2+',ilons]')
+                elif len(dimlist)==4:
+                    exec ('data = ncf.variables[\'' + varstr + '\'][:,:,' + ilt1 + ':' + ilt2 + ',ilons]')
+                exec (dimlist[2] + '=' + dimlist[2] + '[ilons]')
+
+        else:
+            #print "No subsetting"
+            exec('data = ncf.variables[\''+ varstr + '\'][:]')
+    # DO SOME TIME SUBSETTING
+    elif subtime:
+        print "Opening subset of time..."
+        yrs, mns, ds, hs = subtime
+        it1, it2 = ixdtimes(dtarr,yrs,mns,ds,hs)
+        dtarr=dtarr[it1:it2,:]
+        it1, it2 = str(it1), str(it2)
+        exec(timestr+'='+timestr+'['+it1+':'+it2+']')
+        if sub and levselect:
+            print "lat, lon, lev subset"
+            exec('ilats, ilons, ilev = isubs(sub,'+dimlist[1]+','\
+                  +dimlist[2]+','+dimlist[3]+',levselect)')
+            if ilats==-99:
+                ilt1, ilt2, iln1,iln2, ilv1, ilv2 = '0', '','0', '',\
+                 str(ilev[0]),str(ilev[1]+1)
+            else:
+                ilt1,ilt2,iln1,iln2,ilv1,ilv2 = str(ilats[0]), str(ilats[1]+1),\
+                  str(ilons[0]), str(ilons[1]+1),str(ilev[0]),str(ilev[1]+1)
+            exec('data = ncf.variables[\''+ varstr + '\'][:,'+ilv1+':'+ilv2+','\
+                                      +ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+            exec(dimlist[1]+'='+dimlist[1]+'['+ilt1+':'+ilt2+']')
+            exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
+            exec(dimlist[3]+'='+dimlist[3]+'['+ilv1+':'+ilv2+']')
+        elif sub:
+            print "lat, lon subset"
+            exec('ilats,ilons,ilev = isubs(sub,'+dimlist[1]+','+dimlist[2]+')')
+            ilt1, ilt2, iln1,iln2 = str(ilats[0]), str(ilats[1]+1),\
+                                        str(ilons[0]), str(ilons[1]+1)
+            if len(dimlist)==3:
+                exec('data = ncf.variables[\''+ varstr + '\']\
+                         ['+it1+':'+it2+','+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+            elif len(dimlist)==4:
+                exec('data = ncf.variables[\''+ varstr + '\']\
+                       ['+it1+':'+it2+',:,'+ilt1+':'+ilt2+','+iln1+':'+iln2+']')
+            exec(dimlist[1]+'='+dimlist[1]+'['+ilt1+':'+ilt2+']')
+            exec(dimlist[2]+'='+dimlist[2]+'['+iln1+':'+iln2+']')
+        else:
+            #print "No subsetting"
+            exec('data = ncf.variables[\''+ varstr + '\']['+it1+':'+it2+',:]')
+
+    exec(varstr+' = addscalefill(ncf,data,varstr)')
+
+    ncf.close()
+    # Silly dataset specific tweaks
+    if dset == 'cmip5':
+        lat = lat[::-1]
+        if len(dimlist)==3:
+            exec (varstr + '=' + varstr + '[:,::-1,:]')
+        elif len(dimlist)==4:
+            exec (varstr + '=' + varstr + '[:,:,::-1,:]')
+    if dset == 'noaa':
+        if mname == 'cdr':
+            lat = lat[::-1]
+            exec (varstr + '=' + varstr + '[:,::-1,:]')
+    if dset == 'um':
+        latitude=latitude[::-1]
+        exec (varstr + '=' + varstr + '[:,:,::-1,:]')
+
+
+    exec('out=(np.float32('+varstr+'),'+', '.join(dimlist)+',dtarr)')
+
+    return out
+
 
 def openncep2(ncfile,varstr,dset='ncep2',subs=False,levsel=False):
     out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
     return out
 
 def opennc_generic(ncfile,varstr,dset='ncep2',subs=False,levsel=False):
+    out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
+    return out
+
+def opentrmm(ncfile,varstr,dset='trmm',subs=False,levsel=False):
     out = opennc(ncfile,varstr,dset,sub=subs,levselect=levsel)
     return out
 
@@ -387,6 +597,11 @@ def opennddiagnc(ncfile,varstr,dset='nddiagnc',subs=False,levsel=False):
 def opentamsatCCD(ncfile,varstr='ccd',dset='tamsat_ccd'):
     out = opennc(ncfile,varstr,dset)
     return out
+
+def open_multi(ncfile,varstr,name,dataset='noaa',subs=False,levsel=False):
+    out = opennc2(ncfile,varstr,name,dataset,sub=subs,levselect=levsel)
+    return out
+
 
 def openpscdf(ncfile,varstr,dset='pcdf',subs=False,levsel=False):
     psdimdict={"pcdf": ['time','dimy_T','dimx_T','dimz_T'],

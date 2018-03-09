@@ -408,6 +408,45 @@ def SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1,rsltn='c',\
 
     return m, f1
 
+def SAfrBasemap2(lat,lon,drawstuff=False,prj='cyl', rsltn='c',\
+    fontdict=False):
+    '''m, f = SAfrBasemap(lat,lon,drawstuff=False,prj='cyl',fno=1)
+
+    This creates a basemap instance from lat's and lon's provided.
+    Specific for this application of metblobs, so currently using proj='cyl',
+    however Albers equal area is here uncommented.
+    USAGE: lat, lon
+    RETURNS: m, basemap object pointer (handle in matlab language)
+             f, pointer figure'''
+    xy=(lat.min(),lat.max(),lon.min(),lon.max())
+    nx = len(lon); ny = len(lat)
+    if not fontdict: fontdict = {'fontsize':14,'fontweight':'bold'}
+    if prj=='cyl':
+        m = bm.Basemap(llcrnrlon=xy[2],llcrnrlat=xy[0],urcrnrlon=xy[3],\
+                       urcrnrlat=xy[1],resolution=rsltn,area_thresh=10000.,\
+                       projection='cyl')
+    if prj=='aea':
+        m = bm.Basemap(llcrnrlon=xy[2]-5.,llcrnrlat=xy[0],urcrnrlon=xy[3],\
+                       urcrnrlat=xy[1]+5,resolution=rsltn,projection='aea',\
+                        lat_1=-45.,lat_2=0.,lon_0=40.)
+
+    ### SET UP FIGURE AND MERIDIANS
+    delon = 10.
+    meridians = np.arange(10.,360.,delon)
+    delat = 5.
+    circles = np.arange(0.,90.+delat,delat).tolist()+\
+              np.arange(-delat,-90.-delat,-delat).tolist()
+
+    if drawstuff:
+        m.drawcoastlines()
+        m.drawcountries()
+        m.drawparallels(circles,linewidth='0.1',labels=[1,0,0,0],\
+                        fontdict=fontdict)
+        m.drawmeridians(meridians,linewidth='0.1',labels=[0,0,0,1],\
+                        fontdict=fontdict)
+
+    return m
+
 def BlobContour(blbim,blob,gpx):
     '''chtype=convexhull or simple (which is more complex)'''
     boolblob = blbim==blob.label
@@ -679,6 +718,178 @@ def MetBlobs(vrb,time,hrtime,lat,lon,varstr,sub='SA',showblobs=True,\
 
     return metblobs[ikeep,:], blobtime[ikeep,:], chlist
 
+def MetBlobs_th(vrb,time,hrtime,lat,lon,varstr,thresh,sub='SA',showblobs=True,\
+                interact=False):
+    '''mbs, blbim = MetBlobs_th(vrb,time,hrtime,lat,lon,varstr,sub='SA',
+                             showblobs=True)
+    Main blobbing loop - but edited to be able to set threshold from wrapper
+    USAGE: vrb (array, dim: time x lat x lon) NOTE: use plt.cm.gray_r
+    therefore, whitest values are lowest, sometimes need to times vrb by (-1)'''
+    plt.close('all')
+    wt=100
+    ### CREATE BASEMAP INSTANCES
+    if showblobs: m, mfig = SAfrBasemap(lat,lon,drawstuff=True,prj='cyl')
+    ###GET APROPRIATE THRESHOLDS ARE DOMAINS FROM DICTIONARY AND ASSIGN COLORMAP
+    dct=filters.blobfilters[sub+'cloudband'][varstr]
+    domain=dct['ROI']
+    #dthresh, highlow = dct['thresh']
+    dthresh=thresh
+    highlow='low'
+    #data, thrs=Stretch(vrb,dthresh,tval=dstretch)
+    if highlow=='low':
+        data = vrb < dthresh
+        mycmap=plt.cm.gray_r;#print "Reverse Gray Colormap"
+    elif highlow=='high':
+        data = vrb > dthresh
+        mycmap=plt.cm.gray;print "Gray Colormap"
+    data = skimage.img_as_ubyte(data)
+    ### Initialize variables to store output
+    blobslist, blobimages, chlist = [], [], []
+    ### Below: allow space for 4 blobs per day, a "guestimate" initialisation
+    metblobs = np.zeros((len(time)*10,14),dtype=np.float32)
+    blobtime = np.zeros((len(time)*10,4),dtype=np.int)
+
+    if showblobs:
+        bfig=plt.figure(num='Blobs')
+        #bafig=plt.figure(num='BlobsAngles')
+        plt.show();plt.ion()
+        plt.pause(0.05)
+        keyin=raw_input("Position windows as desired then press any key,\n \
+        Press [Esc] at any time to quit...\
+        #[Backspace] to go back one image...")
+    #canvasrect = CanvasCutOut(mfig)
+    #gpx = Geopix((canvasrect[2],canvasrect[3]),lat,lon)
+    gpx = Geopix((len(lat),len(lon)),lat,lon)
+    llgridtup=np.meshgrid(lon,lat)
+    #plt.figure(num=mfig.number);plt.clf()
+    t=0
+    #for t in xrange(len(time)):
+    ixmbs=0
+    mtimstart=timer()
+    while t <= (len(time)-1):
+        wtimstart = timer()
+        tm = time[t, :]
+        hr = hrtime[t]
+        humandate = "%d-%02d-%02d %02d:00" % (tm[0], tm[1], tm[2], tm[3])
+        #plt.figure(num=mfig.number);plt.clf()
+        #datafig=m.transform_scalar(data[t,::-1,:],lon,lat[::-1],\
+        #                           len(lon),len(lat))
+        #plt.figure(num=mfig.number)
+        #m.imshow(datafig,mycmap,interpolation='nearest')
+        #plt.clim(dstretch[0],dstretch[1])
+        #plt.clim(0,255);#plt.colorbar()
+        #img = fig2img(mfig,canvasrect)
+        img = data[t,:,:]
+        img4blob, pixss = gpx.imgsubdomainmasked(img,domain)
+
+        #plt.figure(num=mfig.number);plt.clf()
+        blbim, blobs, grey = GetBlobs(img4blob)
+        if len(blobs)==0:
+            print humandate,": No Blobs detected"
+            if showblobs:
+                plt.figure(num=mfig.number);plt.clf()
+                plt.figure(num=bfig.number);plt.clf()
+                if interact:
+                    plt.pause(0.05)
+                    d=raw_input('Press: x to stop; b to go backwards')
+                else: d='nada'
+                if d=='x':
+                    break
+                elif d=='b':
+                    t=t-2
+                    if t<0:
+                        t=0
+                t=t+1
+                continue
+
+        #FilterBlobs(dct,blobs,img,gpx,thrs)
+        #if showblobs: plt.figure(num=3);plt.clf()
+        FilterBlobs(dct,blobs,img,gpx)
+        if len(blobs) > 0:
+            #blobslist.append(blobs);blobimages.append(blbim)
+            print "%s: %d CANDIDATE %s IN %s"\
+                   %(humandate,len(blobs),dct['text'].upper(),varstr.upper())
+            for b in blobs.keys():
+                cb=blobs[b]
+                miny,minx,maxy,maxx = cb.bbox
+                cprops,convhull,convhullpix = BlobContour(blbim,cb,gpx)
+                cb.convhull = convhull
+                cb.convhullpix = convhullpix
+                chlist.append(convhull)
+                vrbmean,vrbmin,vrbmax=mmm_ch_val(vrb[t,:,:],llgridtup,convhull)
+                metblobs[ixmbs,:]=hr,cb.label,cb.degs,\
+                gpx.xp2lon(cb.centroid[1]), gpx.yp2lat(cb.centroid[0]),\
+                gpx.xp2lon(minx), gpx.xp2lon(maxx), \
+                gpx.yp2lat(miny), gpx.yp2lat(maxy), \
+                cb.area, cprops[2], vrbmean, vrbmin, vrbmax
+                ### Have removed these
+                #cb.m10, cb.m01, cb.m11, cb.m20, cb.m02, cb.u11, cb.u20,
+                #cb.u02, cb.n11, cb.n20, cb.n02, cb.p1 , cb.p2
+                blobtime[ixmbs,:] = tm
+                ixmbs=ixmbs+1
+                if ixmbs >= metblobs.shape[0]:
+                    print "OOPS, ADDING MORE SPACE TO METBLOBS ARRAY"
+                    addmore = np.zeros((len(time)/2,14),dtype=np.float32)
+                    addtime = np.zeros((len(time)/2,4),dtype=np.int)
+                    metblobs = np.append(metblobs, addmore, axis=0)
+                    blobtime = np.append(blobtime, addtime, axis=0)
+                #print "Candidate Details: Area= %d pixels ; Angle= %f ; Caddircularity= %f-s %f-c"\
+                #%(cb.area, (cvb.cvAngle(cb)*360)/(2*np.pi), sprops[2], cprops[2])
+        else:
+            donada=1;print humandate
+
+        if showblobs:
+            plt.figure(num=mfig.number);plt.clf()
+            plt.figure(num=bfig.number);plt.clf()
+            pt1=(pixss[0],pixss[2]);pt3=(pixss[1],pixss[3])
+            pt2=(pixss[0],pixss[3]);pt4=(pixss[1],pixss[2])
+            pt5=pt1
+            #img=skimage.color.gray2rgb(img)
+            #for lc in [1,2,3,4]:
+            #    exec('rr,cc=skimage.draw.line(pt%d[1],pt%d[0],pt%d[1],pt%d[0])'\
+            #          %(lc,lc,lc+1,lc+1))
+            #    img[rr,cc] = np.asarray([255,0,0],dtype=np.uint8)
+            #    img[rr+1,cc+1] = np.asarray([255,0,0],dtype=np.uint8)
+            #    img[rr-1,cc-1] = np.asarray([255,0,0],dtype=np.uint8)
+            dlat=lat[1]-lat[0];dlon=lon[1]-lon[0]
+            latplot = np.hstack((lat[0]-dlat/2.,lat+dlat/2.))
+            lonplot = np.hstack((lon[0]-dlon/2.,lon+dlon/2.))
+            plt.figure(num=mfig.number)
+            plt.pcolormesh(lonplot,latplot,vrb[t,:,:],cmap=mycmap)
+            plt.grid()
+            DrawContourAngles(blobs,gpx,m=plt)
+            plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
+            plt.draw()
+            plt.figure(num=bfig.number)
+            plt.pcolormesh(lonplot,latplot,blbim);plt.grid()
+            plt.xlim(lonplot[0],lonplot[-1]);plt.ylim(latplot[-1],latplot[0])
+            plt.draw()
+            if interact:
+                plt.pause(0.05)
+                d=raw_input('Press: x to stop; b to go backwards')
+            else:
+                d='nada'
+                plt.pause(.00001)
+            if d=='x':
+                break
+            elif d=='b':
+                t=t-2
+                if t<0:
+                    t=0
+        t=t+1
+        #print t," Time taken for while loop is:",timer()-wtimstart
+
+    try:
+        plt.close('all')
+    except:
+        dumdum='''Do nothing'''
+    sm = metblobs.sum(1)
+    ikeep = np.where(sm != 0)[0]
+    print "Time taken for,",len(time)," timesteps in MetBlobs is:",(timer()-mtimstart)/60,"mins"
+
+    return metblobs[ikeep,:], blobtime[ikeep,:], chlist
+
+
 # SPATIAL POSITIONING INFORMATION
 
 def relpos((mbs0, mbt0), (mbs1,mbt1),twindow=13):
@@ -783,7 +994,7 @@ def gethists(vrb,time,lat,lon,varstr,sub='SA',b=50,interact=False,figd=False):
     dct=filters.blobfilters[sub+'cloudband'][varstr];domain=dct['ROI'];
     dstretch=dct['stretch'];dthresh, highlow = dct['thresh']
 
-    #plt.figure(2);plt.hist(vrb.ravel(),bins=b);plt.title('Raw Data Histogram')
+    #plt.figure(2);plt.hist(vrb.ravel(),bins=b)f;plt.title('Raw Data Histogram')
     #plt.plot(dthresh,0,'rv',markersize=30)
     #data, ths = Stretch(vrb,dthresh,tval=dstretch)
     #datah=np.nan_to_num(data)

@@ -129,11 +129,11 @@ class SynopticEvents:
 
     def __rainamounts__(self,event,raindata,rainkey,heavy=20.):
         '''Calculates rainfall statistics for under cloud band footprints
-        properties: rmn,rmx,wetness,heavyness,outrmn,outrmx,outwetness'''
-        # STATION RAINFALL
+        properties: rmn,rmx,wetness,heavyness,outrmn,outrmx,outwetness, rsum, hsum'''
         heavythresh=heavy
         rain,date,xypts = raindata
         erain=[]
+        # STATION RAINFALL
         if rain.ndim==2:
             #print 'Station dataset ',rainkey
             for t in xrange(len(event.trkdtimes)):
@@ -151,10 +151,13 @@ class SynopticEvents:
                 heavymask = rain[:,ix] >= heavythresh
                 hmask = chmask & heavymask.squeeze()
                 r=np.ma.MaskedArray(rain[:,ix],mask=~rmask)
+                h=np.ma.MaskedArray(rain[:,ix],mask=~hmask)
                 if np.any(rmask):
                     # RAIN FALL INSIDE OLR COUNTOUR
                     rmn=r.mean()
                     rmx=r.max()
+                    rsum=r.sum()
+                    hsum=h.sum()
                     wetness=len(np.where(rmask)[0])/\
                             float(len(np.where(chmask)[0]))
                     heavyness=len(np.where(hmask)[0])/\
@@ -169,12 +172,15 @@ class SynopticEvents:
                 else:
                     rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN
                     ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
-                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness))
+                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness,rsum,hsum))
+        # GRIDDED RAINFALL
         elif rain.ndim==3:
             #print 'Gridded rainfall dataset:',rainkey
             for t in xrange(len(event.trkdtimes)):
                 ix = my.ixdtimes(date,[event.trkdtimes[t,0]],\
                               [event.trkdtimes[t,1]],[event.trkdtimes[t,2]],[0])
+                #ix = my.ixdtimes(date,[event.trkdtimes[t,0]],\
+                #              [event.trkdtimes[t,1]],[event.trkdtimes[t,2]],[event.trkdtimes[t,3]])
                 if len(ix)>1: print 'We have a problem'
                 elif len(ix)==0:
                     if t==0: print 'No time match in',rainkey,event.trkdtimes[t]
@@ -186,10 +192,13 @@ class SynopticEvents:
                 heavymask = rain[ix,:,:] >= heavythresh
                 hmask = chmask & heavymask
                 r=np.ma.MaskedArray(rain[ix,:,:],mask=~rmask)
+                h=np.ma.MaskedArray(rain[ix,:,:],mask=~hmask)
                 if np.any(rmask):
                     # RAIN FALL INSIDE OLR COUNTOUR
                     rmn=r.mean()
                     rmx=r.max()
+                    rsum=r.sum()
+                    hsum=np.nansum(h)
                     wetness=len(np.where(rmask.ravel())[0])/\
                             float(len(np.where(chmask.ravel())[0]))
                     heavyness=len(np.where(hmask.ravel())[0])/\
@@ -203,8 +212,8 @@ class SynopticEvents:
                              float(len(np.where(~chmask.ravel())[0]))
                 else:
                     rmn=np.NaN;rmx=np.NaN;wetness=np.NaN;heavyness=np.NaN
-                    ormn=np.NaN;ormx=np.NaN;owetness=np.NaN
-                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness))
+                    ormn=np.NaN;ormx=np.NaN;owetness=np.NaN;rsum=np.NaN;hsum=np.NaN
+                erain.append((rmn,rmx,wetness,heavyness,ormn,ormx,owetness,rsum,hsum))
 
         event.rainfall[rainkey] = np.asarray(erain)
 
@@ -335,6 +344,7 @@ class SynopticEvents:
         ihrt,ilab = self.ifld('hrtime'),self.ifld('Label')
         icx, icy = self.ifld('cX'), self.ifld('cY')
         startfilter = 30*24*100  # the time in label is *100
+        # not sure if this is compatible with other datasets
 
         refhr, reflab = target[:,ihrt], target[:,ilab]
         refcx, refcy = target[:,icx], target[:,icy]
@@ -517,8 +527,8 @@ class SynopticEvents:
         uniques = self.uniqueevents()
         addtrkarrs(self)
 
-    def addeventrain(self,rainkeys,type='station',heavy=20.,\
-                    datadir='/home/neil/sogehome/data/'):
+    def addeventrain(self,rainkeys,type='station',heavy=20., \
+                     datadir='/home/neil/sogehome/data/'):
         '''rainkeys can be 'wrc', 'trmm' but must be list
         type is either 'station' or 'grid'
         Would make more sense to put this partly in buildevents and the
@@ -553,6 +563,28 @@ class SynopticEvents:
                     self.__rainamounts__(evnt,raingrid,rainkey+'grid',\
                                          heavy=heavy)
                 del rain, dtime, lat, lon, raingrid
+
+    def addeventrain_any(self, raindata, lat, lon, dates,\
+                         rainkeys, type='grid', heavy=20.):
+        '''rainkeys can be 'wrc', 'trmm' but must be list
+        type is either 'station' or 'grid'
+        Would make more sense to put this partly in buildevents and the
+        self.rainamounts function into a method of Event but for various
+        reason, not least, need to open and close rain datasets,
+        it is done this way'''
+        # Edited to allow raindata to be set in wrapper
+        ekeys = self.events.keys();
+        ekeys.sort()
+        if type == 'grid':
+            for rainkey in rainkeys:
+                print 'Adding rain from ', rainkey, 'gridded data set'
+                dates[:, 3] = 0 # to set hrtime to 0
+                raingrid = (raindata, dates, (lon, lat))
+                for k in ekeys:
+                    evnt = self.events[k]
+                    self.__rainamounts__(evnt, raingrid, rainkey + 'grid', \
+                                         heavy=heavy)
+                del dates, lat, lon, raingrid
 
     def uniqueevents(self):
         '''Loop through all events and ensure none give same event but with
@@ -633,12 +665,13 @@ class Event(SynopticEvents):
         ihrt, ilab = self.ifld('hrtime'), self.ifld('Label')
         icX, icY = self.ifld('cX'), self.ifld('cY')
         startfilter = 30*24*100  # the time in label is *100
+        #.....not sure if the above is compatible with other datasets?
         # Get necessary properties of elements of flag track
         flagtrk = self.trk
         flaghrs = self.trktimes
         flagcX  = self.trkcX
         flagcY  = self.trkcY
-        #
+
         trkshr = self.trackshr[k]
         trkscX = self.trackscX[k]
         trkscY = self.trackscY[k]
@@ -691,8 +724,12 @@ class Event(SynopticEvents):
         # BUILD TRACK ARRAY FOR REFERENCE/FLAG TRACKS: 
         # currently 'noaa-olr-0-all' which has tres==24
         allhrtm = allhrtime
-        if mbskeyvals[0]=='noaa':
-            allhrtm = allhrtm - (allhrtm % 24)
+        #if mbskeyvals[0]=='noaa':
+            # round the time (in hours) to the nearest day?
+            # not sure this does anything because the value seems to be zero?
+            # for other datasets it might break things
+            # ....because than allhrtm does not equal t below
+        #    allhrtm = allhrtm - (allhrtm % 24)
         trkarr[:,0]=allhrtm
         cnt=0
         for t in self.trktimes:
